@@ -3,7 +3,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 	die();
 ?>
 
-<img src="/bitrix/templates/rudenta/img/footimg.png">
+<img src="/local/templates/rudenta/img/footimg.png">
 <div class="info">
 	<div>
 		Адрес
