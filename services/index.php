@@ -14,8 +14,8 @@ $APPLICATION->SetTitle("Услуги");
 		"SECTION_ID" => $_REQUEST["SECTION_ID"],
 		"SECTION_CODE" => "",
 		"SECTION_URL" => "",
-		"COUNT_ELEMENTS" => "Y",
-		"TOP_DEPTH" => "3",
+		"COUNT_ELEMENTS" => "N",
+		"TOP_DEPTH" => "2",
 		"SECTION_FIELDS" => array(
 			0 => "NAME",
 			1 => "",

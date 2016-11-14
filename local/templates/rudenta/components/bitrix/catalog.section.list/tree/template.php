@@ -53,7 +53,12 @@ $strTitle = "";
 		}
 		else
 		{
-			$link = '<span>'.$arSection["NAME"].$count.'</span>';
+			if($arSection['DEPTH_LEVEL'] == 1){
+				$link = '<span>'.$arSection["NAME"].'</span>';
+			}else{
+				$link = '<a href="'.$arSection["SECTION_PAGE_URL"].'">'.$arSection["NAME"].'</a>';
+			}
+
 		}
 
 		echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH);

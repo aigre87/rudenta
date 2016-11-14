@@ -28,7 +28,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		<div id="panel">
 			<?$APPLICATION->ShowPanel();?>
 		</div>
-		<a href="/"><img src="/bitrix/templates/rudenta/img/logo.png"></a>
+		<a href="/"><img src="/local/templates/rudenta/img/logo.png"></a>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:menu",
 			"header",
