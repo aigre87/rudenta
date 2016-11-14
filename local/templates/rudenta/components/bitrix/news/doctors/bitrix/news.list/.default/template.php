@@ -12,7 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-asdsda
 <div class="news-list">
 	<?if($arParams["DISPLAY_TOP_PAGER"]):?>
 		<?=$arResult["NAV_STRING"]?><br />
