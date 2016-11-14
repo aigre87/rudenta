@@ -27,13 +27,15 @@ $this->setFrameMode(true);
 	<div class="date">
 		<?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>
 	</div>
-	<div class="copy-records">
-		<strong>Похожие записи</strong>
-	</div>
 	<?php
-		$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
+	$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
 	?>
-	<?foreach ($random_art as $usl):?>
-
-	<?endforeach;?>
+	<?if(!empty($random_art)):?>
+		<div class="copy-records">
+			<strong>Похожие записи</strong>
+		</div>
+		<?foreach ($random_art as $usl):?>
+			<a href="/articles/<?=$usl['ID']?>/"><?=$usl['NAME']?></a>
+		<?endforeach;?>
+	<?endif;?>
 </div>

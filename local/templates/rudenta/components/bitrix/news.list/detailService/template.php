@@ -14,8 +14,8 @@ $this->setFrameMode(true);
 ?>
 <div class="parent-section">
 	<h1><?php echo $arResult['SECTION']['PATH'][1]['NAME']?></h1>
-	<div class="parent-section-desc">
-		<?=$arResult['SECTION']['PATH'][1]['DESCRIPTION']?>
+	<div data-ar="<?php echo $arResult['SECTION']['PATH'][1]['ID']?>" class="parent-section-desc">
+		<?php echo $arResult['SECTION']['PATH'][1]['DESCRIPTION']?>
 	</div>
 </div>
 <?foreach($arResult["ITEMS"] as $arItemKey => $arItemArr):?>
@@ -40,9 +40,47 @@ $this->setFrameMode(true);
 	</div>
 <?endforeach;?>
 <?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'])?>
-<div class="articles">
-	<p>Советы</p>
-	<?foreach($articles as $article):?>
-		<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
-	<?endforeach;?>
+<?if(!empty($articles)):?>
+	<div class="articles">
+		<p>Советы</p>
+		<?foreach($articles as $article):?>
+			<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
+		<?endforeach;?>
+	</div>
+<?endif;?>
+<?php $doctors = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);?>
+<?if(!empty($doctors)):?>
+	<div class="doctors">
+		<p>Врачи</p>
+		<?foreach($doctors as $doctor):?>
+			<div class="doctor">
+				<a href="/doctors/<?=$doctor['ID']?>/">
+					<?php echo $doctor['NAME']?>
+				</a>
+				<?php echo $doctor['PROPERTY_POSITION_VALUE'];?>
+				<?php echo Doctors::getExp($doctor['PROPERTY_EXPERIENCE_VALUE']). " опыта";?>
+				<?php echo count($doctor['PROPERTY_AWARDS_VALUE']). " наград и сертефикатов";?>
+				<?php echo recalls(Doctors::getRecallsCnt($doctor['ID']));?>
+			</div>
+		<?endforeach;?>
+	</div>
+<?endif;?>
+
+<!--Навигация-->
+<div class="nav">
+	<a href="#" data-link="<?php echo $arResult['SECTION']['PATH'][1]['ID']?>">Описание</a>
 </div>
+<!--Конец навигации-->
+
+<?$APPLICATION->IncludeComponent(
+	"bitrix:main.include",
+	".default",
+	array(
+		"AREA_FILE_SHOW" => "file",
+		"AREA_FILE_SUFFIX" => "inc",
+		"EDIT_TEMPLATE" => "",
+		"COMPONENT_TEMPLATE" => ".default",
+		"PATH" => "/local/templates/rudenta/inc/record.php"
+	),
+	false
+);?>
