@@ -69,7 +69,7 @@ $APPLICATION->SetTitle("Главная");
         "AREA_FILE_SUFFIX" => "inc",
         "COMPONENT_TEMPLATE" => ".default",
         "EDIT_TEMPLATE" => "",
-        "PATH" => "/bitrix/templates/rudenta/inc/video.php"
+        "PATH" => "/local/templates/rudenta/inc/video.php"
     )
 );?>
 
@@ -81,7 +81,7 @@ $APPLICATION->SetTitle("Главная");
 		"AREA_FILE_SUFFIX" => "inc",
 		"COMPONENT_TEMPLATE" => ".default",
 		"EDIT_TEMPLATE" => "",
-		"PATH" => "/bitrix/templates/rudenta/inc/doctors.php"
+		"PATH" => "/local/templates/rudenta/inc/doctors.php"
 	)
 );?>
 

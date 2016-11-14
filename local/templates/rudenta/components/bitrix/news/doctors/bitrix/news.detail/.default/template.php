@@ -66,7 +66,7 @@ $this->setFrameMode(true);
 			"AREA_FILE_SUFFIX" => "inc",
 			"EDIT_TEMPLATE" => "",
 			"COMPONENT_TEMPLATE" => ".default",
-			"PATH" => "/bitrix/templates/rudenta/inc/record.php"
+			"PATH" => "/local/templates/rudenta/inc/record.php"
 		),
 		false
 	);?>
