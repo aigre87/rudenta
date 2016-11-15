@@ -21,7 +21,8 @@ $this->setFrameMode(true);
 		$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 		$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 		?>
-	<p class="news-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+	<p style="background-color: <?php echo $arItem['PROPERTIES']['BACKGROUND']['VALUE_XML_ID']?>"
+	   class="news-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 		<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 		<a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img
 				class="preview_picture"

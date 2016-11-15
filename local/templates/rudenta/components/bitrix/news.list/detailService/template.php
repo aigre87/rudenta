@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 ?>
 <div class="parent-section">
 	<h1><?php echo $arResult['SECTION']['PATH'][1]['NAME']?></h1>
-	<div data-ar="<?php echo $arResult['SECTION']['PATH'][1]['ID']?>" class="parent-section-desc">
+	<div data-ar="desc" class="parent-section-desc">
 		<?php echo $arResult['SECTION']['PATH'][1]['DESCRIPTION']?>
 	</div>
 </div>
@@ -24,14 +24,14 @@ $this->setFrameMode(true);
 		<?if($ar_res = $res->GetNext()):?>
 			<div class="parent-child-section">
 				<h3><?php echo $ar_res['NAME']?></h3>
-				<div class="parent-child-section-desc">
+				<div data-ar="<?php echo $ar_res['ID'];?>" class="parent-child-section-desc">
 					<?php echo $ar_res['DESCRIPTION']?>
 				</div>
 			</div>
 			<?foreach($arItemArr as $arItem):?>
 			<div class="service">
 				<h4><?php echo $arItem['NAME'];?> - <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р</h4>
-				<div class="service-desc">
+				<div data-ar="<?php echo $arItem['ID'];?>" class="service-desc">
 					<?php echo $arItem['PREVIEW_TEXT'];?>
 				</div>
 			</div>
@@ -39,9 +39,9 @@ $this->setFrameMode(true);
 		<?endif;?>
 	</div>
 <?endforeach;?>
-<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'])?>
+<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
 <?if(!empty($articles)):?>
-	<div class="articles">
+	<div data-ar="articles" class="articles">
 		<p>Советы</p>
 		<?foreach($articles as $article):?>
 			<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
@@ -50,7 +50,7 @@ $this->setFrameMode(true);
 <?endif;?>
 <?php $doctors = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);?>
 <?if(!empty($doctors)):?>
-	<div class="doctors">
+	<div data-ar="doctors" class="doctors">
 		<p>Врачи</p>
 		<?foreach($doctors as $doctor):?>
 			<div class="doctor">
@@ -68,7 +68,35 @@ $this->setFrameMode(true);
 
 <!--Навигация-->
 <div class="nav">
-	<a href="#" data-link="<?php echo $arResult['SECTION']['PATH'][1]['ID']?>">Описание</a>
+	<ul class="ul-nav">
+		<li>
+			<a href="#" data-link="desc">Описание</a>
+		</li>
+		<?foreach($arResult['NAV'] as $navKey => $navValue):?>
+			<li>
+				<a href="#" data-link="<?php echo $navKey;?>"><?php echo $navValue['PARENT'];?></a>
+				<ul class="child-nav">
+					<?foreach($navValue['CHILDS'] as $id => $name):?>
+						<li class="child-li">
+							<a href="#" data-link="<?php echo $id?>"><?php echo $name;?></a>
+						</li>
+					<?endforeach;?>
+				</ul>
+			</li>
+		<?endforeach;?>
+		<li>
+			<a href="#" data-link="articles">Советы пациентам</a>
+		</li>
+		<li>
+			<a href="#" data-link="doctors">Врачи</a>
+		</li>
+		<li>
+			<a href="#" data-link="recalls">Отзывы</a>
+		</li>
+		<li>
+			<a href="#" data-link="techno">Технологии</a>
+		</li>
+	</ul>
 </div>
 <!--Конец навигации-->
 

@@ -41,11 +41,13 @@ $this->setFrameMode(true);
 			<div class="rating"><?php echo $rec['PROPERTY_RATING_VALUE'];?></div>
 			<div class="date"><?php echo FormatDate("d F Y", MakeTimeStamp($rec['DATE_ACTIVE_FROM']));?></div>
 			<div class="service">
-			<?php
-			$res = CIBlockSection::GetByID($rec['PROPERTY_SERVICE_VALUE']);
-			if($ar_res = $res->GetNext())
-				echo "про ".$ar_res['NAME'];
-			?>
+			<?php $res = CIBlockSection::GetByID($rec['PROPERTY_SERVICE_VALUE']);?>
+			<?if($ar_res = $res->GetNext()):?>
+				про
+				<a href="/services/detail/?SECTION_ID=<?php echo $ar_res['IBLOCK_SECTION_ID'];?>">
+					<?php echo $ar_res['NAME'];?>
+				</a>
+			<?endif;?>
 			</div>
 			<div class="text">
 				<?php echo $rec['PREVIEW_TEXT'];?>
