@@ -6,6 +6,6 @@ host - p10210.cpanel.relevate.ru
 
 login - p10210
 
-pass - CHgGUti7uz
+pas - CHgGUti7uz
 -----------------------------------------------------------
 bitrix:
