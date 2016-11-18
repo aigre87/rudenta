@@ -36,7 +36,7 @@ else
 <html>
 	<head>
 		<?$APPLICATION->ShowHead();?>
-		<title><?$APPLICATION->ShowTitle();?></title>
+		<title><?$APPLICATION->ShowTitle(false)?></title>
 
     <meta name="keywords" content="<?$APPLICATION->ShowProperty("keywords");?>" />
     <meta name="description" content="<?$APPLICATION->ShowProperty("description");?>" />
