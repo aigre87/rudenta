@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="93f75d59-34ff-46e3-8f0b-b4fb71d75a4b" name="main" url="http://p10298.cpanel.relevate.ru">
-        <fileTransfer host="p10298.cpanel.relevate.ru" port="21" rootFolder="/public_html" password="df9adf9cdf9adf99df93df99dfdbdfcf" username="p10298">
+        <fileTransfer host="p10298.cpanel.relevate.ru" port="21" rootFolder="/public_html" password="dfefdfd0df99dfd7df8cdfe0dfe9df81dfc6dfeedfe0dff2" username="p10298">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
