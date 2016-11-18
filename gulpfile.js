@@ -58,7 +58,7 @@ gulp.task('js:build', function () {
           host: 'p10210.cpanel.relevate.ru',
           user: 'p10210',
           pass: 'CHgGUti7uz',
-          remotePath: '/home/p10210/public_html/local/templates/rudenta/js/'
+          remotePath: '/www/local/templates/rudenta/js/'
         }));
 });
 //libs
@@ -85,7 +85,7 @@ gulp.task('libs:build', function() {
           host: 'p10210.cpanel.relevate.ru',
           user: 'p10210',
           pass: 'CHgGUti7uz',
-          remotePath: '/home/p10210/public_html/local/templates/rudenta/libs/'
+          remotePath: '/www/local/templates/rudenta/libs/'
         }));
 });
 // move custom fonts to build
@@ -110,7 +110,7 @@ gulp.task('image:build', function () {
           host: 'p10210.cpanel.relevate.ru',
           user: 'p10210',
           pass: 'CHgGUti7uz',
-          remotePath: '/home/p10210/public_html/local/templates/rudenta/images/'
+          remotePath: '/www/local/templates/rudenta/images/'
         }));
 });
 // styles
@@ -129,7 +129,7 @@ gulp.task('styles:build', function () {
           host: 'p10210.cpanel.relevate.ru',
           user: 'p10210',
           pass: 'CHgGUti7uz',
-          remotePath: '/home/p10210/public_html/local/templates/rudenta/css/'
+          remotePath: '/www/local/templates/rudenta/css/'
         }));
 });
 gulp.task('sprite:build', function() {
@@ -152,7 +152,7 @@ gulp.task('sprite:build', function() {
           host: 'p10210.cpanel.relevate.ru',
           user: 'p10210',
           pass: 'CHgGUti7uz',
-          remotePath: '/home/p10210/public_html/local/templates/rudenta/images/'
+          remotePath: '/www/local/templates/rudenta/images/'
         }));
 });
 gulp.task('build', [
