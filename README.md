@@ -6,7 +6,7 @@ host - p10298.cpanel.relevate.ru
 
 login - p10298
 
-pas - CHgGUti7uz
+pas - Ez3}&JC+lDJX
 __________________________
 bitrix:
 
