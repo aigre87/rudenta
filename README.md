@@ -12,3 +12,9 @@ bitrix:
 
 admin
 pJpgW71l
+
+phpmyadmin
+
+БД - p10298_rudenta
+user - p10298_rudenta
+pw -  or2WxrZn
