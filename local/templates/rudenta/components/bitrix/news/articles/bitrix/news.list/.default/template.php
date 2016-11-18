@@ -54,4 +54,17 @@ $this->setFrameMode(true);
 		),
 		false
 	);?>
+
+	<?$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		".default",
+		array(
+			"AREA_FILE_SHOW" => "file",
+			"AREA_FILE_SUFFIX" => "inc",
+			"EDIT_TEMPLATE" => "",
+			"COMPONENT_TEMPLATE" => ".default",
+			"PATH" => "/local/templates/rudenta/inc/record.php"
+		),
+		false
+	);?>
 </div>

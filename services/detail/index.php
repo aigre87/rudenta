@@ -4,9 +4,9 @@ $APPLICATION->SetTitle("");
 ?>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"detailService",
-	Array(
+	"bitrix:news.list", 
+	"detailService", 
+	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
@@ -26,10 +26,13 @@ $APPLICATION->SetTitle("");
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array("",""),
+		"FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "17",
+		"IBLOCK_ID" => "4",
 		"IBLOCK_TYPE" => "services",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -42,10 +45,13 @@ $APPLICATION->SetTitle("");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => (int)$_REQUEST['SECTION_ID'],
+		"PARENT_SECTION" => (int)$_REQUEST["SECTION_ID"],
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array("PRICE",""),
+		"PROPERTY_CODE" => array(
+			0 => "PRICE",
+			1 => "",
+		),
 		"SET_BROWSER_TITLE" => "Y",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
@@ -56,8 +62,10 @@ $APPLICATION->SetTitle("");
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC"
-	)
+		"SORT_ORDER2" => "ASC",
+		"COMPONENT_TEMPLATE" => "detailService"
+	),
+	false
 );?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
