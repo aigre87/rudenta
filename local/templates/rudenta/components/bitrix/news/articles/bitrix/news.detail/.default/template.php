@@ -27,6 +27,19 @@ $this->setFrameMode(true);
 	<div class="date">
 		<?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>
 	</div>
+	Остались вопросы? Запишитесь на бесплатный прием!
+	<?$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		".default",
+		array(
+			"AREA_FILE_SHOW" => "file",
+			"AREA_FILE_SUFFIX" => "inc",
+			"EDIT_TEMPLATE" => "",
+			"COMPONENT_TEMPLATE" => ".default",
+			"PATH" => "/local/templates/rudenta/inc/record.php"
+		),
+		false
+	);?>
 	<?php
 	$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
 	?>

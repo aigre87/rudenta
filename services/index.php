@@ -9,8 +9,8 @@ $APPLICATION->SetTitle("Услуги");
 	array(
 		"VIEW_MODE" => "TEXT",
 		"SHOW_PARENT_NAME" => "Y",
-		"IBLOCK_TYPE" => "about",
-		"IBLOCK_ID" => "17",
+		"IBLOCK_TYPE" => "services",
+		"IBLOCK_ID" => "4",
 		"SECTION_ID" => $_REQUEST["SECTION_ID"],
 		"SECTION_CODE" => "",
 		"SECTION_URL" => "",

@@ -36,7 +36,7 @@ else
 <html>
 	<head>
 		<?$APPLICATION->ShowHead();?>
-		<title><?$APPLICATION->ShowTitle();?></title>
+		<title><?$APPLICATION->ShowTitle(false)?></title>
 
     <meta name="keywords" content="<?$APPLICATION->ShowProperty("keywords");?>" />
     <meta name="description" content="<?$APPLICATION->ShowProperty("description");?>" />
@@ -46,7 +46,7 @@ else
 
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css">
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css">
-		
+
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js"></script>
 	</head>
@@ -90,5 +90,4 @@ else
 				</div>
 			<?endif;?>
 		<section id="content">
-		
-						
+
