@@ -1,0 +1,123 @@
+/*5 - width, 6 - height*/
+/*stylesheet*/
+body {
+  font-family: 'FiraSans';
+  color: #333333; }
+
+div {
+  box-sizing: border-box; }
+
+a {
+  color: #005d97; }
+
+b {
+  font-weight: 600; }
+
+i {
+  font-style: italic; }
+
+video {
+  background: #000; }
+
+#content h1 {
+  font-size: 70px;
+  line-height: 75px; }
+#content h3 {
+  font-size: 30px;
+  line-height: 30px; }
+
+sup {
+  font-size: 0.5em;
+  top: -1em;
+  position: relative;
+  color: #737373; }
+
+.clear:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+header {
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 50px;
+  font-size: 0; }
+  header #headerLogo,
+  header #headerMenu,
+  header #headerContacts {
+    display: inline-block;
+    vertical-align: top; }
+  header #headerLogo {
+    position: absolute;
+    left: 6px;
+    top: 62px; }
+    header #headerLogo img {
+      display: block; }
+  header #headerMenu {
+    margin-left: 406px;
+    padding-top: 17px;
+    width: 460px; }
+    header #headerMenu ul li {
+      box-sizing: border-box;
+      display: inline-block;
+      white-space: nowrap;
+      min-width: 200px;
+      padding-right: 15px;
+      margin-bottom: 21px; }
+      header #headerMenu ul li a {
+        font-size: 25px;
+        line-height: 28px;
+        display: inline-block;
+        font-weight: 600;
+        border-bottom: 1px solid #000; }
+        header #headerMenu ul li a:nth-child(n):hover {
+          border-bottom: 1px solid transparent; }
+      header #headerMenu ul li:nth-child(1) a {
+        border-bottom-color: #005d97;
+        color: #005d97; }
+      header #headerMenu ul li:nth-child(2) a {
+        border-bottom-color: #89af0f;
+        color: #89af0f; }
+      header #headerMenu ul li:nth-child(3) a {
+        border-bottom-color: #1bbee8;
+        color: #1bbee8; }
+      header #headerMenu ul li:nth-child(4) a {
+        border-bottom-color: #ed107a;
+        color: #ed107a; }
+  header #headerContacts {
+    float: right;
+    padding-top: 21px;
+    padding-right: 6px; }
+    header #headerContacts .phone {
+      font-size: 25px;
+      line-height: 25px;
+      font-weight: 600;
+      color: #231f20;
+      margin-left: -3px; }
+      header #headerContacts .phone span {
+        font-size: 20px; }
+    header #headerContacts .adress {
+      color: #737373;
+      font-size: 14px;
+      line-height: 23px;
+      padding-bottom: 8px; }
+    header #headerContacts .desc {
+      font-size: 14px;
+      line-height: 16px;
+      font-style: italic; }
+      header #headerContacts .desc a {
+        border-bottom: 1px solid; }
+        header #headerContacts .desc a:hover {
+          border-bottom: 1px solid transparent;
+          text-decoration: none; }
+
+#content {
+  width: 1180px;
+  margin: 0 auto; }
+
+footer {
+  color: #fff;
+  background: #89af0f; }
+
+/*# sourceMappingURL=template_styles.css.map */

@@ -1,10 +1,17 @@
+@import "other/sprite";
+@import "other/mixins";
+
 /*stylesheet*/
 body{
 	font-family: 'FiraSans';
+  color: #333333;
 	//color: map-get($colors, defaultText);
 }
 div{
 	box-sizing: border-box;
+}
+a{
+  color: map-get($colors, defaultDBlue);
 }
 b{
 	font-weight: 600;
@@ -42,14 +49,116 @@ sup{
   display: table;
   clear: both;
 }
-
-
-
 #mainWrapper{
+
+}
+
+
+header{
+  width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 50px;
+  font-size: 0;
+  #headerLogo,
+  #headerMenu,
+  #headerContacts{
+    display: inline-block;
+    vertical-align: top;
+  }
+  #headerLogo{
+    position: absolute;
+    left: 6px;
+    top: 62px;
+    img{
+      display: block;
+    }
+  }
+
+  #headerMenu{
+    margin-left: 406px;
+    padding-top: 17px;
+    width: 460px;
+    ul{
+      li{
+        box-sizing: border-box;
+        display: inline-block;
+        white-space: nowrap;
+        min-width: 200px;
+        padding-right: 15px;
+        margin-bottom: 21px;
+        a{
+          font-size: 25px;
+          line-height: 28px;
+          display: inline-block;
+          font-weight: 600;
+          border-bottom: 1px solid #000;
+          &:nth-child(n):hover{
+            border-bottom: 1px solid transparent;
+          }
+        }
+        &:nth-child(1) a{
+          border-bottom-color: map-get($colors, defaultDBlue);
+          color: map-get($colors, defaultDBlue);
+        }
+        &:nth-child(2) a{
+          border-bottom-color: map-get($colors, defaultGreen);
+          color: map-get($colors, defaultGreen);
+        }
+        &:nth-child(3) a{
+          border-bottom-color: map-get($colors, defaultLBlue);
+          color: map-get($colors, defaultLBlue);
+        }
+        &:nth-child(4) a{
+          border-bottom-color: map-get($colors, defaultPink);
+          color: map-get($colors, defaultPink);
+        }
+      }
+    }
+  }
+
+  #headerContacts{
+    float: right;
+    padding-top: 21px;
+    padding-right: 6px;
+    .phone{
+      font-size: 25px;
+      line-height: 25px;
+      font-weight: 600;
+      color: #231f20;
+      margin-left: -3px;
+      span{
+        font-size: 20px;
+      }
+    }
+    .adress{
+      color: map-get($colors, defaultDescription);
+      font-size: 14px;
+      line-height: 23px;
+      padding-bottom: 8px;
+    }
+    .desc{
+      font-size: 14px;
+      line-height: 16px;
+      font-style: italic;
+      a{
+        border-bottom: 1px solid map-get($colors, defaultBlue);
+        &:hover{
+          border-bottom: 1px solid transparent;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+#content{
   width: 1180px;
   margin: 0 auto;
 }
+
 footer{
   color: #fff;
   background: map-get($colors, defaultGreen);
 }
+

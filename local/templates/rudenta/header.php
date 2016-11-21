@@ -57,7 +57,7 @@ else
 	</div>
 	<div id="mainWrapper">
 
-		<header>
+		<header class="clear">
 			<a href="/" id="headerLogo"><img src="<?=SITE_TEMPLATE_PATH?>/images/mainSiteLogo.png" alt="logo"></a>
 			<menu id="headerMenu">
 				<?$APPLICATION->IncludeComponent(
@@ -77,8 +77,8 @@ else
 					)
 				);?>
 			</menu>
-			<div class="headerContacts">
-				<div class="phone">+7 (495) 646&bull;81&bull;91</div>
+			<div id="headerContacts">
+				<div class="phone">+7 (495) 646<span>&bull;</span>81<span>&bull;</span>91</div>
 				<div class="adress">Москва, пр. Берёзовой рощи, д. 8</div>
 				<div class="desc"><a>Взрослое отделение</a> в соседнем здании</div>
 			</div>

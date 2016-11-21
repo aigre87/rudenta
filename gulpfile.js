@@ -14,6 +14,8 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),       // Подключаем библиотеку для переименования файлов
     cache       = require('gulp-cache'),        // Подключаем библиотеку кеширования
     sftp        = require('gulp-sftp'),
+    ftp         = require('gulp-ftp'),
+    gutil = require('gulp-util'),
     spritesmith = require('gulp.spritesmith'),
     plumber     = require('gulp-plumber');      // Ловим ошибки, чтобы не прервался watch
 
@@ -55,11 +57,12 @@ gulp.task('js:build', function () {
         .pipe(gulp.dest(path.build.js))
         .pipe(plumber.stop())
         .pipe(sftp({
-          host: 'p10210.cpanel.relevate.ru',
-          user: 'p10210',
-          pass: 'CHgGUti7uz',
-          remotePath: '/www/local/templates/rudenta/js/'
-        }));
+          host: 'p10298.cpanel.relevate.ru',
+          user: 'p10298',
+          pass: 'Ez3}&JC+lDJX',
+          remotePath: '/home/p10298/www/local/templates/rudenta/js/'
+        }))
+        .pipe(gutil.noop());
 });
 //libs
 gulp.task('libs:build', function() {
@@ -82,11 +85,12 @@ gulp.task('libs:build', function() {
         .pipe(plumber.stop())
         .pipe(gulp.dest('local/templates/rudenta/libs/')) // Выгружаем в папку app/js
         .pipe(sftp({
-          host: 'p10210.cpanel.relevate.ru',
-          user: 'p10210',
-          pass: 'CHgGUti7uz',
-          remotePath: '/www/local/templates/rudenta/libs/'
-        }));
+          host: 'p10298.cpanel.relevate.ru',
+          user: 'p10298',
+          pass: 'Ez3}&JC+lDJX',
+          remotePath: '/home/p10298/www/local/templates/rudenta/libs/'
+        }))
+        .pipe(gutil.noop());
 });
 // move custom fonts to build
 gulp.task('fonts:build', function() {
@@ -107,11 +111,13 @@ gulp.task('image:build', function () {
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.images))
         .pipe(sftp({
-          host: 'p10210.cpanel.relevate.ru',
-          user: 'p10210',
-          pass: 'CHgGUti7uz',
-          remotePath: '/www/local/templates/rudenta/images/'
-        }));
+          host: 'p10298.cpanel.relevate.ru',
+          user: 'p10298',
+          pass: 'Ez3}&JC+lDJX',
+          remotePath: '/home/p10298/www/local/templates/rudenta/images/'
+        }))
+        .pipe(gutil.noop());
+        
 });
 // styles
 gulp.task('styles:build', function () {
@@ -126,11 +132,12 @@ gulp.task('styles:build', function () {
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.styles)) // И в build
         .pipe(sftp({
-          host: 'p10210.cpanel.relevate.ru',
-          user: 'p10210',
-          pass: 'CHgGUti7uz',
-          remotePath: '/www/local/templates/rudenta/css/'
-        }));
+          host: 'p10298.cpanel.relevate.ru',
+          user: 'p10298',
+          pass: 'Ez3}&JC+lDJX',
+          remotePath: '/home/p10298/www/local/templates/rudenta/css/'
+        }))
+        .pipe(gutil.noop());
 });
 gulp.task('sprite:build', function() {
     var spriteData =
@@ -149,11 +156,12 @@ gulp.task('sprite:build', function() {
     spriteData.img.pipe(gulp.dest(path.build.images));
     spriteData.css.pipe(gulp.dest('src/styles/other'));
     spriteData.img.pipe(sftp({
-          host: 'p10210.cpanel.relevate.ru',
-          user: 'p10210',
-          pass: 'CHgGUti7uz',
-          remotePath: '/www/local/templates/rudenta/images/'
-        }));
+        host: 'p10298.cpanel.relevate.ru',
+        user: 'p10298',
+        pass: 'Ez3}&JC+lDJX',
+        remotePath: '/home/p10298/www/local/templates/rudenta/images/'
+    }))
+    spriteData.img.pipe(gutil.noop());
 });
 gulp.task('build', [
     'libs:build',
