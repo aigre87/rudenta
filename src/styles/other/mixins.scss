@@ -14,12 +14,16 @@
 }
 /*5 - width, 6 - height*/
 $colors: (
-	defaultHeader: #333333,
-	defaultText: #333333,
-	defaultDescription: #737373,
-	defaultPink: #ed107a,
-	defaultDBlue: #005d97,
-	defaultLBlue: #1bbee8,
-	defaultGreen: #89af0f,
-	defaultLightBlueBlock: #eefafa,
+	header: #333333,
+	text: #333333,
+	desc: #737373,
+	lgray: #d8d8d8,
+	pink: #ed107a,
+	dBlue: #005d97,
+	lBlue: #1bbee8,
+	ulBlue: #eefafa,
+	green: #89af0f,
+	lightBlueBlock: #eefafa,
+	linkUnder: rgba(0, 93, 151, 0.3),
+	linkUnderH: rgba(237, 16, 122, 0.3)
 );

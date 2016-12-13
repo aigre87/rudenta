@@ -5,11 +5,11 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		</section>
 		<!--content END-->
 		<footer>
-			<div class="contactsBlock">
-				<div id="contactsMapW">
-					<div class="contactsMap"></div>
+			<div class="contactsBlock clear">
+				<div class="contactsMapW w-2col">
+					<div id="contactsMap"></div>
 				</div>
-				<div class="contactsText">
+				<div class="contactsText w-1col">
 					<div class="item">
 						<div class="title">Адрес</div>
 						<div class="desc"><b>Москва, пр Березовой рощи, д8</b></div>
@@ -18,7 +18,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 						<div class="title">Время работы</div>
 						<div class="desc">9:00 -21:00(без выходных)</div>
 					</div>
-					<div class="item">
+					<div class="item phone">
 						<div class="title">Многоканальный телефон</div>
 						<div class="desc"><a href="tel:+74956468191"><b>+7(495)646-81-91</b></a></div>
 					</div>
@@ -33,6 +33,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 				</div>
 			</div>
 			<menu id="bottomMenu">
+			<div class="layoutW clear">
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:menu",
 					"bottom",
@@ -49,8 +50,24 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 						"USE_EXT" => "N"
 					)
 				);?>
+				<div class="w-1d4col rc">
+					<div class="item">
+						У нас  можно<br />
+						расплатиться картой
+						<div class="images">
+							<i class="mastercard"></i>
+							<i class="visa"></i>
+						</div>
+					</div>
+					<div class="item">
+						и взять рассрочку<br />
+						на 10 месяцев
+					</div>
+				</div>
+			</div>
 			</menu>
 			<div class="bb">
+			<div class="layoutW clear">
 				<div class="copyright">
 					&copy; 2007–2016, Стоматологическая клиника «РуДента»
 				</div>
@@ -60,6 +77,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 				<div class="adultDepartment">
 					Взрослое отделение стоматологии «РуДента»
 				</div>
+			</div>
 			</div>
 		</footer>
 	</div>

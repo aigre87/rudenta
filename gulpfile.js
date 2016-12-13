@@ -70,6 +70,7 @@ gulp.task('libs:build', function() {
         'src/libs/jquery/dist/jquery.min.js', // Берем jQuery
         'src/libs/magnific-popup/dist/jquery.magnific-popup.min.js', // Берем Magnific Popup
         'src/libs/gsap/src/minified/TweenMax.min.js',
+        'src/libs/gsap/src/minified/plugins/ColorPropsPlugin.min.js',
         'src/libs/jquery-selectric/public/jquery.selectric.js',
         'src/libs/smoothscroll-for-websites/SmoothScroll.js',
         'src/libs/jquery.nicescroll/dist/jquery.nicescroll.min.js',

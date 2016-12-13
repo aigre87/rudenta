@@ -12,13 +12,13 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="news-list">
-	Cоветы для родителей
-	<div class="articles">
-		<?foreach($arResult['ITEMS'] as $arItem):?>
-			<p>
+<div class="sovetiBlock clear">
+	<h2>Советы для родителей</h2>
+	<div class="items">
+	<?foreach($arResult['ITEMS'] as $arItem):?>
+		<div class="item">
 				<a href="<?=$arItem['DETAIL_PAGE_URL']?>"><?=$arItem['NAME']?></a>
-			</p>
-		<?endforeach;?>
+		</div>
+	<?endforeach;?>
 	</div>
 </div>

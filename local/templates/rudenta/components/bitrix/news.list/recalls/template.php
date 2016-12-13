@@ -12,32 +12,31 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="news-list">
-<div class="recalls">
-	Отзывы
+<div class="recallsBlock">
+<div class="recallsBlockIW">
+	<h2>
+		Клиенты о нас
+	</h2>
+	<div class="items">
+		<?foreach($arResult['ITEMS'] as $arItem):?>
+			<?php
+				if($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'm'){
+					$class = 'male';
+				}else{
+					$class = 'female';
+				}
+			?>
+			<div class="item <?=$class?>">
+				<div class="text">
+					<?=$arItem['PREVIEW_TEXT']?>
+				</div>
+				<div class="desc"><?=$arItem['NAME']?>, <?=$arItem["ACTIVE_FROM"]?></div>
+			</div>
+		<?endforeach;?>
+	</div>
+	<div class="nav">
+		<div class="shownext">Eщё отзыв</div>
+		<a class="allRecalls" href="/recalls/"><span>Все отзывы</span></a>
+	</div>
 </div>
-<a href="/recalls/">
-	Все отзывы
-</a>
-<?foreach($arResult['ITEMS'] as $arItem):?>
-	<?php
-		if($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'm'){
-			$txt = 'Он оставил';
-		}else{
-			$txt = 'Она оставила';
-		}
-	?>
-	<div class="man">
-		Это <?=$arItem['NAME']?> <?=$txt?> нам отзыв
-	</div>
-	<div class="text">
-		<?=$arItem['PREVIEW_TEXT']?>
-	</div>
-	<div class="betoo">
-		Будь как <?=$arItem['NAME']?>! Напиши о своем опыте посещения клиники или предложение нашему руководителю.
-	</div>
-
-	<button class="email">Напиши нам письмо</button>
-	<a href="#">показать другой отзыв</a>
-<?endforeach;?>
 </div>

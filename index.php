@@ -84,8 +84,28 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"PATH" => "/local/templates/rudenta/inc/doctors.php"
 	)
 );?>
-
- <?$APPLICATION->IncludeComponent(
+<div class="doctorsBlock clear">
+	<div class="w-1col">
+		<h2>Врачи<br/>детского<br/>отделения</h2>
+		<div class="text"><p>Врачи — главная гордость стоматологической поликлиники «РуДента».</p>
+				<p>У нас трудятся только специалисты самого высокого уровня, обладающие огромным <br />
+						опытом работы и использующие самые современные технологии.</p>
+		</div>
+		<div class="icons">
+			<a class="tech">
+				<span class="text">Применяемые<br />технологии</span>
+			</a>
+			<a class="license">
+				<span class="text">Лицензия РуДента Кидс</span>
+				<span class="desc">PDF &bull; 582 Кб</span>
+			</a>
+			<a class="vacancies">
+				<span class="text">Вакансии</span>
+			</a>
+		</div>
+	</div>
+	<div class="w-2col">
+	<?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"doctors",
 	Array(
@@ -140,13 +160,14 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC"
 	)
-);?>
-
+	);?>
+	</div>
+</div>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"recalls",
 	Array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ACTIVE_DATE_FORMAT" => "j F Y",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -160,7 +181,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"CHECK_DATES" => "Y",
 		"DETAIL_URL" => "",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
+		"DISPLAY_DATE" => "Y",
 		"DISPLAY_NAME" => "Y",
 		"DISPLAY_PICTURE" => "N",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
@@ -198,7 +219,6 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"SORT_ORDER2" => "ASC"
 	)
 );?>
-
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"articles",

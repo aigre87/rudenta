@@ -1,0 +1,1386 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<hr>\n<div>\n    ООО &laquo;Интер РАО - Инжиниринг&raquo;\n</div>\n<div>\n    &copy; 2011 - <?=date(\"Y\");?>\n</div>\n\n<div>\n    <img src=\"<?=SITE_TEMPLATE_PATH?>/images/logo_buttom.png\"\n</div>/home/g_ablyazov/Projects/wwwiraoengineeringru",
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/include/php/footer.php",
+			"file_size": 216,
+			"file_write_time": 131256658360765459,
+			"settings":
+			{
+				"buffer_size": 231,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 7466,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/styles.css",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/package.json",
+			"settings":
+			{
+				"buffer_size": 1009,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/header.php",
+			"settings":
+			{
+				"buffer_size": 3103,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/sftp-config.json",
+			"settings":
+			{
+				"buffer_size": 1406,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "git p",
+		"selected_items":
+		[
+			[
+				"git p",
+				"Git: Pull"
+			],
+			[
+				"git bra",
+				"Git: New Branch"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+			],
+			[
+				"lowe\t",
+				"Convert Case: Lower Case"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"git upda",
+				"Git: Update Project Ignored Files"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"git pu",
+				"Git: Pull"
+			],
+			[
+				"git s",
+				"Git: Status"
+			],
+			[
+				"git c",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"git a",
+				"Git: Add All"
+			],
+			[
+				"git",
+				"Git: Pull"
+			],
+			[
+				"git rese",
+				"Git: Reset (unstage) Current File"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"git sta",
+				"Git: Status"
+			],
+			[
+				"git re",
+				"Git: Reset (unstage) Current File"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"git ad",
+				"Git: Add Current File"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git rese\t",
+				"Git: Reset (hard) HEAD"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git add ",
+				"Git: Add All"
+			],
+			[
+				"git sa",
+				"Git: Status"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"gita",
+				"Git: Add All"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git add .",
+				"Git: Add..."
+			],
+			[
+				"enab",
+				"Package Control: Enable Package"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"pack",
+				"Package Control: Enable Package"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"html",
+				"HTMLPrettify"
+			],
+			[
+				"html pre",
+				"HTMLPrettify"
+			],
+			[
+				"ullo",
+				"SFTP: Upload File"
+			],
+			[
+				"svn c",
+				"SVN: (File) Commit"
+			],
+			[
+				"sftp",
+				"SFTP: Upload File"
+			],
+			[
+				"svn",
+				"SVN: Log"
+			],
+			[
+				"com",
+				"SVN: Commit…"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 542.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '261dd1222b4693ce6d4f85f9c827ac06' + '6d5ab8ebdd020086947172a8a1356bb6'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/local",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/include/js",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/include/php"
+	],
+	"file_history":
+	[
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/test2.php",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/sftp-config.json",
+		"/home/g_ablyazov/Projects/wwwiraoengineeringru/local/sftp-config.json",
+		"/home/g_ablyazov/Projects/rudenta/src/js/script.js",
+		"/home/g_ablyazov/Projects/rudenta/src/styles/other/mixins.scss",
+		"/home/g_ablyazov/Projects/rudenta/src/styles/other/sprite.scss",
+		"/home/g_ablyazov/Projects/rudenta/src/styles/homepage.scss",
+		"/home/g_ablyazov/Projects/rudenta/src/styles/template_styles.scss",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/news.list/articles/template.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/news.list/recalls/template.php",
+		"/home/g_ablyazov/Projects/rudenta/functions/functions.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/news.list/doctors/template.php",
+		"/home/g_ablyazov/Projects/rudenta/index.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/header.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/footer.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/menu/bottom/template.php",
+		"/home/g_ablyazov/Projects/rudenta/src/js/customVideoPlayer.js",
+		"/home/g_ablyazov/Projects/rudenta/gulpfile.js",
+		"/home/g_ablyazov/Projects/rudenta/sftp-config.json",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/menu/header/template.php",
+		"/home/g_ablyazov/Projects/rudenta/.gitignore",
+		"/home/g_ablyazov/Projects/rudenta/src/styles/reset.css",
+		"/home/g_ablyazov/Projects/rudenta/package.json",
+		"/home/g_ablyazov/Projects/rudenta/bower.json",
+		"/home/g_ablyazov/Projects/rudenta/.bowerrc",
+		"/home/g_ablyazov/Projects/rudenta/src/fonts/fonts.css",
+		"/home/g_ablyazov/Projects/rudenta/grishTest.php",
+		"/home/g_ablyazov/Projects/rudenta/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/filialsMap/filialsmap.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/filialsMap/filialsmap_redesign2016.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/filialsMap/filialsmap_en_redesign2016.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/js/customscript-customers.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/js/customscript.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/js/customscript-events.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/template_styles.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/template_styles-customers.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/sitemap-top-menu.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/menu/horizontal_multilevel/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/header.php",
+		"/tmp/sublime-svn-1479141499/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/filialsMap/filialsmap_en.php",
+		"/home/g_ablyazov/web/myProjects/mobilmedorg/mail.html",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/header.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/sftp-config.json",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/js/customscript.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/template_styles.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/advertising.banners/templates/.default/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/advertising.banners/templates/homepageBanners/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/news.list/homepage_news/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/homepage_footer.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/index.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/news.list/main_reporting/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/menu/horizontal_multilevel/script.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/template_styles-homepage.css",
+		"/tmp/sublime-svn-1478772593/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/.default/components/bitrix/news.list/buttons_main/script.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/.default/components/bitrix/news.list/buttons_main/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/.include/homepage_header.php",
+		"/tmp/sublime-svn-1478762120/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/search.form/.default/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk_2016/components/bitrix/menu/horizontal_multilevel/style.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/sftp-config-alt.json",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/ttt.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/template_styles-customers.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016_payments/template.php",
+		"/tmp/sublime-svn-1477316656/SVN",
+		"/tmp/sublime-svn-1477316506/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/template_styles-investors.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates/mrsk/template_styles-information.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016_payments/error.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016_payments/success.php",
+		"/tmp/sublime-svn-1477314006/SVN",
+		"/tmp/sublime-svn-1477313989/SVN",
+		"/tmp/sublime-svn-1477308901/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016/lang/ru/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016/lang/en/template.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk/form.result.new/templates/default_redesign2016/template.php",
+		"/tmp/sublime-svn-1476281009/SVN",
+		"/tmp/sublime-svn-1475743697/SVN",
+		"/tmp/sublime-svn-1475674891/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/style2.css",
+		"/tmp/sublime-svn-1475671152/SVN",
+		"/tmp/sublime-svn-1475488304/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/sftp-config.json",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/index.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/style.css",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/index_old.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/style2.scss",
+		"/tmp/sublime-svn-1475488201/SVN",
+		"/tmp/sublime-svn-1475488187/SVN",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/test5.php",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/script.js",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/investors/management/societies/style.scss",
+		"/home/g_ablyazov/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/g_ablyazov/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/g_ablyazov/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/testT.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/css/main.css",
+		"/tmp/sublime-svn-1475135829/SVN",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/bitrix/templates/main/header.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/bitrix/templates/catalog/header.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/bitrix/templates/.default/components/bitrix/news.detail/newsDetail/template.php",
+		"/home/g_ablyazov/web/myProjects/test.html",
+		"/home/g_ablyazov/web/support/mrsk/28092016/28.09.2016.csv",
+		"/home/g_ablyazov/web/support/mrsk/28092016/qwe1.csv",
+		"/home/g_ablyazov/web/support/mrsk/28092016/qwe12.csv",
+		"/home/g_ablyazov/web/support/mrsk/28092016/qwe123.csv",
+		"/tmp/sublime-svn-1475068011/SVN",
+		"/tmp/sublime-svn-1475067934/SVN",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/sftp-config-alt.json",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/testP.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/pesc-market.ru/www/sftp-config.json",
+		"/var/tmp/kdecache-g_ablyazov/krun/28901_0_header.php",
+		"/var/tmp/kdecache-g_ablyazov/krun/28867_0_redirecting.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/investors/sobrat-investor-kit/index.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/bitrix/templates/empty/components/bitrix/news.list/investorKit/template.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/bitrix/templates/interrao-2016/components/bitrix/catalog.section.list/investorKit/template.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/src/styles/template_styles.scss",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/src/styles/other/sprite.scss",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/src/styles/other/mixins.scss",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/bitrix/templates/interrao-2016/components/bitrix/news.detail/investorKit/template.php",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/src/js/script.js",
+		"/home/g_ablyazov/Projects/wwwinterraoru/interrao/www/src/styles/investors.scss",
+		"/tmp/sublime-svn-1475058683/SVN",
+		"/tmp/sublime-svn-1475049162/SVN",
+		"/tmp/sublime-svn-1474988877/SVN",
+		"/tmp/sublime-svn-1474988816/SVN",
+		"/tmp/sublime-svn-1474988871/SVN"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/g_ablyazov/Projects/wwwmrsk1ru/www",
+			"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/components/mrsk",
+			"/home/g_ablyazov/Projects/wwwmrsk1ru/www/apache/bitrix/templates",
+			"<project>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"/var/www/html/bitrix/templates",
+			"remotePath: '/var/www/html/bitrix/templates/engineering2016/css/'",
+			" user: 'apache',",
+			"host: '10.10.4.3',",
+			"interrao-2016",
+			"bitrix",
+			"contactsMap",
+			"contactsmap",
+			"$c-1d5",
+			"div",
+			"<div class=\"icons\">",
+			"();\t",
+			"{",
+			"div>",
+			"div",
+			"actualClickEvent",
+			"border-bottom",
+			"ss=\"",
+			"lass=\"",
+			"conta",
+			"9,1);",
+			"contactsmap",
+			"ContactsMap",
+			"contactsMap",
+			"map",
+			"li>",
+			"li",
+			"LI",
+			"li",
+			"LI",
+			"li",
+			"green",
+			"$wide",
+			"@include respond-to(wide) {",
+			"@include respond-to(wide) { ",
+			"description",
+			"=\"",
+			"s=\"",
+			"contactsBlock",
+			"map-get(",
+			"defaultPink",
+			"defaultLBlue",
+			"defaultGreen",
+			"defaultBlue",
+			"defaultDescription",
+			"defaultDBlue",
+			"map-get(",
+			"){",
+			"#000",
+			"<?=$arItem[\"TEXT\"]?>",
+			"/www/local/templates",
+			"(ftp({",
+			"pipe(ftp({\n",
+			"(ftp({",
+			".pipe(gutil.noop());",
+			"\n});",
+			"        .pipe(gutil.noop());\n",
+			".pipe(gutil.noop());",
+			"/www/local/templates/rudenta/",
+			"remotePath: '/www/local/templates/rudenta/images/'",
+			"/www/local/templates/rudenta/images/",
+			"Ez3}&JC+lDJX",
+			"p10298",
+			"p10298.cpanel.relevate.ru",
+			"        host: 'p10298.cpanel.relevate.ru',\n        user: 'p10298',\n        pass: 'Ez3}&JC+lDJX',",
+			"/www/local/templates/rudenta/images/",
+			".pipe(ftp({",
+			"ftp.",
+			"sftp({",
+			"p10210.cpanel.relevate.ru",
+			"'p10210'",
+			"p10210",
+			"CHgGUti7uz",
+			"/home/p10210/public_html",
+			"<div>\n\t\t\t\t\t\t<div class=\"",
+			"<div>",
+			"main",
+			"FiraSansMedium",
+			"FiraSansRegular",
+			"FiraSansLight",
+			"FiraSansItalic",
+			"../fonts/FiraSansBoldItalic/",
+			"../fonts/FiraSansItalic/",
+			"../fonts/FiraSansBold/",
+			"../fonts/FiraSansRegular/",
+			"/fonts/FiraSansRegular",
+			"@font-face {",
+			"font-family",
+			"/var/www/html/local/templates/rudenta",
+			"/var/www/html/local/templates/rudenta/images/",
+			"interrao-2016",
+			"bitrix",
+			"regionsMapGetCode",
+			"regionsMapDoSelect",
+			"regionsMapDoBlur",
+			"regionsMapDoHover",
+			"regionsMapBlurCallback",
+			"regionsMapHoverCallback",
+			"regionsMapClickCallback",
+			"centers",
+			"map",
+			"regionsSelector",
+			"#regionsMap",
+			"regionsMapClickCallback",
+			"file",
+			"include",
+			"filialsMap",
+			"#siteMenu",
+			"#siteMenu #w_siteMap",
+			"sitema",
+			"#w_siteMap",
+			"w_siteMap",
+			" #w_siteMap",
+			"#w_siteMap",
+			"#siteMap",
+			"#siteMap ",
+			"siteMap",
+			"<a href=\"../.include/images/lessons/\"",
+			"<img src=\"../.include/images/lessons/",
+			"<a href=\"/common/upload/docs/",
+			"> a[name='burge",
+			"span",
+			"$(this)",
+			"#main_li .burgerButton span",
+			"fff",
+			"#siteMenu ul#horizontal-multilevel-menu",
+			"css",
+			"sidebar"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"regionsMapGetCode1",
+			"regionsMapDoSelect1",
+			"regionsMapDoBlur1",
+			"regionsMapDoHover1",
+			"regionsMapBlurCallback1",
+			"regionsMapHoverCallback1",
+			"regionsMapClickCallback1",
+			"Mrsk-big2016",
+			"homepagebottomRow",
+			"\\d(.)",
+			"\\d.",
+			"$c-1d4",
+			"$c-1d3"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/include/php/footer.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								231,
+								231
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+									"1":
+									[
+										121,
+										122
+									]
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2485,
+								2485
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2486,
+										2487
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										2484,
+										2485
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 899.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1009,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								98,
+								98
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										159,
+										160
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										97,
+										98
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/local/templates/engineering2016/header.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3103,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3103,
+								3103
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+									"1":
+									[
+										3082,
+										3089
+									]
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1461.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/g_ablyazov/Projects/wwwiraoengineeringru/sftp-config.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1406,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1404,
+										1405
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										0,
+										1
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 343.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 386.0
+	},
+	"output.gulp_output":
+	{
+		"height": 185.0
+	},
+	"output.sftp":
+	{
+		"height": 250.0
+	},
+	"pinned_build_system": "Packages/SASS Build/SASS.sublime-build",
+	"project": "iraoengineeringru2016.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 290.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
