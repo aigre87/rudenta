@@ -2,7 +2,17 @@
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle("Rudenta Kids");
 ?>
-
+<?$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    ".default",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "COMPONENT_TEMPLATE" => ".default",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/local/templates/rudenta/inc/hpBestInRus.php"
+    )
+);?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"slider",
@@ -60,7 +70,6 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"SORT_ORDER2" => "ASC"
 	)
 );?>
-
 <?$APPLICATION->IncludeComponent(
     "bitrix:main.include",
     ".default",
@@ -69,40 +78,23 @@ $APPLICATION->SetTitle("Rudenta Kids");
         "AREA_FILE_SUFFIX" => "inc",
         "COMPONENT_TEMPLATE" => ".default",
         "EDIT_TEMPLATE" => "",
-        "PATH" => "/local/templates/rudenta/inc/video.php"
+        "PATH" => "/local/templates/rudenta/inc/hp_video.php"
     )
 );?>
 
-<?$APPLICATION->IncludeComponent(
-	"bitrix:main.include",
-	".default",
-	Array(
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "inc",
-		"COMPONENT_TEMPLATE" => ".default",
-		"EDIT_TEMPLATE" => "",
-		"PATH" => "/local/templates/rudenta/inc/doctors.php"
-	)
-);?>
 <div class="doctorsBlock clear">
 	<div class="w-1col">
-		<h2>Врачи<br/>детского<br/>отделения</h2>
-		<div class="text"><p>Врачи — главная гордость стоматологической поликлиники «РуДента».</p>
-				<p>У нас трудятся только специалисты самого высокого уровня, обладающие огромным <br />
-						опытом работы и использующие самые современные технологии.</p>
-		</div>
-		<div class="icons">
-			<a class="tech">
-				<span class="text">Применяемые<br />технологии</span>
-			</a>
-			<a class="license">
-				<span class="text">Лицензия РуДента Кидс</span>
-				<span class="desc">PDF &bull; 582 Кб</span>
-			</a>
-			<a class="vacancies">
-				<span class="text">Вакансии</span>
-			</a>
-		</div>
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			".default",
+			Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"COMPONENT_TEMPLATE" => ".default",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/local/templates/rudenta/inc/hp_doctorsLeftCol.php"
+			)
+		);?>
 	</div>
 	<div class="w-2col">
 	<?$APPLICATION->IncludeComponent(

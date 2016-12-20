@@ -32,7 +32,6 @@ $this->setFrameMode(true);
 					<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 					<span class="imgW">
 						<img
-							class="preview_picture"
 							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
 							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
 							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"

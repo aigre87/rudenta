@@ -1,3 +1,12 @@
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+function getRandom(min, max) {
+  return min + Math.random() * (max - min);
+}
+/*functions END*/
+
+
 var xhr,
     myGlobalForHomepageMainSlider = false,
     myGlobalisMobileDevice = false,
@@ -9,18 +18,17 @@ window.mobileAndTabletcheck = function() {
   return myGlobalisMobileDevice;
 };
 mobileAndTabletcheck();
-function getRandom(min, max) {
-  return min + Math.random() * (max - min);
+if( myGlobalisMobileDevice ){
+    $("html").attr("id", "mobile");
 }
 
 
+
 function optionSelect(){
-    console.log($('select').length);
     if( myGlobalisMobileDevice ){ return false; }
     $('select').selectric({
         disableOnMobile: false
     });
-    console.log($('select').length);
     $(".selectric-scroll").niceScroll({
         cursorcolor: '#ff9300',
         cursorwidth: '5px',
@@ -45,11 +53,103 @@ function customizeCheckbox( $element ){
         $(this).wrap("<span class='custom-checkbox' />").after('<span class="box"><span class="tick"></span></span>');
     });
 };
+function HPmainSlider(){
+    if( !$("#hp_slider").length > 0 ){ return false }
+    var $block = $("#hp_slider"),
+        $slides = $block.find(".slide"),
+        slidesCount = $slides.length,
+        cur,
+        aniTime = 0.5,
+        aniDist = 500;
+
+    function initSlider(){
+        cur = ($slides.filter(".current").length>0 ? $slides.filter(".current").index() : 0 );
+        if( cur === 0 ){
+          nextCurIndex = cur+1;
+          prevIndex = cur-1;
+        }else if( cur === slidesCount-1 ){
+          nextCurIndex = 0;
+          prevIndex = slidesCount-2;
+        }else if( cur !== 0 ){
+          nextCurIndex = cur+1;
+          prevIndex = cur-1;
+        }
+        var random1 = getRandom(-5, 5);
+            random2 = getRandom(-5, 5);
+            random3 = getRandom(-5, 5);
+
+        TweenMax.set( $slides, { transformOrigin:'50% 50%' });
+        TweenMax.set( $slides.eq(cur), { rotation: random1, zIndex : 1, className:"+=current" });
+        TweenMax.set( $slides.eq(nextCurIndex), { rotation: random2, x: aniDist, scale: 0.5, zIndex: 0 });
+        TweenMax.set( $slides.eq(prevIndex), { rotation: random3, x: -aniDist, scale: 0.5, zIndex:0 });
+    }
+    initSlider();
+
+    function slide(dir){
+        curIndex = $slides.filter(".current").index();
+        var nextIndex,
+            prevIndex,
+            newIndex;
+
+        if((dir === "right") && (curIndex !== slidesCount-1)){
+          nextIndex = curIndex+1;
+          prevIndex = curIndex-1;
+          newShowIndex = curIndex-2;
+        }else if((dir === "right") && (curIndex === slidesCount-1)){
+          nextIndex = 0;
+          prevIndex = slidesCount-2;
+          newShowIndex = slidesCount-3;
+        }else if((dir === "left") && (curIndex !== 0)){
+          nextIndex = curIndex-1;
+          prevIndex = curIndex+1;
+          newShowIndex = curIndex+2;
+        }else if((dir === "left") && (curIndex === 0)){
+          nextIndex = slidesCount-1;
+          prevIndex = curIndex+1;
+          newShowIndex = curIndex+2;
+        }
+
+        if( (dir === "right") ){
+
+        }else{
+
+        }
+
+        
+        TweenMax.to( $slides.eq(curIndex), aniTime , { rotation: randomCur, zIndex : 0 });
+        TweenMax.to( $slides.eq(nextIndex), aniTime , { rotation: randomNext, x: 500, scale: 0.5, zIndex: 1 });
+        TweenMax.to( $slides.eq(prevIndex), aniTime , { rotation: randomPrev, x:-500, scale: 0.5, zIndex: 1 });
+        TweenMax.fromTo( $slides.eq(newShowIndex), aniTime , {  }, {  } );
+
+        $slides.removeClass("current start");
+        $slides.eq(nextIndex).addClass("current");
+    };
+
+    var $la = $block.find(".left-arrow");
+        $la.on("click", function(){
+            slide("left");
+        });
+
+    var $ra = $block.find(".right-arrow");
+        $ra.on("click", function(){
+          slide("right");
+        });
+
+    var hamSlider = new Hammer($block[0], {
+        touchAction: "auto"
+    });
+    hamSlider.on('swipeleft', function(ev) {
+        slide("right");
+    });
+    hamSlider.on('swiperight', function(ev) {
+        slide("left");
+    });
+}
 function initBottomMenu(){
     if( !$("#bottomMenu .item").length > 0 ){ return false;}
-	var $items = $("#bottomMenu .item"),
+	var $items = $("#bottomMenu .item:not(.notMenu)"),
 	itemsL = $items.length,
-	count = Math.ceil(itemsL/3);
+	count = Math.floor(itemsL/3);
 
 	for(var i = 0; i < itemsL; i+=count) {
 	  $items.slice(i, i+count).wrapAll("<div class='w-1d4col'></div>");
@@ -60,7 +160,7 @@ function HPinitSovetiBlock(){
     if( !$(".homepage .sovetiBlock .item").length > 0 ){ return false;}
     var $items = $(".homepage .sovetiBlock .item"),
     itemsL = $items.length,
-    count = Math.ceil(itemsL/3);
+    count = Math.floor(itemsL/3);
 
     for(var i = 0; i < itemsL; i+=count) {
       $items.slice(i, i+count).wrapAll("<div class='w-1col'></div>");
@@ -139,6 +239,56 @@ function contactsmap(){
             }));
     }
 }
+function hpVideoRow(){
+    var myPlayer;
+    function customVideoPlayer(){
+    if( !$('#companyVideo').length > 0 ){ return false;}
+        var options = {
+            "controls": true,
+            "autoplay": false,
+            "preload": "auto",
+            "fluid": true,
+        }
+        videojs(document.getElementById('companyVideo'), options, function() {
+
+        }).ready(function(event){
+            myPlayer = this;
+            var previousTime = 0;
+            var currentTime = 0;
+            myPlayer.on('timeupdate', function() {
+                previousTime = currentTime;
+                currentTime = myPlayer.currentTime();
+            });
+            myPlayer.on('seeking', function() {
+                // setTimeout(function(){
+                //     myPlayer.controlBar.progressControl.seekBar.update();
+                // }, 100)
+            });
+        });
+    }
+    customVideoPlayer();
+    function showVideo(){
+        var videoEl = $(".videoPopup");
+        $.magnificPopup.open({
+            items: {
+                src: videoEl,
+                type: 'inline'
+            },
+            removalDelay: 500, //delay removal by X to allow out-animation
+            closeBtnInside: true,
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.mainClass = "mfp-zoom-in";
+                }
+            },
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+        });
+    }
+    $(".hpVideoRow .videoPlayButton").on("click", function(){
+        showVideo();
+        myPlayer.play();
+    });
+}
 
 function HPrecallsBlock(){
     if( !$(".homepage .recallsBlock .item").length > 0 ){ return false;}
@@ -196,6 +346,29 @@ function HPrecallsBlock(){
         });
 }
 
+function doctorsListInit(){
+    if( !$("#doctors-list").length > 0 ){ return false;}
+    var $items = $("#doctors-list .item"),
+    itemsL = $items.length;
+    for(var i = 0; i <= itemsL; i+=3) {
+        var $item1 = $items.eq(i),
+            $item2 = $items.eq(i+1),
+            $item3 = $items.eq(i+2),
+            maxRowH = [];
+
+        maxRowH.push($item1.outerHeight());
+        maxRowH.push($item2.outerHeight());
+        maxRowH.push($item3.outerHeight());
+        var maxH = maxRowH.max();
+
+        $item1
+        .add($item2)
+        .add($item3)
+            .css({height : maxH})
+            .wrapAll("<div class='row clear'>");
+    }
+}
+
 
 
 
@@ -209,10 +382,16 @@ $(document).ready(function(){
 /*homepage*/
     HPinitSovetiBlock();
     HPrecallsBlock();
+    hpVideoRow();
+    HPmainSlider();
 /*END homepage*/
+
 });
 window.onload = function() {
 /*homepage*/
     HPinitDoctorsBlock();
 /*END homepage*/
+/*doctors*/
+    doctorsListInit();
+/*doctors END*/
 }

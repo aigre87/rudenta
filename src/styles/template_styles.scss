@@ -139,6 +139,7 @@ video{
   background: #000;
 }
 #content{
+  padding-bottom: 50px;
   h1{
     font-size: 70px;
     line-height: 75px;
@@ -243,7 +244,7 @@ sup{
   clear: both;
 }
 #mainWrapper{
-
+  
 }
 
 
@@ -251,7 +252,8 @@ header{
   width: 1180px;
   margin: 0 auto;
   position: relative;
-  padding-top: 50px;
+  padding-top: 21px;
+  padding-bottom: 32px;
   font-size: 0;
   #headerLogo,
   #headerMenu,
@@ -261,16 +263,16 @@ header{
   }
   #headerLogo{
     position: absolute;
-    left: 6px;
-    top: 62px;
+    left: -1px;
+    top: 43px;
     img{
       display: block;
     }
   }
 
   #headerMenu{
-    margin-left: 406px;
-    padding-top: 17px;
+    margin-left: 399px;
+    padding-top: 21px;
     width: 460px;
     ul{
       li{
@@ -279,13 +281,14 @@ header{
         white-space: nowrap;
         min-width: 200px;
         padding-right: 15px;
-        margin-bottom: 21px;
+        margin-bottom: 27px;
         a{
-          font-size: 25px;
-          line-height: 28px;
+          font-size: 20px;
+          line-height: 20px;
           display: inline-block;
           font-weight: 600;
-          border-bottom: 1px solid #000;
+          padding-bottom: 2px;
+          border-bottom: 1px solid map-get($colors, dBlue);
           &:nth-child(n):hover{
             border-bottom: 1px solid transparent;
           }
@@ -313,7 +316,7 @@ header{
   #headerContacts{
     float: right;
     padding-top: 21px;
-    padding-right: 6px;
+    padding-right: 13px;
     .phone{
       font-size: 25px;
       line-height: 25px;
@@ -344,7 +347,15 @@ header{
     }
   }
 }
-
+.pageTitle{
+  width: $contentW;
+  margin: 0 auto;
+  h1{
+    font-size: 70px;
+    line-height: 75px;
+    font-weight: bold;
+  }
+}
 #content{
   width: 1180px;
   margin: 0 auto;
@@ -467,6 +478,7 @@ footer{
     color: #fff;
     background: map-get($colors, green);
     padding-bottom: 37px;
+    position: relative;
     .copyright{
       float: left;
       width: 500px;
@@ -480,9 +492,18 @@ footer{
       float: right;
     }
   }
-
 }
-
+/*fix white line*/
+#mobile footer #bottomMenu:after, #mobile footer .bb:after{
+  position: absolute;
+  top: -2px;
+  height: 4px;
+  content: '';
+  display: block;
+  width: 100%;
+  background: #89af0f;
+}
+    
 
 
 
@@ -839,3 +860,76 @@ input[type='checkbox']{
   }
 }
 /*END SELECTRIC*/
+
+.triangle{
+  will-change: transform;
+  $size : 10px;
+  $brs : 30%;
+  width: $size;
+  height: $size;
+  border-top-right-radius: $brs;
+  position: relative;
+  background-color: #fff;
+  text-align: left;
+  transform: rotate(-210deg) skewX(-30deg) scale(1,.866);
+  &:before, &:after{
+    width: $size;
+    height: $size;
+    border-top-right-radius: $brs;
+    content: '';
+    position: absolute;
+    background-color: inherit;
+  }
+  &::before{
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
+  }
+  &:after{
+    transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
+  }
+}
+.videoPlayButton{
+  will-change: transform;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 98px;
+  height: 98px;
+  background: transparent;
+  border-radius: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  &:before{
+    position: absolute;
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: map-get($colors, green);
+    opacity: 0.85;
+    transition: opacity 0.15s ease-in-out;
+  }
+  .triangle{
+    will-change: transform;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 11px;
+    right: 9px;
+    margin: auto;
+    background: #fff;
+    &:before, &:after{
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &:hover{
+    &:before{
+      opacity: 1;
+    }
+  }
+}

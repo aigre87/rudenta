@@ -51,7 +51,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 					)
 				);?>
 				<div class="w-1d4col rc">
-					<div class="item">
+					<div class="item notMenu">
 						У нас  можно<br />
 						расплатиться картой
 						<div class="images">
@@ -59,7 +59,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 							<i class="visa"></i>
 						</div>
 					</div>
-					<div class="item">
+					<div class="item notMenu">
 						и взять рассрочку<br />
 						на 10 месяцев
 					</div>
@@ -105,6 +105,5 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		$APPLICATION->AddHeadString('<meta property="og:image" content="'.$shareImgSrc.'" />', false, false);
 		$APPLICATION->AddHeadString('<meta property="og:description" content="'.str_replace('"',"'", $shareDescription).'" />', false, false);
 	?>
-
 	</body>
 </html>

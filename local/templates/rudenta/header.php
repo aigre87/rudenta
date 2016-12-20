@@ -40,6 +40,7 @@ else
 
     <meta name="keywords" content="<?$APPLICATION->ShowProperty("keywords");?>" />
     <meta name="description" content="<?$APPLICATION->ShowProperty("description");?>" />
+    <meta id="vp" name="viewport" content="width=1280;  maximum-scale=1.0; user-scalable=no">
 
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -86,7 +87,7 @@ else
 		</header>
 
 			<?if ( !$isHomePage && !defined("ERROR_404") ): ?>
-				<div class="pageTitle clear">
+				<div class="pageTitle clear" >
 					<h1><?$APPLICATION->ShowTitle(false)?></h1>
 				</div>
 			<?endif;?>
