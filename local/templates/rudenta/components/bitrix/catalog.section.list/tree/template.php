@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 
 $strTitle = "";
 ?>
-<div class="sections">
+
 	<?
 	$TOP_DEPTH = $arResult["SECTION"]["DEPTH_LEVEL"];
 	$CURRENT_DEPTH = $TOP_DEPTH;
@@ -27,21 +27,21 @@ $strTitle = "";
 		$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], CIBlock::GetArrayByID($arSection["IBLOCK_ID"], "SECTION_DELETE"), array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_CONFIRM')));
 		if($CURRENT_DEPTH < $arSection["DEPTH_LEVEL"])
 		{
-			echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH),"<ul>";
+			echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH),"<div class='serviceBlock'>";
 		}
 		elseif($CURRENT_DEPTH == $arSection["DEPTH_LEVEL"])
 		{
-			echo "</li>";
+			echo "</div>";
 		}
 		else
 		{
 			while($CURRENT_DEPTH > $arSection["DEPTH_LEVEL"])
 			{
-				echo "</li>";
-				echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</ul>","\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH-1);
+				echo "</div>";
+				echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</div>","\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH-1);
 				$CURRENT_DEPTH--;
 			}
-			echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</li>";
+			echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</div>";
 		}
 
 		$count = $arParams["COUNT_ELEMENTS"] && $arSection["ELEMENT_CNT"] ? "&nbsp;(".$arSection["ELEMENT_CNT"].")" : "";
@@ -54,25 +54,25 @@ $strTitle = "";
 		else
 		{
 			if($arSection['DEPTH_LEVEL'] == 1){
-				$link = '<span>'.$arSection["NAME"].'</span>';
+				$link = '<div class="serviceTitle">'.$arSection["NAME"].'</div>';
 			}else{
-				$link = '<a href="'.$arSection["SECTION_PAGE_URL"].'">'.$arSection["NAME"].'</a>';
+				$link = '<div class="serviceItem"><a href="'.$arSection["SECTION_PAGE_URL"].'">'.'<span class="serviceName">'.$arSection["NAME"].'</span><span class="servicePrice">1200р</span>'.'</a></div>';
 			}
 
 		}
 
 		echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH);
-		?><li <?if($arSection['DEPTH_LEVEL'] == 1):?>style="background-color: <?=$color?>" class="service"<?endif;?> id="<?=$this->GetEditAreaId($arSection['ID']);?>"><?=$link?><?
+		?><div <?if($arSection['DEPTH_LEVEL'] == 1):?>style="background-color: <?=$color?>" class="service"<?endif;?> id="<?=$this->GetEditAreaId($arSection['ID']);?>"><?=$link?><?
 
 		$CURRENT_DEPTH = $arSection["DEPTH_LEVEL"];
 	}
 
 	while($CURRENT_DEPTH > $TOP_DEPTH)
 	{
-		echo "</li>";
-		echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</ul>","\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH-1);
+		echo "<div>";
+		echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</div>","\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH-1);
 		$CURRENT_DEPTH--;
 	}
 	?>
-</div>
+
 <?=($strTitle?'<br/><h2>'.$strTitle.'</h2>':'')?>
