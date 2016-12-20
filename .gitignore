@@ -1,4 +1,4 @@
 /bitrix/*
 /node_modules/*
+/src/libs/*
 .sublime-gulp.cache
-.gitignore
