@@ -25,7 +25,7 @@ $strTitle = "";
 		$color = Service::getColor($color_id);
 		$this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], CIBlock::GetArrayByID($arSection["IBLOCK_ID"], "SECTION_EDIT"));
 		$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], CIBlock::GetArrayByID($arSection["IBLOCK_ID"], "SECTION_DELETE"), array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_CONFIRM')));
-		if($CURRENT_DEPTH < $arSection["DEPTH_LEVEL"])
+		if($CURRENT_DEPTH < $arSection["DEPTH_LEVEL"]) 
 		{
 			echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH),"<div class='serviceBlock'>";
 		}
@@ -56,7 +56,7 @@ $strTitle = "";
 			if($arSection['DEPTH_LEVEL'] == 1){
 				$link = '<div class="serviceTitle">'.$arSection["NAME"].'</div>';
 			}else{
-				$link = "<a" . ($arSection['DEPTH_LEVEL'] == 1) ? "style='background-color: $color" : ""  . "class='serviceItem' href='" .$arSection['SECTION_PAGE_URL']."'>"."<span class='serviceName'>".$arSection['NAME']."</span><span class='servicePrice'>1200р</span>"."</a>";
+				$link = '<a class="serviceItem" href="'.$arSection["SECTION_PAGE_URL"].'">'.'<span class="serviceName">'.$arSection["NAME"].'</span><span class="servicePrice">1200р</span>'.'</a>';
 			}
 
 		}

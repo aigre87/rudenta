@@ -6,6 +6,11 @@
 	background-image: url($url); 
 }
 
+// @mixin background-opacity($color, $opacity: 0.3) {
+//     background: $color; /* The Fallback */
+//     background: rgba($color, $opacity);
+// }
+
 @mixin sprite($sprite) {
 	@include spriteImage($sprite);
 	@include spritePosition($sprite);
@@ -23,6 +28,7 @@ $colors: (
 	lBlue: #1bbee8,
 	ulBlue: #eefafa,
 	green: #89af0f,
+	yellow: #e6b317,
 	lightBlueBlock: #eefafa,
 	linkUnder: rgba(0, 93, 151, 0.3),
 	linkUnderH: rgba(237, 16, 122, 0.3)

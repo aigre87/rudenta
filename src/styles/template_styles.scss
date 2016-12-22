@@ -588,6 +588,65 @@ input[type='checkbox']{
   opacity:0;
   z-index:1;
 }
+.custom-radiobox{
+  user-select: none;
+  cursor: pointer;
+  position:relative;
+  display:inline-block;
+}
+.ie8 .custom-radiobox{
+  zoom:1;
+}
+.custom-radiobox>.box{
+  position:relative;
+  box-sizing: border-box;
+  display:block;
+  width:16px;
+  height:16px;
+  border:1px solid #ebcda4;
+  background-color:#fff;
+  border-radius: 100%;
+}
+.custom-radiobox>.box>.dot{
+  position:absolute;
+  background: #333333;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  display: none;
+}
+.oldie .custom-radiobox>.box>.dot{
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  zoom: 1;
+}
+.custom-radiobox>input:checked+.box>.dot{
+  display:block;
+}
+.custom-radiobox.checked>.box>.dot{
+  display:block;
+}
+.custom-radiobox>input{
+  position:absolute;
+  outline:none;
+  left:0;
+  top:0;
+  padding:0;
+  width:16px;
+  height:16px;
+  border:none;
+  margin:0;
+  opacity:0;
+  z-index:1;
+}
 #content input[type='submit']{
   cursor: pointer;
   border: none;
