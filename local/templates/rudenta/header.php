@@ -40,7 +40,7 @@ else
 
     <meta name="keywords" content="<?$APPLICATION->ShowProperty("keywords");?>" />
     <meta name="description" content="<?$APPLICATION->ShowProperty("description");?>" />
-    <meta id="vp" name="viewport" content="width=1280;  maximum-scale=1.0; user-scalable=no">
+    <meta id="vp" name="viewport" content="width=1240;  maximum-scale=1.0; user-scalable=no">
 
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 

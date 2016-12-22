@@ -18,6 +18,31 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"USE_EXT" => "N"
 	)
 );?>
+<div class="blueBlockLinks clear">
+	<a href="" class="w-1d6col col">
+		<span class="name">Первое посещение</span>
+		<span class="value">Бесплатно</span>
+	</a>
+	<a href="" class="w-1d6col col">
+		<span class="name">Лечение кариеса</span>
+		<span class="value">от 500 <i class="ruble14pxGrey"></i></span>
+	</a>
+	<a href="" class="w-1d6col col">
+		<span class="name">Детские коронки</span>
+		<span class="value">от 2500 <i class="ruble14pxGrey"></i></span>
+	</a>
+	<a href="" class="w-1d6col col">
+		<span class="name">Исправление прикуса</span>
+		<span class="value">от 2500 <i class="ruble14pxGrey"></i></span>
+	</a>
+	<a href="" class="w-1d6col col">
+		<span class="name">Удаление зубов</span>
+		<span class="value">от 1500 <i class="ruble14pxGrey"></i></span>
+	</a>
+	<a href="" class="w-1d6col col all">
+		<span class="name">Все услуги</span>
+	</a>
+</div>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"slider",
@@ -50,7 +75,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
 		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "3",
+		"NEWS_COUNT" => "300",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",

@@ -34,8 +34,42 @@
 			line-height: 20px;
 		}
 	}
+	.blueBlockLinks{
+		margin-top: 44px;
+		.w-1d6col{
+			border-bottom: none;
+			display: block;
+	    box-sizing: border-box;
+    	padding: 22px 20px 18px 20px;
+			border-radius: 13px;
+			background: map-get($colors, lightBlueBlock);
+			.name{
+				display: block;
+				font-size: 20px;
+				color: map-get($colors, dBlue);
+				margin-bottom: 12px;
+				transition: all 0.15s ease;
+			}
+			.value{
+				display: block;
+				font-size: 14px;
+				line-height: 20px;
+				color: map-get($colors, desc);
+			}
+			&:hover{
+				.name{
+					color: map-get($colors, pink);
+				}
+			}
+			&.all{
+
+			}
+		}
+	}
 	#hp_slider{
-		height: 600px;
+		margin-top: 90px;
+		margin-bottom: 90px;
+		height: 550px;
 		width: 100%;
 		position: relative;
 		.slide{
@@ -94,6 +128,7 @@
 			}
 		}
 		.left-arrow, .right-arrow{
+			cursor: pointer;
 			width: 100px;
 			height: 100%;
 			top: 0;
@@ -510,6 +545,9 @@
 				margin-top: 15px;
 				&:first-child{
 					margin-top: 0;
+				}
+				a{
+					border-bottom: none;
 				}
 			}
 		}

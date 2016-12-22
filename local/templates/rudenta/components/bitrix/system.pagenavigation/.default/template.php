@@ -20,16 +20,18 @@ if(!$arResult["NavShowAlways"])
 $strNavQueryString = ($arResult["NavQueryString"] != "" ? $arResult["NavQueryString"]."&amp;" : "");
 $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["NavQueryString"] : "");
 ?>
-<div class="pagenation">
+<div class="pagenation clear">
 	<?if ($arResult["NavPageNomer"] > 1):?>
-		<a href="<?=$arResult["sUrlPath"]?><?=$strNavQueryStringFull?>"><-</a>
+	<div class="prev"><a href="<?=$arResult["sUrlPath"]?><?=$strNavQueryStringFull?>">Назад</a></div>
 	<?else:?>
-		<div class="first-page">Первая строничка</div>
+		<div class="prev"><span>Назад</span></div>
 	<?endif?>
-	<div>Строничка <?=$arResult["NavPageNomer"]?> из <?=$arResult['nEndPage']?></div>
+	<div class="td center"><span class="cur">Страница <?=$arResult["NavPageNomer"]?></span><span class="all"> из <?=$arResult['nEndPage']?></span></div>
 	<?if($arResult["NavPageNomer"] < $arResult["NavPageCount"]):?>
-		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>">-></a>
+		<div class="next">
+		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>">Дальше</a>
+		</div>
 	<?else:?>
-		<div class="last-page">Последняя строничка</div>
+		<div class="next"><span>Дальше</span></div>
 	<?endif?>
 </div>

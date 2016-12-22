@@ -60,6 +60,14 @@ function customizeCheckbox( $element ){
         $(this).wrap("<span class='custom-checkbox' />").after('<span class="box"><span class="tick"></span></span>');
     });
 };
+function HPblueLinksBlock(){
+    var mas=[];
+    $(".blueBlockLinks>a").each(function(){
+        mas.push($(this).outerHeight());
+    });
+    var maxH = mas.max();
+    $(".blueBlockLinks>a").css({ height : maxH });
+}
 function HPmainSlider(){
     if( !$("#hp_slider").length > 0 ){ return false }
     var $block = $("#hp_slider"),
@@ -110,6 +118,11 @@ function HPmainSlider(){
           nextIndex = curIndex-1;
           prevIndex = curIndex+1;
           newShowIndex = curIndex-2;
+          if( curIndex === slidesCount-1 ){
+            nextIndex = slidesCount-2;
+            prevIndex = 0;
+            newShowIndex = slidesCount-3;
+          }
         }else if((dir === "left") && (curIndex === 0)){
           nextIndex = slidesCount-1;
           prevIndex = curIndex+1;
@@ -406,6 +419,7 @@ $(document).ready(function(){
 	contactsmap();
 /*END GLOBAL*/
 /*homepage*/
+    HPblueLinksBlock();
     HPinitSovetiBlock();
     HPrecallsBlock();
     hpVideoRow();

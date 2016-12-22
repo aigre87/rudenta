@@ -243,8 +243,10 @@ sup{
   display: table;
   clear: both;
 }
-#mainWrapper{
-  
+#mobile #mainWrapper{
+  width: 1240px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 
@@ -992,7 +994,7 @@ input[type='checkbox']{
     }
   }
 }
-.customIconsMenu{
+#content .customIconsMenu{
   margin-top: 30px;
   width: 100%;
   padding: 0 20px;
@@ -1021,6 +1023,9 @@ input[type='checkbox']{
         font-size: 15px;
         line-height: 20px;
         letter-spacing: -0.1px;
+        a{
+          border-bottom: none;
+        }
       }
       &.clown i:before{
         top: 6px;
@@ -1043,4 +1048,138 @@ input[type='checkbox']{
       }
     }
   }
+}
+.ruble14pxGrey{
+  display: inline-block;
+  position: relative;
+  bottom: -1px;
+  @include sprite($s-symbol_rubleGrey14px);
+}
+#content .pagenation{
+  .prev,.next{
+    a,span{
+      border-style: solid;
+      font-size: 18px;
+      height: 50px;
+      line-height: 48px;
+      overflow: hidden;
+      display: block;
+      box-sizing: border-box;
+    }
+    span{
+      position: relative;
+      border-width: 2px;
+      border-radius: 5px;
+      background-color: #fff;
+      border-color: map-get($colors, lgray);
+      color: map-get($colors, lgray);
+    }
+    a{
+      position: relative;
+      border-width: 2px;
+      border-radius: 5px;
+      color: #fff;
+      background-color: map-get($colors, lBlue);
+      border-color: map-get($colors, lBlue);
+    }
+  }
+  .prev{
+    padding-right: 10px;
+    float: left;
+    width: calc(100% - 77.7777% - 13.33333px);
+    text-align: right;
+    span, a{
+      &:after, &:before {
+        right: 100%;
+        margin-right: -20px;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-right-color: map-get($colors, lBlue);
+        border-width: 6px;
+        margin-top: -6px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-right-color: #fff;
+        border-width: 9px;
+        margin-top: -9px;
+      }
+    }
+    span{
+      &:after {
+        border-right-color: #fff;
+      }
+      &:before {
+        border-right-color: map-get($colors, lgray);
+      }
+    }
+  }
+  .next{
+    padding-left: 10px;
+    float: left;
+    width: calc(100% - 77.7777% - 13.33333px);
+    margin-left: 20px;
+    text-align: left;
+    span, a{
+      &:after, &:before {
+        left: 100%;
+        margin-left: -20px;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-left-color: map-get($colors, lBlue);
+        border-width: 6px;
+        margin-top: -6px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-left-color: #fff;
+        border-width: 9px;
+        margin-top: -9px;
+      }
+    }
+    span{
+      &:after {
+        border-left-color: #fff
+      }
+      &:before {
+        border-left-color: map-get($colors, lgray);
+      }
+    }
+  }
+  .center{
+    font-size: 18px;
+    height: 50px;
+    line-height: 48px;
+    overflow: hidden;
+    border-width: 2px;
+    border-radius: 5px;
+    text-align: center;
+    width: calc(100% - 44.44444% - 13.33333px);
+    margin-left: 20px;
+    float: left;
+    border: 2px solid map-get($colors, lgray);
+    .cur{
+      color: map-get($colors, dBlue);
+    }
+    .all{
+      color: map-get($colors, lgray);
+    }
+  }
+
 }
