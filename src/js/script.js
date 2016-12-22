@@ -46,6 +46,13 @@ function optionSelect(){
         autohidemode: false
     });
 };
+function customizeRadiobox($element){
+    var $rBox = $element.find("input[type='radio']");
+    if( !$rBox.length > 0 ){return false;}
+    $rBox.each(function(){
+        $(this).wrap("<span class='custom-radiobox' />").after('<span class="box"><span class="dot"></span></span>');
+    });
+}
 function customizeCheckbox( $element ){
     var $cBox = $element.find("input[type='checkbox']");
     if( !$cBox.length > 0 ){return false;}
@@ -78,10 +85,10 @@ function HPmainSlider(){
             random2 = getRandom(-5, 5);
             random3 = getRandom(-5, 5);
 
-        TweenMax.set( $slides, { transformOrigin:'50% 50%' });
-        TweenMax.set( $slides.eq(cur), { rotation: random1, zIndex : 1, className:"+=current" });
-        TweenMax.set( $slides.eq(nextCurIndex), { rotation: random2, x: aniDist, scale: 0.5, zIndex: 0 });
-        TweenMax.set( $slides.eq(prevIndex), { rotation: random3, x: -aniDist, scale: 0.5, zIndex:0 });
+        TweenMax.set( $slides, { transformOrigin:'50% 50%', autoAlpha: 0, z :1 });
+        TweenMax.set( $slides.eq(cur), { rotation: random1, zIndex : 2, className:"+=current", autoAlpha: 1, x:0 });
+        TweenMax.set( $slides.eq(nextCurIndex), { rotation: random2, x: aniDist, scale: 0.5, zIndex: 1, autoAlpha: 1 });
+        TweenMax.set( $slides.eq(prevIndex), { rotation: random3, x: -aniDist, scale: 0.5, zIndex:1, autoAlpha: 1 });
     }
     initSlider();
 
@@ -94,32 +101,50 @@ function HPmainSlider(){
         if((dir === "right") && (curIndex !== slidesCount-1)){
           nextIndex = curIndex+1;
           prevIndex = curIndex-1;
-          newShowIndex = curIndex-2;
+          newShowIndex = curIndex+2;
         }else if((dir === "right") && (curIndex === slidesCount-1)){
           nextIndex = 0;
           prevIndex = slidesCount-2;
-          newShowIndex = slidesCount-3;
+          newShowIndex = 1;
         }else if((dir === "left") && (curIndex !== 0)){
           nextIndex = curIndex-1;
           prevIndex = curIndex+1;
-          newShowIndex = curIndex+2;
+          newShowIndex = curIndex-2;
         }else if((dir === "left") && (curIndex === 0)){
           nextIndex = slidesCount-1;
           prevIndex = curIndex+1;
-          newShowIndex = curIndex+2;
+          newShowIndex = slidesCount-2;
         }
 
+        var random1 = getRandom(-5, 5);
+            random2 = getRandom(-5, 5);
+            random3 = getRandom(-5, 5);
+            random4 = getRandom(-5, 5);
+
+        var xFrom;
         if( (dir === "right") ){
-
+            xFrom = aniDist;
         }else{
-
+            xFrom = -aniDist;
         }
 
-        
-        TweenMax.to( $slides.eq(curIndex), aniTime , { rotation: randomCur, zIndex : 0 });
-        TweenMax.to( $slides.eq(nextIndex), aniTime , { rotation: randomNext, x: 500, scale: 0.5, zIndex: 1 });
-        TweenMax.to( $slides.eq(prevIndex), aniTime , { rotation: randomPrev, x:-500, scale: 0.5, zIndex: 1 });
-        TweenMax.fromTo( $slides.eq(newShowIndex), aniTime , {  }, {  } );
+        if( newShowIndex > slidesCount-1 ){
+            newShowIndex = 0;
+        }
+        if( newShowIndex < 0 ){
+            newShowIndex = slidesCount-1;
+        }
+        $slides.removeClass("curIndex nextIndex prevIndex newShowIndex") ;
+        $slides.eq(curIndex).addClass("curIndex");
+        $slides.eq(nextIndex).addClass("nextIndex");
+        $slides.eq(prevIndex).addClass("prevIndex");
+        $slides.eq(newShowIndex).addClass("newShowIndex");
+
+        TweenMax.to( $slides.eq(curIndex), aniTime , { rotation: random1, x: -xFrom, scale: 0.5, zIndex: 1 });
+        TweenMax.to( $slides.eq(nextIndex), aniTime , { rotation: random2, x: 0, scale: 1, zIndex: 2 });
+        TweenMax.to( $slides.eq(prevIndex), aniTime , { rotation: random3, x: -xFrom*1.2, autoAlpha: 0, scale: 0.3, zIndex: 0 });
+        TweenMax.fromTo( $slides.eq(newShowIndex), aniTime , { rotation: random4, scale: 0.3, autoAlpha: 0, x: xFrom*1.2  }, { rotation :random4, scale: 0.5, autoAlpha: 1, x: xFrom } );
+
 
         $slides.removeClass("current start");
         $slides.eq(nextIndex).addClass("current");
@@ -376,6 +401,7 @@ $(document).ready(function(){
 /*GLOBAL*/
     optionSelect();
     customizeCheckbox( $("#content") );
+    customizeRadiobox( $("#content") );
 	initBottomMenu();
 	contactsmap();
 /*END GLOBAL*/
