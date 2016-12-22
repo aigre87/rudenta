@@ -56,13 +56,13 @@ $strTitle = "";
 			if($arSection['DEPTH_LEVEL'] == 1){
 				$link = '<div class="serviceTitle">'.$arSection["NAME"].'</div>';
 			}else{
-				$link = '<div class="serviceItem"><a href="'.$arSection["SECTION_PAGE_URL"].'">'.'<span class="serviceName">'.$arSection["NAME"].'</span><span class="servicePrice">1200р</span>'.'</a></div>';
+				$link = "<a" . ($arSection['DEPTH_LEVEL'] == 1) ? "style='background-color: $color" : ""  . "class='serviceItem' href='" .$arSection['SECTION_PAGE_URL']."'>"."<span class='serviceName'>".$arSection['NAME']."</span><span class='servicePrice'>1200р</span>"."</a>";
 			}
 
 		}
 
 		echo "\n",str_repeat("\t", $arSection["DEPTH_LEVEL"]-$TOP_DEPTH);
-		?><div <?if($arSection['DEPTH_LEVEL'] == 1):?>style="background-color: <?=$color?>" class="service"<?endif;?> id="<?=$this->GetEditAreaId($arSection['ID']);?>"><?=$link?><?
+		?><div class="service" id="<?=$this->GetEditAreaId($arSection['ID']);?>"><?=$link?><?
 
 		$CURRENT_DEPTH = $arSection["DEPTH_LEVEL"];
 	}

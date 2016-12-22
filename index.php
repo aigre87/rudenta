@@ -3,15 +3,20 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle("Rudenta Kids");
 ?>
 <?$APPLICATION->IncludeComponent(
-    "bitrix:main.include",
-    ".default",
-    Array(
-        "AREA_FILE_SHOW" => "file",
-        "AREA_FILE_SUFFIX" => "inc",
-        "COMPONENT_TEMPLATE" => ".default",
-        "EDIT_TEMPLATE" => "",
-        "PATH" => "/local/templates/rudenta/inc/hpBestInRus.php"
-    )
+	"bitrix:menu",
+	"child",
+	Array(
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "child",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "1",
+		"MENU_CACHE_GET_VARS" => array(""),
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"ROOT_MENU_TYPE" => "child",
+		"USE_EXT" => "N"
+	)
 );?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",

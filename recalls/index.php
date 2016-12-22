@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("title", "Отзывы");
+echo $APPLICATION->GetPageProperty("title");
 $APPLICATION->SetTitle("Отызвы");
 CModule::IncludeModule("iblock");
 filterDocAndUsl();
