@@ -1056,6 +1056,7 @@ input[type='checkbox']{
   @include sprite($s-symbol_rubleGrey14px);
 }
 #content .pagenation{
+  margin-top: 32px;
   .prev,.next{
     a,span{
       border-style: solid;
@@ -1068,7 +1069,7 @@ input[type='checkbox']{
     }
     span{
       position: relative;
-      border-width: 2px;
+      border-width: 1px;
       border-radius: 5px;
       background-color: #fff;
       border-color: map-get($colors, lgray);
@@ -1084,11 +1085,11 @@ input[type='checkbox']{
     }
   }
   .prev{
-    padding-right: 10px;
     float: left;
     width: calc(100% - 77.7777% - 13.33333px);
     text-align: right;
     span, a{
+      padding-right: 20px;
       &:after, &:before {
         right: 100%;
         margin-right: -20px;
@@ -1123,12 +1124,12 @@ input[type='checkbox']{
     }
   }
   .next{
-    padding-left: 10px;
     float: left;
     width: calc(100% - 77.7777% - 13.33333px);
     margin-left: 20px;
     text-align: left;
     span, a{
+      padding-left: 20px;
       &:after, &:before {
         left: 100%;
         margin-left: -20px;
@@ -1173,7 +1174,7 @@ input[type='checkbox']{
     width: calc(100% - 44.44444% - 13.33333px);
     margin-left: 20px;
     float: left;
-    border: 2px solid map-get($colors, lgray);
+    border: 1px solid map-get($colors, lgray);
     .cur{
       color: map-get($colors, dBlue);
     }
@@ -1181,5 +1182,9 @@ input[type='checkbox']{
       color: map-get($colors, lgray);
     }
   }
-
+}
+#content .zoom-gallery{
+  a{
+    border-bottom: none;
+  }
 }
