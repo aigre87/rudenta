@@ -140,6 +140,11 @@ video{
 }
 #content{
   padding-bottom: 50px;
+  h1,h2,h3{
+    &:first-child{
+      margin-top: 0;
+    }
+  }
   h1{
     font-size: 70px;
     line-height: 75px;
@@ -1186,5 +1191,54 @@ input[type='checkbox']{
 #content .zoom-gallery{
   a{
     border-bottom: none;
+  }
+}
+
+#content .free-record{
+  background: #f8f369;
+  border-radius: 5px;
+  margin-top: 31px;
+  padding: 32px 30px 30px;
+  box-sizing: border-box;
+  .title{
+    font-size: 24px;
+    line-height: 28px;
+    font-style: italic;
+    font-weight: 700;
+    padding-left: 1px;
+    margin-bottom: 18px;
+  }
+  .error{
+    
+  }
+  input[type='text']{
+    font-size: 16px;
+    line-height: 20px;
+    color: map-get($colors, text);
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 48px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .free-record-button{
+    border-radius: 6px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 48px;
+    height: 50px;
+    padding: 0 20px;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+  }
+  .free-record-text{
+    font-size: 14px;
+    line-height: 20px;
+    font-style: italic;
+    margin-top: 17px;
   }
 }

@@ -13,25 +13,31 @@
 $this->setFrameMode(true);
 ?>
 <div class="topBlock clear">
-	<div><?php echo $arResult['NAME'];?></div>
-	<div><?php echo $arResult['DISPLAY_PROPERTIES']['POSITION']['VALUE'];?></div>
-	<div><?php echo $arResult['PREVIEW_TEXT'];?></div>
+	<div class="lc">
+		<div class="name"><?php echo $arResult['NAME'];?></div>
+		<div class="position">&mdash; <?php echo $arResult['DISPLAY_PROPERTIES']['POSITION']['VALUE'];?></div>
+	</div>
+	<?if($arResult['PREVIEW_TEXT']):?>
+		<div class="quote">
+			<div class="quoteIW"><?php echo $arResult['PREVIEW_TEXT'];?></div>
+		</div>
+	<?endif;?>
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
-		<img
-			border="0"
-			src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"
-			width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>"
-			height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>"
-			alt="<?=$arResult["DETAIL_PICTURE"]["ALT"]?>"
-			title="<?=$arResult["DETAIL_PICTURE"]["TITLE"]?>"
-			/>
+		<div class="imgW">
+			<img
+					border="0"
+					src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"
+					alt="<?=$arResult["DETAIL_PICTURE"]["ALT"]?>"
+					title="<?=$arResult["DETAIL_PICTURE"]["TITLE"]?>"
+					/>
+		</div>
 	<?endif;?>
 </div>
 <div class="clear">
 	<div class="w-2col">
-		<div><?php echo "Стаж работы - ", $arResult['DISPLAY_PROPERTIES']['EXPERIENCE']['NEW_VALUE'];?></div>
-		<div><?php echo $arResult['DETAIL_TEXT'];?></div>
-		<p><strong>Награды и сертификаты</strong></p>
+		<div class="titleH3"><?php echo "Стаж работы - ", $arResult['DISPLAY_PROPERTIES']['EXPERIENCE']['NEW_VALUE'];?></div>
+		<div class="text"><?php echo $arResult['DETAIL_TEXT'];?></div>
+		<div class="titleH4">Награды и сертификаты</div>
 		<?if( $arResult['DISPLAY_PROPERTIES']['AWARDS']['VALUE'] ):?>
 			<div class="zoom-gallery clear">
 			<?foreach($arResult['DISPLAY_PROPERTIES']['AWARDS']['VALUE'] as $img):?>
@@ -61,11 +67,6 @@ $this->setFrameMode(true);
 				</div>
 			</div>
 		<?endforeach;?>
-		<p><strong>Заметки врача</strong></p>
-		<?php $articles = Doctors::getArticles($arResult['ID']);?>
-		<?foreach($articles as $article):?>
-			<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
-		<?endforeach;?>
 	</div>
 	<div class="w-1col">
 		<?$APPLICATION->IncludeComponent(
@@ -80,5 +81,12 @@ $this->setFrameMode(true);
 			),
 			false
 		);?>
+		<div class="docNoteBlock">
+			<div class="title">Заметки врача</div>
+			<?php $articles = Doctors::getArticles($arResult['ID']);?>
+			<?foreach($articles as $article):?>
+				<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
+			<?endforeach;?>
+		</div>
 	</div>
 </div>

@@ -189,6 +189,159 @@
 }
 
 #content .doctor-detail{
+	.backButton{
+		margin-bottom: 29px;
+		a{
+	    font-size: 18px;
+	    line-height: 49px;
+	    position: relative;
+	    padding-left: 48px;
+	    padding-right: 38px;
+	    height: 50px;
+	    display: inline-block;
+	    box-sizing: border-box;
+	    border: 2px solid map-get($colors, dBlue);
+	    border-radius: 6px;
+	    transition: all 0.13s ease-in-out;
+      &:after, &:before {
+        right: 100%;
+        margin-right: -27px;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        transition: all 0.13s ease-in-out;
+      }
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-right-color: #fff;
+        border-width: 6px;
+        margin-top: -6px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-right-color: map-get($colors, dBlue);
+        border-width: 9px;
+        margin-top: -9px;
+      }
+      &:hover{
+      	border-color: map-get($colors, pink);
+      	&:before{
+					border-right-color: map-get($colors, pink);
+      	}
+      }
+    }
+	}
+	.topBlock{
+		margin-bottom: 49px;
+		color: #fff;
+		height: 250px;
+		background-color: #9f58cd;
+		background-repeat: repeat;
+		background-position: 0 0;
+		background-image: url("/local/templates/rudenta/images/doctorTopBlockBg.png");
+		border-radius: 12px;
+    padding: 0 40px;
+    position: relative;
+    &:after{
+    	display: inline-block;
+    	vertical-align: middle;
+    	content: '';
+    	width: 0;
+    	height: 100%;
+    }
+		&.fio{
+		 	background-color: #9f58cd;
+		 	box-shadow: 0px 30px 55px -20px rgba( #9f58cd , 0.6);
+		}
+		&.pink{
+		 	background-color: map-get($colors, pink);
+		 	box-shadow: 0px 30px 55px -20px rgba( map-get($colors, pink) , 0.6);
+		}
+		&.dBlue{
+		 	background-color: map-get($colors, dBlue);
+		 	box-shadow: 0px 30px 55px -20px rgba( map-get($colors, dBlue) , 0.6);
+		}
+		&.lBlue{
+		 	background-color: map-get($colors, lBlue);
+		 	box-shadow: 0px 30px 55px -20px rgba( map-get($colors, lBlue) , 0.6);
+		}
+		&.green{
+		 	background-color: map-get($colors, green);
+		 	box-shadow: 0px 30px 55px -20px rgba( map-get($colors, green) , 0.6);
+		}
+		&.yellow{
+		 	background-color: map-get($colors, yellow);
+		 	box-shadow: 0px 30px 55px -20px rgba( map-get($colors, yellow) , 0.6);
+		}
+		.lc{
+			display: inline-block;
+			vertical-align: middle;
+			width: 470px;
+			padding-bottom: 18px;
+			.name{
+				font-size: 50px;
+				line-height: 50px;
+				font-weight: 700;
+			}
+			.position{
+				font-size: 18px;
+				line-height: 28px;
+				margin-top: 12px;
+				font-style: italic;
+			}
+		}
+		.quote{
+			display: inline-block;
+			vertical-align: top;
+			background: transparent url("/local/templates/rudenta/images/doctorDetail-quote.png") no-repeat left top;
+			width: 373px;
+			height: 176px;
+	    margin-top: 33px;
+    	margin-left: 10px;
+			font-style: italic;
+			color: map-get($colors, text);
+			font-size: 20px;
+			line-height: 28px;
+			filter: drop-shadow(5px 5px 6px rgba(0, 0, 0, 0.2));
+			position: relative;
+			z-index: 1;
+			.quoteIW{
+		    padding: 24px 55px 15px 40px;
+			}
+		}
+		.imgW{
+			z-index: 0;
+			position: absolute;
+			right: 60px;
+			bottom: 0;
+			img{
+				display: block;
+			}
+		}
+	}
+	.w-2col{
+		.titleH3{
+			font-size: 30px;
+			line-height: 30px;
+			font-weight: 700;
+			margin-bottom: 10px;
+		}
+		.text{
+			font-size: 16px;
+			line-height: 20px;
+		}
+		.titleH4{
+			font-size: 20px;
+			line-height: 28px;
+			font-weight: 700;
+			font-style: italic;
+			margin-bottom: 10px;
+		}
+	}
 	.zoom-gallery{
 	  a{
 	  	box-sizing: border-box;
@@ -205,4 +358,50 @@
 	    }
 	  }
 	}
+	.free-record{
+		margin-top: 1px;
+		background: #ddf4f4;
+	}
+	.docNoteBlock{
+		margin-top: 44px;
+		.title{
+			font-size: 30px;
+			line-height: 30px;
+			font-weight: 700;
+			margin-bottom: 24px;
+		}
+		a{
+			font-size: 20px;
+			line-height: 28px;
+			font-weight: 700;
+			border-radius: 3px;
+			border: 2px dashed map-get($colors, lBlue);
+			box-sizing: border-box;
+			display: block;
+			transition: all 0.12s ease-in-out;
+			position: relative;
+	    padding: 15px 19px 45px;
+	    margin-bottom: 20px;
+	    color: map-get($colors, text);
+	    &:last-child{
+	    	margin-bottom: 0;
+	    }
+			&:after{
+				content: '';
+				position: absolute;
+		    right: 19px;
+	    	bottom: 15px;
+				@include sprite($s-mIcoLBlue_arrowRight);
+				z-index: 1;
+			}
+			&:hover{
+				border: 2px dashed map-get($colors, Pink);
+				color: map-get($colors, pink);
+				&:after{
+					@include sprite($s-mIcoPink_arrowRight);
+				}
+			}
+		}
+	}
+
 }

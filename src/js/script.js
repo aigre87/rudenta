@@ -199,7 +199,11 @@ function HPinitSovetiBlock(){
     var $items = $(".homepage .sovetiBlock .item"),
     itemsL = $items.length,
     count = Math.floor(itemsL/3);
+    console.log(count);
+    if( itemsL%3 !== 1 ){
 
+    }
+    
     for(var i = 0; i < itemsL; i+=count) {
       $items.slice(i, i+count).wrapAll("<div class='w-1col'></div>");
     }
@@ -353,7 +357,12 @@ function zoomGalleryPopup(){
         }
     });
 }
-
+function detailDoctorInit(){
+    if( !$(".doctor-detail .topBlock").length > 0 ){ return false; }
+    var classes = ["pink","dBlue","lBlue","green","yellow", "fio"];
+    var cl = classes[Math.floor(Math.random()*classes.length)];
+    $(".doctor-detail .topBlock").addClass(cl);
+}
 function HPrecallsBlock(){
     if( !$(".homepage .recallsBlock .item").length > 0 ){ return false;}
 
@@ -452,7 +461,9 @@ $(document).ready(function(){
     hpVideoRow();
     HPmainSlider();
 /*END homepage*/
-
+/*doctor*/
+    detailDoctorInit();
+/*doctor END*/
 });
 window.onload = function() {
 /*homepage*/
