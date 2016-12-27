@@ -30,7 +30,7 @@ $this->setFrameMode(true);
 			</div>
 			<?foreach($arItemArr as $arItem):?>
 			<div class="service">
-				<h4><?php echo $arItem['NAME'];?> - <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р</h4>
+				<h4><?php echo $arItem['NAME'];?> <?if($arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE']):?>- <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р<?endif;?></h4>
 				<div data-ar="<?php echo $arItem['ID'];?>" class="service-desc">
 					<?php echo $arItem['PREVIEW_TEXT'];?>
 				</div>
