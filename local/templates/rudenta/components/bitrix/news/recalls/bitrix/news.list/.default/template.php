@@ -27,7 +27,7 @@ $this->setFrameMode(true);
 			$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
 			$perc = intval($int)*100/5;
 		?>
-		<div class="raiting" data-val="<?=$int?>"><div class="val" style="width:<?=$perc?>%;"></div></div>
+		<div class="raiting" data-val="<?=$int?>"><div class="val" style="width:<?=$perc?>%;\"></div></div>
 		<div class="row2">
 			<?echo FormatDate("d F Y", MakeTimeStamp($arItem["DISPLAY_ACTIVE_FROM"]));?>
 			<?if(!empty($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE'])):?>

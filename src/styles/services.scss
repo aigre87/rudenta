@@ -1,6 +1,13 @@
 @import "other/sprite";
 @import "other/mixins";
-
+#content .servicesList{
+	.customPageTitle{
+		font-size: 50px;
+		line-height: 50px;
+		margin-bottom: 36px;
+		font-weight: 700;
+	}
+}
 #content>div>.w-2col>.serviceBlock{
 	>.service{
 		.serviceTitle{
@@ -140,4 +147,7 @@ $bg6: map-get($colors, pink);
 			}
 		}
 	}
+}
+#content .servicesList .free-record{
+	margin-top: 40px;
 }

@@ -2,8 +2,11 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Услуги");
 ?>
-<div class="clear">
+<div class="clear servicesList">
 	<div class="w-2col">
+		<div class="customPageTitle">
+			Услуги
+		</div>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.section.list", 
 			"tree", 
@@ -35,7 +38,24 @@ $APPLICATION->SetTitle("Услуги");
 			false
 		);?>
 	</div>
-	<div class="w-1col">&nbsp;</div>
+	<div class="w-1col">
+		<a href="#" class="fileItem">
+			<div class="name">Скачать полный прайс-лист услуг</div>
+			<div class="desc">XLS, 124 Кб</div>
+		</a>
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			".default",
+			array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE" => "",
+				"COMPONENT_TEMPLATE" => ".default",
+				"PATH" => "/local/templates/rudenta/inc/record.php"
+			),
+			false
+		);?>
+	</div>
 </div>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

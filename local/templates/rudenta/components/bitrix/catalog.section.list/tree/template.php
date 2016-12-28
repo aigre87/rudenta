@@ -73,6 +73,8 @@ $strTitle = "";
 		echo "\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH),"</div>","\n",str_repeat("\t", $CURRENT_DEPTH-$TOP_DEPTH-1);
 		$CURRENT_DEPTH--;
 	}
+	echo "</div>";
+	echo "</div>";
 	?>
 
 <?=($strTitle?'<br/><h2>'.$strTitle.'</h2>':'')?>

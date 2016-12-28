@@ -1243,3 +1243,36 @@ input[type='checkbox']{
     margin-top: 17px;
   }
 }
+#content .fileItem{
+  display: block;
+  border: none;
+  position: relative;
+  background: map-get($colors, ulBlue);
+  border-radius: 5px;
+  padding: 15px 10px 12px 55px;
+  &:hover{
+    border: none;
+    .name{
+      color: map-get($colors, pink);
+    }
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 13px;
+    @include sprite($s-icoFileDownload_blue);
+  }
+  .name{
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    margin-bottom: 1px;
+    transition: color 0.13s ease-in-out;
+  }
+  .desc{
+    font-size: 12px;
+    line-height: 16px;
+    color: map-get($colors, desc);
+  }
+}
