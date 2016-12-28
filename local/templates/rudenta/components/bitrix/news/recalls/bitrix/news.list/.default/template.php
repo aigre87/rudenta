@@ -27,20 +27,17 @@ $this->setFrameMode(true);
 			$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
 			$perc = intval($int)*100/5;
 		?>
-		<div class="raiting" data-val="<?=$int?>"><div class="val" style="width:<?=$perc?>%;"></div></div>
+		<div class="raiting" data-val="<?=$int?>">
+			<div class="val" style="width:<?=$perc?>%;"></div>
+			<div class="bg"></div>
+		</div>
 		<div class="row2">
 			<?echo FormatDate("d F Y", MakeTimeStamp($arItem["DISPLAY_ACTIVE_FROM"]));?>
 			<?if(!empty($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE'])):?>
-				<?php
-					$res = CIBlockSection::GetByID($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE']);
-					if($ar_res = $res->GetNext())
-						echo "про ".$ar_res['NAME'];
-				?>
-				<?if(!empty($arItem['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'])):?>
-					<?php
-						echo "врачу ".$arItem['DISPLAY_PROPERTIES']['DOCTOR']['DISPLAY_VALUE'];
-					?>
-				<?endif;?>
+				про <?=$arItem['DISPLAY_PROPERTIES']['SERVICE']['DISPLAY_VALUE']?>
+			<?endif;?>
+			<?if(!empty($arItem['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'])):?>
+				врачу <?=$arItem['DISPLAY_PROPERTIES']['DOCTOR']['DISPLAY_VALUE']?>
 			<?endif;?>
 		</div>
 		<div class="text">
@@ -48,3 +45,6 @@ $this->setFrameMode(true);
 		</div>
 	</div>
 <?endforeach;?>
+<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
+	<?=$arResult["NAV_STRING"]?>
+<?endif;?>
