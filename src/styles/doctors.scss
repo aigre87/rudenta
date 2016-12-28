@@ -387,6 +387,8 @@
 	    	margin-bottom: 0;
 	    }
 			&:after{
+				transition: all 0.12s ease-in-out;
+				opacity: 1;
 				content: '';
 				position: absolute;
 		    right: 19px;
@@ -394,11 +396,24 @@
 				@include sprite($s-mIcoLBlue_arrowRight);
 				z-index: 1;
 			}
+			&:before{
+				transition: all 0.12s ease-in-out;
+				opacity: 0;
+				content: '';
+				position: absolute;
+		    right: 19px;
+	    	bottom: 15px;
+				@include sprite($s-mIcoPink_arrowRight);
+				z-index: 1;
+			}
 			&:hover{
 				border: 2px dashed map-get($colors, Pink);
 				color: map-get($colors, pink);
 				&:after{
-					@include sprite($s-mIcoPink_arrowRight);
+					opacity: 0;
+				}
+				&:before{
+					opacity: 1;
 				}
 			}
 		}

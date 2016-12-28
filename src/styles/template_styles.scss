@@ -731,7 +731,6 @@ input[type='checkbox']{
     margin: 0 38px 0 10px;
     font-size: 12px;
     line-height: 36px;
-    color: #444;
     height: 36px;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -765,9 +764,9 @@ input[type='checkbox']{
     @include sprite($s-optionSelectArrowlBlueDefault);
   }
 
-  .selectric-focus .selectric {
-    border-color: #AAA;
-  }
+  // .selectric-focus .selectric {
+  //   border-color: #AAA;
+  // }
 
   .selectric-hover .selectric {
     border-color: map-get($colors, lBlue);
@@ -794,10 +793,6 @@ input[type='checkbox']{
   .selectric-open .selectric  .label{
     color: #fff;
   }
-  .selectric-open .selectric-items {
-    display: block;
-    border-radius: 0 0 3px 3px;
-  }
 
   .selectric-disabled {
     filter: alpha(opacity=50);
@@ -820,7 +815,7 @@ input[type='checkbox']{
     left: -100%;
     display: none;
   }
-
+  
   .selectric-input {
     position: absolute !important;
     top: 0 !important;
@@ -844,18 +839,25 @@ input[type='checkbox']{
   }
 
   /* Items box */
+  .selectric-open .selectric-items{
+    display: block;
+  }
   .selectric-items {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
+    border-radius: 0 0 3px 3px;
     background: #F8F8F8;
     border: 1px solid map-get($colors, lBlue);
     border-top: none;
     z-index: -1;
-    -webkit-box-shadow: 0px 8px 128px 0px rgba(255,147,0,0.61);
-    -moz-box-shadow: 0px 8px 128px 0px rgba(255,147,0,0.61);
-    box-shadow: 0px 8px 128px 0px rgba(255,147,0,0.61);
+    box-shadow: 0px 11px 33px -7px rgba( map-get($colors, lBlue) , 0.75);
+  }
+  .selectric-above .selectric-items{
+    border: 1px solid map-get($colors, lBlue);
+    border-bottom: none;
+    border-radius: 3px 3px 0 0 ;
   }
   .selectric-items .selectric-scroll {
     height: 100%;
@@ -889,8 +891,7 @@ input[type='checkbox']{
     display: none;
   }
   .selectric-items li.selected {
-    /*background: #E0E0E0;
-    color: #444;*/
+    display: none;
   }
   .selectric-items li:hover {
     color: map-get($colors, pink);

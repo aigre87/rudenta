@@ -24,16 +24,18 @@ if( myGlobalisMobileDevice ){
 
 
 
-function optionSelect(){
+function optionSelect($element){
     if( myGlobalisMobileDevice ){ return false; }
+    var $s = $element.find("select");
     $('select').selectric({
         disableOnMobile: false
     });
-    $(".selectric-scroll").niceScroll({
-        cursorcolor: '#ff9300',
+    var $ss = $s.closest(".selectric-wrapper").find(".selectric-scroll")
+    $ss.niceScroll({
+        cursorcolor: '#1bbee8',
         cursorwidth: '5px',
         cursorborderradius: '2px',
-        cursorborder: '0px solid #ff9300',
+        cursorborder: '0px solid #1bbee8',
         background: 'transparent',
         scrollspeed: 70,
         mousescrollstep: 50,
@@ -442,12 +444,40 @@ function doctorsListInit(){
     }
 }
 
+function recallsListInit(){
+    $(".filterHidden .filter").each(function(){
+        var $this = $(this),
+            classList = $(this)[0].className.split(' ').join(" "),
+            clearclassList = classList.replace('filter','').replace(' ',''),
+            mySelect = "<select class='"+clearclassList+"'>";
+            console.log(clearclassList);
 
+            $this.find("a").each(function(){
+                var $thisa = $(this);
+                if( $thisa.hasClass("active") ){
+                    mySelect+="<option selected='selected'>"+$thisa.text()+"</option>";
+                }else{
+                    mySelect+="<option>"+$thisa.text()+"</option>";
+                }
+            });
+        mySelect+="</select>";
+        $(".filtesBlock").append(mySelect);
+        var selectric = $('select.'+clearclassList+'').selectric();
+        selectric.on("selectric-change", function(event, element, selectric){
+            var index = $(element).find("option:selected").index();
+            linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
+            window.location.href = linkHref;
+        });
+    });
+}
 
 
 $(document).ready(function(){
+/*recalls*/
+    recallsListInit();
+/*recalls END*/
 /*GLOBAL*/
-    optionSelect();
+    optionSelect( $("#content") );
     customizeCheckbox( $("#content") );
     customizeRadiobox( $("#content") );
 	initBottomMenu();

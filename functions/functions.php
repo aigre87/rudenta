@@ -42,6 +42,7 @@ function filterDocAndUsl(){
 
 
     if(!empty($usl)){
+        echo "<div class='filter doctors'>";
         echo "<a href='/recalls/?usl=$usl'>Все врачи</a>";
         foreach($docs as $key){
             if($doc == $key['ID']){
@@ -50,7 +51,9 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $key['ID'] , "&usl=$usl\">" , $key['NAME'] , "</a>";
             }
         }
+        echo "</div>";
     }else{
+        echo "<div class='filter doctors'>";
         echo "<a href='/recalls/'>Все врачи</a>";
         foreach($docs as $key){
             if($doc == $key['ID']){
@@ -59,9 +62,11 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $key['ID'] , "\">" , $key['NAME'] , "</a>";
             }
         }
+        echo "</div>";
     }
 
     if(!empty($doc)){
+        echo "<div class='filter services'>";
         echo "<a href='/recalls/?doc=$doc'>Все услуги</a>";
         foreach($servs as $serv_id => $serv_name){
             if($usl == $serv_id){
@@ -70,7 +75,9 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $doc , "&usl=$serv_id\">" , $serv_name , "</a>";
             }
         }
+        echo "</div>";
     }else{
+        echo "<div class='filter services'>";
         echo "<a href='/recalls/'>Все услуги</a>";
         foreach($servs as $serv_id => $serv_name){
             if($usl == $serv_id){
@@ -79,6 +86,7 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?usl=" , $serv_id , "\">" , $serv_name , "</a>";
             }
         }
+        echo "</div>";
     }
 
 }

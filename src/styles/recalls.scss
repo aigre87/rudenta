@@ -1,0 +1,116 @@
+@import "other/sprite";
+@import "other/mixins";
+#content .recalls-list{
+	.lc{
+		.title{
+			font-size: 50px;
+			line-height: 50px;
+			font-weight: 700;
+			margin-bottom: 17px;
+		}
+		.filterHidden{
+			display: none;
+		}
+		.filtesBlock{
+
+		}
+		.selectric-wrapper{
+			margin-bottom: 10px;
+			.selectric{
+	    	height: 50px;
+	    	border-radius: 5px;
+	    	color: map-get($colors, lBlue);
+	    	.label{
+	    		height: 100%;
+	    		font-size: 18px;
+	    		line-height: 49px;
+	    		margin-left: 20px;
+	    	}
+	    	.button{
+	    		height: 100%;
+	    		&:after{
+	    			right: 11px;
+	    			top: 2px;
+	    		}
+	    	}
+			}
+
+    	&.selectric-open{
+    		.selectric{
+    			border-radius: 5px 5px 0 0;
+    		}
+    		&.selectric-above{
+    			.selectric{
+    				border-radius:  0 0 5px 5px;
+    			}
+    		}
+    	}
+
+		}
+	}
+
+	.rc{
+		.recall-item{
+			position: relative;
+			border: 2px solid #eaeaea;
+			border-radius: 10px;
+			padding: 27px 28px 31px;
+			margin-top: 20px;
+			&:first-child{
+				margin-top: 8px;
+			}
+			.row1{
+				font-size: 16px;
+				line-height: 20px;
+				margin-bottom: 6px;
+				.name{
+					font-weight: 700;
+
+				}
+				.town{
+					margin-left: 2px;
+					color: map-get($colors, desc);
+				}
+			}
+			.row2{
+				font-size: 14px;
+				line-height: 20px;
+				color: map-get($colors, desc);
+				a{
+					border-bottom: none;
+				}
+			}
+			.raiting{
+				width: 120px;
+				height: 20px;
+				background: transparent url(../images/raitingBg.png) repeat-x 0 0;
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				.val{
+					position: absolute;
+					left: 0;
+					top: 0;
+					height: 100%;
+				}
+			}
+			.text{
+				padding: 0 28px 0 32px;
+				margin-top: 18px;
+				position: relative;
+				font-size: 16px;
+				line-height: 22px;
+				&:before{
+					content: '\00AB';
+					font-weight: 700;
+					color: #e2e2e2;
+					font-size: 50px;
+					line-height: 50px;
+					position: absolute;
+					left: -8px;
+    			top: -8px;
+				}
+			}
+		}
+	}
+}

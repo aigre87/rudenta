@@ -85,14 +85,12 @@ else
 				<div class="desc"><a>Взрослое отделение</a> в соседнем здании</div>
 			</div>
 		</header>
-			<?if ( !$isHomePage && !defined("ERROR_404") ): ?>
+			<?php
+			$keywords = $APPLICATION->GetDirProperty("h1");
+			?>
+			<?if ( !$isHomePage && !defined("ERROR_404") && !empty($keywords) ): ?>
 				<div class="pageTitle clear" >
-					<?php
-					$keywords = $APPLICATION->GetDirProperty("h1");
-					?>
-					<?if(!empty($keywords)):?>
 						<h1><?$APPLICATION->ShowTitle(false)?></h1>
-					<?endif;?>
 				</div>
 			<?endif;?>
 		<section id="content">
