@@ -16,7 +16,17 @@ echo Recalls::getRecallsCNT();*/
 		<div class="filtesBlock">
 			
 		</div>
-		тут новая форма
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			".default",
+			Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"COMPONENT_TEMPLATE" => ".default",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/local/templates/rudenta/inc/add_recall.php"
+			)
+		);?>
 	</div>
 	<div class="w-3d4col rc">
 		<?$APPLICATION->IncludeComponent(
