@@ -18,31 +18,36 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"USE_EXT" => "N"
 	)
 );?>
-<div class="blueBlockLinks clear">
-	<a href="" class="w-1d6col col">
-		<span class="name">Первое посещение</span>
-		<span class="value">Бесплатно</span>
-	</a>
-	<a href="" class="w-1d6col col">
-		<span class="name">Лечение кариеса</span>
-		<span class="value">от 500 <i class="ruble14pxGrey"></i></span>
-	</a>
-	<a href="" class="w-1d6col col">
-		<span class="name">Детские коронки</span>
-		<span class="value">от 2500 <i class="ruble14pxGrey"></i></span>
-	</a>
-	<a href="" class="w-1d6col col">
-		<span class="name">Исправление прикуса</span>
-		<span class="value">от 2500 <i class="ruble14pxGrey"></i></span>
-	</a>
-	<a href="" class="w-1d6col col">
-		<span class="name">Удаление зубов</span>
-		<span class="value">от 1500 <i class="ruble14pxGrey"></i></span>
-	</a>
-	<a href="" class="w-1d6col col all">
-		<span class="name">Все услуги</span>
-	</a>
-</div>
+<?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.section.list",
+	"main",
+	array(
+		"VIEW_MODE" => "TEXT",
+		"SHOW_PARENT_NAME" => "Y",
+		"IBLOCK_TYPE" => "services",
+		"IBLOCK_ID" => "4",
+		"SECTION_ID" => $_REQUEST["SECTION_ID"],
+		"SECTION_CODE" => "",
+		"SECTION_URL" => "",
+		"COUNT_ELEMENTS" => "N",
+		"TOP_DEPTH" => "3",
+		"SECTION_FIELDS" => array(
+			0 => "NAME",
+			1 => "",
+		),
+		"SECTION_USER_FIELDS" => array(
+			0 => "",
+			1 => "",
+		),
+		"ADD_SECTIONS_CHAIN" => "Y",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+		"CACHE_NOTES" => "",
+		"CACHE_GROUPS" => "Y",
+		"COMPONENT_TEMPLATE" => "tree"
+	),
+	false
+);?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"slider",
