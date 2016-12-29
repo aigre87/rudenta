@@ -6,7 +6,7 @@ echo "<br/>";
 echo "Всего отзывов";
 echo Recalls::getRecallsCNT();*/
 ?>
-<div class="recalls-list clear">
+<div class="recalls-list-page clear">
 	<div class="w-1d4col lc">
 		<div class="title">
 			<?=Recalls::getRecallsCNT();?><br />
@@ -16,6 +16,7 @@ echo Recalls::getRecallsCNT();*/
 		<div class="filtesBlock">
 			
 		</div>
+		<div style="display: none;">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:main.include",
 			".default",
@@ -27,6 +28,7 @@ echo Recalls::getRecallsCNT();*/
 				"PATH" => "/local/templates/rudenta/inc/add_recall.php"
 			)
 		);?>
+		</div>
 	</div>
 	<div class="w-3d4col rc">
 		<?$APPLICATION->IncludeComponent(

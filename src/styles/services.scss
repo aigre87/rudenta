@@ -151,3 +151,24 @@ $bg6: map-get($colors, pink);
 #content .servicesList .free-record{
 	margin-top: 40px;
 }
+#mainWrapper #content .servicesList .hpBestInRus{
+	margin-top: 46px;
+	.title, .t{
+		display: none;
+	}
+	.items{
+		.item{
+			margin-top: 44px;
+			display: block;
+			float: none;
+			width: 100%;
+			padding: 0 30px;
+			text-align: center;
+			.text{
+				font-size: 18px;
+				line-height: 25px;
+			}
+		}
+	}
+
+}

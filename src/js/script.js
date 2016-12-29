@@ -188,26 +188,38 @@ function HPmainSlider(){
 function initBottomMenu(){
     if( !$("#bottomMenu .item").length > 0 ){ return false;}
 	var $items = $("#bottomMenu .item:not(.notMenu)"),
-	itemsL = $items.length,
-	count = Math.floor(itemsL/3);
+        cols = 3,
+        itemsL = $items.length,
+        countB = Math.ceil(itemsL/cols),
+        countL = Math.floor(itemsL/cols);
 
-	for(var i = 0; i < itemsL; i+=count) {
-	  $items.slice(i, i+count).wrapAll("<div class='w-1d4col'></div>");
-	}
+    for(var i = 0, k = 0; i < cols; i++ ) {
+        if( i < itemsL%cols ) {
+            $items.slice(k, k+countB).wrapAll("<div class='w-1d4col'></div>");
+            k = k+countB;
+        } else {
+            $items.slice(k, k+countL).wrapAll("<div class='w-1d4col'></div>");
+            k = k+countL;
+        }
+    }
 }
 
 function HPinitSovetiBlock(){
     if( !$(".homepage .sovetiBlock .item").length > 0 ){ return false;}
     var $items = $(".homepage .sovetiBlock .item"),
-    itemsL = $items.length,
-    count = Math.floor(itemsL/3);
-    console.log(count);
-    if( itemsL%3 !== 1 ){
+        cols = 3,
+        itemsL = $items.length,
+        countB = Math.ceil(itemsL/cols),
+        countL = Math.floor(itemsL/cols);
 
-    }
-    
-    for(var i = 0; i < itemsL; i+=count) {
-      $items.slice(i, i+count).wrapAll("<div class='w-1col'></div>");
+    for(var i = 0, k = 0; i < cols; i++ ) {
+        if( i < itemsL%cols ) {
+            $items.slice(k, k+countB).wrapAll("<div class='w-1col'></div>");
+            k = k+countB;
+        } else {
+            $items.slice(k, k+countL).wrapAll("<div class='w-1col'></div>");
+            k = k+countL;
+        }
     }
 }
 
@@ -240,8 +252,8 @@ function HPinitDoctorsBlock(){
 //zIndex: 4, width: "380px", left: 0, top: 0, height: $iw.outerHeight(), x: "0%", y: "0%"
             tl.fromTo( $overflow, 0.12, 
               {rotation: thisInitRotate, left: "76px", top: "76px", x: "-50%", y:"-50%", transformOrigin: "50% 50%", zIndex:1},
-              { rotation : 0, ease:Power0.easeNone })
-                .to( $overflow, 0.12, { "border-width" : 0, ease:Power0.easeNone })
+              { rotation : 0, ease:Circ.easeIn })
+                .to( $overflow, 0.12, { "border-width" : 0, ease:Circ.easeIn })
                 .fromTo($link, 0.01, {zIndex: 0}, { zIndex: 3 })
                 .to( $link, 0.12, { width: "380px", height: $iw.outerHeight(), className:'+=complete', ease:Power0.easeNone });
 
@@ -471,6 +483,30 @@ function recallsListInit(){
     });
 }
 
+function servicesDetail(){
+    function menuScrollAnimation(){
+        var controller = new ScrollMagic.Controller({
+            globalSceneOptions: {
+                triggerHook: 'onLeave',
+                offset: 0
+            }
+        });
+        $contentSections.each(function(i){
+            var $sc = $(this),
+            $thisMenu = $sc.find(".menu"),
+            curDur = typeof masScMenuOffset[i+1] != "undefined" ?  masScMenuOffset[i+1] - masScMenuOffset[i] : 0;
+            scene = new ScrollMagic.Scene({triggerElement: $sc, duration: curDur })
+                .setPin($thisMenu)
+                //.addIndicators({name: i}) // add indicators (requires plugin)
+                .addTo(controller)
+                .on("leave enter", function (event) {
+                    hideMenu();
+                });
+        });
+    }
+    //menuScrollAnimation();
+}
+
 
 $(document).ready(function(){
 /*recalls*/
@@ -494,6 +530,10 @@ $(document).ready(function(){
 /*doctor*/
     detailDoctorInit();
 /*doctor END*/
+/*servicesDetail*/
+    servicesDetail();
+/*servicesDetail END*/
+
 });
 window.onload = function() {
 /*homepage*/

@@ -1,6 +1,6 @@
 @import "other/sprite";
 @import "other/mixins";
-#content .recalls-list{
+#content .recalls-list-page{
 	margin-bottom: 46px;
 	.lc{
 		.title{
@@ -51,77 +51,80 @@
 	}
 
 	.rc{
-		.recall-item{
-			position: relative;
-			border: 2px solid #eaeaea;
-			border-radius: 10px;
-			padding: 27px 28px 31px;
-			margin-top: 20px;
-			&:first-child{
-				margin-top: 8px;
-			}
-			.row1{
-				font-size: 16px;
-				line-height: 20px;
-				margin-bottom: 6px;
-				.name{
-					font-weight: 700;
 
-				}
-				.town{
-					margin-left: 2px;
-					color: map-get($colors, desc);
-				}
+	}
+}
+.recalls-list{
+	.recall-item{
+		position: relative;
+		border: 2px solid #eaeaea;
+		border-radius: 10px;
+		padding: 27px 28px 31px;
+		margin-top: 20px;
+		&:first-child{
+			margin-top: 8px;
+		}
+		.row1{
+			font-size: 16px;
+			line-height: 20px;
+			margin-bottom: 6px;
+			.name{
+				font-weight: 700;
+
 			}
-			.row2{
-				font-size: 14px;
-				line-height: 20px;
+			.town{
+				margin-left: 2px;
 				color: map-get($colors, desc);
-				a{
-					border-bottom: none;
-				}
 			}
-			.raiting{
-				width: 120px;
-				height: 20px;
+		}
+		.row2{
+			font-size: 14px;
+			line-height: 20px;
+			color: map-get($colors, desc);
+			a{
+				border-bottom: none;
+			}
+		}
+		.raiting{
+			width: 120px;
+			height: 20px;
+			position: absolute;
+	    right: 28px;
+	    top: 21px;
+			background: #eaeaea;
+			.val{
 				position: absolute;
-		    right: 28px;
-		    top: 21px;
-				background: #eaeaea;
-				.val{
-					position: absolute;
-					display: block;
-					left: 0;
-					top: 0;
-					height: 100%;
-					background: map-get($colors, pink);
-				}
-				.bg{
-					position: absolute;
-					display: block;
-					left: 0;
-					top: 0;
-					height: 100%;
-					width: 100%;
-					background: transparent url(../images/raitingBg.png) repeat-x 0 0;
-				}
+				display: block;
+				left: 0;
+				top: 0;
+				height: 100%;
+				background: map-get($colors, pink);
 			}
-			.text{
-				padding: 0 28px 0 32px;
-				margin-top: 18px;
-				position: relative;
-				font-size: 16px;
-				line-height: 22px;
-				&:before{
-					content: '\00AB';
-					font-weight: 700;
-					color: #e2e2e2;
-					font-size: 50px;
-					line-height: 50px;
-					position: absolute;
-					left: -8px;
-    			top: -8px;
-				}
+			.bg{
+				position: absolute;
+				display: block;
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 100%;
+				background: transparent url(../images/raitingBg.png) repeat-x 0 0;
+			}
+		}
+		.text{
+			padding: 0 28px 0 32px;
+			margin-top: 18px;
+			position: relative;
+			font-size: 16px;
+			line-height: 22px;
+			&:before{
+				content: '\00AB';
+				font-weight: 700;
+				color: #e2e2e2;
+				font-size: 50px;
+				line-height: 50px;
+				position: absolute;
+				left: -8px;
+  			top: -8px;
 			}
 		}
 	}

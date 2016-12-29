@@ -12,39 +12,41 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<?foreach($arResult["ITEMS"] as $arItem):?>
-	<?
-	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-	$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
-	?>
-	<div class="recall-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-		<div class="row1">
-			<span class="name"><?=$arItem["NAME"]?></span>
-			<span class="town"><?=$arItem['DISPLAY_PROPERTIES']['CITY']['VALUE']?></span>
-		</div>
+<div class="recalls-list">
+	<?foreach($arResult["ITEMS"] as $arItem):?>
 		<?
-			$str = $arItem['DISPLAY_PROPERTIES']['RATING']['VALUE'];
-			$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
-			$perc = intval($int)*100/5;
+		$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+		$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 		?>
-		<div class="raiting" data-val="<?=$int?>">
-			<div class="val" style="width:<?=$perc?>%;"></div>
-			<div class="bg"></div>
+		<div class="recall-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+			<div class="row1">
+				<span class="name"><?=$arItem["NAME"]?></span>
+				<span class="town"><?=$arItem['DISPLAY_PROPERTIES']['CITY']['VALUE']?></span>
+			</div>
+			<?
+				$str = $arItem['DISPLAY_PROPERTIES']['RATING']['VALUE'];
+				$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
+				$perc = intval($int)*100/5;
+			?>
+			<div class="raiting" data-val="<?=$int?>">
+				<div class="val" style="width:<?=$perc?>%;"></div>
+				<div class="bg"></div>
+			</div>
+			<div class="row2">
+				<?echo FormatDate("d F Y", MakeTimeStamp($arItem["DISPLAY_ACTIVE_FROM"]));?>
+				<?if(!empty($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE'])):?>
+					про <?=$arItem['DISPLAY_PROPERTIES']['SERVICE']['DISPLAY_VALUE']?>
+				<?endif;?>
+				<?if(!empty($arItem['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'])):?>
+					врачу <?=$arItem['DISPLAY_PROPERTIES']['DOCTOR']['DISPLAY_VALUE']?>
+				<?endif;?>
+			</div>
+			<div class="text">
+				<?echo $arItem["PREVIEW_TEXT"];?>
+			</div>
 		</div>
-		<div class="row2">
-			<?echo FormatDate("d F Y", MakeTimeStamp($arItem["DISPLAY_ACTIVE_FROM"]));?>
-			<?if(!empty($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE'])):?>
-				про <?=$arItem['DISPLAY_PROPERTIES']['SERVICE']['DISPLAY_VALUE']?>
-			<?endif;?>
-			<?if(!empty($arItem['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'])):?>
-				врачу <?=$arItem['DISPLAY_PROPERTIES']['DOCTOR']['DISPLAY_VALUE']?>
-			<?endif;?>
-		</div>
-		<div class="text">
-			<?echo $arItem["PREVIEW_TEXT"];?>
-		</div>
-	</div>
-<?endforeach;?>
+	<?endforeach;?>	
+</div>
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
 	<?=$arResult["NAV_STRING"]?>
 <?endif;?>

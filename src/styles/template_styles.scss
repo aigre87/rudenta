@@ -140,7 +140,7 @@ video{
 }
 #content{
   padding-bottom: 50px;
-  h1,h2,h3{
+  h1,h2,h3,h4{
     &:first-child{
       margin-top: 0;
     }
@@ -149,16 +149,29 @@ video{
     font-size: 70px;
     line-height: 75px;
     font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 44px;
   }
   h2{
     font-size: 50px;
     line-height: 50px;
     font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 44px;
   }
   h3{
     font-size: 30px;
     line-height: 30px;
     font-weight: bold;
+    margin-bottom: 17px;
+    margin-top: 33px;
+  }
+  h4{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: bold;
+    margin-bottom: 17px;
+    margin-top: 33px;
   }
   p{
     font-size: 16px;
@@ -184,7 +197,7 @@ video{
     counter-reset:  item;
   }
   ol li{
-    margin: 0 0 25px 0;
+    margin: 0 0 7px 0;
     position: relative;
     padding-left: 30px;
     font-size: 16px;
@@ -215,7 +228,7 @@ video{
     line-height: 25px;
     position: relative;
     padding-left: 30px;
-    margin: 0 0 25px 0;
+    margin: 0 0 7px 0;
     &:last-child{
       margin-bottom: 0;
     }
@@ -232,6 +245,24 @@ video{
     left: 0;
     top: 13px;
     position: absolute;
+  }
+}
+table{
+  border: 1px solid map-get($colors, lBlue);
+  border-radius: 3px;
+  border-collapse: separate;
+  th{
+    padding: 3px 6px;
+    font-weight: bold;
+  }
+  td{
+    padding: 3px 6px;
+    border-bottom: 1px solid map-get($colors, ulBlue);
+  }
+  tr:last-child{
+    td{
+      border-bottom: none;
+    }
   }
 }
 
@@ -610,7 +641,7 @@ input[type='checkbox']{
   display:block;
   width:16px;
   height:16px;
-  border:1px solid #ebcda4;
+  border:1px solid map-get($colors, lBlue);
   background-color:#fff;
   border-radius: 100%;
 }
@@ -654,7 +685,7 @@ input[type='checkbox']{
   opacity:0;
   z-index:1;
 }
-#content input[type='submit']{
+#content input[type='submit'], button{
   cursor: pointer;
   border: none;
   font-size: 16px;
@@ -664,7 +695,7 @@ input[type='checkbox']{
   display: inline-block;
   background: map-get($colors, pink);
   border-radius: 3px;
-  padding: 0 16px;
+  padding: 0 18px 0 16px;
   letter-spacing: 0px;
   height: 50px;
   &:disabled{
@@ -781,8 +812,17 @@ input[type='checkbox']{
   .selectric-open {
     z-index: 9999;
   }
+  .selectric-open{
+    .selectric{
+      border-radius: 3px 3px 0 0;
+    }
+    &.selectric-above{
+      .selectric{
+        border-radius: 0 0 3px 3px;
+      }
+    }
+  }
   .selectric-open .selectric {
-    border-radius: 3px 3px 0 0;
     border-color: map-get($colors, lBlue);
     background: map-get($colors, lBlue);
     color: #fff;
@@ -1001,9 +1041,6 @@ input[type='checkbox']{
   }
 }
 #content .customIconsMenu{
-  margin-top: 30px;
-  width: 100%;
-  padding: 0 20px;
   .items{
     .item{
       float: left;
@@ -1197,6 +1234,7 @@ input[type='checkbox']{
 
 #content .free-record{
   background: #f8f369;
+  box-shadow: 0px 11px 33px -7px rgba( #f8f369 , 0.7);
   border-radius: 5px;
   margin-top: 31px;
   padding: 32px 30px 30px;
