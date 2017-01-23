@@ -496,6 +496,28 @@ function recallsListInit(){
             });
         }
     });
+
+    /*FORM writeRewiev*/
+    $(".writeReviewBlock .defaultButton").on("click", function(e){
+        e.preventDefault();
+
+        var $writeReviewForm = $(".writeReviewForm");
+        $.magnificPopup.open({
+            items: {
+                src: $writeReviewForm,
+                type: 'inline'
+            },
+            removalDelay: 500, //delay removal by X to allow out-animation
+            closeBtnInside: true,
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.mainClass = "mfp-zoom-in";
+                }
+            },
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+        });
+    });
+        
 }
 
 function servicesDetail(){
@@ -544,6 +566,18 @@ function servicesDetail(){
             TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
         }
     });
+
+    function docNoteBlock_maxHeight(){
+        var maxH = 0;
+        var $b = $(".docNoteBlock a.w-1col");
+        if( $b.length == 0 ){ return false; }
+        $b.css({"height": ""});
+        $b.each(function(){
+            $(this).outerHeight() > maxH ? maxH = $(this).outerHeight() : maxH = maxH;
+        });
+        $b.css({"height": maxH});
+    }
+    docNoteBlock_maxHeight();
 }
 
 

@@ -93,5 +93,5 @@ else
 						<h1><?$APPLICATION->ShowTitle(false)?></h1>
 				</div>
 			<?endif;?>
-		<section id="content">
+		<section id="content" class="content">
 

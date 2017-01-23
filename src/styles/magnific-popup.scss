@@ -363,7 +363,7 @@ img.mfp-img {
     max-width: 500px;
     margin: 0 auto;
 }
-.videoPopup .mfp-close {
+.videoPopup .mfp-close, .writeReviewForm .mfp-close{
   z-index: 2;
   cursor: pointer;
   font-size: 0;
