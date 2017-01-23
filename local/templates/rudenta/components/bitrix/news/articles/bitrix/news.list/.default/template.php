@@ -27,7 +27,8 @@ $this->setFrameMode(true);
 				?>
 				<div class="bottomRow">
 					<div class="date">
-						<?php echo FormatDate("d F Y", MakeTimeStamp($arItem['DISPLAY_ACTIVE_FROM']));?>
+						<a href="<?=$arItem['DETAIL_PAGE_URL']?>">Читать далее...</a>
+						<?php /*echo FormatDate("d F Y", MakeTimeStamp($arItem['DISPLAY_ACTIVE_FROM']));*/?>
 					</div>
 					<div class="doc">
 						<div class="imgW"><img src="<?=$doc_array['PREVIEW_PICTURE']?>"></div>
