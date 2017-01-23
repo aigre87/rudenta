@@ -102,6 +102,15 @@ $this->setFrameMode(true);
 			<div id="doctors-list">
 			<?foreach($doctors as $doctor):?>
 				<a class="item doctor w-1col" href="/doctors/<?=$doctor['ID']?>/">
+					<span class="imgW">
+						<img
+							class="preview_picture"
+							border="0"
+							src="<?=$doctor["PREVIEW_PICTURE"]["SRC"]?>"
+							alt="<?=$doctor["PREVIEW_PICTURE"]["ALT"]?>"
+							title="<?=$doctor["PREVIEW_PICTURE"]["TITLE"]?>"
+						/>
+					</span>
 					<span class="text">
 						<span class="name"><?php echo $doctor['NAME'];?></span>
 						<span class="position"><?php echo $doctor['PROPERTY_POSITION_VALUE']?></span>
