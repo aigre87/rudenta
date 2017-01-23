@@ -14,6 +14,7 @@ $this->setFrameMode(true);
 ?>
 <div class="news-detail">
 	<div><strong><?php echo $arResult['NAME']?></strong></div>
+	<div><?php echo $arResult['PREVIEW_TEXT'];?></div>
 	<div><?php echo $arResult['DETAIL_TEXT']?></div>
 
 	<?php
