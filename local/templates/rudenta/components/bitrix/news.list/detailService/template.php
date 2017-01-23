@@ -89,9 +89,18 @@ $this->setFrameMode(true);
 		<div data-ar="articles" class="articles">
 			<h2 class="lBlue">Советы</h2>
 			<div class="docNoteBlock clear">
-				<?foreach($articles as $article):?>
-					<a class="w-1col" href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
-				<?endforeach;?>
+				<?if(!empty($articles[0])):?>
+					<a class="w-1col" href="/articles/<?=$articles[0]['ID']?>/"><?=$articles[0]['NAME']?></a>
+				<?endif;?>
+				<?if(!empty($articles[1])):?>
+					<a class="w-1col" href="/articles/<?=$articles[1]['ID']?>/"><?=$articles[1]['NAME']?></a>
+				<?endif;?>
+				<?if(!empty($articles[2]) && count($articles) == 3):?>
+					<a class="w-1col" href="/articles/">Все советы</a>
+				<?endif;?>
+				<?if(count($articles) < 3):?>
+					<a class="w-1col" href="/articles/">Все советы</a>
+				<?endif;?>
 			</div>
 		</div>
 	<?endif;?>
