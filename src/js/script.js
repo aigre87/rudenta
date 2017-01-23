@@ -21,6 +21,10 @@ mobileAndTabletcheck();
 if( myGlobalisMobileDevice ){
     $("html").attr("id", "mobile");
 }
+function setFooterPadding(){
+    var h = $("footer").outerHeight();
+    $("#mainWrapper").css({"padding-bottom": h});
+}
 
 
 
@@ -202,6 +206,7 @@ function initBottomMenu(){
             k = k+countL;
         }
     }
+    setFooterPadding();
 }
 
 function HPinitSovetiBlock(){
@@ -474,12 +479,22 @@ function recallsListInit(){
             });
         mySelect+="</select>";
         $(".filtesBlock").append(mySelect);
-        var selectric = $('select.'+clearclassList+'').selectric();
-        selectric.on("selectric-change", function(event, element, selectric){
-            var index = $(element).find("option:selected").index();
-            linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
-            window.location.href = linkHref;
-        });
+            
+        if( $("html#mobile").length > 0 ){
+            var $select = $('.filtesBlock select');
+            $select.on("change", function(){
+                var index = $(this).find("option:selected").index();
+                linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
+                window.location.href = linkHref;
+            });
+        }else{
+            var selectric = $('select.'+clearclassList+'').selectric();
+            selectric.on("selectric-change", function(event, element, selectric){
+                var index = $(element).find("option:selected").index();
+                linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
+                window.location.href = linkHref;
+            });
+        }
     });
 }
 
@@ -488,23 +503,46 @@ function servicesDetail(){
         var controller = new ScrollMagic.Controller({
             globalSceneOptions: {
                 triggerHook: 'onLeave',
-                offset: 0
             }
         });
-        $contentSections.each(function(i){
-            var $sc = $(this),
-            $thisMenu = $sc.find(".menu"),
-            curDur = typeof masScMenuOffset[i+1] != "undefined" ?  masScMenuOffset[i+1] - masScMenuOffset[i] : 0;
-            scene = new ScrollMagic.Scene({triggerElement: $sc, duration: curDur })
-                .setPin($thisMenu)
-                //.addIndicators({name: i}) // add indicators (requires plugin)
-                .addTo(controller)
-                .on("leave enter", function (event) {
-                    hideMenu();
-                });
+        var $navBlock = $(".w-1col .nav"),
+            scrollDur = $(".w-2col").outerHeight() - $navBlock.outerHeight();
+
+        new ScrollMagic.Scene({triggerElement: $(".topBlock"), duration: scrollDur, offset: -30})
+        .setPin($navBlock)
+        .addIndicators() // add indicators (requires plugin)
+        .addTo(controller);
+
+        $("*[data-ar]").each(function(i){
+            var $thisAr = $(this),
+                thisArAttr = $thisAr.attr("data-ar"),
+                $thisLink = $("*[data-link='"+thisArAttr+"']"),
+                $thisLinkLi = $("*[data-link='"+thisArAttr+"']").closest("li"),
+                curDur = null;
+
+                if( $("*[data-ar]:eq("+(i+1)+")").length > 0 ){
+                    curDur = $("*[data-ar]:eq("+(i+1)+")").offset().top - $thisAr.offset().top;
+                }
+                
+                new ScrollMagic.Scene({triggerElement: $thisAr, duration: curDur, offset: -30})
+                .setClassToggle( $thisLinkLi , "active") // add class toggle
+                .addIndicators() // add indicators (requires plugin)
+                .addTo(controller);
         });
     }
-    //menuScrollAnimation();
+    menuScrollAnimation();
+
+    $("*[data-link]").on("click", function(e){
+        e.preventDefault();
+        var $link = $(this),
+            linkAttr = $link.attr("data-link"),
+            $ar = $("*[data-ar='"+linkAttr+"']");
+            
+        if ( $ar.length > 0 ){
+            var arSC = $ar.offset().top;
+            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
+        }
+    });
 }
 
 

@@ -172,3 +172,70 @@ $bg6: map-get($colors, pink);
 	}
 
 }
+
+
+#content .servicesDetailPage{
+	.topBlock{
+		.nav{
+			padding-top: 32px;
+	    padding-bottom: 23px;
+			background: #faf9ee;
+			border-radius: 5px;
+			li{
+				position: relative;
+				&:before{
+					display: none;
+				}
+				a{
+					color: map-get($colors, text);
+					border-bottom: 1px solid map-get($colors, linkUnderH);
+					&:hover{
+						color: map-get($colors, pink);
+					}
+				}
+				&.active{
+					>a{
+						color: map-get($colors, pink);
+						border-bottom: 1px solid transparent;
+					}
+					&:before{
+						content: '';
+				    display: block;
+				    width: 30px;
+				    height: 3px;
+				    background-color: map-get($colors, pink);
+				    left: -14px;
+				    top: 13px;
+				    position: absolute;
+					}
+				}
+			}
+			.ul-nav{
+				>li{
+					margin-bottom: 10px;
+					a{
+						font-size: 20px;
+						line-height: 30px;
+						left: 30px;
+						font-weight: 700;
+					}
+				}
+			}
+			.child-nav{
+				margin: 2px 0;
+				>li{
+					margin-bottom: 0;
+					&:last-child{
+				    margin-bottom: -1px;
+					}
+					a{
+						font-size: 16px;
+						line-height: 30px;
+						font-weight: 400;
+					}
+				}
+			}
+
+		}
+	}
+}

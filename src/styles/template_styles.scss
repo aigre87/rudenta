@@ -117,8 +117,11 @@ $c-1d6-mar : 20px;
   width: $contentW;
   margin: 0 auto;
 }
-
+html, body{
+  height: 100%;
+}
 body{
+  min-height: 100%;
 	font-family: 'FiraSans';
   color: #333333;
 	//color: map-get($colors, defaultText);
@@ -279,6 +282,10 @@ sup{
   display: table;
   clear: both;
 }
+#mainWrapper{
+  min-height: 100%;
+  position: relative;
+}
 #mobile #mainWrapper{
   width: 1240px;
   margin: 0 auto;
@@ -400,6 +407,10 @@ header{
 }
 
 footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   .contactsBlock{
     position: relative;
     z-index: 1;
@@ -706,29 +717,26 @@ input[type='checkbox']{
   Selectric v1.10.0
 ======================================*/
 /*default select mobile*/
-// .blueSelect select{
-//     max-width: 300px;
-//     height: 38px;
-//     background: #097ad6 url(../images/optionSelectArrow.png) no-repeat 95% center;
-//     border: 1px solid #097ad6;
-//     color: #fff;
-//     display: inline-block;
-//     white-space: nowrap;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     font-size: 12px;
-//     line-height: 36px;
-//     user-select: none;
-//     font-size: 11px;
-//     text-transform: uppercase;
-//     padding: 0 42px 0 14px;
-//     letter-spacing: .75px;
-//     border-radius: 3px;
-//     margin-left: 15px;
-//     &:first-child{
-//       margin-left: 0;
-//     }
-// }
+select{
+    height: 50px;
+    background: #fff url(../images/optionSelectArrowMobile.png) no-repeat 95% center;
+    border: 2px solid #1bbee8;
+    width: 100%;
+    box-sizing: border-box;
+    color: #1bbee8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    font-size: 18px;
+    line-height: 49px;
+    padding: 0 38px 0 10px;
+    letter-spacing: .75px;
+    border-radius: 5px;
+    &:first-child{
+      margin-left: 0;
+    }
+}
     
 /*default select mobile END*/
 
@@ -1312,5 +1320,51 @@ input[type='checkbox']{
     font-size: 12px;
     line-height: 16px;
     color: map-get($colors, desc);
+  }
+}
+#content .docNoteBlock{
+  a{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    border-radius: 3px;
+    border: 2px dashed map-get($colors, lBlue);
+    box-sizing: border-box;
+    display: block;
+    transition: all 0.12s ease-in-out;
+    position: relative;
+    padding: 15px 19px 45px;
+    margin-bottom: 20px;
+    color: map-get($colors, text);
+    &:after{
+      transition: all 0.12s ease-in-out;
+      opacity: 1;
+      content: '';
+      position: absolute;
+      right: 19px;
+      bottom: 15px;
+      @include sprite($s-mIcoLBlue_arrowRight);
+      z-index: 1;
+    }
+    &:before{
+      transition: all 0.12s ease-in-out;
+      opacity: 0;
+      content: '';
+      position: absolute;
+      right: 19px;
+      bottom: 15px;
+      @include sprite($s-mIcoPink_arrowRight);
+      z-index: 1;
+    }
+    &:hover{
+      border: 2px dashed map-get($colors, Pink);
+      color: map-get($colors, pink);
+      &:after{
+        opacity: 0;
+      }
+      &:before{
+        opacity: 1;
+      }
+    }
   }
 }

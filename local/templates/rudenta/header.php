@@ -46,7 +46,7 @@ else
 
 
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css">
-		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css">
+		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css?v1">
 		
 		<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js"></script>
