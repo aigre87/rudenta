@@ -1,10 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 CModule::IncludeModule("iblock");
-/*filterDocAndUsl();
-echo "<br/>";
-echo "Всего отзывов";
-echo Recalls::getRecallsCNT();*/
 ?>
 <div class="recalls-list-page clear">
 	<div class="w-1d4col lc">
