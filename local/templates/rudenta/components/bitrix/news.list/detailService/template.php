@@ -81,26 +81,31 @@ $this->setFrameMode(true);
 	<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
 	<?if(!empty($articles)):?>
 		<div data-ar="articles" class="articles">
-			<p>Советы</p>
-			<?foreach($articles as $article):?>
-				<a href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
-			<?endforeach;?>
+			<h2 class="lBlue">Советы</h2>
+			<div class="docNoteBlock clear">
+				<?foreach($articles as $article):?>
+					<a class="w-1col" href="/articles/<?=$article['ID']?>/"><?=$article['NAME']?></a>
+				<?endforeach;?>
+			</div>
 		</div>
 	<?endif;?>
 	<?php $doctors = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);?>
 	<?if(!empty($doctors)):?>
 		<div data-ar="doctors" class="doctors">
-			<p>Врачи</p>
+			<h2 class="lBlue">Врачи</h2>
+			<div id="doctors-list">
 			<?foreach($doctors as $doctor):?>
-				<div class="doctor">
-					<a href="/doctors/<?=$doctor['ID']?>/">
-						<?php echo $doctor['NAME']?>
-					</a>
-					<?php echo $doctor['PROPERTY_POSITION_VALUE'];?>
-					<?php echo Doctors::getExp($doctor['PROPERTY_EXPERIENCE_VALUE']). " опыта";?>
-					<?php echo count($doctor['PROPERTY_AWARDS_VALUE']). " наград и сертефикатов";?>
-					<?php echo recalls(Doctors::getRecallsCnt($doctor['ID']));?>
-				</div>
+				<a class="item doctor w-1col" href="/doctors/<?=$doctor['ID']?>/">
+					<span class="text">
+						<span class="name"><?php echo $doctor['NAME'];?></span>
+						<span class="position"><?php echo $doctor['PROPERTY_POSITION_VALUE']?></span>
+						<span class="experience"><?php echo Doctors::getExp($doctor['PROPERTY_EXPERIENCE_VALUE'])?> опыта</span>
+						<span class="awards'"><?php echo count($doctor['PROPERTY_AWARDS_VALUE'])?> наград и сертификатов</span>
+						<?/*<span class="recalls"><?php echo recalls($arItem['CNT_RECALLS'])?></span>
+						<span class="articles"><?php echo articles($arItem['CNT_ARTICLES']);?></span>*/?>
+						<?php echo recalls(Doctors::getRecallsCnt($doctor['ID']));?>
+					</span>
+				</a>
 			<?endforeach;?>
 		</div>
 	<?endif;?>

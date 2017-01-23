@@ -499,6 +499,7 @@ function recallsListInit(){
 }
 
 function servicesDetail(){
+    if( !$("body.services-detail").length > 0 ){ return false; }
     function menuScrollAnimation(){
         var controller = new ScrollMagic.Controller({
             globalSceneOptions: {
@@ -510,7 +511,7 @@ function servicesDetail(){
 
         new ScrollMagic.Scene({triggerElement: $(".topBlock"), duration: scrollDur, offset: -30})
         .setPin($navBlock)
-        .addIndicators() // add indicators (requires plugin)
+        //.addIndicators() // add indicators (requires plugin)
         .addTo(controller);
 
         $("*[data-ar]").each(function(i){
@@ -526,7 +527,7 @@ function servicesDetail(){
                 
                 new ScrollMagic.Scene({triggerElement: $thisAr, duration: curDur, offset: -30})
                 .setClassToggle( $thisLinkLi , "active") // add class toggle
-                .addIndicators() // add indicators (requires plugin)
+                //.addIndicators() // add indicators (requires plugin)
                 .addTo(controller);
         });
     }

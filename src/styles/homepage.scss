@@ -312,6 +312,7 @@
 			.row{
 				margin-bottom: 40px;
 				.col{
+					height: 180px;
 					position: relative;
 					&.hover{
 						.item .iw{
@@ -346,7 +347,12 @@
 								position: absolute;
 								top: 0;
 								left: 0;
+								height: 100%;
 								img{
+									height: 100%;
+							    position: relative;
+							    left: -75px;
+							    top: 5px;
 									display: block;
 								}
 							}
@@ -361,6 +367,8 @@
 						    font-size: 14px;
 						    line-height: 20px;
 						    color: #fff;
+				        position: relative;
+				        z-index: 1;
 						    >span{
 						    	display: block;
 						    }

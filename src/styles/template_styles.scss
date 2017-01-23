@@ -1368,3 +1368,6 @@ select{
     }
   }
 }
+.lBlue{
+  color : map-get($colors, lBlue);
+}
