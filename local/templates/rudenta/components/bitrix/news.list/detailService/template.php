@@ -16,28 +16,34 @@ $this->setFrameMode(true);
 	<div class="topBlock clear">
 		<div class="w-2col">
 			<div class="parent-section">
-				<h1><?php echo $arResult['SECTION']['PATH'][1]['NAME']?></h1>
+				<!--<h1><?php /*echo $arResult['SECTION']['PATH'][1]['NAME']*/?></h1>-->
 				<div data-ar="desc" class="parent-section-desc">
-					<?php echo $arResult['SECTION']['PATH'][1]['DESCRIPTION']?>
+					<?php /*echo $arResult['SECTION']['PATH'][1]['DESCRIPTION']*/?>
 				</div>
 			</div>
+			<?$i = 1;?>
 			<?foreach($arResult["ITEMS"] as $arItemKey => $arItemArr):?>
 				<div class="child-section">
 					<?php $res = CIBlockSection::GetByID($arItemKey);?>
 					<?if($ar_res = $res->GetNext()):?>
 						<div class="parent-child-section">
-							<h3><?php echo $ar_res['NAME']?></h3>
+							<?if($i == 1):?>
+								<h1><?php echo $ar_res['NAME']?></h1>
+							<?else:?>
+								<h2><?php echo $ar_res['NAME']?></h2>
+							<?endif;?>
 							<div data-ar="<?php echo $ar_res['ID'];?>" class="parent-child-section-desc">
 								<?php echo $ar_res['DESCRIPTION']?>
 							</div>
 						</div>
 						<?foreach($arItemArr as $arItem):?>
 						<div class="service">
-							<h4><?php echo $arItem['NAME'];?> <?if($arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE']):?>- <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р<?endif;?></h4>
+							<h3><?php echo $arItem['NAME'];?> <?if($arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE']):?>- <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р<?endif;?></h3>
 							<div data-ar="<?php echo $arItem['ID'];?>" class="service-desc">
 								<?php echo $arItem['PREVIEW_TEXT'];?>
 							</div>
 						</div>
+						<?$i++;?>
 						<?endforeach;?>
 					<?endif;?>
 				</div>
@@ -47,7 +53,7 @@ $this->setFrameMode(true);
 			<div class="nav">
 				<ul class="ul-nav">
 					<li>
-						<a href="#" data-link="desc">Описание</a>
+						<!--<a href="#" data-link="desc">Описание</a>-->
 					</li>
 					<?foreach($arResult['NAV'] as $navKey => $navValue):?>
 						<li>
