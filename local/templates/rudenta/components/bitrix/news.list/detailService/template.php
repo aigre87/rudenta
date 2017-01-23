@@ -101,14 +101,15 @@ $this->setFrameMode(true);
 			<h2 class="lBlue">Врачи</h2>
 			<div id="doctors-list">
 			<?foreach($doctors as $doctor):?>
+				<?php
+				$path_to_img = CFile::GetPath($doctor["PREVIEW_PICTURE"]);
+				?>
 				<a class="item doctor w-1col" href="/doctors/<?=$doctor['ID']?>/">
 					<span class="imgW">
 						<img
 							class="preview_picture"
 							border="0"
-							src="<?=$doctor["PREVIEW_PICTURE"]["SRC"]?>"
-							alt="<?=$doctor["PREVIEW_PICTURE"]["ALT"]?>"
-							title="<?=$doctor["PREVIEW_PICTURE"]["TITLE"]?>"
+							src="<?=$path_to_img?>"
 						/>
 					</span>
 					<span class="text">
