@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 ?>
 <div class="news-detail">
-	<div><strong><?php echo $arResult['NAME']?></strong></div>
+	<h1><?php echo $arResult['NAME']?></h1>
 	<div><?php echo $arResult['PREVIEW_TEXT'];?></div>
 	<div><?php echo $arResult['DETAIL_TEXT']?></div>
 
@@ -25,9 +25,9 @@ $this->setFrameMode(true);
 		<?=$doc_array['NAME']?>
 		<?=$doc_array['POSITION']?>
 	</div>
-	<div class="date">
-		<?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>
-	</div>
+<!--	<div class="date">
+		<?php /*echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));*/?>
+	</div>-->
 	Остались вопросы? Запишитесь на бесплатный прием!
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:main.include",
