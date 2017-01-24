@@ -448,11 +448,11 @@ function doctorsListInit(){
             $item3 = $items.eq(i+2),
             maxRowH = [];
 
-        maxRowH.push($item1.outerHeight());
-        maxRowH.push($item2.outerHeight());
-        maxRowH.push($item3.outerHeight());
+        if( $item1.length > 0 ){ maxRowH.push($item1.outerHeight()); }
+        if( $item2.length > 0 ){ maxRowH.push($item2.outerHeight()); }
+        if( $item3.length > 0 ){ maxRowH.push($item3.outerHeight()); }
         var maxH = maxRowH.max();
-
+        console.log(maxH);
         $item1
         .add($item2)
         .add($item3)

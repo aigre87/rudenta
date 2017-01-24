@@ -175,67 +175,115 @@ $bg6: map-get($colors, pink);
 
 
 #content .servicesDetailPage{
-	.topBlock{
-		.nav{
-			padding-top: 32px;
-	    padding-bottom: 23px;
-			background: #faf9ee;
-			border-radius: 5px;
-			li{
-				position: relative;
+	.nav{
+		padding-top: 32px;
+    padding-bottom: 23px;
+		background: #faf9ee;
+		border-radius: 5px;
+		box-shadow: 0px 30px 35px -19px rgba( darken(#faf9ee , 15%), 0.5);
+		li{
+			position: relative;
+			&:before{
+				display: none;
+			}
+			a{
+				color: map-get($colors, text);
+				border-bottom: 1px solid map-get($colors, linkUnderH);
+				&:hover{
+					color: map-get($colors, pink);
+				}
+			}
+			&.active{
+				>a{
+					color: map-get($colors, pink);
+					border-bottom: 1px solid transparent;
+				}
 				&:before{
-					display: none;
+					content: '';
+			    display: block;
+			    width: 30px;
+			    height: 3px;
+			    background-color: map-get($colors, pink);
+			    left: -14px;
+			    top: 13px;
+			    position: absolute;
+				}
+			}
+		}
+		.ul-nav{
+			>li{
+				margin-bottom: 10px;
+				a{
+					font-size: 20px;
+					line-height: 30px;
+					left: 30px;
+					font-weight: 700;
+				}
+			}
+		}
+		.child-nav{
+			margin: 2px 0;
+			>li{
+				margin-bottom: 0;
+				&:last-child{
+			    margin-bottom: -1px;
 				}
 				a{
-					color: map-get($colors, text);
-					border-bottom: 1px solid map-get($colors, linkUnderH);
-					&:hover{
-						color: map-get($colors, pink);
-					}
-				}
-				&.active{
-					>a{
-						color: map-get($colors, pink);
-						border-bottom: 1px solid transparent;
-					}
-					&:before{
-						content: '';
-				    display: block;
-				    width: 30px;
-				    height: 3px;
-				    background-color: map-get($colors, pink);
-				    left: -14px;
-				    top: 13px;
-				    position: absolute;
-					}
+					font-size: 16px;
+					line-height: 30px;
+					font-weight: 400;
 				}
 			}
-			.ul-nav{
-				>li{
-					margin-bottom: 10px;
-					a{
-						font-size: 20px;
-						line-height: 30px;
-						left: 30px;
-						font-weight: 700;
-					}
-				}
-			}
-			.child-nav{
-				margin: 2px 0;
-				>li{
-					margin-bottom: 0;
-					&:last-child{
-				    margin-bottom: -1px;
-					}
-					a{
-						font-size: 16px;
-						line-height: 30px;
-						font-weight: 400;
-					}
-				}
-			}
+		}
 
+	}
+}
+#mainWrapper #content .servicesDetailPage{
+	.free-record{
+		margin-top: 28px;
+    padding: 34px 30px 36px;
+		.title{
+			margin-bottom: 14px;
+			br{
+				display: none;
+			}
+		}
+		input{
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 0;
+			margin-left: 7px;
+			&[type="text"]{
+				width: 240px;
+			}
+			&[name="form_text_1"]{
+				margin-left: 0;
+			}
+		}
+		.free-record-text{
+			color: map-get($colors, pink);
+			margin-top: 8px;
+		}
+	}
+	.section.articles{
+		margin-top: 59px;
+		h2{
+			margin-bottom: 16px;
+		}
+	}
+	.section.doctors{
+		margin-top: 40px;
+		h2{
+			margin-bottom: 25px;
+		}
+	}
+	.section.recalls{
+		margin-top: 65px;
+		h2{
+
+		}
+		.writeReviewBlock{
+			margin-top: 8px;
 		}
 	}
 }

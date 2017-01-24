@@ -295,6 +295,9 @@ sup{
   overflow: hidden;
 }
 
+.lBlue{
+  color : map-get($colors, lBlue);
+}
 
 header{
   width: 1180px;
@@ -639,6 +642,7 @@ input[type='checkbox']{
   margin:0;
   opacity:0;
   z-index:1;
+  cursor: pointer;
 }
 .custom-radiobox{
   user-select: none;
@@ -1372,6 +1376,32 @@ select{
     }
   }
 }
-.lBlue{
-  color : map-get($colors, lBlue);
+.writeReviewBlock{
+  margin-top: 30px;
+  background: #f8f369;
+  box-shadow: 0px 11px 33px -7px rgba( #f8f369 , 0.7);
+  border-radius: 5px;
+  padding: 29px 30px 34px;
+  .title{
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 9px;
+  }
+  .text{
+    font-style: italic;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+  .defaultButton{
+    font-size: 16px;
+    line-height: 50px;
+    font-weight: 700;
+    padding: 0 31px;
+  }
+  .writeReviewForm{
+    display: none;
+  }
 }

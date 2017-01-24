@@ -12,24 +12,17 @@ CModule::IncludeModule("iblock");
 		<div class="filtesBlock">
 			
 		</div>
-		<div class="writeReviewBlock">
-			<div class="title">Уже бывали у нас?</div>
-			<div class="text">Напишите о своем опыте посещения клиники</div>
-			<div class="defaultButton">Написать отзыв</div>
-			<div class="writeReviewForm mfp-with-anim">
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:main.include",
-				".default",
-				Array(
-					"AREA_FILE_SHOW" => "file",
-					"AREA_FILE_SUFFIX" => "inc",
-					"COMPONENT_TEMPLATE" => ".default",
-					"EDIT_TEMPLATE" => "",
-					"PATH" => "/local/templates/rudenta/inc/add_recall.php"
-				)
-			);?>
-			</div>
-		</div>
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			".default",
+			Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"COMPONENT_TEMPLATE" => ".default",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/local/templates/rudenta/inc/add_recall.php"
+			)
+		);?>
 	</div>
 	<div class="w-3d4col rc">
 		<?$APPLICATION->IncludeComponent(
