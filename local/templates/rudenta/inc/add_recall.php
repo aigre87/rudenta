@@ -10,8 +10,9 @@ $services = Service::getAllServices();
         <form action="#">
             <h3 class="title">Написать отзыв</h3>
             <div class="row">
-                <input type="text" name="name" placeholder="Ваше имя">
-                <input type="text" name="city" placeholder="Ваш город">
+                <div ><input type="text" name="name" placeholder="Ваше имя"></div>
+                <div style="margin-top:5px;"><input type="text" name="city" placeholder="Ваш город"></div>
+                <div style="margin-top:5px;"><input type="email" name="email" placeholder="Ваш email"></div>
             </div>
             <div class="row">
                 <div class="fieldName">Ваш пол:</div>

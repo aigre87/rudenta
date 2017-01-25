@@ -88,7 +88,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		global $shareDescription; /* declared in components of this template */
 
 		if(!$shareImgSrc) {
-			$shareImgSrc = SITE_TEMPLATE_PATH."/images/mainSiteLogo.png";
+			$shareImgSrc = SITE_TEMPLATE_PATH."/images/siteShareImg.png";
 		}
 		$shareImgSrc = preg_match("^https?://(.*)", $url) ? $shareImgSrc : "http://".$_SERVER["HTTP_HOST"].$shareImgSrc;
 

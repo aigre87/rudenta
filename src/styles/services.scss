@@ -239,32 +239,6 @@ $bg6: map-get($colors, pink);
 	}
 }
 #mainWrapper #content .servicesDetailPage{
-	.free-record{
-		margin-top: 28px;
-    padding: 34px 30px 36px;
-		.title{
-			margin-bottom: 14px;
-			br{
-				display: none;
-			}
-		}
-		input{
-			display: inline-block;
-			vertical-align: top;
-			margin-top: 0;
-			margin-left: 7px;
-			&[type="text"]{
-				width: 240px;
-			}
-			&[name="form_text_1"]{
-				margin-left: 0;
-			}
-		}
-		.free-record-text{
-			color: map-get($colors, pink);
-			margin-top: 8px;
-		}
-	}
 	.section.articles{
 		margin-top: 59px;
 		h2{

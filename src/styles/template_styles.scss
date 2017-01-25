@@ -566,8 +566,9 @@ input, textarea{
   background: #fff;
   border-radius: 2px;
   border: 1px solid map-get($colors, lBlue);
+  box-sizing: border-box;
 }
-input[type='text']{
+input[type='text'],input[type='email']{
   box-sizing: border-box;
   height: 40px;
   font-size: 16px;
@@ -1295,6 +1296,32 @@ select{
     line-height: 20px;
     font-style: italic;
     margin-top: 17px;
+  }
+}
+#content .w-2col .free-record{
+  margin-top: 28px;
+  padding: 34px 30px 36px;
+  .title{
+    margin-bottom: 14px;
+    br{
+      display: none;
+    }
+  }
+  input{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;
+    margin-left: 7px;
+    &[type="text"]{
+      width: 240px;
+    }
+    &[name="form_text_1"]{
+      margin-left: 0;
+    }
+  }
+  .free-record-text{
+    color: map-get($colors, pink);
+    margin-top: 8px;
   }
 }
 #content .fileItem{

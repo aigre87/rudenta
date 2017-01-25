@@ -566,18 +566,37 @@ function servicesDetail(){
             TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
         }
     });
+}
+function docNoteBlock_maxHeight(){
+    var maxH = 0;
+    var $b = $(".articles.section .docNoteBlock a.w-1col");
+    if( $b.length == 0 ){ return false; }
+    $b.css({"height": ""});
+    $b.each(function(){
+        $(this).outerHeight() > maxH ? maxH = $(this).outerHeight() : maxH = maxH;
+    });
+    $b.css({"height": maxH});
+}
 
-    function docNoteBlock_maxHeight(){
-        var maxH = 0;
-        var $b = $(".docNoteBlock a.w-1col");
-        if( $b.length == 0 ){ return false; }
-        $b.css({"height": ""});
-        $b.each(function(){
-            $(this).outerHeight() > maxH ? maxH = $(this).outerHeight() : maxH = maxH;
+function articlesDetail(){
+    if( $(".articlesDetailPage").length == 0 ){ return false; }
+    function printPage(){
+        $(".printVersion").on("click", function(e){
+            e.preventDefault();
+            $("html").attr("id" , "printVersion");
+            $("#mainWrapper").css({"padding-bottom": ""});
         });
-        $b.css({"height": maxH});
-    }
-    docNoteBlock_maxHeight();
+        $(".printButton").on("click", function(e){
+            e.preventDefault();
+            window.print();
+        });
+        $(".disablePrintVersion").on("click", function(e){
+            e.preventDefault();
+            $("html").attr("id" , "");
+            setFooterPadding();
+        });
+    };
+    printPage();
 }
 
 
@@ -592,6 +611,7 @@ $(document).ready(function(){
 	initBottomMenu();
 	contactsmap();
     zoomGalleryPopup();
+    docNoteBlock_maxHeight();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();
@@ -606,7 +626,9 @@ $(document).ready(function(){
 /*servicesDetail*/
     servicesDetail();
 /*servicesDetail END*/
-
+/*articles*/
+    articlesDetail();
+/*END articles*/
 });
 window.onload = function() {
 /*homepage*/
