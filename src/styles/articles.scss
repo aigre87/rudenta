@@ -227,6 +227,108 @@ body.articles{
 	.disablePrintVersion{
 		display: none;
 	}
+
+	.shareBlock{
+		.ya-share2__item{
+			padding-left: 0;
+			margin-right: 10px;
+			&:last-child{
+				margin-right: 0;
+			}
+			&:before{
+				display: none;
+			}
+			a{
+				border-bottom: none;
+				padding: 10px;
+				padding-right: 15px;
+				position: relative;
+				border-radius: 6px;
+				.ya-share2__badge{
+					background: none;
+					border-radius: 0;
+					position: static;
+					&:after{
+						transition: color 0.12s ease;
+						content: 'Поделиться';
+				    position: relative;
+				    width: auto;
+				    top: auto;
+				    bottom: auto;
+				    background: none;
+		        display: inline-block;
+    				vertical-align: middle;
+				    line-height: 30px;
+				    color: map-get($colors, text);
+				    font-size: 16px;
+				    font-style: italic;
+				    margin-left: 10px;
+					}
+					.ya-share2__icon{
+				    border-radius: 3px;
+				    width: 30px;
+				    height: 30px;
+					}
+					.ya-share2__counter{
+				    float: right;
+						display: inline-block;
+						vertical-align: middle;
+						color: #aca49e;
+				    font-size: 16px;
+				    line-height: 30px;
+				    font-style: italic;
+				    width: auto;
+		        padding-right: 2px;
+						&:before{
+							display: none;
+						}
+					}
+				}
+				&:hover{
+					.ya-share2__badge{
+						&:after{
+							color: map-get($colors, pink);
+						}
+					}
+				}
+			}
+		}
+
+		.ya-share2__item_service_vkontakte{
+			a{
+				background: #eceff3;
+			}
+			.ya-share2__icon{
+				background-color: #48729e;
+			}
+		}
+		.ya-share2__item_service_odnoklassniki{
+			a{
+				background: #fef2e8;
+			}
+			.ya-share2__icon{
+		    background-color: #eb722e;
+			}
+		}
+		.ya-share2__item_service_facebook{
+			a{
+				background: #ebeef4;
+			}
+			.ya-share2__icon{
+		    background-color: #3b5998;
+			}
+		}
+		.ya-share2__item_service_twitter{
+			a{
+				background: #eef7fd;
+			}
+			.ya-share2__icon{
+		    background-color: #00aced;
+			}
+		}
+
+
+	}
 }
 #content .articlesDetailPage{
 	h3{
@@ -237,7 +339,16 @@ body.articles{
 	}
 }
 
+
+/*print V*/
+#printVersion body{
+	width: 21cm;
+	margin: 0 auto;
+}
 #printVersion #mainWrapper{
+	#content{
+		width: 100%;
+	}
 	header, 
 	footer, 
 	.articlesDetailPage .articles.section,
@@ -251,7 +362,7 @@ body.articles{
 		
 	}
 	.articlesDetailPage .lc{
-		width: 90%;
+		width: 100%;
 		margin: 0 auto;
 	}
 	.articlesDetailPage .rc{
@@ -278,7 +389,17 @@ body.articles{
 		}
 	}
 }
+	@page {
+	  size: A4;
+    margin: 27mm 16mm 27mm 16mm;
+	}
 @media print {
+
+  // html, body {
+  //   width: 210mm;
+  //   height: 297mm;
+  //   margin: 0 auto;
+  // }
 	.articlesDetailPage .rc{
 		display: none !important;
 	}
