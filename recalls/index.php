@@ -5,8 +5,7 @@ CModule::IncludeModule("iblock");
 <div class="recalls-list-page clear">
 	<div class="w-1d4col lc">
 		<div class="title">
-			<?=Recalls::getRecallsCNT();?><br />
-			отзывов
+			<?=Recalls::getRecallsCNT();?>
 		</div>
 		<div class="filterHidden"><?=filterDocAndUsl();?></div>
 		<div class="filtesBlock">
