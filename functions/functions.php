@@ -9,10 +9,10 @@ function arrPrint($arr){
 function recalls($cnt_recalls){
     $count = abs($cnt_recalls) % 100;
     $lcount = $count % 10;
-    if ($count >= 11 && $count <= 19) return($cnt_recalls.'<br />отзывов');
-    if ($lcount >= 2 && $lcount <= 4) return($cnt_recalls.'<br />отзыва');
-    if ($lcount == 1) return($cnt_recalls.'<br />отзыв');
-    return $cnt_recalls."<br />отзывов";
+    if ($count >= 11 && $count <= 19) return($cnt_recalls.' отзывов');
+    if ($lcount >= 2 && $lcount <= 4) return($cnt_recalls.' отзыва');
+    if ($lcount == 1) return($cnt_recalls.' отзыв');
+    return $cnt_recalls." отзывов";
 }
 
 function articles($cnt_articles){
