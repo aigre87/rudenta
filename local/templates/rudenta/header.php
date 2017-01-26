@@ -45,12 +45,12 @@ else
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
 
-		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css">
-		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css?v1">
+		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css?v2">
+		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css?v2">
 		
 		<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
-    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js"></script>
-    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js"></script>
+    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js?v1"></script>
+    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js?v1"></script>
 	</head>
 	<body class='<?=defined("ERROR_404") ? "page404 " : ""?><?= $isHomePage ? "homepage" : "innerpage ".str_replace('/', ' ', $bodyClassString) ?>'>
 	<div class='globalLoader siteLoader'><div class='overlay'></div><div class='loader-icon'><div></div></div></div>
