@@ -277,6 +277,7 @@ function HPinitDoctorsBlock(){
 
 
 function contactsmap(){
+    if( $("footer #contactsMap").length == 0 ){ return false; }
     ymaps.ready(init);
     function init () {
         var myMap = new ymaps.Map("contactsMap", {

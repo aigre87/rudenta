@@ -1,4 +1,5 @@
 /bitrix/*
 /node_modules/*
 /src/libs/*
+/local/templates/rudenta/fonts/*
 .sublime-gulp.cache

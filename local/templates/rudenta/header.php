@@ -48,7 +48,7 @@ else
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css?v2">
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css?v2">
 		
-		<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+		<?/*<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>*/?>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js?v1"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js?v1"></script>
 	</head>
