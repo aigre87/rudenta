@@ -35,6 +35,8 @@ $this->setFrameMode(true);
 							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
 							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
 							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
+							style="margin-left:<?=$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE']?>;
+								margin-top:<?=$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE']?> "
 						/>
 					</span>
 					<?endif;?>
