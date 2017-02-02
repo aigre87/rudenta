@@ -5,7 +5,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		</section>
 		<!--content END-->
 		<footer>
-<!-- 			<div class="contactsBlock clear">
+ 			<div class="contactsBlock clear">
 				<div class="contactsMapW w-2col">
 					<div id="contactsMap"></div>
 				</div>
@@ -31,7 +31,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 						<div class="desc">+7(985)745-79-99</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 			<menu id="bottomMenu">
 			<div class="layoutW clear">
 				<?$APPLICATION->IncludeComponent(

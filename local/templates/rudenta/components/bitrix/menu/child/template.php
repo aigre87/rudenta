@@ -6,12 +6,12 @@
 		<div class="itemsW customIconsMenu">
 			<div class="clear items">
 			<? foreach($arResult as $arItem):?>
-				<div class="item <?=$arItem['PARAMS']['class-img']?>">
+				<a href="<?=$arItem["LINK"]?>" class="item <?=$arItem['PARAMS']['class-img']?>">
 					<i></i>
 					<div class="text">
-						<a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a>
+						<span><?=$arItem["TEXT"]?></span>
 					</div>
-				</div>
+				</a>
 			<?endforeach;?>
 			</div>
 		</div>

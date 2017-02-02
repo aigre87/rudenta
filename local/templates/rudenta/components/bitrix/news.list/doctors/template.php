@@ -35,8 +35,14 @@ $this->setFrameMode(true);
 							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
 							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
 							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
-							style="margin-left:<?=$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE']?>;
-								margin-top:<?=$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE']?> "
+							style="
+								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE'] :)?>
+									margin-left: $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE'].'px';
+								<?endif;?>
+								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE'] :)?>
+									margin-top: $arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE'].'px';
+								<?endif;?>
+							"
 						/>
 					</span>
 					<?endif;?>
