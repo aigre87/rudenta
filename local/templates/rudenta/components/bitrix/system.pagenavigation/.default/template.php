@@ -22,11 +22,11 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
 ?>
 <div class="pagenation clear">
 	<?if ($arResult["NavPageNomer"] > 1):?>
-	<div class="prev"><a href="<?=$arResult["sUrlPath"]?><?=$strNavQueryStringFull?>">Назад</a></div>
+		<div class="prev"><a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>">Назад</a></div>
 	<?else:?>
 		<div class="prev"><span>Назад</span></div>
 	<?endif?>
-	<div class="td center"><span class="cur">Страница <?=$arResult["NavPageNomer"]?></span><span class="all"> из <?=$arResult['nEndPage']?></span></div>
+	<div class="td center"><span class="cur">Страница <?=$arResult["NavPageNomer"]?></span><span class="all"> из <?=$arResult['NavPageCount']?></span></div>
 	<?if($arResult["NavPageNomer"] < $arResult["NavPageCount"]):?>
 		<div class="next">
 		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>">Дальше</a>
