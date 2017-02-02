@@ -28,18 +28,18 @@ $this->setFrameMode(true);
 					<?if($ar_res = $res->GetNext()):?>
 						<div class="parent-child-section">
 							<?if($i == 1):?>
-								<h1><?php echo $ar_res['NAME']?></h1>
+								<h1 data-ar="<?php echo $ar_res['ID'];?>" ><?php echo $ar_res['NAME']?></h1>
 							<?else:?>
-								<h2><?php echo $ar_res['NAME']?></h2>
+								<h2 data-ar="<?php echo $ar_res['ID'];?>" ><?php echo $ar_res['NAME']?></h2>
 							<?endif;?>
-							<div data-ar="<?php echo $ar_res['ID'];?>" class="parent-child-section-desc">
+							<div class="parent-child-section-desc">
 								<?php echo $ar_res['DESCRIPTION']?>
 							</div>
 						</div>
 						<?foreach($arItemArr as $arItem):?>
 						<div class="service">
-							<h3><?php echo $arItem['NAME'];?> <?if($arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE']):?>- <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р<?endif;?></h3>
-							<div data-ar="<?php echo $arItem['ID'];?>" class="service-desc">
+							<h3 data-ar="<?php echo $arItem['ID'];?>"><?php echo $arItem['NAME'];?> <?if($arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE']):?>- <?php echo $arItem['DISPLAY_PROPERTIES']['PRICE']['VALUE'];?>р<?endif;?></h3>
+							<div class="service-desc">
 								<?php echo $arItem['PREVIEW_TEXT'];?>
 							</div>
 						</div>
