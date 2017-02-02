@@ -50,9 +50,9 @@ $this->setFrameMode(true);
 						<span class="name"><?php echo $arItem['NAME'];?></span>
 						<span class="position"><?php echo $arItem['DISPLAY_PROPERTIES']['POSITION']['DISPLAY_VALUE']?></span>
 						<span class="experience"><?php echo $arItem['DISPLAY_PROPERTIES']['EXPERIENCE']['NEW_VALUE']?> стаж работы</span>
-						<span class="awards'"><?php echo $arItem['CNT_AWARDS']?> наград и сертификатов</span>
-						<span class="recalls"><?php echo recalls($arItem['CNT_RECALLS'])?></span>
-						<span class="articles"><?php echo articles($arItem['CNT_ARTICLES']);?></span>
+						<span class="awards'"><?if(!empty($arItem['CNT_AWARDS'])):?><?php echo $arItem['CNT_AWARDS']?> наград и сертификатов<?endif;?></span>
+						<span class="recalls"><?if(!empty($arItem['CNT_RECALLS'])):?><?php echo recalls($arItem['CNT_RECALLS'])?><?endif;?></span>
+						<span class="articles"><?if(!empty($arItem['CNT_ARTICLES'])):?><?php echo articles($arItem['CNT_ARTICLES']);?><?endif;?></span>
 					</span>
 			</span>
 		</a>

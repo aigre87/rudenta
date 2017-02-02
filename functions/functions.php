@@ -18,10 +18,10 @@ function recalls($cnt_recalls){
 function articles($cnt_articles){
     $count = abs($cnt_articles) % 100;
     $lcount = $count % 10;
-    if ($count >= 11 && $count <= 19) return($cnt_articles.' Публикаций');
-    if ($lcount >= 2 && $lcount <= 4) return($cnt_articles.' Публикации');
-    if ($lcount == 1) return($cnt_articles.' Публикация');
-    return $cnt_articles." Публикаций";
+    if ($count >= 11 && $count <= 19) return($cnt_articles.' публикаций');
+    if ($lcount >= 2 && $lcount <= 4) return($cnt_articles.' публикации');
+    if ($lcount == 1) return($cnt_articles.' публикация');
+    return $cnt_articles." публикаций";
 }
 
 function filterDocAndUsl(){
