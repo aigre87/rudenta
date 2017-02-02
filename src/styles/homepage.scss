@@ -243,6 +243,7 @@
 	}
 	.doctorsBlock{
 		margin-top: 136px;
+    margin-bottom: 80px;
 		.w-1col{
 			h2{
 				padding-top: 20px;
@@ -312,8 +313,9 @@
 			}
 		}/*end left col*/
 		.doctors-list{
+			visibility: hidden;
 			.row{
-				margin-bottom: 40px;
+				margin-bottom: 0px;
 				.col{
 					height: 180px;
 					position: relative;
@@ -403,9 +405,9 @@
 						}
 						&.complete {
 							transition: box-shadow 0.15s ease-in-out;
-						  -webkit-box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
-							-moz-box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
-							box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
+						  -webkit-box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
+							-moz-box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
+							box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
 						}
 					}
 					.itemOverflow{
@@ -552,7 +554,6 @@
 
 	.sovetiBlock{
 		margin-top: 98px;
-		margin-bottom: 99px;
 		h2{
 			margin-bottom: 28px;
 		}

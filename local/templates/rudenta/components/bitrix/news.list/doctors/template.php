@@ -45,10 +45,10 @@ $this->setFrameMode(true);
 							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
 							style="
 								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE'] ):?>
-									margin-left: <?=$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE'].'px'?>;
+									margin-right: <?=(-1*$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE']).'px'?>;
 								<?endif;?>
 								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE'] ):?>
-									margin-top: <?=$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE'].'px'?>;
+									margin-bottom: <?=(-1*$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE']).'px'?>;
 								<?endif;?>
 							"
 						/>

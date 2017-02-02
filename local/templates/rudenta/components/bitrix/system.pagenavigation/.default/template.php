@@ -26,7 +26,10 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
 	<?else:?>
 		<div class="prev"><span>Назад</span></div>
 	<?endif?>
-	<div class="td center"><span class="cur">Страница <?=$arResult["NavPageNomer"]?></span><span class="all"> из <?=$arResult['NavPageCount']?></span></div>
+	<div class="td center">
+		<div class="centerTextBlock"><span class="cur">Страница <?=$arResult["NavPageNomer"]?></span><span class="all"> из <?=$arResult['NavPageCount']?></span></div>
+		<input type="text" data-min="1" data-max="<?=$arResult['NavPageCount']?>" class="navHelper">
+	</div>
 	<?if($arResult["NavPageNomer"] < $arResult["NavPageCount"]):?>
 		<div class="next">
 		<a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]+1)?>">Дальше</a>

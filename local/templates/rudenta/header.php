@@ -50,7 +50,7 @@ else
 
 		<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js?v1"></script>
-    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/script.js?v1"></script>
+    <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/script.js?v2"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js?v1"></script>
 	</head>
 	<body class='<?=defined("ERROR_404") ? "page404 " : ""?><?= $isHomePage ? "homepage" : "innerpage ".str_replace('/', ' ', $bodyClassString) ?>'>
