@@ -31,7 +31,7 @@
 			opacity: 0;
 			content: '';
 			position: absolute;
-	    right: 19px;
+	    left: 19px;
     	bottom: 15px;
 			@include sprite($s-mIcoWhite_arrowRight);
 			z-index: 1;
@@ -48,21 +48,21 @@
 			display: block;
 			position: absolute;
 			bottom: 0;
-			left: 0;
-			border-radius: 0 0 0 13px;
+			right: 0;
+			border-radius: 0 0 13px 0;
 			overflow: hidden;
 			height: 100%;
 			img{
 				height: 100%;
-		    left: -75px;
+		    right: -40px;
 				position: relative;
 				display: block;
 			}
 		}
 		.text{
-	    padding-left: 169px;
+	    padding-right: 169px;
 	    padding-top: 19px;
-	    padding-right: 20px;
+	    padding-left: 20px;
 	    padding-bottom: 14px;
 	    box-sizing: border-box;
 	    display: block;
@@ -327,7 +327,7 @@
 		.imgW{
 			z-index: 0;
 			position: absolute;
-			right: 40px;
+			right: 0px;
 			bottom: 0;
 			img{
 				display: block;

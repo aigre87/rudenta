@@ -47,26 +47,77 @@ $this->setFrameMode(true);
 			<?endforeach;?>
 			</div>
 		<?endif;?>
-		<p><strong>Отзывы</strong></p>
-		<?foreach($arResult['RECALLS'] as $rec):?>
-			<div class="recall">
-				<div class="recall-name"><?php echo $rec['NAME'];?> <?php echo $rec['PROPERTY_CITY_VALUE'];?></div>
-				<div class="rating"><?php echo $rec['PROPERTY_RATING_VALUE'];?></div>
-				<div class="date"><?php echo FormatDate("d F Y", MakeTimeStamp($rec['DATE_ACTIVE_FROM']));?></div>
-				<div class="service">
-				<?php $res = CIBlockSection::GetByID($rec['PROPERTY_SERVICE_VALUE']);?>
-				<?if($ar_res = $res->GetNext()):?>
-					про
-					<a href="/services/detail/?SECTION_ID=<?php echo $ar_res['IBLOCK_SECTION_ID'];?>">
-						<?php echo $ar_res['NAME'];?>
-					</a>
-				<?endif;?>
-				</div>
-				<div class="text">
-					<?php echo $rec['PREVIEW_TEXT'];?>
-				</div>
+		<h3>Отзывы</h3>
+
+<div class="recalls-list">
+	<?foreach($arResult["ITEMS"] as $arItem):?>
+		<?
+		$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+		$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+		?>
+		<div class="recall-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+			<div class="row1">
+				<span class="name"><?=$arItem["NAME"]?></span>
+				<span class="town"><?=$arItem['DISPLAY_PROPERTIES']['CITY']['VALUE']?></span>
 			</div>
-		<?endforeach;?>
+			<?
+				$str = $arItem['DISPLAY_PROPERTIES']['RATING']['VALUE'];
+				$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
+				$perc = intval($int)*100/5;
+			?>
+			<div class="raiting" data-val="<?=$int?>">
+				<div class="val" style="width:<?=$perc?>%;"></div>
+				<div class="bg"></div>
+			</div>
+			<div class="row2">
+				<?echo FormatDate("d F Y", MakeTimeStamp($arItem["DISPLAY_ACTIVE_FROM"]));?>
+				<?if(!empty($arItem['DISPLAY_PROPERTIES']['SERVICE']['VALUE'])):?>
+					про <?=$arItem['DISPLAY_PROPERTIES']['SERVICE']['DISPLAY_VALUE']?>
+				<?endif;?>
+				<?if(!empty($arItem['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'])):?>
+					врачу <?=$arItem['DISPLAY_PROPERTIES']['DOCTOR']['DISPLAY_VALUE']?>
+				<?endif;?>
+			</div>
+			<div class="text">
+				<?echo $arItem["PREVIEW_TEXT"];?>
+			</div>
+		</div>
+	<?endforeach;?>	
+</div>
+
+
+
+		<div class="recalls-list">
+			<?foreach($arResult['RECALLS'] as $rec):?>
+				<div class="recall-item">
+					<div class="row1">
+						<span class="name"><?php echo $rec['NAME'];?></span>
+						<span class="town"><?php echo $rec['PROPERTY_CITY_VALUE'];?></span>
+					</div>
+					<?
+						$str = $rec['PROPERTY_RATING_VALUE'];
+						$int = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
+						$perc = intval($int)*100/5;
+					?>
+					<div class="raiting" data-val="<?=$int?>">
+						<div class="val" style="width:<?=$perc?>%;"></div>
+						<div class="bg"></div>
+					</div>
+					<div class="row2">
+						<?php $res = CIBlockSection::GetByID($rec['PROPERTY_SERVICE_VALUE']);?>
+						<?if($ar_res = $res->GetNext()):?>
+							про
+							<a href="/services/detail/?SECTION_ID=<?php echo $ar_res['IBLOCK_SECTION_ID'];?>">
+								<?php echo $ar_res['NAME'];?>
+							</a>
+						<?endif;?>
+					</div>
+					<div class="text">
+						<?php echo $rec['PREVIEW_TEXT'];?>
+					</div>
+				</div>
+			<?endforeach;?>
+		</div>
 	</div>
 	<div class="w-1col">
 		<?$APPLICATION->IncludeComponent(

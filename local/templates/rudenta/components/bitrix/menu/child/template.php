@@ -8,9 +8,9 @@
 			<? foreach($arResult as $arItem):?>
 				<a href="<?=$arItem["LINK"]?>" class="item <?=$arItem['PARAMS']['class-img']?>">
 					<i></i>
-					<div class="text">
+					<span class="text">
 						<span><?=$arItem["TEXT"]?></span>
-					</div>
+					</span>
 				</a>
 			<?endforeach;?>
 			</div>
