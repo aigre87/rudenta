@@ -286,7 +286,8 @@ function contactsmap(){
                 controls: []
             }, {
                 searchControlProvider: 'yandex#search'
-            }),
+            });
+            myMap.behaviors.disable('scrollZoom');
 
         // Создаем геообъект с типом геометрии "Точка".
             myGeoObject = new ymaps.GeoObject({
