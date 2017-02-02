@@ -30,7 +30,7 @@ $this->setFrameMode(true);
 				<div class="text">
 					<?=$arItem['PREVIEW_TEXT']?>
 				</div>
-				<div class="desc"><?=$arItem['NAME']?>, <?=$arItem["ACTIVE_FROM"]?></div>
+				<div class="desc"><?=$arItem['NAME']?>, <?=FormatDate("d F Y", MakeTimeStamp($arItem["ACTIVE_FROM"]))?></div>
 			</div>
 		<?endforeach;?>
 	</div>
