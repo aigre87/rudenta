@@ -4,6 +4,45 @@ Array.prototype.max = function() {
 function getRandom(min, max) {
   return min + Math.random() * (max - min);
 }
+
+
+// Define variable colors    
+function setRandomGradient($items, colorsArray){
+    $items.each(function() {
+        
+        // First random color
+        var rand1 = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+        // Second random color
+        var rand2 = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+        
+        var grad = $(this);
+        
+        // Convert Hex color to RGB
+        function convertHex(hex,opacity){
+            hex = hex.replace('#','');
+            r = parseInt(hex.substring(0,2), 16);
+            g = parseInt(hex.substring(2,4), 16);
+            b = parseInt(hex.substring(4,6), 16);
+            
+            // Add Opacity to RGB to obtain RGBA
+            result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
+            return result;
+        }
+        
+        // Gradient rules
+        grad.css('background-color', convertHex(rand1,40) );
+        grad.css("background-image", "-webkit-gradient(linear, left top, left bottom, color-stop(0%,"+ convertHex(rand1,40) +"), color-stop(100%,"+ convertHex(rand2,40) +"))");
+        grad.css("background-image", "-webkit-linear-gradient(top,  "+ convertHex(rand1,40) +" 0%,"+ convertHex(rand2,40) +" 100%)");
+        grad.css("background-image", "-o-linear-gradient(top, "+ convertHex(rand1,40) +" 0%,"+ convertHex(rand2,40) +" 100%)");
+        grad.css("background-image", "-ms-linear-gradient(top, "+ convertHex(rand1,40) +" 0%,"+ convertHex(rand2,40) +" 100%)");
+        grad.css("background-image", "linear-gradient(to bottom, "+ convertHex(rand1,40) +" 0%,"+ convertHex(rand2,40) +" 100%)");
+        grad.css("filter", "progid:DXImageTransform.Microsoft.gradient( startColorstr='"+ convertHex(rand1,40) +"', endColorstr='"+ convertHex(rand2,40) +"',GradientType=0 )");
+        
+    });
+}
+
+
+
 /*functions END*/
 
 
@@ -190,25 +229,46 @@ function HPmainSlider(){
     });
 }
 function initBottomMenu(){
-    if( !$("#bottomMenu .item").length > 0 ){ return false;}
-	var $items = $("#bottomMenu .item:not(.notMenu)"),
-        cols = 3,
-        itemsL = $items.length,
-        countB = Math.ceil(itemsL/cols),
-        countL = Math.floor(itemsL/cols);
+    if( !$("#bottomMenu .menuItem").length > 0 ){ return false;}
 
-    for(var i = 0, k = 0; i < cols; i++ ) {
-        if( i < itemsL%cols ) {
-            $items.slice(k, k+countB).wrapAll("<div class='w-1d4col'></div>");
-            k = k+countB;
-        } else {
-            $items.slice(k, k+countL).wrapAll("<div class='w-1d4col'></div>");
-            k = k+countL;
-        }
-    }
+    $("#bottomMenu .menuItem.left").wrapAll("<div class='w-1d6col menuLc'></div>");
+    $("#bottomMenu .menuItem.middle").wrapAll("<div class='w-1d6col menuMc'></div>");
+    $("#bottomMenu .menuItem.right").wrapAll("<div class='w-1d4col menuRc'></div>");
+
     setFooterPadding();
 }
-
+function pagenationHelper(){
+    $('.pagenation .navHelper').each(function(){
+        var thismax = parseInt($(this).data("max"));
+        $(this).inputmask("numeric", {
+            min: 1,
+            max: thismax
+        });
+    });
+    $('.pagenation .navHelper').on('keyup', function (e) {
+        if (e.keyCode == 13 && $(this).val().length !== 0 ) {
+            $(this).blur();
+            var currentLocation = window.location.pathname;
+            window.location.href = currentLocation+"?PAGEN_1="+$(this).val();
+        }
+    });
+    $(".pagenation .centerTextBlock").on("click", function(){
+        var $tb = $(this),
+            $hb = $(this).next(".navHelper"),
+            $pag = $(this).closest(".pagenation");
+        $tb.hide();
+        $hb.show();
+        $pag.addClass("active");
+        $hb.focus();
+    });
+    $("body").on("click", function(event) {
+        if (($(".pagenation.active").length > 0) && ($(event.target).closest(".pagenation").length < 1) ) {
+            $(".pagenation.active .navHelper").hide();
+            $(".pagenation.active .centerTextBlock").show();
+            $(".pagenation.active").removeClass("active");
+        }
+    });
+}
 function HPinitSovetiBlock(){
     if( !$(".homepage .sovetiBlock .item").length > 0 ){ return false;}
     var $items = $(".homepage .sovetiBlock .item"),
@@ -242,13 +302,17 @@ function HPinitDoctorsBlock(){
     }
     TweenLite.set( $links, { zIndex:0 });
 
+    var gradColors = ["#f0f1f3","#95edd4","#d7efe2", "#b8c2ba", "#edf4d5"];
+
+    setRandomGradient($links, gradColors);
+
     function initIcons(){
         $overFlows.each(function(i , el){
             var $overflow = $(this),
                 $col = $overflow.closest(".col"),
                 $link = $col.find(".item"),
                 $iw = $link.find(".iw");
-                thisInitRotate = getRandom(-5 , 5);
+                thisInitRotate = getRandom(-7 , 7);
 
             TweenMax.set( $overflow, { rotation: thisInitRotate , left: "76px", top: "76px",  x: "-50%", y:"-50%", transformOrigin: "50% 50%", zIndex:1});
             var tl = new TimelineMax({
@@ -273,6 +337,7 @@ function HPinitDoctorsBlock(){
 
     }
     initIcons();
+    $(".homepage .doctors-list").css({visibility:"visible"});
 }
 
 
@@ -454,7 +519,7 @@ function doctorsListInit(){
         if( $item2.length > 0 ){ maxRowH.push($item2.outerHeight()); }
         if( $item3.length > 0 ){ maxRowH.push($item3.outerHeight()); }
         var maxH = maxRowH.max();
-        console.log(maxH);
+        //console.log(maxH);
         $item1
         .add($item2)
         .add($item3)
@@ -469,7 +534,7 @@ function recallsListInit(){
             classList = $(this)[0].className.split(' ').join(" "),
             clearclassList = classList.replace('filter','').replace(' ',''),
             mySelect = "<select class='"+clearclassList+"'>";
-            console.log(clearclassList);
+            //console.log(clearclassList);
 
             $this.find("a").each(function(){
                 var $thisa = $(this);
@@ -614,6 +679,7 @@ $(document).ready(function(){
 	contactsmap();
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
+    pagenationHelper();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();

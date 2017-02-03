@@ -46,18 +46,21 @@
 			border-bottom: none;
 			display: block;
 	    box-sizing: border-box;
-    	padding: 22px 20px 18px 20px;
+    	padding: 20px 20px 40px 20px;
 			border-radius: 13px;
 			background: map-get($colors, lightBlueBlock);
+			position: relative;
 			.name{
 				display: block;
-				font-size: 20px;
+				font-size: 18px;
 				color: map-get($colors, dBlue);
-				margin-bottom: 12px;
+				margin-bottom: 10px;
 				transition: all 0.15s ease;
 			}
 			.value{
 				display: block;
+				position: absolute;
+				bottom: 15px;
 				font-size: 14px;
 				line-height: 20px;
 				color: map-get($colors, desc);
@@ -240,6 +243,7 @@
 	}
 	.doctorsBlock{
 		margin-top: 136px;
+    margin-bottom: 80px;
 		.w-1col{
 			h2{
 				padding-top: 20px;
@@ -309,8 +313,9 @@
 			}
 		}/*end left col*/
 		.doctors-list{
+			visibility: hidden;
 			.row{
-				margin-bottom: 40px;
+				margin-bottom: 0px;
 				.col{
 					height: 180px;
 					position: relative;
@@ -321,11 +326,12 @@
 					}
 					.item{
 						will-change: transform;
-						position: relative;
+				    position: absolute;
+				    right: 25px;
 						width: 152px;
 						height: 152px;
 						display: block;
-						border-radius: 30px;
+						border-radius: 25px;
 						overflow: hidden;
 						/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#94ecd3+0,f0f1f3+100 */
 						background: #94ecd3; /* Old browsers */
@@ -337,7 +343,7 @@
 						.iw{
 					    overflow: hidden;
 					    position: absolute;
-					    left: 0;
+					    right: 0;
 					    width: 380px;
 					    min-height: 200px;
 					    background: transparent;
@@ -346,20 +352,20 @@
 								display: block;
 								position: absolute;
 								top: 0;
-								left: 0;
+								right: 0;
 								height: 100%;
 								img{
-									height: 100%;
-							    position: relative;
-							    left: -75px;
-							    top: 5px;
+									height: 95%;
+							    position: absolute;
+							    right: -40px;
+							    bottom: -1px;
 									display: block;
 								}
 							}
 							.text{
-						    padding-left: 169px;
+						    padding-right: 169px;
 						    padding-top: 28px;
-						    padding-right: 20px;
+						    padding-left: 20px;
 						    padding-bottom: 14px;
 						    box-sizing: border-box;
 						    display: block;
@@ -399,9 +405,9 @@
 						}
 						&.complete {
 							transition: box-shadow 0.15s ease-in-out;
-						  -webkit-box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
-							-moz-box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
-							box-shadow: 0px 38px 80px 0px rgba(56,67,70,0.5);
+						  -webkit-box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
+							-moz-box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
+							box-shadow: 0px 28px 80px 0px rgba(56,67,70,0.5);
 						}
 					}
 					.itemOverflow{
@@ -548,7 +554,6 @@
 
 	.sovetiBlock{
 		margin-top: 98px;
-		margin-bottom: 99px;
 		h2{
 			margin-bottom: 28px;
 		}

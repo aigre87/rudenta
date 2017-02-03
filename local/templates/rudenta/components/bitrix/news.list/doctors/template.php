@@ -29,23 +29,6 @@ $this->setFrameMode(true);
 		<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="itemOverflow"></a>
 		<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="item <?=$cssClass?>" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 			<span class="iw">
-					<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
-					<span class="imgW">
-						<img
-							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
-							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
-							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
-							style="
-								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE'] ):?>
-									margin-left: <?=$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE'].'px'?>;
-								<?endif;?>
-								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE'] ):?>
-									margin-top: <?=$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE'].'px'?>;
-								<?endif;?>
-							"
-						/>
-					</span>
-					<?endif;?>
 					<span class="text">
 						<span class="name"><?php echo $arItem['NAME'];?></span>
 						<span class="position"><?php echo $arItem['DISPLAY_PROPERTIES']['POSITION']['DISPLAY_VALUE']?></span>
@@ -54,6 +37,23 @@ $this->setFrameMode(true);
 						<span class="recalls"><?if(!empty($arItem['CNT_RECALLS'])):?><?php echo recalls($arItem['CNT_RECALLS'])?><?endif;?></span>
 						<span class="articles"><?if(!empty($arItem['CNT_ARTICLES'])):?><?php echo articles($arItem['CNT_ARTICLES']);?><?endif;?></span>
 					</span>
+					<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
+					<span class="imgW">
+						<img
+							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
+							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
+							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
+							style="
+								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE'] ):?>
+									margin-right: <?=(-1*$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE']).'px'?>;
+								<?endif;?>
+								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE'] ):?>
+									margin-bottom: <?=(-1*$arItem['DISPLAY_PROPERTIES']['OFFSETY_ANONS_IMAGE']['VALUE']).'px'?>;
+								<?endif;?>
+							"
+						/>
+					</span>
+					<?endif;?>
 			</span>
 		</a>
 		</div>

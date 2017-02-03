@@ -163,14 +163,14 @@ video{
     }
   }
   h1{
-    font-size: 70px;
+    font-size: 60px;
     line-height: 75px;
     font-weight: bold;
     margin-bottom: 12px;
     margin-top: 44px;
   }
   h2{
-    font-size: 50px;
+    font-size: 40px;
     line-height: 50px;
     font-weight: bold;
     margin-bottom: 12px;
@@ -187,6 +187,7 @@ video{
     font-size: 20px;
     line-height: 28px;
     font-weight: bold;
+    font-style: italic;
     margin-bottom: 17px;
     margin-top: 33px;
   }
@@ -337,7 +338,7 @@ header{
 
   #headerMenu{
     margin-left: 399px;
-    padding-top: 21px;
+    padding-top: 10px;
     width: 460px;
     ul{
       li{
@@ -346,33 +347,66 @@ header{
         white-space: nowrap;
         min-width: 200px;
         padding-right: 15px;
-        margin-bottom: 27px;
+        margin-bottom: 10px;
         a{
           font-size: 20px;
-          line-height: 20px;
+          line-height: 40px;
           display: inline-block;
           font-weight: 600;
-          padding-bottom: 2px;
-          border-bottom: 1px solid map-get($colors, dBlue);
-          &:nth-child(n):hover{
+          height: 40px;
+          box-sizing: border-box;
+          border-radius: 4px;
+          padding: 0 10px;
+          span{
+            padding-bottom: 1px;
+            border-bottom: 1px solid map-get($colors, dBlue);
+          }
+          &:nth-child(n):hover span{
             border-bottom: 1px solid transparent;
+          }
+          &:nth-child(n).selected{
+            color: #fff;
+            background: map-get($colors, dBlue);
+            span{
+              border-bottom: 1px solid transparent;
+            }
           }
         }
         &:nth-child(1) a{
-          border-bottom-color: map-get($colors, dBlue);
           color: map-get($colors, dBlue);
+          span{
+            border-bottom-color: map-get($colors, dBlue);
+          }
+          &.selected{
+            background: map-get($colors, dBlue);
+          }
         }
         &:nth-child(2) a{
-          border-bottom-color: map-get($colors, green);
           color: map-get($colors, green);
+          span{
+            border-bottom-color: map-get($colors, green);
+          }
+          &.selected{
+            background: map-get($colors, green);
+          }
         }
         &:nth-child(3) a{
-          border-bottom-color: map-get($colors, lBlue);
           color: map-get($colors, lBlue);
+          span{
+            border-bottom-color: map-get($colors, lBlue);
+          }
+          &.selected{
+            background: map-get($colors, lBlue);
+          }
         }
         &:nth-child(4) a{
-          border-bottom-color: map-get($colors, pink);
           color: map-get($colors, pink);
+          span{
+            border-bottom-color: map-get($colors, pink);
+          }
+          &.selected{
+            background: map-get($colors, pink);
+          }
         }
       }
     }
@@ -496,8 +530,8 @@ footer{
     position: relative;
     color: #fff;
     background: map-get($colors, green);
-    padding-top: 94px;
-    padding-bottom: 63px;
+    padding-top: 83px;
+    padding-bottom: 58px;
     &:before{
       position: absolute;
       top: -102px;
@@ -511,12 +545,26 @@ footer{
       margin-top: 15px;
       a{
         color: #fff;
+        &:hover{
+          border-bottom: 1px solid #fff;
+          padding-bottom: 1px;
+        }
       }
       &:first-child{
         margin-top: 0;
       }
+      &.main{
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+    .menuLc, .menuMc{
+      .item.main{
+        margin-bottom: 17px;
+      }
     }
     .rc{
+      width: 480px;
       .item{
 
       }
@@ -543,11 +591,12 @@ footer{
 
   .bb{
     font-size: 14px;
-    line-height: 20px;
+    line-height: 60px;
     color: #fff;
-    background: map-get($colors, green);
+    background: #639200;
     padding-bottom: 37px;
     position: relative;
+    height: 60px;
     .copyright{
       float: left;
       width: 500px;
@@ -1074,10 +1123,12 @@ select{
 #content .customIconsMenu{
   .items{
     .item{
+      display: block;
       float: left;
       width: 20%;
       padding: 0 2px;
       border-bottom: none;
+      box-sizing: border-box;
       i{
         position: relative;
         width: 100%;
@@ -1094,6 +1145,7 @@ select{
         }
       }
       .text{
+        display: block;
         margin-top: 6px;
         font-size: 15px;
         line-height: 20px;
@@ -1250,11 +1302,27 @@ select{
     margin-left: 20px;
     float: left;
     border: 1px solid map-get($colors, lgray);
+    transition: border-color 0.13s ease-in-out;
+    &:hover{
+      border: 1px solid map-get($colors, pink);
+    }
+    .centerTextBlock{
+      cursor: pointer;
+    }
     .cur{
       color: map-get($colors, dBlue);
     }
     .all{
       color: map-get($colors, lgray);
+    }
+    .navHelper{
+      border: none;
+      width: 100%;
+      height: 100%;
+      height: 50px;
+      line-height: 48px;
+      text-align: center !important;
+
     }
   }
 }
