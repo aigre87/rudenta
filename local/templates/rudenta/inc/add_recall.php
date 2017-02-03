@@ -7,7 +7,7 @@ $services = Service::getAllServices();
     <div class="text">Напишите о своем опыте посещения клиники</div>
     <div class="defaultButton">Написать отзыв</div>
     <div class="writeReviewForm mfp-with-anim">
-        <form action="#">
+        <form method="post" action="/recalls/add_recall.php">
             <h3 class="title">Написать отзыв</h3>
             <div class="row">
                 <div ><input type="text" name="name" placeholder="Ваше имя"></div>
@@ -16,8 +16,8 @@ $services = Service::getAllServices();
             </div>
             <div class="row">
                 <div class="fieldName">Ваш пол:</div>
-                <input name="sex" type="radio" id="male" value="1"><label for="male">Муж.</label>
-                <input name="sex" type="radio" id="female" value="2"><label for="female">Жен.</label>
+                <input name="sex" type="radio" id="male" value="6"><label for="male">Муж.</label>
+                <input name="sex" type="radio" id="female" value="7"><label for="female">Жен.</label>
             </div>
             <div class="row">
                 <div class="fieldName">Оценка</div>
@@ -51,7 +51,8 @@ $services = Service::getAllServices();
                 <div class="fieldName">Отзыв</div>
                 <textarea name="recallText"></textarea>
             </div>
-            <input type="submit" value="Отправить">
+            <input class="button_recall" type="submit" value="Отправить">
+            <div class="result"></div>
         </form>
     </div>
 </div>
