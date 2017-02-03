@@ -17,3 +17,5 @@ foreach($arResult['ITEMS'] as $arItemKey => $arItemArr){
 }
 
 $arResult['NAV'] = $nav;
+$arResult['CNT_RECALLS'] = Service::getRecallsCNT($arResult['SECTION']['PATH'][1]['ID']);
+$arResult['DOCTORS'] = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);

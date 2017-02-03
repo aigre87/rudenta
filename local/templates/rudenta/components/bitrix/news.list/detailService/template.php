@@ -85,9 +85,11 @@ $this->setFrameMode(true);
 					<li>
 						<a href="#" data-link="doctors">Врачи</a>
 					</li>
-					<li>
-						<a href="#" data-link="recalls">Отзывы</a>
-					</li>
+					<?if($arResult['CNT_RECALLS'] > 0):?>
+						<li>
+							<a href="#" data-link="recalls">Отзывы</a>
+						</li>
+					<?endif;?>
 					<li>
 						<a href="#" data-link="techno">Технологии</a>
 					</li>
@@ -115,12 +117,11 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	<?endif;?>
-	<?php $doctors = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);?>
-	<?if(!empty($doctors)):?>
+	<?if(!empty($arResult['DOCTORS'])):?>
 		<div data-ar="doctors" class="doctors section">
 			<h2 class="lBlue">Врачи</h2>
 			<div id="doctors-list">
-			<?foreach($doctors as $doctor):?>
+			<?foreach($arResult['DOCTORS'] as $doctor):?>
 				<?php
 				$path_to_img = CFile::GetPath($doctor["PREVIEW_PICTURE"]);
 				?>
@@ -134,12 +135,13 @@ $this->setFrameMode(true);
 					</span>
 					<span class="text">
 						<span class="name"><?php echo $doctor['NAME'];?></span>
-						<span class="position"><?php echo $doctor['PROPERTY_POSITION_VALUE']?></span>
-						<span class="experience"><?php echo Doctors::getExp($doctor['PROPERTY_EXPERIENCE_VALUE'])?> опыта</span>
-						<span class="awards'"><?php echo count($doctor['PROPERTY_AWARDS_VALUE'])?> наград и сертификатов</span>
+						<span class="position"><?if(!empty($doctor['PROPERTY_POSITION_VALUE'])):?><?php echo $doctor['PROPERTY_POSITION_VALUE']?><?endif;?></span>
+						<span class="experience"><?if(!empty($doctor['PROPERTY_EXPERIENCE_VALUE'])):?><?php echo Doctors::getExp($doctor['PROPERTY_EXPERIENCE_VALUE'])?> опыта<?endif;?></span>
+						<span class="awards'"><?if(!empty($doctor['PROPERTY_AWARDS_VALUE'])):?><?php echo count($doctor['PROPERTY_AWARDS_VALUE'])?> наград и сертификатов<?endif;?></span>
 						<?/*<span class="recalls"><?php echo recalls($arItem['CNT_RECALLS'])?></span>
 						<span class="articles"><?php echo articles($arItem['CNT_ARTICLES']);?></span>*/?>
-						<span class="recalls"><?php echo recalls(Doctors::getRecallsCnt($doctor['ID']));?></span>
+						<?php $doctor_cnt_recalls = Doctors::getRecallsCnt($doctor['ID']);?>
+						<span class="recalls"><?if(!empty($doctor_cnt_recalls)):?><?php echo recalls($doctor_cnt_recalls);?><?endif;?></span>
 					</span>
 				</a>
 			<?endforeach;?>
@@ -147,7 +149,9 @@ $this->setFrameMode(true);
 		</div>
 	<?endif;?>
 	<div class="recalls section" data-ar="recalls">
-		<h2 class="lBlue">Отзывы</h2>
+		<?if($arResult['CNT_RECALLS'] > 0):?>
+			<h2 class="lBlue">Отзывы</h2>
+		<?endif;?>
 		<div class="clear">
 			<div class="w-2col">
 				<?$APPLICATION->IncludeComponent(
