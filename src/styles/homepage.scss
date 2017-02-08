@@ -505,6 +505,10 @@
 					position: relative;
 					cursor: pointer;
 			    padding-left: 66px;
+			    transition: all 0.3s ease 0s;
+			    &:hover{
+			    	background: map-get($colors, pink);
+			    }
 					&:after{
 						content: '';
 						position: absolute;

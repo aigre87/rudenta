@@ -245,13 +245,6 @@ function pagenationHelper(){
             max: thismax
         });
     });
-    $('.pagenation .navHelper').on('keyup', function (e) {
-        if (e.keyCode == 13 && $(this).val().length !== 0 ) {
-            $(this).blur();
-            var currentLocation = window.location.pathname;
-            window.location.href = currentLocation+"?PAGEN_1="+$(this).val();
-        }
-    });
     $(".pagenation .centerTextBlock").on("click", function(){
         var $tb = $(this),
             $hb = $(this).next(".navHelper"),
@@ -260,6 +253,43 @@ function pagenationHelper(){
         $hb.show();
         $pag.addClass("active");
         $hb.focus();
+    });
+    $('.pagenation .navHelper').on('keyup', function (e) {
+        if (e.keyCode == 13 && $(this).val().length !== 0 ) {
+            if( $(this).hasClass("noHref") ){
+                $(this).blur();
+                var $pag = $(this).closest(".pagenation");
+                    $slider = $pag.prev(".defaultSlider"),
+                    sliderOT = $slider.offset().top-80,
+                    $slides = $slider.find(".slide"),
+                    slidesL = $slides.length,
+                    $curSlide = $slider.find(".slide.current"),
+                    curIndex = $curSlide.index(),
+                    nextCurIndex = $(this).val()-1;
+
+                $slides.removeClass("current");
+                $slides.eq(nextCurIndex).addClass("current");
+                $pag.find(".centerTextBlock .cur .page").text(nextCurIndex+1);
+                $pag.find(".prev").removeClass("disabled");
+                $pag.find(".next").removeClass("disabled");
+                if( nextCurIndex == 0 ){
+                    $pag.find(".prev").addClass("disabled");
+                }
+                if( nextCurIndex == slidesL-1 ){
+                    $pag.find(".next").addClass("disabled");
+                }
+
+                $(".pagenation.active .navHelper").hide();
+                $(".pagenation.active .centerTextBlock").show();
+                $(".pagenation.active").removeClass("active");
+                $slider.css({ "height" : $slides.eq(nextCurIndex).outerHeight() });
+                TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+            }else{
+                $(this).blur();
+                var currentLocation = window.location.pathname;
+                window.location.href = currentLocation+"?PAGEN_1="+$(this).val();    
+            }
+        }
     });
     $("body").on("click", function(event) {
         if (($(".pagenation.active").length > 0) && ($(event.target).closest(".pagenation").length < 1) ) {
@@ -505,6 +535,85 @@ function HPrecallsBlock(){
         });
 }
 
+
+function createSlider($items){
+    var itemsL = $items.length;
+    if( itemsL == 0 ){ return false; }
+
+    $items.wrapAll("<div class='defaultSlider'></div>");
+    var slideL = 0;
+    for(var i = 0; i < itemsL ; i+=5) {
+        if( i == 0 ){
+            $items.slice(i, i+5).wrapAll("<div class='slide current'></div>");
+        }else{
+            $items.slice(i, i+5).wrapAll("<div class='slide'></div>");
+        }
+        
+        slideL++;
+    }
+    var pagHtml = '<div class="pagenation js clear">\
+                        <div class="prev js disabled"><a name="but">Назад</a></div>\
+                        <div class="td center">\
+                            <div class="centerTextBlock"><span class="cur">Страница <span class="page">1</span></span><span class="all"> из '+slideL+'</span></div>\
+                            <input type="text" data-min="1" data-max="'+slideL+'" class="navHelper noHref" style="text-align: right;">\
+                        </div>\
+                        <div class="next js"><a name="but">Дальше</a></div>\
+                    </div>';
+    $(".doctor-detail .recalls-list").append(pagHtml);
+
+    var $slider = $items.closest(".defaultSlider"),
+        sliderOT = $slider.offset().top-80,
+        $pag = $slider.next(".pagenation"),
+        $slides = $slider.find(".slide"),
+        slidesL = $slides.length,
+        $nextBut = $pag.find(".next"),
+        $prevBut = $pag.find(".prev");
+
+    $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
+    setTimeout(function(){
+        $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
+    }, 200);
+
+    $nextBut.on("click", function(){
+        if( $nextBut.hasClass("disabled") ){return false;}
+
+        var $curSlide = $slider.find(".slide.current"),
+            curIndex = $curSlide.index(),
+            nextIndex = curIndex+1;
+
+        $prevBut.removeClass("disabled");
+        if( nextIndex == slidesL-1 ){
+            $nextBut.addClass("disabled");
+        }
+        $slides.removeClass("current");
+        $slides.eq(nextIndex).addClass("current");
+        $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
+        $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
+        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+    });
+    $prevBut.on("click", function(){
+        if( $prevBut.hasClass("disabled") ){return false;}
+
+        var $curSlide = $slider.find(".slide.current"),
+            curIndex = $curSlide.index(),
+            nextIndex = curIndex-1;
+
+        $nextBut.removeClass("disabled");
+        if( nextIndex == 0 ){
+            $prevBut.addClass("disabled");
+        }
+        $slides.removeClass("current");
+        $slides.eq(nextIndex).addClass("current");
+        $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
+        $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
+        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+    });
+}
+
+function doctorDetail(){
+    createSlider( $(".doctor-detail .recalls-list .recall-item") );
+}
+
 function doctorsListInit(){
     if( !$("#doctors-list").length > 0 ){ return false;}
     var $items = $("#doctors-list .item"),
@@ -679,7 +788,6 @@ $(document).ready(function(){
 	contactsmap();
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
-    pagenationHelper();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();
@@ -690,6 +798,7 @@ $(document).ready(function(){
 /*END homepage*/
 /*doctor*/
     detailDoctorInit();
+    doctorDetail();
 /*doctor END*/
 /*servicesDetail*/
     servicesDetail();
@@ -697,6 +806,9 @@ $(document).ready(function(){
 /*articles*/
     articlesDetail();
 /*END articles*/
+/*GLOBAL*/
+    pagenationHelper();
+/*END GLOBAL*/
 });
 window.onload = function() {
 /*homepage*/

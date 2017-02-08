@@ -145,6 +145,10 @@ div{
 }
 a{
   color: map-get($colors, dBlue);
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
 }
 b{
 	font-weight: 600;
@@ -1096,7 +1100,7 @@ select{
     height: 100%;
     background: map-get($colors, green);
     opacity: 0.85;
-    transition: opacity 0.15s ease-in-out;
+    transition: all 0.3s ease 0s;
   }
   .triangle{
     will-change: transform;
@@ -1116,6 +1120,7 @@ select{
   }
   &:hover{
     &:before{
+      background: map-get($colors, pink);
       opacity: 1;
     }
   }
@@ -1209,6 +1214,19 @@ select{
       color: #fff;
       background-color: map-get($colors, lBlue);
       border-color: map-get($colors, lBlue);
+      transition: all 0.12s ease-in-out;
+      &:hover{
+        background-color: map-get($colors, pink);
+        border-color: map-get($colors, pink);
+      }
+    }
+    &.disabled a{
+      position: relative;
+      border-width: 1px;
+      border-radius: 5px;
+      background-color: #fff;
+      border-color: map-get($colors, lgray);
+      color: map-get($colors, lgray);
     }
   }
   .prev{
@@ -1227,6 +1245,7 @@ select{
         width: 0;
         position: absolute;
         pointer-events: none;
+        transition: all 0.12s ease-in-out;
       }
       &:after {
         border-color: rgba(136, 183, 213, 0);
@@ -1241,7 +1260,29 @@ select{
         margin-top: -9px;
       }
     }
+    a:hover{
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-right-color: map-get($colors, pink);
+        border-width: 6px;
+        margin-top: -6px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-right-color: #fff;
+        border-width: 9px;
+        margin-top: -9px;
+      }
+    }
     span{
+      &:after {
+        border-right-color: #fff;
+      }
+      &:before {
+        border-right-color: map-get($colors, lgray);
+      }
+    }
+    &.disabled a{
       &:after {
         border-right-color: #fff;
       }
@@ -1267,10 +1308,25 @@ select{
         width: 0;
         position: absolute;
         pointer-events: none;
+        transition: all 0.12s ease-in-out;
       }
       &:after {
         border-color: rgba(136, 183, 213, 0);
         border-left-color: map-get($colors, lBlue);
+        border-width: 6px;
+        margin-top: -6px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-left-color: #fff;
+        border-width: 9px;
+        margin-top: -9px;
+      }
+    }
+    a:hover{
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-left-color: map-get($colors, pink);
         border-width: 6px;
         margin-top: -6px;
       }
@@ -1288,6 +1344,14 @@ select{
       &:before {
         border-left-color: map-get($colors, lgray);
       }
+    }
+    &.disabled a{
+     &:after {
+        border-left-color: #fff
+      }
+      &:before {
+        border-left-color: map-get($colors, lgray);
+      } 
     }
   }
   .center{
@@ -1513,5 +1577,23 @@ select{
   }
   .writeReviewForm{
     display: none;
+  }
+}
+
+.defaultSlider{
+  position: relative;
+  transition: height 0.2s ease;
+  .slide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    transition: all 0.2s ease;
+    &.current{
+      opacity: 1;
+      z-index: 1;
+    }    
   }
 }
