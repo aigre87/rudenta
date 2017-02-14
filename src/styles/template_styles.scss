@@ -146,8 +146,10 @@ div{
 a{
   color: map-get($colors, dBlue);
   text-decoration: none;
+  transition: color 0.15s ease 0s;
   &:hover{
     text-decoration: none;
+    color: map-get($colors, pink);
   }
 }
 b{
@@ -307,11 +309,11 @@ sup{
 #mainWrapper{
   min-height: 100%;
   position: relative;
+  overflow: hidden;
 }
 #mobile #mainWrapper{
   width: 1240px;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 .lBlue{
@@ -569,28 +571,159 @@ footer{
     }
     .rc{
       width: 480px;
-      .item{
-
+      color: #fff;
+      .t{
+        margin-top: -16px;
+        margin-bottom: 27px;
+        .lb{
+          float: left;
+          border: 2px dashed #fff;
+          border-radius: 10px;
+          padding: 16px 25px 20px 19px;
+          .text{
+            font-size: 16px;
+            line-height: 20px;
+            font-style: italic;
+            margin-bottom: 10px;
+          }
+          .icons{
+            font-size: 0;
+            margin-left: -1px;
+            >div{
+              display: inline-block;
+              vertical-align: top;
+              margin-left: 5px;
+              &:first-child{
+                margin-left: 0;
+              }
+            }
+            .visa{
+              &:after{
+                display: block;
+                content: '';
+                position: relative;
+                @include sprite($s-mIcoWhite_visa);
+              }
+            }
+            .mastercard{
+              &:after{
+                display: block;
+                content: '';
+                position: relative;
+                @include sprite($s-mIcoWhite_mastercard);
+              }
+            }
+            .koshel{
+              &:after{
+                display: block;
+                content: '';
+                position: relative;
+                @include sprite($s-mIcoWhite_koshel);
+              }
+            }
+          }
+        }
+        .rb{
+          float: left;
+          font-size: 20px;
+          line-height: 35px;
+          font-weight: 700;
+          position: relative;
+          margin-top: 9px;
+          margin-left: 41px;
+          &:before{
+            content: '';
+            position: absolute;
+            right: 26px;
+            top: 3px;
+            @include sprite($s-mIcoWhite_sale);
+          }
+        }
       }
-      .images{
-        margin-left: -2px;
-        margin-top: 5px;
-        margin-bottom: -3px;
+      .socialLinks{
+        margin-top: 10px;
+        margin-left: -1px;
         font-size: 0;
-        i.mastercard{
+        >a{
+          box-sizing: border-box;
+          color: #fff;
+          font-size: 14px;
+          line-height: 36px;
           display: inline-block;
           vertical-align: top;
-          @include sprite($s-mIcoWhite_mastercard);
+          border: 2px solid #fff;
+          border-radius: 4px;
+          width: 120px;
+          height: 40px;
+          padding-left: 37px;
+          position: relative;
+          margin-left: 10px;
+          transition: all 0.2s ease 0s;
+          &:hover{
+            border-color: map-get($colors, pink);
+            color: map-get($colors, pink);
+          }
+          &:first-child{
+            margin-left: 0;
+          }
+          .icon{
+            fill: #fff;
+            transition: fill 0.15s ease;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+          }
+          &:hover{
+            .icon{
+              fill: map-get($colors, pink);
+            }
+          }
+          // &:before{
+          //   content: '';
+          //   position: absolute;
+          // }
         }
-        i.visa{
-          margin-left: 5px;
-          display: inline-block;
-          vertical-align: top;
-          @include sprite($s-mIcoWhite_visa);
+        .vk{
+          .icon{
+            top: 3px;
+            left: 2px;
+          }
         }
+        .fb{
+          .icon{
+            top: 3px;
+            left: 4px;
+          }
+        }
+        .ig{
+          .icon{
+            top: 3px;
+            left: 3px;
+          }
+        }
+        // .vk{
+        //   &:before{
+        //     top: 11px;
+        //     left: 5px;
+        //     @include sprite($s-mIco_social-vk-white);
+        //   }
+        // }
+        // .fb{
+        //   &:before{
+        //     top: 7px;
+        //     left: 13px;
+        //     @include sprite($s-mIco_social-fb-white);
+        //   }
+        // }
+        // .ig{
+        //   &:before{
+        //     top: 5px;
+        //     left: 5px;
+        //     @include sprite($s-mIco_social-ig-white);
+        //   }
+        // }
       }
-
-    }
+    }/*end menu rc*/
   }
 
   .bb{
@@ -1159,24 +1292,57 @@ select{
           
         }
       }
-      &.clown i:before{
+      svg{
+        position: relative;
+        width: 63px;
+        margin: 0 auto;
+        height: 70px;
+        display: block;
+        transition: fill 0.15s ease;
+      }
+      &.clown svg{
         top: 6px;
-        @include sprite($s-siteIcons-clown_green);
+        fill: map-get($colors, green);
       }
-      &.sun i:before{
+      &.sun svg{
         top: 9px;
-        @include sprite($s-siteIcons-sun_yellow);
+        fill: map-get($colors, yellow);
       }
-      &.mayak i:before{
-        @include sprite($s-siteIcons-mayak_pink);
+      &.alert svg{
+        fill: map-get($colors, pink);
       }
-      &.podushka i:before{
+      &.pillow svg{
         top: 10px;
-        @include sprite($s-siteIcons-podushka_lblue);
+        fill: map-get($colors, lBlue);
       }
-      &.boy i:before{
+      &.kid svg{
         top: 8px;
-        @include sprite($s-siteIcons-boy_dblue);
+        fill: map-get($colors, dBlue);
+      }
+
+      // &.clown i:before{
+      //   top: 6px;
+      //   @include sprite($s-siteIcons-clown_green);
+      // }
+      // &.sun i:before{
+      //   top: 9px;
+      //   @include sprite($s-siteIcons-sun_yellow);
+      // }
+      // &.mayak i:before{
+      //   @include sprite($s-siteIcons-mayak_pink);
+      // }
+      // &.podushka i:before{
+      //   top: 10px;
+      //   @include sprite($s-siteIcons-podushka_lblue);
+      // }
+      // &.boy i:before{
+      //   top: 8px;
+      //   @include sprite($s-siteIcons-boy_dblue);
+      // }
+      &:hover{
+        svg.icon{
+          fill: map-get($colors, pink);
+        }
       }
     }
   }

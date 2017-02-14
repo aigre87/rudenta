@@ -51,17 +51,43 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 					)
 				);?>
 				<div class="w-1d4col rc">
-					<div class="item notMenu">
-						У нас  можно<br />
-						расплатиться картой
-						<div class="images">
-							<i class="mastercard"></i>
-							<i class="visa"></i>
+					<div class="t clear">
+						<div class="lb">
+							<div class="text">
+								Принимаем<br />
+								наличные и карты
+							</div>
+							<div class="icons">
+								<div class="visa"></div>
+								<div class="mastercard"></div>
+								<div class="koshel"></div>
+							</div>
+						</div>
+						<div class="rb">
+							Скидки и акции<br />
+							Лечение по страховке<br />
+							Рассрочка
 						</div>
 					</div>
-					<div class="item notMenu">
-						и взять рассрочку<br />
-						на 10 месяцев
+					<div class="socialLinks">
+						<a href="#" class="vk">
+							<svg class="icon">
+							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-vkontakte-white"></use>
+							</svg>
+							Вконтакте
+						</a>
+						<a href="#" class="fb">
+							<svg class="icon">
+							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-facebook-white"></use>
+							</svg>
+							Фейсбук
+						</a>
+						<a href="#" class="ig">
+							<svg class="icon">
+							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-instagram-white"></use>
+							</svg>
+							Инстаграм
+						</a>
 					</div>
 				</div>
 			</div>

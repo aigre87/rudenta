@@ -25,6 +25,7 @@
     "scrollmagic": "^2.0.5",
     "video.js": "^5.14.1",
     "hammerjs": "^2.0.8",
-    "jquery.inputmask": "^3.3.4"
+    "jquery.inputmask": "^3.3.4",
+    "svg4everybody": "^2.1.4"
   }
 }

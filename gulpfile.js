@@ -15,8 +15,13 @@ var gulp        = require('gulp'),
     cache       = require('gulp-cache'),        // Подключаем библиотеку кеширования
     sftp        = require('gulp-sftp'),
     ftp         = require('gulp-ftp'),
-    gutil = require('gulp-util'),
+    gutil       = require('gulp-util'),
     spritesmith = require('gulp.spritesmith'),
+    svgSprite   = require('gulp-svg-sprite'),
+    //svgSprites  = require('gulp-svg-sprites'),
+    svgmin      = require('gulp-svgmin'),
+    cheerio     = require('gulp-cheerio'),
+    replace     = require('gulp-replace'),
     plumber     = require('gulp-plumber');      // Ловим ошибки, чтобы не прервался watch
 
 
@@ -30,22 +35,27 @@ var path = {
         libs:          'local/templates/rudenta/libs/'
     },
     src: {
-        js:            'src/js/*.js',
-        styles:        'src/styles/*.+(sass|scss|css)',
-        images:        'src/images/**/*.*',
-        sprite:        'src/sprite/*.*',
-        spriteTemplate:'src/sass.template.mustache',
-        fonts:         'src/fonts/**/*.*',
-        stylesPartials:'src/styles/partials/'
+        js:                 'src/js/*.js',
+        styles:             'src/styles/*.+(sass|scss|css)',
+        images:             'src/images/**/*.*',
+        svg:                'src/svgIcons/*.svg',
+        sprite:             'src/sprite/*.*',
+        spriteTemplate:     'src/sass.template.mustache',
+        svgSpriteTemplate:  'src/_sprite_template.scss',
+        fonts:              'src/fonts/**/*.*',
+        stylesPartials:     'src/styles/partials/'
     },
     watch: {
         sprite:        'src/sprite/*.*',
+        svg:           'src/svgIcons/*.svg',
         js:            'src/js/*.js',
         styles:        'src/styles/*.+(sass|scss|css)',
         images:        'src/images/**/*.*',
         fonts:         'src/fonts/**/*.*'
     }
 };
+
+
 // javascript
 gulp.task('js:build', function () {
     gulp.src([path.src.js])
@@ -78,6 +88,7 @@ gulp.task('libs:build', function() {
         'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
         'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
         'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
+        'src/libs/svg4everybody/dist/svg4everybody.min.js',
         'src/libs/hammerjs/hammer.min.js',
         'src/libs/all.js',
         'src/libs/video.js/dist/video.min.js',
@@ -146,6 +157,51 @@ gulp.task('styles:build', function () {
         }))
         .pipe(gutil.noop());
 });
+
+/*svg*/
+gulp.task('svgSprite:build', function () {
+    return gulp.src(path.src.svg)
+        // minify svg
+        .pipe(svgmin({
+            js2svg: {
+                pretty: true
+            }
+        }))
+        // remove all fill, style and stroke declarations in out shapes
+        .pipe(cheerio({
+            run: function ($) {
+                $('[fill]').removeAttr('fill');
+                $('[stroke]').removeAttr('stroke');
+                $('[style]').removeAttr('style');
+            },
+            parserOptions: {xmlMode: true}
+        }))
+        // cheerio plugin create unnecessary string '&gt;', so replace it.
+        .pipe(replace('&gt;', '>'))
+        // build svg sprite
+        .pipe(svgSprite({
+            mode: {
+                symbol: {
+                    sprite: "sprite.svg",
+                    render: {
+                        scss: {
+                            dest:'/src/styles/other/',
+                            template: path.src.svgSpriteTemplate
+                        }
+                    }
+                }
+            }
+        })) 
+        .pipe(gulp.dest(path.build.images))
+        .pipe(gulp.dest("src/styles/other/"))
+        .pipe(sftp({
+            host: 'p10298.cpanel.relevate.ru',
+            user: 'p10298',
+            pass: 'Ez3}&JC+lDJX',
+            remotePath: '/home/p10298/www/local/templates/rudenta/images/'
+        }));
+});
+
 gulp.task('sprite:build', function() {
     var spriteData =
         gulp.src(path.src.sprite)
@@ -173,6 +229,7 @@ gulp.task('sprite:build', function() {
 gulp.task('build', [
     'libs:build',
     'sprite:build',
+    'svgSprite:build',
     'js:build',
     'fonts:build',
     'image:build',
@@ -185,6 +242,7 @@ gulp.task('watch', function(){
     gulp.watch(path.watch.images, ['image:build']);
     gulp.watch(path.watch.fonts,  ['fonts:build']);
     gulp.watch(path.watch.sprite, ['sprite:build']);
+    gulp.watch(path.watch.svg, ['svgSprite:build']);
 });
 
 gulp.task('default', ['build', 'watch']);

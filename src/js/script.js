@@ -123,6 +123,7 @@ function HPmainSlider(){
         aniDist = 500;
 
     function initSlider(){
+        TweenMax.set($('body'), {perspective:500});
         cur = ($slides.filter(".current").length>0 ? $slides.filter(".current").index() : 0 );
         if( cur === 0 ){
           nextCurIndex = cur+1;
@@ -140,6 +141,7 @@ function HPmainSlider(){
 
         TweenMax.set( $slides, { transformOrigin:'50% 50%', autoAlpha: 0, z :1 });
         TweenMax.set( $slides.eq(cur), { rotation: random1, zIndex : 2, className:"+=current", autoAlpha: 1, x:0 });
+        TweenMax.set( $slides.eq(cur).find(".desc"), { rotation: -random1});
         TweenMax.set( $slides.eq(nextCurIndex), { rotation: random2, x: aniDist, scale: 0.5, zIndex: 1, autoAlpha: 1 });
         TweenMax.set( $slides.eq(prevIndex), { rotation: random3, x: -aniDist, scale: 0.5, zIndex:1, autoAlpha: 1 });
     }
@@ -198,10 +200,11 @@ function HPmainSlider(){
         $slides.eq(prevIndex).addClass("prevIndex");
         $slides.eq(newShowIndex).addClass("newShowIndex");
 
-        TweenMax.to( $slides.eq(curIndex), aniTime , { rotation: random1, x: -xFrom, scale: 0.5, zIndex: 1 });
-        TweenMax.to( $slides.eq(nextIndex), aniTime , { rotation: random2, x: 0, scale: 1, zIndex: 2 });
-        TweenMax.to( $slides.eq(prevIndex), aniTime , { rotation: random3, x: -xFrom*1.2, autoAlpha: 0, scale: 0.3, zIndex: 0 });
-        TweenMax.fromTo( $slides.eq(newShowIndex), aniTime , { rotation: random4, scale: 0.3, autoAlpha: 0, x: xFrom*1.2  }, { rotation :random4, scale: 0.5, autoAlpha: 1, x: xFrom } );
+        TweenMax.to( $slides.eq(curIndex), aniTime , { rotation: random1, x: -xFrom, z:1, scale: 0.5, zIndex: 1 });
+        TweenMax.to( $slides.eq(nextIndex), aniTime , { rotation: random2, x: 0, z:1, scale: 1, zIndex: 2 });
+        TweenMax.set( $slides.eq(nextIndex).find(".desc"), { rotation: -random2, z:1});
+        TweenMax.to( $slides.eq(prevIndex), aniTime , { rotation: random3, x: -xFrom*1.2, autoAlpha: 0, z:1, scale: 0.3, zIndex: 0 });
+        TweenMax.fromTo( $slides.eq(newShowIndex), aniTime , { rotation: random4, scale: 0.3, z:1, autoAlpha: 0, x: xFrom*1.2  }, { rotation :random4, z:1, scale: 0.5, autoAlpha: 1, x: xFrom } );
 
 
         $slides.removeClass("current start");
@@ -777,6 +780,7 @@ function articlesDetail(){
 
 
 $(document).ready(function(){
+    svg4everybody({});
 /*recalls*/
     recallsListInit();
 /*recalls END*/
