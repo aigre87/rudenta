@@ -539,7 +539,7 @@ function HPrecallsBlock(){
 }
 
 
-function createSlider($items){
+function createSlider($block, $items){
     var itemsL = $items.length;
     if( itemsL == 0 ){ return false; }
 
@@ -562,7 +562,7 @@ function createSlider($items){
                         </div>\
                         <div class="next js"><a name="but">Дальше</a></div>\
                     </div>';
-    $(".doctor-detail .recalls-list").append(pagHtml);
+    $block.append(pagHtml);
 
     var $slider = $items.closest(".defaultSlider"),
         sliderOT = $slider.offset().top-80,
@@ -592,7 +592,7 @@ function createSlider($items){
         $slides.eq(nextIndex).addClass("current");
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
-        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
     });
     $prevBut.on("click", function(){
         if( $prevBut.hasClass("disabled") ){return false;}
@@ -609,12 +609,13 @@ function createSlider($items){
         $slides.eq(nextIndex).addClass("current");
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
-        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+        TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
     });
 }
 
 function doctorDetail(){
-    createSlider( $(".doctor-detail .recalls-list .recall-item") );
+    if( $(".doctor-detail").length == 0 ){ return false; }
+    createSlider( $(".doctor-detail .recalls-list"), $(".doctor-detail .recalls-list .recall-item") );
 }
 
 function doctorsListInit(){
@@ -701,6 +702,7 @@ function recallsListInit(){
 
 function servicesDetail(){
     if( !$("body.services-detail").length > 0 ){ return false; }
+    createSlider( $(".servicesDetailPage .recalls-list"), $(".servicesDetailPage .recalls-list .recall-item") );
     function menuScrollAnimation(){
         var controller = new ScrollMagic.Controller({
             globalSceneOptions: {
