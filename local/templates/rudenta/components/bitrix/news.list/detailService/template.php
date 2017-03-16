@@ -71,9 +71,11 @@ $this->setFrameMode(true);
 						<li>
 							<a href="#" data-link="<?php echo $navKey;?>"><?php echo $navValue['PARENT'];?></a>
 							<ul class="child-nav">
-								<?foreach($navValue['CHILDS'] as $id => $name):?>
+								<?foreach($navValue['CHILDS'] as $id => $arr):?>
 									<li class="child-li">
-										<a href="#" data-link="<?php echo $id?>"><?php echo $name;?></a>
+										<a href="#" data-link="<?php echo $id?>">
+											 <?if(!empty($arr['PRICE'])):?> <?php echo $arr['PRICE'];?>р - <?endif;?>
+											<?php echo $arr['NAME'];?></a>
 									</li>
 								<?endforeach;?>
 							</ul>
@@ -148,10 +150,9 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	<?endif;?>
+	<?if($arResult['CNT_RECALLS'] > 0):?>
 	<div class="recalls section" data-ar="recalls">
-		<?if($arResult['CNT_RECALLS'] > 0):?>
-			<h2 class="lBlue">Отзывы</h2>
-		<?endif;?>
+		<h2 class="lBlue">Отзывы</h2>
 		<div class="clear">
 			<div class="w-2col">
 				<?$APPLICATION->IncludeComponent(
@@ -240,4 +241,6 @@ $this->setFrameMode(true);
 				);?>
 			</div>
 		</div>
+	</div>
+	<?endif;?>
 </div>

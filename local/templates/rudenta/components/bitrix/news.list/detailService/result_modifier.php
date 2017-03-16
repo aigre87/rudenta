@@ -38,7 +38,8 @@ foreach($arResult['ITEMS'] as $arItemKey => $arItemArr){
     if($ar_res = $res->GetNext()){
         $nav[$ar_res['ID']]['PARENT'] = $ar_res['NAME'];
         foreach($arItemArr as $arItem){
-            $nav[$ar_res['ID']]['CHILDS'][$arItem['ID']] = $arItem['NAME'];
+            $nav[$ar_res['ID']]['CHILDS'][$arItem['ID']]['NAME'] = $arItem['NAME'];
+            $nav[$ar_res['ID']]['CHILDS'][$arItem['ID']]['PRICE'] = Service::GetPrice($arItem['ID']);
         }
     }
 }
