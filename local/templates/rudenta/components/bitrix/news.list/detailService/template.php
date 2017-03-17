@@ -74,8 +74,9 @@ $this->setFrameMode(true);
 								<?foreach($navValue['CHILDS'] as $id => $arr):?>
 									<li class="child-li">
 										<a href="#" data-link="<?php echo $id?>">
-											<span><?php echo $arr['NAME'];?></span></a>
-											 <?if(!empty($arr['PRICE'])):?> - <?php echo $arr['PRICE'];?>р  <?endif;?>
+											<?php echo $arr['NAME'];?>
+											<?if(!empty($arr['PRICE'])):?> - <?php echo $arr['PRICE'];?>р  <?endif;?>
+										</a>
 									</li>
 								<?endforeach;?>
 							</ul>
