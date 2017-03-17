@@ -183,6 +183,7 @@ $bg6: map-get($colors, pink);
 	.nav{
 		padding-top: 32px;
     padding-bottom: 23px;
+    padding-right: 35px;
 		background: #faf9ee;
 		border-radius: 5px;
 		box-shadow: 0px 30px 35px -19px rgba( darken(#faf9ee , 15%), 0.5);
@@ -223,20 +224,22 @@ $bg6: map-get($colors, pink);
 					line-height: 30px;
 					left: 30px;
 					font-weight: 700;
+					padding-bottom: 1px;
 				}
 			}
 		}
 		.child-nav{
-			margin: 2px 0;
+			margin: 2px 0 11px;
 			>li{
-				margin-bottom: 0;
+				margin: 4px 0;
 				&:last-child{
 			    margin-bottom: -1px;
 				}
 				a{
 					font-size: 16px;
-					line-height: 30px;
+					line-height: 26px;
 					font-weight: 400;
+					padding-bottom: 2px;
 				}
 			}
 		}
