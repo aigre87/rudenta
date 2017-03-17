@@ -69,12 +69,12 @@ $this->setFrameMode(true);
 					</li>
 					<?foreach($arResult['NAV'] as $navKey => $navValue):?>
 						<li>
-							<a href="#" data-link="<?php echo $navKey;?>"><?php echo $navValue['PARENT'];?></a>
+							<a href="#" data-link="<?php echo $navKey;?>"><span><?php echo $navValue['PARENT'];?></span></a>
 							<ul class="child-nav">
 								<?foreach($navValue['CHILDS'] as $id => $arr):?>
 									<li class="child-li">
 										<a href="#" data-link="<?php echo $id?>">
-											<?php echo $arr['NAME'];?></a>
+											<span><?php echo $arr['NAME'];?></span></a>
 											 <?if(!empty($arr['PRICE'])):?> - <?php echo $arr['PRICE'];?>р  <?endif;?>
 									</li>
 								<?endforeach;?>
