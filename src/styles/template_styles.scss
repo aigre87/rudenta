@@ -225,7 +225,7 @@ video{
   ol li{
     margin: 0 0 7px 0;
     position: relative;
-    padding-left: 30px;
+    padding-left: 20px;
     font-size: 16px;
     line-height: 25px;
   }
@@ -253,7 +253,7 @@ video{
     font-size: 16px;
     line-height: 25px;
     position: relative;
-    padding-left: 30px;
+    padding-left: 20px;
     margin: 0 0 7px 0;
     &:last-child{
       margin-bottom: 0;
@@ -263,14 +263,46 @@ video{
     margin-top: 25px;
   }
   ul li:before{
+    content: '';
     display: block;
-    width: 12px;
-    height: 1px;
-    background-color: map-get($colors, desc);
-    content: "";
-    left: 0;
-    top: 13px;
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    background-color: map-get($colors, text);
+    left: 7px;
+    top: 11px;
     position: absolute;
+  }
+  ul.succes,
+  ul.error{
+    margin: 25px 0;
+    &:first-child{
+      margin-top: 0;
+    }
+    li{
+      line-height: 20px;
+      padding-left: 47px;
+      margin-bottom: 15px;
+      &:before{
+        top: -6px;
+        @include sprite($s-ul-succes);
+        background-color: transparent;
+      }
+    }
+  }
+  ul.succes{
+    li{
+      &:before{
+        @include sprite($s-ul-succes);
+      }
+    }
+  }
+  ul.error{
+    li{
+      &:before{
+        @include sprite($s-ul-error);
+      }
+    }
   }
 }
 
@@ -1761,5 +1793,61 @@ select{
       opacity: 1;
       z-index: 1;
     }    
+  }
+}
+blockquote.blueLeft{
+  border-left: 5px solid map-get($colors, lBlue);
+  padding: 5px 20px 8px 17px;
+  margin: 25px 0;
+  &:first-child{
+    margin-top: 0;
+  }
+  .text{
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .person{
+    display: table;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 26px;
+    .l{
+      display: table-cell;
+      vertical-align: top;
+      .imgW{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-right: 10px;
+        position: relative;
+        overflow: hidden;
+        background: #e9efef;
+        img{
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          height: auto;
+          max-width: 100%;
+        }
+      }
+    }
+    .r{
+      display: table-cell;
+      vertical-align: top;
+      .name{
+        white-space: nowrap;
+        color: map-get($colors, text);
+        margin-bottom: 4px;
+      }
+      .position{
+        white-space: nowrap;
+        color: map-get($colors, desc);
+        font-style: italic;
+      }
+    }
   }
 }

@@ -162,8 +162,8 @@ font, often using the <em>same</em> presentation for all of them. This
 tests whether that is the case on your browser:</p>
 
 <ul>
-  <li> <code>This is sample text inside code markup</code>
-  </li><li> <kbd>This is sample text inside kbd markup</kbd>
+  <li> <code>This is sample text<br /> inside code markup</code>
+  </li><li> <kbd>This is sample<br /> text inside kbd markup</kbd>
   </li><li> <samp>This is sample text inside samp markup</samp>
   </li><li> <tt>This is sample text inside tt markup</tt>
 </li></ul>
@@ -283,6 +283,43 @@ This view has been ably main&shy;tain&shy;ed by many au&shy;thors.
 
 
 </p><hr title="Information about this document">
+<ul>
+  <li>text text text<br >text text</li>
+  <li>Мандарины<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+</ul>
+<ul class="succes">
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+</ul>
+<ul class="error">
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+  <li>text text text<br >text text</li>
+</ul>
+<blockquote class="blueLeft">
+  <div class="text">
+    Нам часто задают вопрос, лечим ли мы детей с удержанием? Конечно, мы удерживаем внимание ребенка, его интерес до последней минуты пребывания в кабинете. Но мы точно знаем, что ни один ребенок не станет делать неинтересные ему вещи... Как же тогда удержать его в кресле, чтобы провести лечение?!
+  </div>
+  <div class="person">
+    <div class="l">
+      <div class="imgW">
+        <img src="/upload/resize_cache/iblock/2fc/40_40_2/2fc4ef77a98a56742e7a68eec2aa1dca.png" alt="">
+      </div>
+    </div>
+    <div class="r">
+      <div class="name">Иванов И.И.</div>
+      <div class="position">Зав. отделением</div>
+    </div>
+  </div>
+</blockquote>
 
 <address>
 <a href="../personal.html" hreflang="en" lang="fi">Jukka Korpela</a>

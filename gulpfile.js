@@ -85,9 +85,9 @@ gulp.task('libs:build', function() {
         'src/libs/jquery-selectric/public/jquery.selectric.js',
         'src/libs/smoothscroll-for-websites/SmoothScroll.js',
         'src/libs/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-        'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
-        'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
-        'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
+        //'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
+        //'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
+        //'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
         'src/libs/svg4everybody/dist/svg4everybody.min.js',
         'src/libs/hammerjs/hammer.min.js',
         'src/libs/all.js',
@@ -95,7 +95,7 @@ gulp.task('libs:build', function() {
         'src/libs/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
-        'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
+        //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
         ])
         .pipe(plumber())
         .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
@@ -142,11 +142,11 @@ gulp.task('styles:build', function () {
     gulp.src(path.src.styles)               // Выберем наш .sass|scss
         .pipe(plumber())
         .pipe(sourcemaps.init())            // То же самое что и с js
+        .pipe(sourcemaps.write())           // Пропишем карты
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
         .pipe(cssmin())
-        .pipe(sourcemaps.write())           // Пропишем карты
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.build.styles)) // И в build
         .pipe(sftp({
