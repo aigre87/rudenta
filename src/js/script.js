@@ -1,3 +1,73 @@
+/**
+ * Even Heights plugin
+ * Author: Glen Cheney
+ * Modified: 2016-03-08
+ * Sets a collection to all be the same height.
+ *
+ * Usage:
+ *
+ * evenHeights([
+ *   document.querySelectorAll('.foo'),
+ * ]);
+ *
+ */
+window.evenHeights = (function () {
+  'use strict';
+
+  function getTallest(elements) {
+    var tallest = 0;
+
+    for (var i = elements.length - 1; i >= 0; i--) {
+      if (elements[i].offsetHeight > tallest) {
+        tallest = elements[i].offsetHeight;
+      }
+    }
+
+    return tallest;
+  }
+
+  function setAllHeights(elements, height) {
+    for (var i = elements.length - 1; i >= 0; i--) {
+      elements[i].style.height = height;
+    }
+  }
+
+  /**
+   * For groups of elements which should be the same height. Using this method
+   * will create far less style recalculations and layouts.
+   * @param {ArrayLike.<ArrayLike.<Element>>} groups An array-like collection of
+   *     an array-like collection of elements.
+   * @return {Array.<number>} An array containing the pixel value of the
+   *     tallest element for each group.
+   */
+  function evenHeights(groups) {
+    groups = Array.prototype.slice.call(groups);
+
+    // First, reset the height for every element.
+    // This is done first, otherwise we dirty the DOM on each loop!
+    groups.forEach(function (elements) {
+      setAllHeights(elements, '');
+    });
+
+    // Now, measure heights in each group and save the tallest value. Instead of
+    // setting the height value for the entire group, save it. If it were set,
+    // the next iteration in the loop would have to recalculate styles in the DOM
+    var tallests = groups.map(function (elements) {
+      return getTallest(elements);
+    });
+
+    // Lastly, set them all.
+    groups.forEach(function (elements, i) {
+      setAllHeights(elements, tallests[i] + 'px');
+    });
+
+    return tallests;
+  }
+
+  return evenHeights;
+})();
+
+
 Array.prototype.max = function() {
   return Math.max.apply(null, this);
 };
@@ -387,9 +457,81 @@ function contactsmap(){
             });
             myMap.behaviors.disable('scrollZoom');
 
+        // Создадим пользовательский макет ползунка масштаба.
+        var ZoomLayout = ymaps.templateLayoutFactory.createClass("<div>\
+                <div id='zoom-in' class='btn'><i class='icon-plus'></i>\
+                </div><div id='zoom-out' class='btn'><i class='icon-minus'></i></div>\
+            </div>", {
+
+            // Переопределяем методы макета, чтобы выполнять дополнительные действия
+            // при построении и очистке макета.
+            build: function () {
+                // Вызываем родительский метод build.
+                ZoomLayout.superclass.build.call(this);
+
+                // Привязываем функции-обработчики к контексту и сохраняем ссылки
+                // на них, чтобы потом отписаться от событий.
+                this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
+                this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
+
+                // Начинаем слушать клики на кнопках макета.
+                $('#zoom-in').bind('click', this.zoomInCallback);
+                $('#zoom-out').bind('click', this.zoomOutCallback);
+                $('#yaPanorama').on('click', function(){
+                    $(".contactsMapPanorama-wrapper").css({"z-index": 1});
+                    $("#contactsMap").css({"z-index": 0});
+                });
+            },
+
+            clear: function () {
+                // Снимаем обработчики кликов.
+                $('#zoom-in').unbind('click', this.zoomInCallback);
+                $('#zoom-out').unbind('click', this.zoomOutCallback);
+
+                // Вызываем родительский метод clear.
+                ZoomLayout.superclass.clear.call(this);
+            },
+
+            zoomIn: function () {
+                var map = this.getData().control.getMap();
+                // Генерируем событие, в ответ на которое
+                // элемент управления изменит коэффициент масштабирования карты.
+                this.events.fire('zoomchange', {
+                    oldZoom: map.getZoom(),
+                    newZoom: map.getZoom() + 1
+                });
+                if(  map.getZoom() < 15  ){
+
+                }
+            },
+
+            zoomOut: function () {
+                var map = this.getData().control.getMap();
+                this.events.fire('zoomchange', {
+                    oldZoom: map.getZoom(),
+                    newZoom: map.getZoom() - 1
+                });
+            }
+        }),
+        zoomControl = new ymaps.control.ZoomControl({ options: { layout: ZoomLayout } });
+        /*END CUSTOM ZOOM CONTROL BUTTONS*/
+
         // Создаем геообъект с типом геометрии "Точка".
-            myGeoObject = new ymaps.GeoObject({
-            });
+        myGeoObject = new ymaps.GeoObject({
+        });
+
+        var polyline = new ymaps.Polyline([
+            [55.769411, 37.596591], [55.768976, 37.595819], [55.769623, 37.594714], [55.769164, 37.593737], [55.770040, 37.592246], [55.768716, 37.589832]
+        ], {
+            hintContent: "Путь от метро"
+        }, {
+            draggable: false,
+            strokeColor: '#e4002b',
+            strokeWidth: 4,
+            opacity: 0.6,
+            // Первой цифрой задаем длину штриха. Второй цифрой задаем длину разрыва.
+            strokeStyle: '1 0'
+        });
 
         myMap.geoObjects.add(new ymaps.Placemark([55.787811, 37.519467], {
                 balloonContent: 'цвет <strong>голубой</strong>',
@@ -397,7 +539,18 @@ function contactsmap(){
             }, {
                 preset: 'islands#blueCircleDotIconWithCaption',
                 iconCaptionMaxWidth: '200'
-            }));
+        }));
+        myMap.geoObjects
+            .add(polyline);
+
+        myMap.controls.add(zoomControl, {
+            float: 'none',
+            position: {
+                right: 30,
+                bottom: 50
+            }
+        });
+
     }
 }
 function hpVideoRow(){
@@ -644,7 +797,7 @@ function doctorsListInit(){
 function recallsListInit(){
     $(".filterHidden .filter").each(function(){
         var $this = $(this),
-            classList = $(this)[0].className.split(' ').join(" "),
+            classList = $(this).attr("class").split(' ').join(" "),
             clearclassList = classList.replace('filter','').replace(' ',''),
             mySelect = "<select class='"+clearclassList+"'>";
             //console.log(clearclassList);
@@ -697,7 +850,6 @@ function recallsListInit(){
             midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
         });
     });
-        
 }
 
 function servicesDetail(){
@@ -779,7 +931,191 @@ function articlesDetail(){
     };
     printPage();
 }
+function tehnologypage(){
+    if( $("#tehnologyBlock").length == 0 ){return false;}
+    var Shuffle = window.shuffle;
+    var myelement = document.getElementById('itemsRow');
+    // var sizer = element.querySelector('.my-sizer-element');
 
+    // var shuffle = new Shuffle(element, {
+    //     itemSelector: '.item',
+    //     sizer: '.item',
+    //     buffer: 1
+    // });
+
+
+    // ES7 will have Array.prototype.includes.
+    function arrayIncludes(array, value) {
+      return array.indexOf(value) !== -1;
+    }
+
+    // Convert an array-like object to a real array.
+    function toArray(thing) {
+      return Array.prototype.slice.call(thing);
+    }
+
+    var Demo = function (element) {
+      //this.shapes = toArray(document.querySelectorAll('.linksBlock button'));
+      this.category = toArray( $('.linksBlock .button:not(.reset)') );
+      console.log(this.category);
+      this.shuffle = new Shuffle(element, {
+        itemSelector: '#itemsRow .item',
+        sizer: null,
+        //buffer: 1
+
+  // group: Shuffle.ALL_ITEMS, // Initial filter group.
+  // speed: 250, // Transition/animation speed (milliseconds).
+  // easing: 'ease', // CSS easing function to use.
+  // itemSelector: '*', // e.g. '.picture-item'.
+  // sizer: null, // Element or selector string. Use an element to determine the size of columns and gutters.
+  // gutterWidth: 0, // A static number or function that tells the plugin how wide the gutters between columns are (in pixels).
+  // columnWidth: 0, // A static number or function that returns a number which tells the plugin how wide the columns are (in pixels).
+  // delimeter: null, // If your group is not json, and is comma delimeted, you could set delimeter to ','.
+  // buffer: 0, // Useful for percentage based heights when they might not always be exactly the same (in pixels).
+  // columnThreshold: 0.01, // Reading the width of elements isn't precise enough and can cause columns to jump between values.
+  // initialSort: null, // Shuffle can be initialized with a sort object. It is the same object given to the sort method.
+  // throttle: throttle, // By default, shuffle will throttle resize events. This can be changed or removed.
+  // throttleTime: 300, // How often shuffle can be called on resize (in milliseconds).
+  // staggerAmount: 15, // Transition delay offset for each item in milliseconds.
+  // staggerAmountMax: 250, // Maximum stagger delay in milliseconds.
+  // useTransforms: true, // Whether to use transforms or absolute positioning.
+      });
+
+      this.filters = {
+        category: [],
+      };
+
+      this._bindEventListeners();
+    };
+
+    /**
+     * Bind event listeners for when the filters change.
+     */
+    Demo.prototype._bindEventListeners = function () {
+      //this._onShapeChange = this._handleShapeChange.bind(this);
+      this._onColorChange = this._handleColorChange.bind(this);
+
+      // this.shapes.forEach(function (input) {
+      //   input.addEventListener('change', this._onShapeChange);
+      // }, this);
+
+      this.category.forEach(function (button) {
+        button.addEventListener('click', this._onColorChange);
+      }, this);
+    };
+
+    /**
+     * Get the values of each checked input.
+     * @return {Array.<string>}
+     */
+    // Demo.prototype._getCurrentShapeFilters = function () {
+    //   return this.shapes.filter(function (input) {
+    //     return input.checked;
+    //   }).map(function (input) {
+    //     return input.value;
+    //   });
+    // };
+
+    /**
+     * Get the values of each `active` button.
+     * @return {Array.<string>}
+     */
+    Demo.prototype._getCurrentColorFilters = function () {
+      return this.category.filter(function (button) {
+        return button.classList.contains('active');
+      }).map(function (button) {
+        return button.getAttribute('data-val');
+      });
+    };
+
+    /**
+     * A shape input check state changed, update the current filters and filte.r
+     */
+    // Demo.prototype._handleShapeChange = function () {
+    //   this.filters.shapes = this._getCurrentShapeFilters();
+    //   this.filter();
+    // };
+
+    /**
+     * A color button was clicked. Update filters and display.
+     * @param {Event} evt Click event object.
+     */
+    Demo.prototype._handleColorChange = function (evt) {
+      var button = evt.currentTarget;
+
+      // Treat these buttons like radio buttons where only 1 can be selected.
+      if (button.classList.contains('active')) {
+        button.classList.remove('active');
+        $(".linksBlock .button.reset").addClass("active");
+      } else {
+        this.category.forEach(function (btn) {
+          btn.classList.remove('active');
+        });
+
+        button.classList.add('active');
+        $(".linksBlock .button.reset").removeClass("active");
+      }
+
+      this.filters.category = this._getCurrentColorFilters();
+      this.filter();
+    };
+
+    /**
+     * Filter shuffle based on the current state of filters.
+     */
+    Demo.prototype.filter = function () {
+      if (this.hasActiveFilters()) {
+        this.shuffle.filter(this.itemPassesFilters.bind(this));
+      } else {
+        this.shuffle.filter(Shuffle.ALL_ITEMS);
+      }
+    };
+
+    /**
+     * If any of the arrays in the `filters` property have a length of more than zero,
+     * that means there is an active filter.
+     * @return {boolean}
+     */
+    Demo.prototype.hasActiveFilters = function () {
+      return Object.keys(this.filters).some(function (key) {
+        return this.filters[key].length > 0;
+      }, this);
+    };
+
+    /**
+     * Determine whether an element passes the current filters.
+     * @param {Element} element Element to test.
+     * @return {boolean} Whether it satisfies all current filters.
+     */
+    Demo.prototype.itemPassesFilters = function (element) {
+      //var shapes = this.filters.shapes;
+      var category = this.filters.category;
+      //var shape = element.getAttribute('data-shape');
+      var cat = element.getAttribute('data-cat');
+
+      // If there are active shape filters and this shape is not in that array.
+      // if (shapes.length > 0 && !arrayIncludes(shapes, shape)) {
+      //   return false;
+      // }
+
+      // If there are active color filters and this color is not in that array.
+      if (category.length > 0 && !arrayIncludes(category, cat)) {
+        return false;
+      }
+
+      return true;
+    };
+    //document.addEventListener('DOMContentLoaded', function () {
+        evenHeights([
+           document.querySelectorAll('#itemsRow .item'),
+        ]);
+      window.demo = new Demo(myelement);
+    //});
+
+    $(".linksBlock .button.reset").on("click", function(){
+        $(".linksBlock .button.active:not(.reset)").trigger("click");
+    });
+}
 
 $(document).ready(function(){
     svg4everybody({});
@@ -806,6 +1142,9 @@ $(document).ready(function(){
     detailDoctorInit();
     doctorDetail();
 /*doctor END*/
+/*teh*/
+    tehnologypage();
+/*teh end*/
 /*servicesDetail*/
     servicesDetail();
 /*servicesDetail END*/

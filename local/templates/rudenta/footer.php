@@ -20,15 +20,11 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 					</div>
 					<div class="item phone">
 						<div class="title">Многоканальный телефон</div>
-						<div class="desc"><a href="tel:+74956468191"><b>+7(495)646-81-91</b></a></div>
+						<div class="desc"><a href="tel:+74956468191"><b>+8(495)104-77-87</b></a></div>
 					</div>
 					<div class="item">
 						<div class="title">Электронная почта</div>
 						<div class="desc"><a href="mailto:grandpark@rudenta.ru">grandpark@rudenta.ru</a></div>
-					</div>
-					<div class="item">
-						<div class="title">Вайбер</div>
-						<div class="desc">+7(985)745-79-99</div>
 					</div>
 				</div>
 			</div>
