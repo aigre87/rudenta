@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Врачи");
 ?>
 <h1>Testing display of HTML elements</h1>
-
+123
 <h2>This is 2nd level heading</h2>
 <p>This is a test paragraph.</p>
 <h3>This is 3rd level heading</h3>
