@@ -40,9 +40,7 @@ $this->setFrameMode(true);
 					<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 					<span class="imgW">
 						<img
-							src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
-							alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
-							title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
+							src="<?=$arItem["PREVIEW_PICTURE"]["src"]?>"
 							style="
 								<?if( $arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE'] ):?>
 									margin-right: <?=(-1*$arItem['DISPLAY_PROPERTIES']['OFFSETX_ANONS_IMAGE']['VALUE']).'px'?>;
