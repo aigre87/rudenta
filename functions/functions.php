@@ -43,8 +43,9 @@ function filterDocAndUsl(){
 
     if(!empty($usl)){
         echo "<div class='filter doctors'>";
-        echo "<a href='/recalls/?usl=$usl'>Все врачи</a>";
+
         foreach($docs as $key){
+            echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
                 echo "<a class='active' href=\"/recalls/?doc=" , $key['ID'] , "&usl=$usl\">" , $key['NAME'] , "</a>";
             }else{
@@ -56,6 +57,7 @@ function filterDocAndUsl(){
         echo "<div class='filter doctors'>";
         echo "<a href='/recalls/'>Все врачи</a>";
         foreach($docs as $key){
+            echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
                 echo "<a class='active' href=\"/recalls/?doc=" , $key['ID'] , "\">" , $key['NAME'] , "</a>";
             }else{

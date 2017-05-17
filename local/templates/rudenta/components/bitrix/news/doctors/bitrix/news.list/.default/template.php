@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 ?>
 <div id="doctors-list">
 	<div class="item w-1col title">
-		<span><?$APPLICATION->ShowTitle(false)?></span>
+		<h1><?$APPLICATION->ShowTitle(false)?></h1>
 	</div>
 	<?if($arParams["DISPLAY_TOP_PAGER"]):?>
 		<?=$arResult["NAV_STRING"]?>
@@ -38,9 +38,7 @@ $this->setFrameMode(true);
 			<img
 				class="preview_picture"
 				border="0"
-				src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
-				alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
-				title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
+				src="<?=$arItem["PREVIEW_PICTURE"]["src"]?>"
 			/>
 		</span>
 		<?endif;?>

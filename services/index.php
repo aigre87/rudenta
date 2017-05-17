@@ -4,9 +4,6 @@ $APPLICATION->SetTitle("Услуги");
 ?>
 <div class="clear servicesList">
 	<div class="w-2col">
-		<div class="customPageTitle">
-			Услуги
-		</div>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.section.list", 
 			"tree", 
