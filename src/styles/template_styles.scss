@@ -1702,6 +1702,69 @@ select{
     margin-top: 8px;
   }
 }
+#content{
+  a.backButton{
+    font-size: 18px;
+    line-height: 50px;
+    position: relative;
+    padding: 0 20px 0 48px;
+    height: 50px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    background-color: rgba(0, 93, 151, 0.1);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAgCAMAAAAootjDAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAAAOVBMVEUAAAAAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZcAXZfGBLblAAAAEnRSTlMAWE/pV01O/PlZUOdUTOXkSUpSqu0uAAAAWUlEQVQoz7XSSQ6AIBBEUeZJFO37H5YENnQKYiKxl2/XlS8Eu3Rpy8V4Ig1CBSTcIArEDSI/SWxif5Dc5BwfO0A68Y2yR4tLcxummMkNM0tLE3teAphl0mOqTOMJgqsfPLwAAAAASUVORK5CYII=');
+    background-repeat: no-repeat;
+    background-size: 9px 16px;
+    background-position: 20px center;
+    &:hover{
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAgCAMAAAAootjDAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAAAOVBMVEUAAADtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrtEHrFkjEAAAAAEnRSTlMAWE/pV01O/PlZUOdMVOXkSUrtv7GbAAAAWUlEQVQoz7XSSQ6AIBBEUeZJEe37H5YENnQKYiKxl2/XlS8Eu3Rpy8V4Ig1CBSTcIArEDSI/SWxif5Dc5BwfO0A68Y2yR4tLcxummMkNM0tLE3teAphl0mOqTMgJgkXc6rgAAAAASUVORK5CYII=');
+      background-color: rgba(237, 16, 122, 0.1);
+    }
+  }
+}
+#content .salesItem{
+  display: block;
+  border: none;
+  position: relative;
+  background: rgba( map-get($colors, green) , 0.1);
+  border-radius: 5px;
+  padding: 22px 10px 21px 55px;
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    border: none;
+    background: rgba( map-get($colors, pink), 0.1 );
+    .name{
+      color: map-get($colors, pink);
+    }
+    .icon{
+      fill: map-get($colors, pink);
+    }
+  }
+  .icon{
+    transition: all 0.2s ease-in-out;
+    display: block;
+    width: 30px;
+    height: 30px;
+    fill: map-get($colors, green);
+    position: absolute;
+    left: 17px;
+    top: 15px;
+  }
+  .name{
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    margin-bottom: 1px;
+    transition: color 0.2s ease-in-out;
+  }
+}
 #content .fileItem{
   display: block;
   border: none;
@@ -1709,25 +1772,33 @@ select{
   background: map-get($colors, ulBlue);
   border-radius: 5px;
   padding: 15px 10px 12px 55px;
+  transition: all 0.2s ease-in-out;
   &:hover{
     border: none;
+    background: rgba( map-get($colors, pink), 0.1 );
     .name{
       color: map-get($colors, pink);
     }
+    .icon{
+      fill: map-get($colors, pink);
+    }
   }
-  &:before{
-    content: '';
+  .icon{
+    transition: all 0.2s ease-in-out;
+    display: block;
+    width: 24px;
+    height: 37px;
+    fill: map-get($colors, lBlue);
     position: absolute;
     left: 19px;
     top: 13px;
-    @include sprite($s-icoFileDownload_blue);
   }
   .name{
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
     margin-bottom: 1px;
-    transition: color 0.13s ease-in-out;
+    transition: color 0.2s ease-in-out;
   }
   .desc{
     font-size: 12px;

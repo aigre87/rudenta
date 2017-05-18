@@ -89,7 +89,7 @@ class PosterImage extends ClickableComponent {
   /**
    * Set the source of the `PosterImage` depending on the display method.
    *
-   * @param {String} url
+   * @param {string} url
    *        The URL to the source for the `PosterImage`.
    */
   setSrc(url) {
@@ -121,7 +121,10 @@ class PosterImage extends ClickableComponent {
    */
   handleClick(event) {
     // We don't want a click to trigger playback when controls are disabled
-    // but CSS should be hiding the poster to prevent that from happening
+    if (!this.player_.controls()) {
+      return;
+    }
+
     if (this.player_.paused()) {
       this.player_.play();
     } else {

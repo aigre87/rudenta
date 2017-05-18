@@ -40,8 +40,17 @@ $APPLICATION->SetTitle("Услуги");
 	</div>
 	<div class="w-1col">
 		<a href="#" class="fileItem">
+			<svg class="icon">
+		    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-fileDownload"></use>
+			</svg>
 			<div class="name">Скачать полный прайс-лист услуг</div>
 			<div class="desc">XLS, 124 Кб</div>
+		</a>
+		<a href="#" class="salesItem">
+			<svg class="icon">
+		    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-sale"></use>
+			</svg>
+			<div class="name">Скидки и акции</div>
 		</a>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:main.include",

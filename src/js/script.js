@@ -312,8 +312,9 @@ function initBottomMenu(){
 }
 function pagenationHelper(){
     $('.pagenation .navHelper').each(function(){
-        var thismax = parseInt($(this).data("max"));
-        $(this).inputmask("numeric", {
+        var $this = $(this);
+        var thismax = parseInt($this.data("max"));
+        $this.inputmask("numeric", {
             min: 1,
             max: thismax
         });
@@ -790,7 +791,7 @@ function doctorsListInit(){
         .add($item2)
         .add($item3)
             .css({height : maxH})
-            .wrapAll("<div class='row clear'>");
+            //.wrapAll("<div class='row clear'>");
     }
 }
 

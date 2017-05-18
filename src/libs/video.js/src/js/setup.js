@@ -1,10 +1,10 @@
 /**
- * Functions for setting up a player without user insteraction based on the data-setup
- * `attribute` of the video tag.
+ * @file setup.js - Functions for setting up a player without
+ * user interaction based on the data-setup `attribute` of the video tag.
  *
- * @file setup.js
  * @module setup
  */
+import * as Dom from './utils/dom';
 import * as Events from './utils/events.js';
 import document from 'global/document';
 import window from 'global/window';
@@ -16,6 +16,12 @@ let videojs;
  * Set up any tags that have a data-setup `attribute` when the player is started.
  */
 const autoSetup = function() {
+
+  // Protect against breakage in non-browser environments.
+  if (!Dom.isReal()) {
+    return;
+  }
+
   // One day, when we stop supporting IE8, go back to this, but in the meantime...*hack hack hack*
   // var vids = Array.prototype.slice.call(document.getElementsByTagName('video'));
   // var audios = Array.prototype.slice.call(document.getElementsByTagName('audio'));
@@ -78,16 +84,22 @@ const autoSetup = function() {
 /**
  * Wait until the page is loaded before running autoSetup. This will be called in
  * autoSetup if `hasLoaded` returns false.
+ *
+ * @param {number} wait
+ *        How long to wait in ms
+ *
+ * @param {videojs} [vjs]
+ *        The videojs library function
  */
 function autoSetupTimeout(wait, vjs) {
   if (vjs) {
     videojs = vjs;
   }
 
-  setTimeout(autoSetup, wait);
+  window.setTimeout(autoSetup, wait);
 }
 
-if (document.readyState === 'complete') {
+if (Dom.isReal() && document.readyState === 'complete') {
   _windowLoaded = true;
 } else {
   /**

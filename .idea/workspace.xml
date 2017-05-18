@@ -2,9 +2,499 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c0fec42-9f80-4e22-97ff-8ee31bfebacd" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-dark-blue/selectric.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-light-blue/selectric.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-marsala/selectric.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-radiant-orchid/selectric.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-red/selectric.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video-js-5.14.1.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/faq.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/troubleshooting.md" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/anti-corruptionBanner.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/anti-corruptionBanner.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/doctorDetail-quote.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/doctorDetail-quote.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/footerBg.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/footerBg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/hp-recalls-girl.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/hp-recalls-girl.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/mainSiteLogo.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/mainSiteLogo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/siteShareImg.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/siteShareImg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/images/sprite.png" afterPath="$PROJECT_DIR$/local/templates/rudenta/images/sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.swf" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php" afterPath="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/template.php" afterPath="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/template.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sublime-gulp.cache" afterPath="$PROJECT_DIR$/.sublime-gulp.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/css/template_styles.min.css" afterPath="$PROJECT_DIR$/local/templates/rudenta/css/template_styles.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/js/main.min.js" afterPath="$PROJECT_DIR$/local/templates/rudenta/js/main.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local/templates/rudenta/libs/libs.min.js" afterPath="$PROJECT_DIR$/local/templates/rudenta/libs/libs.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/.bower.json" afterPath="$PROJECT_DIR$/src/libs/gsap/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/.gitignore" afterPath="$PROJECT_DIR$/src/libs/gsap/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/README.md" afterPath="$PROJECT_DIR$/src/libs/gsap/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/bower.json" afterPath="$PROJECT_DIR$/src/libs/gsap/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/package.json" afterPath="$PROJECT_DIR$/src/libs/gsap/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/TimelineLite.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/TimelineLite.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/TimelineMax.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/TimelineMax.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/TweenLite.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/TweenLite.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/TweenMax.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/TweenMax.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/easing/EasePack.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/easing/EasePack.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/jquery.gsap.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/jquery.gsap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/AttrPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/AttrPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/BezierPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/BezierPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/CSSPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/CSSPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/CSSRulePlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/CSSRulePlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ColorPropsPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ColorPropsPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/DirectionalRotationPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/DirectionalRotationPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/EaselPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/EaselPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/EndArrayPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/EndArrayPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ModifiersPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ModifiersPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/RaphaelPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/RaphaelPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/RoundPropsPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/RoundPropsPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ScrollToPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/ScrollToPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/TextPlugin.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/plugins/TextPlugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/minified/utils/Draggable.min.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/minified/utils/Draggable.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TimelineLite.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TimelineLite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TimelineMax.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TimelineMax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TweenLite.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TweenLite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TweenMax.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/TweenMax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/easing/EasePack.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/easing/EasePack.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/jquery.gsap.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/jquery.gsap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/AttrPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/AttrPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/BezierPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/BezierPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/CSSPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/CSSPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/CSSRulePlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/CSSRulePlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ColorPropsPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ColorPropsPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/DirectionalRotationPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/DirectionalRotationPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/EaselPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/EaselPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/EndArrayPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/EndArrayPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ModifiersPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ModifiersPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/RaphaelPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/RaphaelPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/RoundPropsPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/RoundPropsPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ScrollToPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/ScrollToPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/TEMPLATE_Plugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/TEMPLATE_Plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/TextPlugin.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/plugins/TextPlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/utils/Draggable.js" afterPath="$PROJECT_DIR$/src/libs/gsap/src/uncompressed/utils/Draggable.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/.bower.json" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/LICENSE" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/bower.json" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/karma.conf.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/karma.conf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/ajax.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/ajax.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/customoptions.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/customoptions.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/demo.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/index.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/jquery.selectric.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/jquery.selectric.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/jquery.selectric.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/jquery.selectric.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/demo.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/demo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery-ui.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery-ui.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery.minicolors.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/jquery.minicolors.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/prism.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/prism.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/prism.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/lib/prism.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.addNew.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.placeholder.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.placeholder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.placeholder.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/plugins/jquery.selectric.placeholder.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/style.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-dark-blue/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-dark-blue/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-light-blue/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-light-blue/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-marsala/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-marsala/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-radiant-orchid/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-radiant-orchid/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-red/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/flat-red/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/modern-v2/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/modern-v2/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/modern/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/modern/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/plus/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/plus/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/square/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/square/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/template/selectric.css" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/public/themes/template/selectric.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/selectric.jquery.json" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/selectric.jquery.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/basic.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/basic.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/events.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/events.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/basic.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/basic.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/hidden.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/hidden.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/multiple.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/multiple.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/optgroup.html" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/fixtures/optgroup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/keyboard.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/keyboard.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/lib/jasmine-jquery.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/lib/jasmine-jquery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/lib/keyvent.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/lib/keyvent.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/mobile.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/mobile.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/multiple.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/multiple.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery-selectric/test/visibility.spec.js" afterPath="$PROJECT_DIR$/src/libs/jquery-selectric/test/visibility.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/.bower.json" afterPath="$PROJECT_DIR$/src/libs/jquery/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/AUTHORS.txt" afterPath="$PROJECT_DIR$/src/libs/jquery/AUTHORS.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/LICENSE.txt" afterPath="$PROJECT_DIR$/src/libs/jquery/LICENSE.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/README.md" afterPath="$PROJECT_DIR$/src/libs/jquery/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/bower.json" afterPath="$PROJECT_DIR$/src/libs/jquery/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/core.js" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.js" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.min.map" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.min.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.js" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.min.map" afterPath="$PROJECT_DIR$/src/libs/jquery/dist/jquery.slim.min.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/LICENSE.txt" afterPath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/LICENSE.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/dist/sizzle.js" afterPath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/dist/sizzle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/dist/sizzle.min.js" afterPath="$PROJECT_DIR$/src/libs/jquery/external/sizzle/dist/sizzle.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/.eslintrc.json" afterPath="$PROJECT_DIR$/src/libs/jquery/src/.eslintrc.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/jsonp.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/jsonp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/load.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/load.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/parseXML.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/parseXML.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/script.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/location.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/location.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/nonce.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/nonce.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/rquery.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/var/rquery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/ajax/xhr.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/ajax/xhr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes/attr.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes/attr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes/classes.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes/classes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes/prop.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes/prop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/attributes/val.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/attributes/val.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/callbacks.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/callbacks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/DOMEval.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/DOMEval.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/access.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/access.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/init.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/init.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/parseHTML.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/parseHTML.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/ready-no-deferred.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/ready-no-deferred.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/ready.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/ready.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/readyException.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/readyException.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/stripAndCollapse.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/stripAndCollapse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/core/var/rsingleTag.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/core/var/rsingleTag.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/addGetHookIf.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/addGetHookIf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/adjustCSS.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/adjustCSS.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/curCSS.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/curCSS.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/hiddenVisibleSelectors.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/hiddenVisibleSelectors.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/showHide.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/showHide.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/cssExpand.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/cssExpand.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/getStyles.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/getStyles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/isHiddenWithinTree.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/isHiddenWithinTree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/rmargin.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/rmargin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/rnumnonpx.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/rnumnonpx.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/css/var/swap.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/css/var/swap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/data.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/data/Data.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/data/Data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/data/var/acceptData.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/data/var/acceptData.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/data/var/dataPriv.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/data/var/dataPriv.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/data/var/dataUser.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/data/var/dataUser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/deferred.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/deferred.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/deferred/exceptionHook.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/deferred/exceptionHook.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/deprecated.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/deprecated.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/dimensions.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/dimensions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/effects.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/effects.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/effects/Tween.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/effects/Tween.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/effects/animatedSelector.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/effects/animatedSelector.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event/ajax.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event/ajax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event/alias.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event/alias.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event/focusin.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event/focusin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/event/trigger.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/event/trigger.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/exports/amd.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/exports/amd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/exports/global.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/exports/global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/jquery.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/jquery.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/_evalUrl.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/_evalUrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/buildFragment.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/buildFragment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/getAll.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/getAll.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/setGlobalEval.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/setGlobalEval.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rcheckableType.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rcheckableType.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rscriptType.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rscriptType.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rtagName.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/var/rtagName.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/wrapMap.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/manipulation/wrapMap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/offset.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/offset.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/queue.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/queue.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/queue/delay.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/queue/delay.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/selector-native.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/selector-native.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/selector-sizzle.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/selector-sizzle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/selector.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/selector.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/serialize.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/serialize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/traversing.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/traversing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/traversing/findFilter.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/traversing/findFilter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/dir.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/dir.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/rneedsContext.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/rneedsContext.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/siblings.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/traversing/var/siblings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/ObjectFunctionString.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/ObjectFunctionString.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/arr.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/arr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/class2type.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/class2type.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/concat.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/concat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/document.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/document.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/documentElement.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/documentElement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/fnToString.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/fnToString.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/getProto.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/getProto.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/hasOwn.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/hasOwn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/indexOf.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/indexOf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/pnum.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/pnum.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/push.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/push.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/rcssNum.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/rcssNum.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/rnothtmlwhite.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/rnothtmlwhite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/slice.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/slice.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/support.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/support.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/var/toString.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/var/toString.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/jquery/src/wrap.js" afterPath="$PROJECT_DIR$/src/libs/jquery/src/wrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/.bower.json" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/LICENSE" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/README" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/SmoothScroll.js" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/SmoothScroll.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/bower.json" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/package.json" afterPath="$PROJECT_DIR$/src/libs/smoothscroll-for-websites/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/.bower.json" afterPath="$PROJECT_DIR$/src/libs/video.js/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/CHANGELOG.md" afterPath="$PROJECT_DIR$/src/libs/video.js/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/COLLABORATOR_GUIDE.md" afterPath="$PROJECT_DIR$/src/libs/video.js/COLLABORATOR_GUIDE.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/src/libs/video.js/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/Gruntfile.js" afterPath="$PROJECT_DIR$/src/libs/video.js/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/LICENSE" afterPath="$PROJECT_DIR$/src/libs/video.js/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/README.md" afterPath="$PROJECT_DIR$/src/libs/video.js/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/bower.json" afterPath="$PROJECT_DIR$/src/libs/video.js/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/component.json" afterPath="$PROJECT_DIR$/src/libs/video.js/component.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/composer.json" afterPath="$PROJECT_DIR$/src/libs/video.js/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/contrib.json" afterPath="$PROJECT_DIR$/src/libs/video.js/contrib.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video-js-cdn.css" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video-js-cdn.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video-js-cdn.min.css" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video-js-cdn.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video.novtt.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video.novtt.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video.novtt.min.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/alt/video.novtt.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ar.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ar.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.en.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.en.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ja.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ja.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ru.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.ru.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.sv.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/captions.sv.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/chapters.en.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/chapters.en.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/index.html" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/elephantsdream/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/shared/example-captions.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/shared/example-captions.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/examples/simple-embed/index.html" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/examples/simple-embed/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/font/VideoJS.svg" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/font/VideoJS.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/ie8/videojs-ie8.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/ie8/videojs-ie8.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ba.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ba.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/bg.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/bg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ca.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ca.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/cs.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/cs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/da.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/da.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/de.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/de.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/el.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/el.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/en.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/es.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/es.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fa.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fa.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fi.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fi.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fr.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/fr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/hr.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/hr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/hu.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/hu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/it.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/it.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ja.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ja.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ko.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ko.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nb.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nb.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nl.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nn.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/nn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/pl.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/pl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/pt-BR.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/pt-BR.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ru.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/ru.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/sr.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/sr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/sv.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/sv.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/tr.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/tr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/uk.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/uk.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/vi.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/vi.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/zh-CN.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/zh-CN.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/lang/zh-TW.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/lang/zh-TW.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.css" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.min.css" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/video-js.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/video.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/dist/video.min.js" afterPath="$PROJECT_DIR$/src/libs/video.js/dist/video.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ar.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ar.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.en.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.en.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ja.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ja.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ru.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.ru.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.sv.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/captions.sv.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/chapters.en.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/chapters.en.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/index.html" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/elephantsdream/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/shared/example-captions.vtt" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/shared/example-captions.vtt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/examples/simple-embed/index.html" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/examples/simple-embed/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/audio-tracks.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/audio-tracks.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/components.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/components.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/hooks.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/hooks.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/languages.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/languages.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/options.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/options.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/player-workflows.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/player-workflows.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/plugins.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/plugins.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/setup.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/setup.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/skins.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/skins.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/tech.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/tech.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/text-tracks.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/text-tracks.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/tracks.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/tracks.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/guides/video-tracks.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/guides/video-tracks.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/index.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/docs/translations-needed.md" afterPath="$PROJECT_DIR$/src/libs/video.js/docs/translations-needed.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ar.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ar.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ba.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ba.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/bg.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/bg.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ca.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ca.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/cs.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/cs.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/da.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/da.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/de.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/de.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/el.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/el.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/en.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/en.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/es.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/es.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/fa.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/fa.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/fi.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/fi.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/fr.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/fr.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/hr.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/hr.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/hu.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/hu.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/it.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/it.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ja.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ja.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ko.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ko.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/nb.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/nb.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/nl.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/nl.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/nn.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/nn.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/pl.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/pl.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/pt-BR.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/pt-BR.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/ru.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/ru.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/sr.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/sr.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/sv.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/sv.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/tr.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/tr.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/uk.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/uk.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/vi.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/vi.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/zh-CN.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/zh-CN.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/lang/zh-TW.json" afterPath="$PROJECT_DIR$/src/libs/video.js/lang/zh-TW.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/package.json" afterPath="$PROJECT_DIR$/src/libs/video.js/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/sandbox/descriptions.html.example" afterPath="$PROJECT_DIR$/src/libs/video.js/sandbox/descriptions.html.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/sandbox/icons.html.example" afterPath="$PROJECT_DIR$/src/libs/video.js/sandbox/icons.html.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/sandbox/index.html.example" afterPath="$PROJECT_DIR$/src/libs/video.js/sandbox/index.html.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/sandbox/language.html.example" afterPath="$PROJECT_DIR$/src/libs/video.js/sandbox/language.html.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/sandbox/plugin.html.example" afterPath="$PROJECT_DIR$/src/libs/video.js/sandbox/plugin.html.example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/_print.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/_print.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/_private-variables.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/_private-variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/_utilities.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/_utilities.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/_variables.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/_variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_adaptive.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_adaptive.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_audio.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_audio.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_big-play.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_big-play.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_button.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_button.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_captions-settings.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_captions-settings.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_captions.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_captions.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_chapters.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_chapters.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_close-button.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_close-button.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control-bar.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control-bar.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control-spacer.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control-spacer.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_control.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_descriptions.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_descriptions.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_error.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_error.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_fullscreen.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_fullscreen.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_layout.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_layout.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_live.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_live.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_loading.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_loading.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_modal-dialog.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_modal-dialog.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_play-pause.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_play-pause.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_playback-rate.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_playback-rate.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_poster.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_poster.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_progress.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_progress.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_slider.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_slider.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_subtitles.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_subtitles.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_text-track.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_text-track.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_time.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_time.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_volume.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/_volume.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu-inline.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu-inline.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu-popup.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu-popup.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/components/menu/_menu.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/ie8.css" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/ie8.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/utilities/_linear-gradient.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/utilities/_linear-gradient.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/video-js.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/video-js.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/vjs-cdn.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/vjs-cdn.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/css/vjs.scss" afterPath="$PROJECT_DIR$/src/libs/video.js/src/css/vjs.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/big-play-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/big-play-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/clickable-component.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/clickable-component.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/close-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/close-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/component.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/component.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/audio-track-controls/audio-track-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/audio-track-controls/audio-track-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/audio-track-controls/audio-track-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/audio-track-controls/audio-track-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/control-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/control-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/fullscreen-toggle.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/fullscreen-toggle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/live-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/live-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/mute-toggle.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/mute-toggle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/play-toggle.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/play-toggle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/playback-rate-menu/playback-rate-menu-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/playback-rate-menu/playback-rate-menu-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/playback-rate-menu/playback-rate-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/playback-rate-menu/playback-rate-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/load-progress-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/load-progress-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/mouse-time-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/mouse-time-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/play-progress-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/play-progress-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/progress-control.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/progress-control.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/seek-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/seek-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/tooltip-progress-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/progress-control/tooltip-progress-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/spacer-controls/custom-control-spacer.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/spacer-controls/custom-control-spacer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/spacer-controls/spacer.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/spacer-controls/spacer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/caption-settings-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/caption-settings-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/captions-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/captions-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/chapters-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/chapters-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/chapters-track-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/chapters-track-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/descriptions-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/descriptions-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/off-text-track-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/off-text-track-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/subtitles-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/subtitles-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/text-track-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/text-track-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/text-track-menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/text-track-controls/text-track-menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/current-time-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/current-time-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/duration-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/duration-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/remaining-time-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/remaining-time-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/time-divider.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/time-controls/time-divider.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/track-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/track-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-bar.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-bar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-control.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-control.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-level.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-control/volume-level.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-menu-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/control-bar/volume-menu-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/error-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/error-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/event-target.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/event-target.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/extend.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/extend.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/fullscreen-api.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/fullscreen-api.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/loading-spinner.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/loading-spinner.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/media-error.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/media-error.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu-item.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/menu/menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/modal-dialog.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/modal-dialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/player.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/player.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/plugins.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/popup/popup-button.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/popup/popup-button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/popup/popup.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/popup/popup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/poster-image.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/poster-image.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/setup.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/setup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/slider/slider.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/slider/slider.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/flash-rtmp.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/flash-rtmp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/flash.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/flash.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/html5.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/html5.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/loader.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/loader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/tech.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tech/tech.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/audio-track-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/audio-track-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/audio-track.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/audio-track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/html-track-element-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/html-track-element-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/html-track-element.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/html-track-element.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-cue-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-cue-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-display.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-display.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-list-converter.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-list-converter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-settings.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track-settings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/text-track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track-enums.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track-enums.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/video-track-list.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/video-track-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/video-track.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/tracks/video-track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/browser.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/browser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/buffer.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/buffer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/computed-style.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/computed-style.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/dom.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/dom.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/events.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/events.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/fn.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/fn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/format-time.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/format-time.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/guid.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/guid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/log.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/log.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/merge-options.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/merge-options.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/obj.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/obj.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/stylesheet.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/stylesheet.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/time-ranges.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/time-ranges.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/to-title-case.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/to-title-case.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/url.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/utils/url.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/video.js/src/js/video.js" afterPath="$PROJECT_DIR$/src/libs/video.js/src/js/video.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/other/sprite.scss" afterPath="$PROJECT_DIR$/src/styles/other/sprite.scss" />
     </list>
     <ignored path="rudenta.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,39 +518,101 @@
       <file leaf-file-name="result_modifier.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="945">
+              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Service.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Service.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="167" column="53" selection-start-line="167" selection-start-column="53" selection-end-line="167" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="template.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="template.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/template.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+            <state relative-caret-position="273">
+              <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/detail/index.php">
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="105">
+              <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+              <folding>
+                <marker date="1494491906325" expanded="true" signature="18606:18786" ph="..." />
+                <marker date="1494491906325" expanded="true" signature="18654:18703" ph="..." />
+                <marker date="1494491906325" expanded="true" signature="27546:28118" ph="..." />
+                <marker date="1494491906325" expanded="true" signature="27680:28013" ph="..." />
+                <marker date="1494491906325" expanded="false" signature="27962:27980" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rudenta.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/rudenta.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modules.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deployment.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/deployment.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sftp-config.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sftp-config.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-558">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webServers.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/webServers.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+              <folding>
+                <marker date="1494491635231" expanded="true" signature="2739:3170" ph="{...}" />
+                <marker date="1494491635231" expanded="true" signature="3055:3170" ph="{&quot;host&quot;: 'p10298.cpanel.relevate.ru'...}" />
+                <marker date="1494491635231" expanded="true" signature="9119:9197" ph="{&quot;host&quot;: 'p10298.cpanel.relevate.ru'...}" />
+                <marker date="1494491635231" expanded="true" signature="9119:9240" ph="{...}" />
+                <marker date="1494491635231" expanded="true" signature="9262:9399" ph="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,7 +632,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bitrix/templates/rudenta/js/script.js" />
         <option value="$PROJECT_DIR$/bitrix/templates/rudenta/header.php" />
         <option value="$PROJECT_DIR$/bitrix/templates/rudenta/components/bitrix/news.list/slider/template.php" />
         <option value="$PROJECT_DIR$/bitrix/templates/rudenta/components/bitrix/news.list/doctors/result_modifier.php" />
@@ -131,6 +682,7 @@
         <option value="$PROJECT_DIR$/bitrix/php_interface/include/Service.class.php" />
         <option value="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php" />
         <option value="$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/template.php" />
+        <option value="$PROJECT_DIR$/src/js/script.js" />
       </list>
     </option>
   </component>
@@ -138,28 +690,72 @@
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+        <tasks>
+          <GulpTaskState>
+            <task-name>js:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>libs:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>fonts:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>image:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>styles:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>svgSprite:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>sprite:build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <dependencies>
+              <dependency value="libs:build" />
+              <dependency value="sprite:build" />
+              <dependency value="svgSprite:build" />
+              <dependency value="js:build" />
+              <dependency value="fonts:build" />
+              <dependency value="image:build" />
+              <dependency value="styles:build" />
+            </dependencies>
+            <task-name>build</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <dependencies>
+              <dependency value="build" />
+              <dependency value="watch" />
+            </dependencies>
+            <task-name>default</task-name>
+          </GulpTaskState>
+        </tasks>
+      </GulpfileState>
+    </gulpfiles>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="PhpServers">
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="802" />
+    <option name="x" value="152" />
+    <option name="y" value="24" />
+    <option name="width" value="1704" />
+    <option name="height" value="992" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
       <flattenPackages />
@@ -175,6 +771,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -182,57 +779,25 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
+            <PATH_ELEMENT USER_OBJECT="External Dependencies">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="E:">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="www">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="projects">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="services">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="services">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="detail">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -250,200 +815,13 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="images">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="components">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="components">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="news.list">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="components">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="news.list">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="detailService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="local">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="php_interface">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="php_interface">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="include">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="rudenta">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="bitrix">
+            <PATH_ELEMENT USER_OBJECT=".idea">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -460,6 +838,10 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../marketguru" />
+    <property name="nodejs_interpreter_path" value="C:/nodejs/node" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="E:\www\projects\rudenta\node_modules\gulp" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -476,22 +858,65 @@
       <recent name="C:\Users\viktor.burcev\PhpstormProjects\rudenta\rudenta\bitrix\templates\rudenta\js\fancybox\helpers" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
+    <configuration default="false" name="default" type="js.build_tools.gulp" factoryName="Gulp.js" temporary="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>default</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
-    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
-      <BehatRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -504,7 +929,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -523,6 +948,14 @@
       <recursive>false</recursive>
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Gulp.js.default" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Gulp.js.default" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -568,6 +1001,8 @@
       <workItem from="1486021903459" duration="21362000" />
       <workItem from="1486125740451" duration="8744000" />
       <workItem from="1489667495693" duration="1826000" />
+      <workItem from="1494490411224" duration="12000" />
+      <workItem from="1494490468915" duration="1361000" />
     </task>
     <task id="LOCAL-00001" summary="add papki">
       <created>1478622108935</created>
@@ -874,31 +1309,32 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184804000" />
+    <option name="totallyTimeSpent" value="186177000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="802" extended-state="6" />
+    <frame x="152" y="24" width="1704" height="992" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20462634" sideWeight="0.504084" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20462634" sideWeight="0.49591598" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32611832" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756132" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20303383" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -920,6 +1356,9 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
@@ -968,355 +1407,267 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/after_connect_d7.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/after_connect.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/dbconn.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/menu/child/.description.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/inc/hpBestInRus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="37" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/menu/child/template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/system.pagenavigation/blog/template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2996">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/services/index.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/catalog.section.list/main/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/catalog.section.list/main/result_modifier.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
-          <caret line="106" column="46" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="46" />
+          <caret line="106" column="46" lean-forward="false" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/catalog.section.list/tree/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-789">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/articles/bitrix/news.list/list/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/recalls/bitrix/news.list/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/inc/rudenta_standart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/recalls/news.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
+          <caret line="57" column="14" lean-forward="false" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/inc/rudenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/inc/record.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/.section.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recalls/.section.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contacts/.section.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Articles.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/services/.section.php" />
+    <entry file="file://$PROJECT_DIR$/recalls/.section.php" />
+    <entry file="file://$PROJECT_DIR$/contacts/.section.php" />
+    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Articles.class.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/articles/bitrix/news.detail/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="605">
-          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+          <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/articles/inc/filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/articles/inc/filter.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/articles/bitrix/news.list/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/articles/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="176" column="91" selection-start-line="176" selection-start-column="91" selection-end-line="176" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/articles/index.php" />
+    <entry file="file://$PROJECT_DIR$/index.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/recalls/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+          <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/functions.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/doctors/bitrix/news.list/.default/result_modifier.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/doctors/bitrix/news.list/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+          <caret line="23" column="66" lean-forward="false" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/doctors/result_modifier.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="93" />
+          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="93" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/doctors/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
-          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/system.pagenavigation/.default/lang/ru/template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recalls/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1146">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/system.pagenavigation/.default/lang/ru/template.php" />
+    <entry file="file://$PROJECT_DIR$/recalls/index.php" />
     <entry file="file://$USER_HOME$/Downloads/pag/beneverard-jqPagination-33b19cb/js/demo.js" />
     <entry file="file://$USER_HOME$/Downloads/pag/beneverard-jqPagination-33b19cb/js/scripts.js" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
-          <caret line="71" column="39" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
+          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/system.pagenavigation/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-51">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/menu/bottom/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/inc/add_recall.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="503">
-          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+          <caret line="54" column="32" lean-forward="false" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recalls/add_recall.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/recalls/add_recall.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Doctors.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="76" column="27" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Recalls.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Doctors.class.php" />
+    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Recalls.class.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/doctors/bitrix/news.detail/.default/result_modifier.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news/doctors/bitrix/news.detail/.default/template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
-          <folding />
+          <caret line="43" column="63" lean-forward="false" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/.default/result_modifier.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/detail/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Service.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="167" column="53" selection-start-line="167" selection-start-column="53" selection-end-line="167" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/.default/result_modifier.php" />
+    <entry file="file://$PROJECT_DIR$/services/detail/index.php" />
+    <entry file="file://$PROJECT_DIR$/bitrix/php_interface/include/Service.class.php" />
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/result_modifier.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state relative-caret-position="945">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local/templates/rudenta/components/bitrix/news.list/detailService/template.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+        <state relative-caret-position="273">
+          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+          <folding>
+            <marker date="1494491635231" expanded="true" signature="2739:3170" ph="{...}" />
+            <marker date="1494491635231" expanded="true" signature="3055:3170" ph="{&quot;host&quot;: 'p10298.cpanel.relevate.ru'...}" />
+            <marker date="1494491635231" expanded="true" signature="9119:9197" ph="{&quot;host&quot;: 'p10298.cpanel.relevate.ru'...}" />
+            <marker date="1494491635231" expanded="true" signature="9119:9240" ph="{...}" />
+            <marker date="1494491635231" expanded="true" signature="9262:9399" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sftp-config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-558">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/rudenta.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/deployment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/webServers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+          <folding>
+            <marker date="1494491906325" expanded="true" signature="18606:18786" ph="..." />
+            <marker date="1494491906325" expanded="true" signature="18654:18703" ph="..." />
+            <marker date="1494491906325" expanded="true" signature="27546:28118" ph="..." />
+            <marker date="1494491906325" expanded="true" signature="27680:28013" ph="..." />
+            <marker date="1494491906325" expanded="false" signature="27962:27980" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

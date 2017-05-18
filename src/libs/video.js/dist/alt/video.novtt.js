@@ -1,6 +1,6 @@
 /**
  * @license
- * Video.js 5.14.1 <http://videojs.com/>
+ * Video.js 5.19.2 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -70,6 +70,18 @@ var BigPlayButton = function (_Button) {
 
   BigPlayButton.prototype.handleClick = function handleClick(event) {
     this.player_.play();
+
+    var cb = this.player_.getChild('controlBar');
+    var playToggle = cb && cb.getChild('playToggle');
+
+    if (!playToggle) {
+      this.player_.focus();
+      return;
+    }
+
+    this.setTimeout(function () {
+      playToggle.focus();
+    }, 1);
   };
 
   return BigPlayButton;
@@ -219,9 +231,6 @@ var Button = function (_ClickableComponent) {
   /**
    * Enable the `Button` element so that it can be activated or clicked. Use this with
    * {@link Button#disable}.
-   *
-   * @return {Component}
-   *         Returns itself; method is chainable.
    */
 
 
@@ -233,9 +242,6 @@ var Button = function (_ClickableComponent) {
   /**
    * Enable the `Button` element so that it cannot be activated or clicked. Use this with
    * {@link Button#enable}.
-   *
-   * @return {Component}
-   *         Returns itself; method is chainable.
    */
 
 
@@ -444,7 +450,11 @@ var ClickableComponent = function (_Component) {
 
     this.controlText_ = text;
     this.controlTextEl_.innerHTML = localizedText;
-    el.setAttribute('title', localizedText);
+
+    if (!this.nonIconControl) {
+      // Set title attribute if only an icon is shown
+      el.setAttribute('title', localizedText);
+    }
 
     return this;
   };
@@ -743,33 +753,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * in the DOM. They can be children of other components, and can have
  * children themselves.
  *
- * Creating a button component.
- * ``` js
- *   // adding a button to the player
- *   var player = videojs('some-video-id');
- *   var Component = videojs.getComponent('Component');
- *   var button = new Component(player);
- *
- *   console.log(button.el());
- * ```
- *
- * Above code will log this html.
- * ```html
- *   <div class="video-js">
- *     <div class="vjs-button">Button</div>
- *   </div>
- * ```
- *
- * Adding a button to the player
- * ``` js
- *   // adding a button to the player
- *   var player = videojs('some-video-id');
- *   var button = player.addChild('button');
- *
- *   console.log(button.el());
- *   // will have the same html result as the previous example
- * ```
- *
  * Components can also use methods from {@link EventTarget}
  */
 var Component = function () {
@@ -789,7 +772,12 @@ var Component = function () {
    *        The `Player` that this class should be attached to.
    *
    * @param {Object} [options]
-   *         The key/value store of player options.
+   *        The key/value store of player options.
+   #
+   * @param {Object[]} [options.children]
+   *        An array of children objects to intialize this component with. Children objects have
+   *        a name property that will be used if more than one component of the same type needs to be
+   *        added.
    *
    * @param {Component~ReadyCallback} [ready]
    *        Function that gets called when the `Component` is ready.
@@ -911,41 +899,6 @@ var Component = function () {
    * Deep merge of options objects with new options.
    * > Note: When both `obj` and `options` contain properties whose values are objects.
    *         The two properties get merged using {@link module:mergeOptions}
-   *
-   * Example
-   * ```js
-   *   var player = videojs('some-vid-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var component = new Component(player, {
-   *     optionSet: {
-   *       childOne: {foo: 'bar', asdf: 'fdsa'},
-   *       childTwo: {},
-   *       childThree: {}
-   *     }
-   *   });
-   *
-   *   const newOptions = {
-   *     optionSet: {
-   *       childOne: {foo: 'baz', abc: '123'}
-   *       childTwo: null,
-   *       childFour: {}
-   *     }
-   *   };
-   *
-   *   console.log(component.options(newOptions));
-   * ```
-   *
-   * Result
-   * ```js
-   *   {
-   *     optionSet: {
-   *       childOne: {foo: 'baz', asdf: 'fdsa', abc: '123' },
-   *       childTwo: null,
-   *       childThree: {},
-   *       childFour: {}
-   *     }
-   *   }
-   * ```
    *
    * @param {Object} obj
    *        The object that contains new options.
@@ -1125,37 +1078,6 @@ var Component = function () {
   /**
    * Add a child `Component` inside the current `Component`.
    *
-   * Example:
-   * ```js
-   *   var player = videojs('some-vid-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *
-   *   console.log(myComponent.el());
-   *   // -> <div class='my-component'></div>
-   *   console.log(myComponent.children());
-   *   // [empty array]
-   *
-   *   var myButton = myComponent.addChild('MyButton');
-   *
-   *   console.log(myComponent.el());
-   *   // -> <div class='my-component'><div class="my-button">myButton<div></div>
-   *   console.log(myComponent.children());
-   *   // -> myButton === myComponent.children()[0];
-   * ```
-   *
-   * Pass in options for child constructors and options for children of the child.
-   * ```js
-   *   var player = videojs('some-vid-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *   var myButton = myComponent.addChild('MyButton', {
-   *     text: 'Press Me',
-   *     buttonChildExample: {
-   *       buttonChildOption: true
-   *     }
-   *   });
-   * ```
    *
    * @param {string|Component} child
    *        The name or instance of a child to add.
@@ -1232,7 +1154,7 @@ var Component = function () {
 
     // If a name wasn't used to create the component, check if we can use the
     // name function of the component
-    componentName = componentName || component.name && component.name();
+    componentName = componentName || component.name && (0, _toTitleCase2['default'])(component.name());
 
     if (componentName) {
       this.childNameIndex_[componentName] = component;
@@ -1295,48 +1217,6 @@ var Component = function () {
 
   /**
    * Add and initialize default child `Component`s based upon options.
-   *
-   * Example.
-   * ```js
-   *   var MyComponent = videojs.extend(videojs.getComponent('Component'));
-   *   // when an instance of MyComponent is created, all children in options
-   *   // will be added to the instance by their name strings and options
-   *   MyComponent.prototype.options_ = {
-   *     children: [
-   *       'myChildComponent'
-   *     ],
-   *     myChildComponent: {
-   *       myChildOption: true
-   *     }
-   *   };
-   *
-   *   // Or when creating the component
-   *   var player = videojs('some-player-id');
-   *   var myComp = new MyComponent(player, {
-   *     children: [
-   *       'myChildComponent'
-   *     ],
-   *     myChildComponent: {
-   *       myChildOption: true
-   *     }
-   *   });
-   * ```
-   *
-   * The children option can also be an array of child options objects
-   * (that also include a 'name' key). This will get used if you have two child
-   * components of the same type that need different options.
-   * ```js
-   *   // MyComponent is from the above example
-   *   var myComp = new MyComponent(player, {
-   *     children: ['button', {
-   *       name: 'button',
-   *       someOtherOption: true
-   *     }, {
-   *       name: 'button',
-   *       someOtherOption: false
-   *     }]
-   *   });
-   * ```
    */
 
 
@@ -1346,91 +1226,89 @@ var Component = function () {
     var children = this.options_.children;
 
     if (children) {
-      (function () {
-        // `this` is `parent`
-        var parentOptions = _this.options_;
+      // `this` is `parent`
+      var parentOptions = this.options_;
 
-        var handleAdd = function handleAdd(child) {
-          var name = child.name;
-          var opts = child.opts;
+      var handleAdd = function handleAdd(child) {
+        var name = child.name;
+        var opts = child.opts;
 
-          // Allow options for children to be set at the parent options
-          // e.g. videojs(id, { controlBar: false });
-          // instead of videojs(id, { children: { controlBar: false });
-          if (parentOptions[name] !== undefined) {
-            opts = parentOptions[name];
-          }
-
-          // Allow for disabling default components
-          // e.g. options['children']['posterImage'] = false
-          if (opts === false) {
-            return;
-          }
-
-          // Allow options to be passed as a simple boolean if no configuration
-          // is necessary.
-          if (opts === true) {
-            opts = {};
-          }
-
-          // We also want to pass the original player options
-          // to each component as well so they don't need to
-          // reach back into the player for options later.
-          opts.playerOptions = _this.options_.playerOptions;
-
-          // Create and add the child component.
-          // Add a direct reference to the child by name on the parent instance.
-          // If two of the same component are used, different names should be supplied
-          // for each
-          var newChild = _this.addChild(name, opts);
-
-          if (newChild) {
-            _this[name] = newChild;
-          }
-        };
-
-        // Allow for an array of children details to passed in the options
-        var workingChildren = void 0;
-        var Tech = Component.getComponent('Tech');
-
-        if (Array.isArray(children)) {
-          workingChildren = children;
-        } else {
-          workingChildren = Object.keys(children);
+        // Allow options for children to be set at the parent options
+        // e.g. videojs(id, { controlBar: false });
+        // instead of videojs(id, { children: { controlBar: false });
+        if (parentOptions[name] !== undefined) {
+          opts = parentOptions[name];
         }
 
-        workingChildren
-        // children that are in this.options_ but also in workingChildren  would
-        // give us extra children we do not want. So, we want to filter them out.
-        .concat(Object.keys(_this.options_).filter(function (child) {
-          return !workingChildren.some(function (wchild) {
-            if (typeof wchild === 'string') {
-              return child === wchild;
-            }
-            return child === wchild.name;
-          });
-        })).map(function (child) {
-          var name = void 0;
-          var opts = void 0;
+        // Allow for disabling default components
+        // e.g. options['children']['posterImage'] = false
+        if (opts === false) {
+          return;
+        }
 
-          if (typeof child === 'string') {
-            name = child;
-            opts = children[name] || _this.options_[name] || {};
-          } else {
-            name = child.name;
-            opts = child;
+        // Allow options to be passed as a simple boolean if no configuration
+        // is necessary.
+        if (opts === true) {
+          opts = {};
+        }
+
+        // We also want to pass the original player options
+        // to each component as well so they don't need to
+        // reach back into the player for options later.
+        opts.playerOptions = _this.options_.playerOptions;
+
+        // Create and add the child component.
+        // Add a direct reference to the child by name on the parent instance.
+        // If two of the same component are used, different names should be supplied
+        // for each
+        var newChild = _this.addChild(name, opts);
+
+        if (newChild) {
+          _this[name] = newChild;
+        }
+      };
+
+      // Allow for an array of children details to passed in the options
+      var workingChildren = void 0;
+      var Tech = Component.getComponent('Tech');
+
+      if (Array.isArray(children)) {
+        workingChildren = children;
+      } else {
+        workingChildren = Object.keys(children);
+      }
+
+      workingChildren
+      // children that are in this.options_ but also in workingChildren  would
+      // give us extra children we do not want. So, we want to filter them out.
+      .concat(Object.keys(this.options_).filter(function (child) {
+        return !workingChildren.some(function (wchild) {
+          if (typeof wchild === 'string') {
+            return child === wchild;
           }
+          return child === wchild.name;
+        });
+      })).map(function (child) {
+        var name = void 0;
+        var opts = void 0;
 
-          return { name: name, opts: opts };
-        }).filter(function (child) {
-          // we have to make sure that child.name isn't in the techOrder since
-          // techs are registerd as Components but can't aren't compatible
-          // See https://github.com/videojs/video.js/issues/2772
-          var c = Component.getComponent(child.opts.componentClass || (0, _toTitleCase2['default'])(child.name));
+        if (typeof child === 'string') {
+          name = child;
+          opts = children[name] || _this.options_[name] || {};
+        } else {
+          name = child.name;
+          opts = child;
+        }
 
-          return c && !Tech.isTech(c);
-        }).forEach(handleAdd);
-      })();
+        return { name: name, opts: opts };
+      }).filter(function (child) {
+        // we have to make sure that child.name isn't in the techOrder since
+        // techs are registerd as Components but can't aren't compatible
+        // See https://github.com/videojs/video.js/issues/2772
+        var c = Component.getComponent(child.opts.componentClass || (0, _toTitleCase2['default'])(child.name));
+
+        return c && !Tech.isTech(c);
+      }).forEach(handleAdd);
     }
   };
 
@@ -1453,46 +1331,17 @@ var Component = function () {
   /**
    * Add an `event listener` to this `Component`s element.
    *
-   * ```js
-   *   var player = videojs('some-player-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *   var myFunc = function() {
-   *     var myComponent = this;
-   *     console.log('myFunc called');
-   *   };
-   *
-   *   myComponent.on('eventType', myFunc);
-   *   myComponent.trigger('eventType');
-   *   // logs 'myFunc called'
-   * ```
-   *
-   * The context of `myFunc` will be `myComponent` unless it is bound. You can add
-   * a listener to another element or component.
-   * ```js
-   *   var otherComponent = new Component(player);
-   *
-   *   // myComponent/myFunc is from the above example
-   *   myComponent.on(otherComponent.el(), 'eventName', myFunc);
-   *   myComponent.on(otherComponent, 'eventName', myFunc);
-   *
-   *   otherComponent.trigger('eventName');
-   *   // logs 'myFunc called' twice
-   * ```
-   *
    * The benefit of using this over the following:
    * - `VjsEvents.on(otherElement, 'eventName', myFunc)`
    * - `otherComponent.on('eventName', myFunc)`
-   * Is that the listeners will get cleaned up when either component gets disposed.
-   * It will also bind `myComponent` as the context of `myFunc`.
+   *
+   * 1. Is that the listeners will get cleaned up when either component gets disposed.
+   * 1. It will also bind `myComponent` as the context of `myFunc`.
    * > NOTE: If you remove the element from the DOM that has used `on` you need to
-   *             clean up references using:
-   *
-   *             `myComponent.trigger(el, 'dispose')`
-   *
-   *             This will also allow the browser to garbage collect it. In special
-   *             cases such as with `window` and `document`, which are both permanent,
-   *             this is not necessary.
+   *         clean up references using: `myComponent.trigger(el, 'dispose')`
+   *         This will also allow the browser to garbage collect it. In special
+   *         cases such as with `window` and `document`, which are both permanent,
+   *         this is not necessary.
    *
    * @param {string|Component|string[]} [first]
    *        The event name, and array of event names, or another `Component`.
@@ -1519,92 +1368,51 @@ var Component = function () {
 
       // Targeting another component or element
     } else {
-      (function () {
-        var target = first;
-        var type = second;
-        var fn = Fn.bind(_this2, third);
+      var target = first;
+      var type = second;
+      var fn = Fn.bind(this, third);
 
-        // When this component is disposed, remove the listener from the other component
-        var removeOnDispose = function removeOnDispose() {
-          return _this2.off(target, type, fn);
-        };
+      // When this component is disposed, remove the listener from the other component
+      var removeOnDispose = function removeOnDispose() {
+        return _this2.off(target, type, fn);
+      };
 
-        // Use the same function ID so we can remove it later it using the ID
-        // of the original listener
-        removeOnDispose.guid = fn.guid;
-        _this2.on('dispose', removeOnDispose);
+      // Use the same function ID so we can remove it later it using the ID
+      // of the original listener
+      removeOnDispose.guid = fn.guid;
+      this.on('dispose', removeOnDispose);
 
-        // If the other component is disposed first we need to clean the reference
-        // to the other component in this component's removeOnDispose listener
-        // Otherwise we create a memory leak.
-        var cleanRemover = function cleanRemover() {
-          return _this2.off('dispose', removeOnDispose);
-        };
+      // If the other component is disposed first we need to clean the reference
+      // to the other component in this component's removeOnDispose listener
+      // Otherwise we create a memory leak.
+      var cleanRemover = function cleanRemover() {
+        return _this2.off('dispose', removeOnDispose);
+      };
 
-        // Add the same function ID so we can easily remove it later
-        cleanRemover.guid = fn.guid;
+      // Add the same function ID so we can easily remove it later
+      cleanRemover.guid = fn.guid;
 
-        // Check if this is a DOM node
-        if (first.nodeName) {
-          // Add the listener to the other element
-          Events.on(target, type, fn);
-          Events.on(target, 'dispose', cleanRemover);
+      // Check if this is a DOM node
+      if (first.nodeName) {
+        // Add the listener to the other element
+        Events.on(target, type, fn);
+        Events.on(target, 'dispose', cleanRemover);
 
-          // Should be a component
-          // Not using `instanceof Component` because it makes mock players difficult
-        } else if (typeof first.on === 'function') {
-          // Add the listener to the other component
-          target.on(type, fn);
-          target.on('dispose', cleanRemover);
-        }
-      })();
+        // Should be a component
+        // Not using `instanceof Component` because it makes mock players difficult
+      } else if (typeof first.on === 'function') {
+        // Add the listener to the other component
+        target.on(type, fn);
+        target.on('dispose', cleanRemover);
+      }
     }
 
     return this;
   };
 
   /**
-   * Remove an event listener from this `Component`s element.
-   * ```js
-   *   var player = videojs('some-player-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *   var myFunc = function() {
-   *     var myComponent = this;
-   *     console.log('myFunc called');
-   *   };
-   *   myComponent.on('eventType', myFunc);
-   *   myComponent.trigger('eventType');
-   *   // logs 'myFunc called'
-   *
-   *   myComponent.off('eventType', myFunc);
-   *   myComponent.trigger('eventType');
-   *   // does nothing
-   * ```
-   *
-   * If myFunc gets excluded, ALL listeners for the event type will get removed. If
-   * eventType gets excluded, ALL listeners will get removed from the component.
-   * You can use `off` to remove listeners that get added to other elements or
-   * components using:
-   *
-   *  `myComponent.on(otherComponent...`
-   *
-   * In this case both the event type and listener function are **REQUIRED**.
-   *
-   * ```js
-   *   var otherComponent = new Component(player);
-   *
-   *   // myComponent/myFunc is from the above example
-   *   myComponent.on(otherComponent.el(), 'eventName', myFunc);
-   *   myComponent.on(otherComponent, 'eventName', myFunc);
-   *
-   *   otherComponent.trigger('eventName');
-   *   // logs 'myFunc called' twice
-   *   myComponent.off(ootherComponent.el(), 'eventName', myFunc);
-   *   myComponent.off(otherComponent, 'eventName', myFunc);
-   *   otherComponent.trigger('eventName');
-   *   // does nothing
-   * ```
+   * Remove an event listener from this `Component`s element. If the second argument is
+   * exluded all listeners for the type passed in as the first argument will be removed.
    *
    * @param {string|Component|string[]} [first]
    *        The event name, and array of event names, or another `Component`.
@@ -1650,38 +1458,6 @@ var Component = function () {
 
   /**
    * Add an event listener that gets triggered only once and then gets removed.
-   * ```js
-   *   var player = videojs('some-player-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *   var myFunc = function() {
-   *     var myComponent = this;
-   *     console.log('myFunc called');
-   *   };
-   *   myComponent.one('eventName', myFunc);
-   *   myComponent.trigger('eventName');
-   *   // logs 'myFunc called'
-   *
-   *   myComponent.trigger('eventName');
-   *   // does nothing
-   *
-   * ```
-   *
-   * You can also add a listener to another element or component that will get
-   * triggered only once.
-   * ```js
-   *   var otherComponent = new Component(player);
-   *
-   *   // myComponent/myFunc is from the above example
-   *   myComponent.one(otherComponent.el(), 'eventName', myFunc);
-   *   myComponent.one(otherComponent, 'eventName', myFunc);
-   *
-   *   otherComponent.trigger('eventName');
-   *   // logs 'myFunc called' twice
-   *
-   *   otherComponent.trigger('eventName');
-   *   // does nothing
-   * ```
    *
    * @param {string|Component|string[]} [first]
    *        The event name, and array of event names, or another `Component`.
@@ -1705,21 +1481,19 @@ var Component = function () {
     if (typeof first === 'string' || Array.isArray(first)) {
       Events.one(this.el_, first, Fn.bind(this, second));
     } else {
-      (function () {
-        var target = first;
-        var type = second;
-        var fn = Fn.bind(_this3, third);
+      var target = first;
+      var type = second;
+      var fn = Fn.bind(this, third);
 
-        var newFunc = function newFunc() {
-          _this3.off(target, type, newFunc);
-          fn.apply(null, _arguments);
-        };
+      var newFunc = function newFunc() {
+        _this3.off(target, type, newFunc);
+        fn.apply(null, _arguments);
+      };
 
-        // Keep the same function ID so we can remove it later
-        newFunc.guid = fn.guid;
+      // Keep the same function ID so we can remove it later
+      newFunc.guid = fn.guid;
 
-        _this3.on(target, type, newFunc);
-      })();
+      this.on(target, type, newFunc);
     }
 
     return this;
@@ -1727,29 +1501,6 @@ var Component = function () {
 
   /**
    * Trigger an event on an element.
-   *
-   * ```js
-   *   var player = videojs('some-player-id');
-   *   var Component = videojs.getComponent('Component');
-   *   var myComponent = new Component(player);
-   *   var myFunc = function(data) {
-   *     var myComponent = this;
-   *     console.log('myFunc called');
-   *     console.log(data);
-   *   };
-   *   myComponent.one('eventName', myFunc);
-   *   myComponent.trigger('eventName');
-   *   // logs 'myFunc called' and 'undefined'
-   *
-   *   myComponent.trigger({'type':'eventName'});
-   *   // logs 'myFunc called' and 'undefined'
-   *
-   *   myComponent.trigger('eventName', {data: 'some data'});
-   *   // logs 'myFunc called' and "{data: 'some data'}"
-   *
-   *   myComponent.trigger({'type':'eventName'}, {data: 'some data'});
-   *   // logs 'myFunc called' and "{data: 'some data'}"
-   * ```
    *
    * @param {EventTarget~Event|Object|string} event
    *        The event name, and Event, or an event-like object with a type attribute
@@ -2312,6 +2063,24 @@ var Component = function () {
   };
 
   /**
+   * Set the focus to this component
+   */
+
+
+  Component.prototype.focus = function focus() {
+    this.el_.focus();
+  };
+
+  /**
+   * Remove the focus from this component
+   */
+
+
+  Component.prototype.blur = function blur() {
+    this.el_.blur();
+  };
+
+  /**
    * Emit a 'tap' events when touch event support gets detected. This gets used to
    * support toggling the controls through a tap on the video. They get enabled
    * because every sub-component would have extra overhead otherwise.
@@ -2645,19 +2414,17 @@ var Component = function () {
     }
 
     if (name === 'Player' && Component.components_[name]) {
-      (function () {
-        var Player = Component.components_[name];
+      var Player = Component.components_[name];
 
-        // If we have players that were disposed, then their name will still be
-        // in Players.players. So, we must loop through and verify that the value
-        // for each item is not null. This allows registration of the Player component
-        // after all players have been disposed or before any were created.
-        if (Player.players && Object.keys(Player.players).length > 0 && Object.keys(Player.players).map(function (playerName) {
-          return Player.players[playerName];
-        }).every(Boolean)) {
-          throw new Error('Can not register Player component after player has been created');
-        }
-      })();
+      // If we have players that were disposed, then their name will still be
+      // in Players.players. So, we must loop through and verify that the value
+      // for each item is not null. This allows registration of the Player component
+      // after all players have been disposed or before any were created.
+      if (Player.players && Object.keys(Player.players).length > 0 && Object.keys(Player.players).map(function (playerName) {
+        return Player.players[playerName];
+      }).every(Boolean)) {
+        throw new Error('Can not register Player component after player has been created');
+      }
     }
 
     Component.components_[name] = comp;
@@ -2844,6 +2611,9 @@ var AudioTrackButton = function (_TrackButton) {
   AudioTrackButton.prototype.createItems = function createItems() {
     var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
+    // if there's only one audio track, there no point in showing it
+    this.hideThreshold_ = 1;
+
     var tracks = this.player_.audioTracks && this.player_.audioTracks();
 
     if (!tracks) {
@@ -2940,14 +2710,12 @@ var AudioTrackMenuItem = function (_MenuItem) {
     _this.track = track;
 
     if (tracks) {
-      (function () {
-        var changeHandler = Fn.bind(_this, _this.handleTracksChange);
+      var changeHandler = Fn.bind(_this, _this.handleTracksChange);
 
-        tracks.addEventListener('change', changeHandler);
-        _this.on('dispose', function () {
-          tracks.removeEventListener('change', changeHandler);
-        });
-      })();
+      tracks.addEventListener('change', changeHandler);
+      _this.on('dispose', function () {
+        tracks.removeEventListener('change', changeHandler);
+      });
     }
     return _this;
   }
@@ -3907,6 +3675,7 @@ var PlaybackRateMenuItem = function (_MenuItem) {
     // Modify options for parent MenuItem class's init.
     options.label = label;
     options.selected = rate === 1;
+    options.selectable = true;
 
     var _this = _possibleConstructorReturn(this, _MenuItem.call(this, player, options));
 
@@ -4602,7 +4371,8 @@ var SeekBar = function (_Slider) {
   /**
    * Get percentage of video played
    *
-    * @return {Number} Percentage played
+   * @return {number}
+   *         The percentage played
    */
 
 
@@ -4623,12 +4393,12 @@ var SeekBar = function (_Slider) {
 
 
   SeekBar.prototype.handleMouseDown = function handleMouseDown(event) {
-    _Slider.prototype.handleMouseDown.call(this, event);
-
     this.player_.scrubbing(true);
 
     this.videoWasPlaying = !this.player_.paused();
     this.player_.pause();
+
+    _Slider.prototype.handleMouseDown.call(this, event);
   };
 
   /**
@@ -5115,35 +4885,6 @@ var CaptionsButton = function (_TextTrackButton) {
   };
 
   /**
-   * Update caption menu items
-   *
-   * @param {EventTarget~Event} [event]
-   *        The `addtrack` or `removetrack` event that caused this function to be
-   *        called.
-   *
-   * @listens TextTrackList#addtrack
-   * @listens TextTrackList#removetrack
-   */
-
-
-  CaptionsButton.prototype.update = function update(event) {
-    var threshold = 2;
-
-    _TextTrackButton.prototype.update.call(this);
-
-    // if native, then threshold is 1 because no settings button
-    if (this.player().tech_ && this.player().tech_.featuresNativeTextTracks) {
-      threshold = 1;
-    }
-
-    if (this.items && this.items.length > threshold) {
-      this.show();
-    } else {
-      this.hide();
-    }
-  };
-
-  /**
    * Create caption menu items
    *
    * @return {CaptionSettingsMenuItem[]}
@@ -5156,6 +4897,8 @@ var CaptionsButton = function (_TextTrackButton) {
 
     if (!(this.player().tech_ && this.player().tech_.featuresNativeTextTracks)) {
       items.push(new _captionSettingsMenuItem2['default'](this.player_, { kind: this.kind_ }));
+
+      this.hideThreshold_ += 1;
     }
 
     return _TextTrackButton.prototype.createItems.call(this, items);
@@ -5597,14 +5340,12 @@ var DescriptionsButton = function (_TextTrackButton) {
     var tracks = player.textTracks();
 
     if (tracks) {
-      (function () {
-        var changeHandler = Fn.bind(_this, _this.handleTracksChange);
+      var changeHandler = Fn.bind(_this, _this.handleTracksChange);
 
-        tracks.addEventListener('change', changeHandler);
-        _this.on('dispose', function () {
-          tracks.removeEventListener('change', changeHandler);
-        });
-      })();
+      tracks.addEventListener('change', changeHandler);
+      _this.on('dispose', function () {
+        tracks.removeEventListener('change', changeHandler);
+      });
     }
     return _this;
   }
@@ -5934,6 +5675,7 @@ var TextTrackButton = function (_TrackButton) {
 
     // Add an OFF menu item to turn all tracks off
     items.push(new _offTextTrackMenuItem2['default'](this.player_, { kind: this.kind_ }));
+    this.hideThreshold_ += 1;
 
     var tracks = this.player_.textTracks();
 
@@ -6035,14 +5777,13 @@ var TextTrackMenuItem = function (_MenuItem) {
     _this.track = track;
 
     if (tracks) {
-      (function () {
-        var changeHandler = Fn.bind(_this, _this.handleTracksChange);
+      var changeHandler = Fn.bind(_this, _this.handleTracksChange);
 
-        tracks.addEventListener('change', changeHandler);
-        _this.on('dispose', function () {
-          tracks.removeEventListener('change', changeHandler);
-        });
-      })();
+      player.on(['loadstart', 'texttrackchange'], changeHandler);
+      tracks.addEventListener('change', changeHandler);
+      _this.on('dispose', function () {
+        tracks.removeEventListener('change', changeHandler);
+      });
     }
 
     // iOS7 doesn't dispatch change events to TextTrackLists when an
@@ -6052,27 +5793,25 @@ var TextTrackMenuItem = function (_MenuItem) {
     // the change event. As a poor substitute, we manually dispatch
     // change events whenever the controls modify the mode.
     if (tracks && tracks.onchange === undefined) {
-      (function () {
-        var event = void 0;
+      var event = void 0;
 
-        _this.on(['tap', 'click'], function () {
-          if (_typeof(_window2['default'].Event) !== 'object') {
-            // Android 2.3 throws an Illegal Constructor error for window.Event
-            try {
-              event = new _window2['default'].Event('change');
-            } catch (err) {
-              // continue regardless of error
-            }
+      _this.on(['tap', 'click'], function () {
+        if (_typeof(_window2['default'].Event) !== 'object') {
+          // Android 2.3 throws an Illegal Constructor error for window.Event
+          try {
+            event = new _window2['default'].Event('change');
+          } catch (err) {
+            // continue regardless of error
           }
+        }
 
-          if (!event) {
-            event = _document2['default'].createEvent('Event');
-            event.initEvent('change', true, true);
-          }
+        if (!event) {
+          event = _document2['default'].createEvent('Event');
+          event.initEvent('change', true, true);
+        }
 
-          tracks.dispatchEvent(event);
-        });
-      })();
+        tracks.dispatchEvent(event);
+      });
     }
     return _this;
   }
@@ -7087,6 +6826,9 @@ var VolumeMenuButton = function (_PopupButton) {
 
   /**
    * Create the VolumeMenuButton popup
+   *
+   * @return {Popup}
+   *         The popup that was created
    */
 
 
@@ -7280,6 +7022,7 @@ var ErrorDisplay = function (_ModalDialog) {
 
 
 ErrorDisplay.prototype.options_ = (0, _mergeOptions2['default'])(_modalDialog2['default'].prototype.options_, {
+  pauseOnOpen: false,
   fillAlways: true,
   temporary: false,
   uncloseable: true
@@ -7347,20 +7090,6 @@ EventTarget.prototype.allowedEvents_ = {};
  * Adds an `event listener` to an instance of an `EventTarget`. An `event listener` is a
  * function that will get called when an event with a certain name gets triggered.
  *
- * ```js
- *   var foo = new EventTarget();
- *   var handleBar = function() {
- *     console.log('bar was triggered');
- *   };
- *
- *   foo.on('bar', handleBar);
- *
- *   // This causes any `event listeners` for the `bar` event to get called
- *   // see {@link EventTarget#trigger} for more information
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- * ```
- *
  * @param {string|string[]} type
  *        An event name or an array of event names.
  *
@@ -7391,26 +7120,6 @@ EventTarget.prototype.addEventListener = EventTarget.prototype.on;
  * This makes it so that the `event listener` will no longer get called when the
  * named event happens.
  *
- * ```js
- *   var foo = new EventTarget();
- *   var handleBar = function() {
- *     console.log('bar was triggered');
- *   };
- *
- *   // adds an `event listener` for the `bar` event
- *   // see {@link EventTarget#on} for more info
- *   foo.on('bar', handleBar);
- *
- *   // runs all `event listeners` for the `bar` event
- *   // see {@link EventTarget#trigger} for more info
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- *
- *   foo.off('bar', handleBar);
- *   foo.trigger('bar');
- *   // does nothing
- * ```
- *
  * @param {string|string[]} type
  *        An event name or an array of event names.
  *
@@ -7434,39 +7143,6 @@ EventTarget.prototype.removeEventListener = EventTarget.prototype.off;
  * This function will add an `event listener` that gets triggered only once. After the
  * first trigger it will get removed. This is like adding an `event listener`
  * with {@link EventTarget#on} that calls {@link EventTarget#off} on itself.
- *
- * Using {@link EventTarget#on} and {@link EventTarget#off} to mimic {@link EventTarget#one}
- * ```js
- *   var foo = new EventTarget();
- *   var handleBar = function() {
- *     console.log('bar was triggered');
- *     // after the first trigger remove this handler
- *     foo.off('bar', handleBar);
- *   };
- *
- *   foo.on('bar', handleBar);
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- *
- *   foo.trigger('bar');
- *   // does nothing
- * ```
- *
- * Using {@link EventTarget#one}
- * ```js
- *   var foo = new EventTarget();
- *   var handleBar = function() {
- *     console.log('bar was triggered');
- *   };
- *
- *   // removed after the first trigger
- *   foo.one('bar', handleBar);
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- *
- *   foo.trigger('bar');
- *   // does nothing
- * ```
  *
  * @param {string|string[]} type
  *        An event name or an array of event names.
@@ -7495,23 +7171,6 @@ EventTarget.prototype.one = function (type, fn) {
  * Example:
  * 'click' is in `EventTarget.allowedEvents_`, so, trigger will attempt to call
  * `onClick` if it exists.
- *
- * ```js
- *   var foo = new EventTarget();
- *   var handleBar = function() {
- *     console.log('bar was triggered');
- *   };
- *
- *   foo.on('bar', handleBar);
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- *
- *   foo.trigger('bar');
- *   // logs 'bar was triggered'
- *
- *   foo.trigger('foo');
- *   // does nothing
- * ```
  *
  * @param {string|EventTarget~Event|Object} event
  *        The name of the event, an `Event`, or an object with a key of type set to
@@ -7558,12 +7217,23 @@ var _obj = _dereq_(88);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-/*
+/**
  * @file extend.js
- *
+ * @module extend
+ */
+
+/**
  * A combination of node inherits and babel's inherits (after transpile).
  * Both work the same but node adds `super_` to the subClass
  * and Bable adds the superClass as __proto__. Both seem useful.
+ *
+ * @param {Object} subClass
+ *        The class to inherit to
+ *
+ * @param {Object} superClass
+ *        The class to inherit from
+ *
+ * @private
  */
 var _inherits = function _inherits(subClass, superClass) {
   if (typeof superClass !== 'function' && superClass !== null) {
@@ -7585,22 +7255,18 @@ var _inherits = function _inherits(subClass, superClass) {
   }
 };
 
-/*
+/**
  * Function for subclassing using the same inheritance that
  * videojs uses internally
- * ```js
- * var Button = videojs.getComponent('Button');
- * ```
- * ```js
- * var MyButton = videojs.extend(Button, {
- *   constructor: function(player, options) {
- *     Button.call(this, player, options);
- *   },
- *   onClick: function() {
- *     // doSomething
- *   }
- * });
- * ```
+ *
+ * @param {Object} superClass
+ *        The class to inherit from
+ *
+ * @param {Object} [subClassMethods={}]
+ *        The class to inherit to
+ *
+ * @return {Object}
+ *         The new object with subClassMethods that inherited superClass.
  */
 var extendFn = function extendFn(superClass) {
   var subClassMethods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -8061,9 +7727,9 @@ var MenuButton = function (_ClickableComponent) {
     this.buttonPressed_ = false;
     this.el_.setAttribute('aria-expanded', 'false');
 
-    if (this.items && this.items.length === 0) {
+    if (this.items && this.items.length <= this.hideThreshold_) {
       this.hide();
-    } else if (this.items && this.items.length > 1) {
+    } else {
       this.show();
     }
   };
@@ -8079,6 +7745,16 @@ var MenuButton = function (_ClickableComponent) {
   MenuButton.prototype.createMenu = function createMenu() {
     var menu = new _menu2['default'](this.player_);
 
+    /**
+     * Hide the menu if the number of items is less than or equal to this threshold. This defaults
+     * to 0 and whenever we add items which can be hidden to the menu we'll increment it. We list
+     * it here because every time we run `createMenu` we need to reset the value.
+     *
+     * @protected
+     * @type {Number}
+     */
+    this.hideThreshold_ = 0;
+
     // Add a title list item to the top
     if (this.options_.title) {
       var title = Dom.createEl('li', {
@@ -8086,6 +7762,8 @@ var MenuButton = function (_ClickableComponent) {
         innerHTML: (0, _toTitleCase2['default'])(this.options_.title),
         tabIndex: -1
       });
+
+      this.hideThreshold_ += 1;
 
       menu.children_.unshift(title);
       Dom.insertElFirst(title, menu.contentEl());
@@ -8384,6 +8062,9 @@ var MenuItem = function (_ClickableComponent) {
 
 
   MenuItem.prototype.createEl = function createEl(type, props, attrs) {
+    // The control is textual, not just an icon
+    this.nonIconControl = true;
+
     return _ClickableComponent.prototype.createEl.call(this, 'li', (0, _obj.assign)({
       className: 'vjs-menu-item',
       innerHTML: this.localize(this.options_.label),
@@ -8867,7 +8548,7 @@ var ModalDialog = function (_Component) {
       // playing state.
       this.wasPlaying_ = !player.paused();
 
-      if (this.wasPlaying_) {
+      if (this.options_.pauseOnOpen && this.wasPlaying_) {
         player.pause();
       }
 
@@ -8934,7 +8615,7 @@ var ModalDialog = function (_Component) {
       this.trigger('beforemodalclose');
       this.opened_ = false;
 
-      if (this.wasPlaying_) {
+      if (this.wasPlaying_ && this.options_.pauseOnOpen) {
         player.play();
       }
 
@@ -9132,6 +8813,7 @@ var ModalDialog = function (_Component) {
 
 
 ModalDialog.prototype.options_ = {
+  pauseOnOpen: true,
   temporary: true
 };
 
@@ -9139,168 +8821,333 @@ _component2['default'].registerComponent('ModalDialog', ModalDialog);
 exports['default'] = ModalDialog;
 
 },{"5":5,"81":81,"83":83}],51:[function(_dereq_,module,exports){
-'use strict';exports.__esModule=true;var _component=_dereq_(5);var _component2=_interopRequireDefault(_component);var _document=_dereq_(94);var _document2=_interopRequireDefault(_document);var _window=_dereq_(95);var _window2=_interopRequireDefault(_window);var _events=_dereq_(82);var Events=_interopRequireWildcard(_events);var _dom=_dereq_(81);var Dom=_interopRequireWildcard(_dom);var _fn=_dereq_(83);var Fn=_interopRequireWildcard(_fn);var _guid=_dereq_(85);var Guid=_interopRequireWildcard(_guid);var _browser=_dereq_(78);var browser=_interopRequireWildcard(_browser);var _log=_dereq_(86);var _log2=_interopRequireDefault(_log);var _toTitleCase=_dereq_(91);var _toTitleCase2=_interopRequireDefault(_toTitleCase);var _timeRanges=_dereq_(90);var _buffer=_dereq_(79);var _stylesheet=_dereq_(89);var stylesheet=_interopRequireWildcard(_stylesheet);var _fullscreenApi=_dereq_(44);var _fullscreenApi2=_interopRequireDefault(_fullscreenApi);var _mediaError=_dereq_(46);var _mediaError2=_interopRequireDefault(_mediaError);var _tuple=_dereq_(97);var _tuple2=_interopRequireDefault(_tuple);var _obj=_dereq_(88);var _mergeOptions=_dereq_(87);var _mergeOptions2=_interopRequireDefault(_mergeOptions);var _textTrackListConverter=_dereq_(69);var _textTrackListConverter2=_interopRequireDefault(_textTrackListConverter);var _modalDialog=_dereq_(50);var _modalDialog2=_interopRequireDefault(_modalDialog);var _tech=_dereq_(62);var _tech2=_interopRequireDefault(_tech);var _audioTrackList=_dereq_(63);var _audioTrackList2=_interopRequireDefault(_audioTrackList);var _videoTrackList=_dereq_(76);var _videoTrackList2=_interopRequireDefault(_videoTrackList);_dereq_(61);_dereq_(59);_dereq_(55);_dereq_(68);_dereq_(45);_dereq_(1);_dereq_(4);_dereq_(8);_dereq_(41);_dereq_(71);_dereq_(60);function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else{var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj['default']=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{'default':obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}/**
- * @file player.js
- */// Subclasses Component
+'use strict';
+
+exports.__esModule = true;
+
+var _component = _dereq_(5);
+
+var _component2 = _interopRequireDefault(_component);
+
+var _document = _dereq_(94);
+
+var _document2 = _interopRequireDefault(_document);
+
+var _window = _dereq_(95);
+
+var _window2 = _interopRequireDefault(_window);
+
+var _events = _dereq_(82);
+
+var Events = _interopRequireWildcard(_events);
+
+var _dom = _dereq_(81);
+
+var Dom = _interopRequireWildcard(_dom);
+
+var _fn = _dereq_(83);
+
+var Fn = _interopRequireWildcard(_fn);
+
+var _guid = _dereq_(85);
+
+var Guid = _interopRequireWildcard(_guid);
+
+var _browser = _dereq_(78);
+
+var browser = _interopRequireWildcard(_browser);
+
+var _log = _dereq_(86);
+
+var _log2 = _interopRequireDefault(_log);
+
+var _toTitleCase = _dereq_(91);
+
+var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
+
+var _timeRanges = _dereq_(90);
+
+var _buffer = _dereq_(79);
+
+var _stylesheet = _dereq_(89);
+
+var stylesheet = _interopRequireWildcard(_stylesheet);
+
+var _fullscreenApi = _dereq_(44);
+
+var _fullscreenApi2 = _interopRequireDefault(_fullscreenApi);
+
+var _mediaError = _dereq_(46);
+
+var _mediaError2 = _interopRequireDefault(_mediaError);
+
+var _tuple = _dereq_(97);
+
+var _tuple2 = _interopRequireDefault(_tuple);
+
+var _obj = _dereq_(88);
+
+var _mergeOptions = _dereq_(87);
+
+var _mergeOptions2 = _interopRequireDefault(_mergeOptions);
+
+var _textTrackListConverter = _dereq_(69);
+
+var _textTrackListConverter2 = _interopRequireDefault(_textTrackListConverter);
+
+var _modalDialog = _dereq_(50);
+
+var _modalDialog2 = _interopRequireDefault(_modalDialog);
+
+var _tech = _dereq_(62);
+
+var _tech2 = _interopRequireDefault(_tech);
+
+var _audioTrackList = _dereq_(63);
+
+var _audioTrackList2 = _interopRequireDefault(_audioTrackList);
+
+var _videoTrackList = _dereq_(76);
+
+var _videoTrackList2 = _interopRequireDefault(_videoTrackList);
+
+_dereq_(61);
+
+_dereq_(59);
+
+_dereq_(55);
+
+_dereq_(68);
+
+_dereq_(45);
+
+_dereq_(1);
+
+_dereq_(4);
+
+_dereq_(8);
+
+_dereq_(41);
+
+_dereq_(71);
+
+_dereq_(60);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @file player.js
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+// Subclasses Component
+
+
 // The following imports are used only to ensure that the corresponding modules
 // are always included in the video.js package. Importing the modules will
 // execute them and they will register themselves with video.js.
+
+
 // Import Html5 tech, at least for disposing the original video tag.
+
+
 // The following tech events are simply re-triggered
 // on the player when they happen
-var TECH_EVENTS_RETRIGGER=[/**
-   * Fired while the user agent is downloading media data.
-   *
-   * @event Player#progress
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `progress` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechProgress_
-   * @fires Player#progress
-   * @listens Tech#progress
-   */'progress',/**
-   * Fires when the loading of an audio/video is aborted.
-   *
-   * @event Player#abort
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `abort` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechAbort_
-   * @fires Player#abort
-   * @listens Tech#abort
-   */'abort',/**
-   * Fires when the browser is intentionally not getting media data.
-   *
-   * @event Player#suspend
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `suspend` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechSuspend_
-   * @fires Player#suspend
-   * @listens Tech#suspend
-   */'suspend',/**
-   * Fires when the current playlist is empty.
-   *
-   * @event Player#emptied
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `emptied` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechEmptied_
-   * @fires Player#emptied
-   * @listens Tech#emptied
-   */'emptied',/**
-   * Fires when the browser is trying to get media data, but data is not available.
-   *
-   * @event Player#stalled
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `stalled` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechStalled_
-   * @fires Player#stalled
-   * @listens Tech#stalled
-   */'stalled',/**
-   * Fires when the browser has loaded meta data for the audio/video.
-   *
-   * @event Player#loadedmetadata
-   * @type {EventTarget~Event}
-   *//**
-   * Retrigger the `stalled` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechLoadedmetadata_
-   * @fires Player#loadedmetadata
-   * @listens Tech#loadedmetadata
-   */'loadedmetadata',/**
-   * Fires when the browser has loaded the current frame of the audio/video.
-   *
-   * @event player#loadeddata
-   * @type {event}
-   *//**
-   * Retrigger the `loadeddata` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechLoaddeddata_
-   * @fires Player#loadeddata
-   * @listens Tech#loadeddata
-   */'loadeddata',/**
-   * Fires when the current playback position has changed.
-   *
-   * @event player#timeupdate
-   * @type {event}
-   *//**
-   * Retrigger the `timeupdate` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechTimeUpdate_
-   * @fires Player#timeupdate
-   * @listens Tech#timeupdate
-   */'timeupdate',/**
-   * Fires when the playing speed of the audio/video is changed
-   *
-   * @event player#ratechange
-   * @type {event}
-   *//**
-   * Retrigger the `ratechange` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechRatechange_
-   * @fires Player#ratechange
-   * @listens Tech#ratechange
-   */'ratechange',/**
-   * Fires when the volume has been changed
-   *
-   * @event player#volumechange
-   * @type {event}
-   *//**
-   * Retrigger the `volumechange` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechVolumechange_
-   * @fires Player#volumechange
-   * @listens Tech#volumechange
-   */'volumechange',/**
-   * Fires when the text track has been changed
-   *
-   * @event player#texttrackchange
-   * @type {event}
-   *//**
-   * Retrigger the `texttrackchange` event that was triggered by the {@link Tech}.
-   *
-   * @private
-   * @method Player.prototype.handleTechTexttrackchange_
-   * @fires Player#texttrackchange
-   * @listens Tech#texttrackchange
-   */'texttrackchange'];/**
+var TECH_EVENTS_RETRIGGER = [
+/**
+ * Fired while the user agent is downloading media data.
+ *
+ * @event Player#progress
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `progress` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechProgress_
+ * @fires Player#progress
+ * @listens Tech#progress
+ */
+'progress',
+
+/**
+ * Fires when the loading of an audio/video is aborted.
+ *
+ * @event Player#abort
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `abort` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechAbort_
+ * @fires Player#abort
+ * @listens Tech#abort
+ */
+'abort',
+
+/**
+ * Fires when the browser is intentionally not getting media data.
+ *
+ * @event Player#suspend
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `suspend` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechSuspend_
+ * @fires Player#suspend
+ * @listens Tech#suspend
+ */
+'suspend',
+
+/**
+ * Fires when the current playlist is empty.
+ *
+ * @event Player#emptied
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `emptied` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechEmptied_
+ * @fires Player#emptied
+ * @listens Tech#emptied
+ */
+'emptied',
+/**
+ * Fires when the browser is trying to get media data, but data is not available.
+ *
+ * @event Player#stalled
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `stalled` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechStalled_
+ * @fires Player#stalled
+ * @listens Tech#stalled
+ */
+'stalled',
+
+/**
+ * Fires when the browser has loaded meta data for the audio/video.
+ *
+ * @event Player#loadedmetadata
+ * @type {EventTarget~Event}
+ */
+/**
+ * Retrigger the `stalled` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechLoadedmetadata_
+ * @fires Player#loadedmetadata
+ * @listens Tech#loadedmetadata
+ */
+'loadedmetadata',
+
+/**
+ * Fires when the browser has loaded the current frame of the audio/video.
+ *
+ * @event player#loadeddata
+ * @type {event}
+ */
+/**
+ * Retrigger the `loadeddata` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechLoaddeddata_
+ * @fires Player#loadeddata
+ * @listens Tech#loadeddata
+ */
+'loadeddata',
+
+/**
+ * Fires when the current playback position has changed.
+ *
+ * @event player#timeupdate
+ * @type {event}
+ */
+/**
+ * Retrigger the `timeupdate` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechTimeUpdate_
+ * @fires Player#timeupdate
+ * @listens Tech#timeupdate
+ */
+'timeupdate',
+
+/**
+ * Fires when the playing speed of the audio/video is changed
+ *
+ * @event player#ratechange
+ * @type {event}
+ */
+/**
+ * Retrigger the `ratechange` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechRatechange_
+ * @fires Player#ratechange
+ * @listens Tech#ratechange
+ */
+'ratechange',
+
+/**
+ * Fires when the volume has been changed
+ *
+ * @event player#volumechange
+ * @type {event}
+ */
+/**
+ * Retrigger the `volumechange` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechVolumechange_
+ * @fires Player#volumechange
+ * @listens Tech#volumechange
+ */
+'volumechange',
+
+/**
+ * Fires when the text track has been changed
+ *
+ * @event player#texttrackchange
+ * @type {event}
+ */
+/**
+ * Retrigger the `texttrackchange` event that was triggered by the {@link Tech}.
+ *
+ * @private
+ * @method Player#handleTechTexttrackchange_
+ * @fires Player#texttrackchange
+ * @listens Tech#texttrackchange
+ */
+'texttrackchange'];
+
+/**
  * An instance of the `Player` class is created when any of the Video.js setup methods
  * are used to initialize a video.
- * ```js
- *   var myPlayer = videojs('example_video_1');
- * ```
- *
- * In the following example, the `data-setup` attribute tells the Video.js library to
- * create a player instance when the library is ready.
- * ```html
- *   <video id="example_video_1" data-setup='{}' controls>
- *     <source src="my-source.mp4" type="video/mp4">
- *   </video>
- * ```
  *
  * After an instance has been created it can be accessed globally in two ways:
  * 1. By calling `videojs('example_video_1');`
  * 2. By using it directly via  `videojs.players.example_video_1;`
  *
  * @extends Component
- */var Player=function(_Component){_inherits(Player,_Component);/**
+ */
+
+var Player = function (_Component) {
+  _inherits(Player, _Component);
+
+  /**
    * Create an instance of this class.
    *
    * @param {Element} tag
@@ -9311,106 +9158,328 @@ var TECH_EVENTS_RETRIGGER=[/**
    *
    * @param {Component~ReadyCallback} [ready]
    *        Ready callback function.
-   */function Player(tag,options,ready){_classCallCheck(this,Player);// Make sure tag ID exists
-tag.id=tag.id||'vjs_video_'+Guid.newGUID();// Set Options
-// The options argument overrides options set in the video tag
-// which overrides globally set options.
-// This latter part coincides with the load order
-// (tag must exist before Player)
-options=(0,_obj.assign)(Player.getTagSettings(tag),options);// Delay the initialization of children because we need to set up
-// player properties first, and can't use `this` before `super()`
-options.initChildren=false;// Same with creating the element
-options.createEl=false;// we don't want the player to report touch activity on itself
-// see enableTouchActivity in Component
-options.reportTouchActivity=false;// If language is not set, get the closest lang attribute
-if(!options.language){if(typeof tag.closest==='function'){var closest=tag.closest('[lang]');if(closest){options.language=closest.getAttribute('lang');}}else{var element=tag;while(element&&element.nodeType===1){if(Dom.getElAttributes(element).hasOwnProperty('lang')){options.language=element.getAttribute('lang');break;}element=element.parentNode;}}}// Run base component initializing with new options
-// if the global option object was accidentally blown away by
-// someone, bail early with an informative error
-var _this=_possibleConstructorReturn(this,_Component.call(this,null,options,ready));if(!_this.options_||!_this.options_.techOrder||!_this.options_.techOrder.length){throw new Error('No techOrder specified. Did you overwrite '+'videojs.options instead of just changing the '+'properties you want to override?');}// Store the original tag used to set options
-_this.tag=tag;// Store the tag attributes used to restore html5 element
-_this.tagAttributes=tag&&Dom.getElAttributes(tag);// Update current language
-_this.language(_this.options_.language);// Update Supported Languages
-if(options.languages){(function(){// Normalise player option languages to lowercase
-var languagesToLower={};Object.getOwnPropertyNames(options.languages).forEach(function(name){languagesToLower[name.toLowerCase()]=options.languages[name];});_this.languages_=languagesToLower;})();}else{_this.languages_=Player.prototype.options_.languages;}// Cache for video property values.
-_this.cache_={};// Set poster
-_this.poster_=options.poster||'';// Set controls
-_this.controls_=!!options.controls;// Original tag settings stored in options
-// now remove immediately so native controls don't flash.
-// May be turned back on by HTML5 tech if nativeControlsForTouch is true
-tag.controls=false;/*
+   */
+  function Player(tag, options, ready) {
+    _classCallCheck(this, Player);
+
+    // Make sure tag ID exists
+    tag.id = tag.id || 'vjs_video_' + Guid.newGUID();
+
+    // Set Options
+    // The options argument overrides options set in the video tag
+    // which overrides globally set options.
+    // This latter part coincides with the load order
+    // (tag must exist before Player)
+    options = (0, _obj.assign)(Player.getTagSettings(tag), options);
+
+    // Delay the initialization of children because we need to set up
+    // player properties first, and can't use `this` before `super()`
+    options.initChildren = false;
+
+    // Same with creating the element
+    options.createEl = false;
+
+    // we don't want the player to report touch activity on itself
+    // see enableTouchActivity in Component
+    options.reportTouchActivity = false;
+
+    // If language is not set, get the closest lang attribute
+    if (!options.language) {
+      if (typeof tag.closest === 'function') {
+        var closest = tag.closest('[lang]');
+
+        if (closest) {
+          options.language = closest.getAttribute('lang');
+        }
+      } else {
+        var element = tag;
+
+        while (element && element.nodeType === 1) {
+          if (Dom.getElAttributes(element).hasOwnProperty('lang')) {
+            options.language = element.getAttribute('lang');
+            break;
+          }
+          element = element.parentNode;
+        }
+      }
+    }
+
+    // Run base component initializing with new options
+
+    // if the global option object was accidentally blown away by
+    // someone, bail early with an informative error
+    var _this = _possibleConstructorReturn(this, _Component.call(this, null, options, ready));
+
+    if (!_this.options_ || !_this.options_.techOrder || !_this.options_.techOrder.length) {
+      throw new Error('No techOrder specified. Did you overwrite ' + 'videojs.options instead of just changing the ' + 'properties you want to override?');
+    }
+
+    // Store the original tag used to set options
+    _this.tag = tag;
+
+    // Store the tag attributes used to restore html5 element
+    _this.tagAttributes = tag && Dom.getElAttributes(tag);
+
+    // Update current language
+    _this.language(_this.options_.language);
+
+    // Update Supported Languages
+    if (options.languages) {
+      // Normalise player option languages to lowercase
+      var languagesToLower = {};
+
+      Object.getOwnPropertyNames(options.languages).forEach(function (name) {
+        languagesToLower[name.toLowerCase()] = options.languages[name];
+      });
+      _this.languages_ = languagesToLower;
+    } else {
+      _this.languages_ = Player.prototype.options_.languages;
+    }
+
+    // Cache for video property values.
+    _this.cache_ = {};
+
+    // Set poster
+    _this.poster_ = options.poster || '';
+
+    // Set controls
+    _this.controls_ = !!options.controls;
+
+    // Original tag settings stored in options
+    // now remove immediately so native controls don't flash.
+    // May be turned back on by HTML5 tech if nativeControlsForTouch is true
+    tag.controls = false;
+
+    /*
      * Store the internal state of scrubbing
      *
      * @private
      * @return {Boolean} True if the user is scrubbing
-     */_this.scrubbing_=false;_this.el_=_this.createEl();// We also want to pass the original player options to each component and plugin
-// as well so they don't need to reach back into the player for options later.
-// We also need to do another copy of this.options_ so we don't end up with
-// an infinite loop.
-var playerOptionsCopy=(0,_mergeOptions2['default'])(_this.options_);// Load plugins
-if(options.plugins){(function(){var plugins=options.plugins;Object.getOwnPropertyNames(plugins).forEach(function(name){if(typeof this[name]==='function'){this[name](plugins[name]);}else{_log2['default'].error('Unable to find plugin:',name);}},_this);})();}_this.options_.playerOptions=playerOptionsCopy;_this.initChildren();// Set isAudio based on whether or not an audio tag was used
-_this.isAudio(tag.nodeName.toLowerCase()==='audio');// Update controls className. Can't do this when the controls are initially
-// set because the element doesn't exist yet.
-if(_this.controls()){_this.addClass('vjs-controls-enabled');}else{_this.addClass('vjs-controls-disabled');}// Set ARIA label and region role depending on player type
-_this.el_.setAttribute('role','region');if(_this.isAudio()){_this.el_.setAttribute('aria-label','audio player');}else{_this.el_.setAttribute('aria-label','video player');}if(_this.isAudio()){_this.addClass('vjs-audio');}if(_this.flexNotSupported_()){_this.addClass('vjs-no-flex');}// TODO: Make this smarter. Toggle user state between touching/mousing
-// using events, since devices can have both touch and mouse events.
-// if (browser.TOUCH_ENABLED) {
-//   this.addClass('vjs-touch-enabled');
-// }
-// iOS Safari has broken hover handling
-if(!browser.IS_IOS){_this.addClass('vjs-workinghover');}// Make player easily findable by ID
-Player.players[_this.id_]=_this;// When the player is first initialized, trigger activity so components
-// like the control bar show themselves if needed
-_this.userActive(true);_this.reportUserActivity();_this.listenForUserActivity_();_this.on('fullscreenchange',_this.handleFullscreenChange_);_this.on('stageclick',_this.handleStageClick_);return _this;}/**
+     */
+    _this.scrubbing_ = false;
+
+    _this.el_ = _this.createEl();
+
+    // We also want to pass the original player options to each component and plugin
+    // as well so they don't need to reach back into the player for options later.
+    // We also need to do another copy of this.options_ so we don't end up with
+    // an infinite loop.
+    var playerOptionsCopy = (0, _mergeOptions2['default'])(_this.options_);
+
+    // Load plugins
+    if (options.plugins) {
+      var plugins = options.plugins;
+
+      Object.getOwnPropertyNames(plugins).forEach(function (name) {
+        if (typeof this[name] === 'function') {
+          this[name](plugins[name]);
+        } else {
+          _log2['default'].error('Unable to find plugin:', name);
+        }
+      }, _this);
+    }
+
+    _this.options_.playerOptions = playerOptionsCopy;
+
+    _this.initChildren();
+
+    // Set isAudio based on whether or not an audio tag was used
+    _this.isAudio(tag.nodeName.toLowerCase() === 'audio');
+
+    // Update controls className. Can't do this when the controls are initially
+    // set because the element doesn't exist yet.
+    if (_this.controls()) {
+      _this.addClass('vjs-controls-enabled');
+    } else {
+      _this.addClass('vjs-controls-disabled');
+    }
+
+    // Set ARIA label and region role depending on player type
+    _this.el_.setAttribute('role', 'region');
+    if (_this.isAudio()) {
+      _this.el_.setAttribute('aria-label', 'audio player');
+    } else {
+      _this.el_.setAttribute('aria-label', 'video player');
+    }
+
+    if (_this.isAudio()) {
+      _this.addClass('vjs-audio');
+    }
+
+    if (_this.flexNotSupported_()) {
+      _this.addClass('vjs-no-flex');
+    }
+
+    // TODO: Make this smarter. Toggle user state between touching/mousing
+    // using events, since devices can have both touch and mouse events.
+    // if (browser.TOUCH_ENABLED) {
+    //   this.addClass('vjs-touch-enabled');
+    // }
+
+    // iOS Safari has broken hover handling
+    if (!browser.IS_IOS) {
+      _this.addClass('vjs-workinghover');
+    }
+
+    // Make player easily findable by ID
+    Player.players[_this.id_] = _this;
+
+    // When the player is first initialized, trigger activity so components
+    // like the control bar show themselves if needed
+    _this.userActive(true);
+    _this.reportUserActivity();
+    _this.listenForUserActivity_();
+
+    _this.on('fullscreenchange', _this.handleFullscreenChange_);
+    _this.on('stageclick', _this.handleStageClick_);
+    return _this;
+  }
+
+  /**
    * Destroys the video player and does any necessary cleanup.
    *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     myPlayer.dispose();
-   *   });
-   * ```
    * This is especially helpful if you are dynamically adding and removing videos
    * to/from the DOM.
    *
    * @fires Player#dispose
-   */Player.prototype.dispose=function dispose(){/**
+   */
+
+
+  Player.prototype.dispose = function dispose() {
+    /**
      * Called when the player is being disposed of.
      *
      * @event Player#dispose
      * @type {EventTarget~Event}
-     */this.trigger('dispose');// prevent dispose from being called twice
-this.off('dispose');if(this.styleEl_&&this.styleEl_.parentNode){this.styleEl_.parentNode.removeChild(this.styleEl_);}// Kill reference to this player
-Player.players[this.id_]=null;if(this.tag&&this.tag.player){this.tag.player=null;}if(this.el_&&this.el_.player){this.el_.player=null;}if(this.tech_){this.tech_.dispose();}_Component.prototype.dispose.call(this);};/**
+     */
+    this.trigger('dispose');
+    // prevent dispose from being called twice
+    this.off('dispose');
+
+    if (this.styleEl_ && this.styleEl_.parentNode) {
+      this.styleEl_.parentNode.removeChild(this.styleEl_);
+    }
+
+    // Kill reference to this player
+    Player.players[this.id_] = null;
+
+    if (this.tag && this.tag.player) {
+      this.tag.player = null;
+    }
+
+    if (this.el_ && this.el_.player) {
+      this.el_.player = null;
+    }
+
+    if (this.tech_) {
+      this.tech_.dispose();
+    }
+
+    _Component.prototype.dispose.call(this);
+  };
+
+  /**
    * Create the `Player`'s DOM element.
    *
    * @return {Element}
    *         The DOM element that gets created.
-   */Player.prototype.createEl=function createEl(){var el=this.el_=_Component.prototype.createEl.call(this,'div');var tag=this.tag;// Remove width/height attrs from tag so CSS can make it 100% width/height
-tag.removeAttribute('width');tag.removeAttribute('height');// Copy over all the attributes from the tag, including ID and class
-// ID will now reference player box, not the video tag
-var attrs=Dom.getElAttributes(tag);Object.getOwnPropertyNames(attrs).forEach(function(attr){// workaround so we don't totally break IE7
-// http://stackoverflow.com/questions/3653444/css-styles-not-applied-on-dynamic-elements-in-internet-explorer-7
-if(attr==='class'){el.className=attrs[attr];}else{el.setAttribute(attr,attrs[attr]);}});// Update tag id/class for use as HTML5 playback tech
-// Might think we should do this after embedding in container so .vjs-tech class
-// doesn't flash 100% width/height, but class only applies with .video-js parent
-tag.playerId=tag.id;tag.id+='_html5_api';tag.className='vjs-tech';// Make player findable on elements
-tag.player=el.player=this;// Default state of video is paused
-this.addClass('vjs-paused');// Add a style element in the player that we'll use to set the width/height
-// of the player in a way that's still overrideable by CSS, just like the
-// video element
-if(_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE!==true){this.styleEl_=stylesheet.createStyleElement('vjs-styles-dimensions');var defaultsStyleEl=Dom.$('.vjs-styles-defaults');var head=Dom.$('head');head.insertBefore(this.styleEl_,defaultsStyleEl?defaultsStyleEl.nextSibling:head.firstChild);}// Pass in the width/height/aspectRatio options which will update the style el
-this.width(this.options_.width);this.height(this.options_.height);this.fluid(this.options_.fluid);this.aspectRatio(this.options_.aspectRatio);// Hide any links within the video/audio tag, because IE doesn't hide them completely.
-var links=tag.getElementsByTagName('a');for(var i=0;i<links.length;i++){var linkEl=links.item(i);Dom.addElClass(linkEl,'vjs-hidden');linkEl.setAttribute('hidden','hidden');}// insertElFirst seems to cause the networkState to flicker from 3 to 2, so
-// keep track of the original for later so we can know if the source originally failed
-tag.initNetworkState_=tag.networkState;// Wrap video tag in div (el/box) container
-if(tag.parentNode){tag.parentNode.insertBefore(el,tag);}// insert the tag as the first child of the player element
-// then manually add it to the children array so that this.addChild
-// will work properly for other components
-//
-// Breaks iPhone, fixed in HTML5 setup.
-Dom.insertElFirst(tag,el);this.children_.unshift(tag);this.el_=el;return el;};/**
+   */
+
+
+  Player.prototype.createEl = function createEl() {
+    var tag = this.tag;
+    var el = void 0;
+    var playerElIngest = this.playerElIngest_ = tag.parentNode && tag.parentNode.hasAttribute && tag.parentNode.hasAttribute('data-vjs-player');
+
+    if (playerElIngest) {
+      el = this.el_ = tag.parentNode;
+    } else {
+      el = this.el_ = _Component.prototype.createEl.call(this, 'div');
+    }
+
+    // set tabindex to -1 so we could focus on the player element
+    tag.setAttribute('tabindex', '-1');
+
+    // Remove width/height attrs from tag so CSS can make it 100% width/height
+    tag.removeAttribute('width');
+    tag.removeAttribute('height');
+
+    // Copy over all the attributes from the tag, including ID and class
+    // ID will now reference player box, not the video tag
+    var attrs = Dom.getElAttributes(tag);
+
+    Object.getOwnPropertyNames(attrs).forEach(function (attr) {
+      // workaround so we don't totally break IE7
+      // http://stackoverflow.com/questions/3653444/css-styles-not-applied-on-dynamic-elements-in-internet-explorer-7
+      if (attr === 'class') {
+        el.className += ' ' + attrs[attr];
+      } else {
+        el.setAttribute(attr, attrs[attr]);
+      }
+    });
+
+    // Update tag id/class for use as HTML5 playback tech
+    // Might think we should do this after embedding in container so .vjs-tech class
+    // doesn't flash 100% width/height, but class only applies with .video-js parent
+    tag.playerId = tag.id;
+    tag.id += '_html5_api';
+    tag.className = 'vjs-tech';
+
+    // Make player findable on elements
+    tag.player = el.player = this;
+    // Default state of video is paused
+    this.addClass('vjs-paused');
+
+    // Add a style element in the player that we'll use to set the width/height
+    // of the player in a way that's still overrideable by CSS, just like the
+    // video element
+    if (_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE !== true) {
+      this.styleEl_ = stylesheet.createStyleElement('vjs-styles-dimensions');
+      var defaultsStyleEl = Dom.$('.vjs-styles-defaults');
+      var head = Dom.$('head');
+
+      head.insertBefore(this.styleEl_, defaultsStyleEl ? defaultsStyleEl.nextSibling : head.firstChild);
+    }
+
+    // Pass in the width/height/aspectRatio options which will update the style el
+    this.width(this.options_.width);
+    this.height(this.options_.height);
+    this.fluid(this.options_.fluid);
+    this.aspectRatio(this.options_.aspectRatio);
+
+    // Hide any links within the video/audio tag, because IE doesn't hide them completely.
+    var links = tag.getElementsByTagName('a');
+
+    for (var i = 0; i < links.length; i++) {
+      var linkEl = links.item(i);
+
+      Dom.addElClass(linkEl, 'vjs-hidden');
+      linkEl.setAttribute('hidden', 'hidden');
+    }
+
+    // insertElFirst seems to cause the networkState to flicker from 3 to 2, so
+    // keep track of the original for later so we can know if the source originally failed
+    tag.initNetworkState_ = tag.networkState;
+
+    // Wrap video tag in div (el/box) container
+    if (tag.parentNode && !playerElIngest) {
+      tag.parentNode.insertBefore(el, tag);
+    }
+
+    // insert the tag as the first child of the player element
+    // then manually add it to the children array so that this.addChild
+    // will work properly for other components
+    //
+    // Breaks iPhone, fixed in HTML5 setup.
+    Dom.insertElFirst(tag, el);
+    this.children_.unshift(tag);
+
+    this.el_ = el;
+
+    return el;
+  };
+
+  /**
    * A getter/setter for the `Player`'s width.
    *
    * @param {number} [value]
@@ -9418,7 +9487,14 @@ Dom.insertElFirst(tag,el);this.children_.unshift(tag);this.el_=el;return el;};/*
    *
    * @return {number}
    *         The current width of the `Player`.
-   */Player.prototype.width=function width(value){return this.dimension('width',value);};/**
+   */
+
+
+  Player.prototype.width = function width(value) {
+    return this.dimension('width', value);
+  };
+
+  /**
    * A getter/setter for the `Player`'s height.
    *
    * @param {number} [value]
@@ -9426,7 +9502,14 @@ Dom.insertElFirst(tag,el);this.children_.unshift(tag);this.el_=el;return el;};/*
    *
    * @return {number}
    *         The current heigth of the `Player`.
-   */Player.prototype.height=function height(value){return this.dimension('height',value);};/**
+   */
+
+
+  Player.prototype.height = function height(value) {
+    return this.dimension('height', value);
+  };
+
+  /**
    * A getter/setter for the `Player`'s width & height.
    *
    * @param {string} dimension
@@ -9440,8 +9523,35 @@ Dom.insertElFirst(tag,el);this.children_.unshift(tag);this.el_=el;return el;};/*
    * @return {Player|number}
    *         - Returns itself when setting; method can be chained.
    *         - The dimension arguments value when getting (width/height).
-   */Player.prototype.dimension=function dimension(_dimension,value){var privDimension=_dimension+'_';if(value===undefined){return this[privDimension]||0;}if(value===''){// If an empty string is given, reset the dimension to be automatic
-this[privDimension]=undefined;}else{var parsedVal=parseFloat(value);if(isNaN(parsedVal)){_log2['default'].error('Improper value "'+value+'" supplied for for '+_dimension);return this;}this[privDimension]=parsedVal;}this.updateStyleEl_();return this;};/**
+   */
+
+
+  Player.prototype.dimension = function dimension(_dimension, value) {
+    var privDimension = _dimension + '_';
+
+    if (value === undefined) {
+      return this[privDimension] || 0;
+    }
+
+    if (value === '') {
+      // If an empty string is given, reset the dimension to be automatic
+      this[privDimension] = undefined;
+    } else {
+      var parsedVal = parseFloat(value);
+
+      if (isNaN(parsedVal)) {
+        _log2['default'].error('Improper value "' + value + '" supplied for for ' + _dimension);
+        return this;
+      }
+
+      this[privDimension] = parsedVal;
+    }
+
+    this.updateStyleEl_();
+    return this;
+  };
+
+  /**
    * A getter/setter/toggler for the vjs-fluid `className` on the `Player`.
    *
    * @param {boolean} [bool]
@@ -9452,7 +9562,26 @@ this[privDimension]=undefined;}else{var parsedVal=parseFloat(value);if(isNaN(par
    * @return {boolean|undefined}
    *         - The value of fluid when getting.
    *         - `undefined` when setting.
-   */Player.prototype.fluid=function fluid(bool){if(bool===undefined){return!!this.fluid_;}this.fluid_=!!bool;if(bool){this.addClass('vjs-fluid');}else{this.removeClass('vjs-fluid');}this.updateStyleEl_();};/**
+   */
+
+
+  Player.prototype.fluid = function fluid(bool) {
+    if (bool === undefined) {
+      return !!this.fluid_;
+    }
+
+    this.fluid_ = !!bool;
+
+    if (bool) {
+      this.addClass('vjs-fluid');
+    } else {
+      this.removeClass('vjs-fluid');
+    }
+
+    this.updateStyleEl_();
+  };
+
+  /**
    * Get/Set the aspect ratio
    *
    * @param {string} [ratio]
@@ -9460,7 +9589,9 @@ this[privDimension]=undefined;}else{var parsedVal=parseFloat(value);if(isNaN(par
    *
    * @return {string|undefined}
    *         returns the current aspect ratio when getting
-   *//**
+   */
+
+  /**
    * A getter/setter for the `Player`'s aspect ratio.
    *
    * @param {string} [ratio]
@@ -9469,27 +9600,107 @@ this[privDimension]=undefined;}else{var parsedVal=parseFloat(value);if(isNaN(par
    * @return {string|undefined}
    *         - The current aspect ratio of the `Player` when getting.
    *         - undefined when setting
-   */Player.prototype.aspectRatio=function aspectRatio(ratio){if(ratio===undefined){return this.aspectRatio_;}// Check for width:height format
-if(!/^\d+\:\d+$/.test(ratio)){throw new Error('Improper value supplied for aspect ratio. The format should be width:height, for example 16:9.');}this.aspectRatio_=ratio;// We're assuming if you set an aspect ratio you want fluid mode,
-// because in fixed mode you could calculate width and height yourself.
-this.fluid(true);this.updateStyleEl_();};/**
+   */
+
+
+  Player.prototype.aspectRatio = function aspectRatio(ratio) {
+    if (ratio === undefined) {
+      return this.aspectRatio_;
+    }
+
+    // Check for width:height format
+    if (!/^\d+\:\d+$/.test(ratio)) {
+      throw new Error('Improper value supplied for aspect ratio. The format should be width:height, for example 16:9.');
+    }
+    this.aspectRatio_ = ratio;
+
+    // We're assuming if you set an aspect ratio you want fluid mode,
+    // because in fixed mode you could calculate width and height yourself.
+    this.fluid(true);
+
+    this.updateStyleEl_();
+  };
+
+  /**
    * Update styles of the `Player` element (height, width and aspect ratio).
    *
    * @private
    * @listens Tech#loadedmetadata
-   */Player.prototype.updateStyleEl_=function updateStyleEl_(){if(_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE===true){var _width=typeof this.width_==='number'?this.width_:this.options_.width;var _height=typeof this.height_==='number'?this.height_:this.options_.height;var techEl=this.tech_&&this.tech_.el();if(techEl){if(_width>=0){techEl.width=_width;}if(_height>=0){techEl.height=_height;}}return;}var width=void 0;var height=void 0;var aspectRatio=void 0;var idClass=void 0;// The aspect ratio is either used directly or to calculate width and height.
-if(this.aspectRatio_!==undefined&&this.aspectRatio_!=='auto'){// Use any aspectRatio that's been specifically set
-aspectRatio=this.aspectRatio_;}else if(this.videoWidth()>0){// Otherwise try to get the aspect ratio from the video metadata
-aspectRatio=this.videoWidth()+':'+this.videoHeight();}else{// Or use a default. The video element's is 2:1, but 16:9 is more common.
-aspectRatio='16:9';}// Get the ratio as a decimal we can use to calculate dimensions
-var ratioParts=aspectRatio.split(':');var ratioMultiplier=ratioParts[1]/ratioParts[0];if(this.width_!==undefined){// Use any width that's been specifically set
-width=this.width_;}else if(this.height_!==undefined){// Or calulate the width from the aspect ratio if a height has been set
-width=this.height_/ratioMultiplier;}else{// Or use the video's metadata, or use the video el's default of 300
-width=this.videoWidth()||300;}if(this.height_!==undefined){// Use any height that's been specifically set
-height=this.height_;}else{// Otherwise calculate the height from the ratio and the width
-height=width*ratioMultiplier;}// Ensure the CSS class is valid by starting with an alpha character
-if(/^[^a-zA-Z]/.test(this.id())){idClass='dimensions-'+this.id();}else{idClass=this.id()+'-dimensions';}// Ensure the right class is still on the player for the style element
-this.addClass(idClass);stylesheet.setTextContent(this.styleEl_,'\n      .'+idClass+' {\n        width: '+width+'px;\n        height: '+height+'px;\n      }\n\n      .'+idClass+'.vjs-fluid {\n        padding-top: '+ratioMultiplier*100+'%;\n      }\n    ');};/**
+   */
+
+
+  Player.prototype.updateStyleEl_ = function updateStyleEl_() {
+    if (_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE === true) {
+      var _width = typeof this.width_ === 'number' ? this.width_ : this.options_.width;
+      var _height = typeof this.height_ === 'number' ? this.height_ : this.options_.height;
+      var techEl = this.tech_ && this.tech_.el();
+
+      if (techEl) {
+        if (_width >= 0) {
+          techEl.width = _width;
+        }
+        if (_height >= 0) {
+          techEl.height = _height;
+        }
+      }
+
+      return;
+    }
+
+    var width = void 0;
+    var height = void 0;
+    var aspectRatio = void 0;
+    var idClass = void 0;
+
+    // The aspect ratio is either used directly or to calculate width and height.
+    if (this.aspectRatio_ !== undefined && this.aspectRatio_ !== 'auto') {
+      // Use any aspectRatio that's been specifically set
+      aspectRatio = this.aspectRatio_;
+    } else if (this.videoWidth() > 0) {
+      // Otherwise try to get the aspect ratio from the video metadata
+      aspectRatio = this.videoWidth() + ':' + this.videoHeight();
+    } else {
+      // Or use a default. The video element's is 2:1, but 16:9 is more common.
+      aspectRatio = '16:9';
+    }
+
+    // Get the ratio as a decimal we can use to calculate dimensions
+    var ratioParts = aspectRatio.split(':');
+    var ratioMultiplier = ratioParts[1] / ratioParts[0];
+
+    if (this.width_ !== undefined) {
+      // Use any width that's been specifically set
+      width = this.width_;
+    } else if (this.height_ !== undefined) {
+      // Or calulate the width from the aspect ratio if a height has been set
+      width = this.height_ / ratioMultiplier;
+    } else {
+      // Or use the video's metadata, or use the video el's default of 300
+      width = this.videoWidth() || 300;
+    }
+
+    if (this.height_ !== undefined) {
+      // Use any height that's been specifically set
+      height = this.height_;
+    } else {
+      // Otherwise calculate the height from the ratio and the width
+      height = width * ratioMultiplier;
+    }
+
+    // Ensure the CSS class is valid by starting with an alpha character
+    if (/^[^a-zA-Z]/.test(this.id())) {
+      idClass = 'dimensions-' + this.id();
+    } else {
+      idClass = this.id() + '-dimensions';
+    }
+
+    // Ensure the right class is still on the player for the style element
+    this.addClass(idClass);
+
+    stylesheet.setTextContent(this.styleEl_, '\n      .' + idClass + ' {\n        width: ' + width + 'px;\n        height: ' + height + 'px;\n      }\n\n      .' + idClass + '.vjs-fluid {\n        padding-top: ' + ratioMultiplier * 100 + '%;\n      }\n    ');
+  };
+
+  /**
    * Load/Create an instance of playback {@link Tech} including element
    * and API methods. Then append the `Tech` element in `Player` as a child.
    *
@@ -9500,38 +9711,145 @@ this.addClass(idClass);stylesheet.setTextContent(this.styleEl_,'\n      .'+idCla
    *        video source
    *
    * @private
-   */Player.prototype.loadTech_=function loadTech_(techName,source){var _this2=this;// Pause and remove current playback technology
-if(this.tech_){this.unloadTech_();}// get rid of the HTML5 video tag as soon as we are using another tech
-if(techName!=='Html5'&&this.tag){_tech2['default'].getTech('Html5').disposeMediaElement(this.tag);this.tag.player=null;this.tag=null;}this.techName_=techName;// Turn off API access because we're loading a new tech that might load asynchronously
-this.isReady_=false;// Grab tech-specific options from player options and add source and parent element to use.
-var techOptions=(0,_obj.assign)({source:source,'nativeControlsForTouch':this.options_.nativeControlsForTouch,'playerId':this.id(),'techId':this.id()+'_'+techName+'_api','videoTracks':this.videoTracks_,'textTracks':this.textTracks_,'audioTracks':this.audioTracks_,'autoplay':this.options_.autoplay,'preload':this.options_.preload,'loop':this.options_.loop,'muted':this.options_.muted,'poster':this.poster(),'language':this.language(),'vtt.js':this.options_['vtt.js']},this.options_[techName.toLowerCase()]);if(this.tag){techOptions.tag=this.tag;}if(source){this.currentType_=source.type;if(source.src===this.cache_.src&&this.cache_.currentTime>0){techOptions.startTime=this.cache_.currentTime;}this.cache_.sources=null;this.cache_.source=source;this.cache_.src=source.src;}// Initialize tech instance
-var TechComponent=_tech2['default'].getTech(techName);// Support old behavior of techs being registered as components.
-// Remove once that deprecated behavior is removed.
-if(!TechComponent){TechComponent=_component2['default'].getComponent(techName);}this.tech_=new TechComponent(techOptions);// player.triggerReady is always async, so don't need this to be async
-this.tech_.ready(Fn.bind(this,this.handleTechReady_),true);_textTrackListConverter2['default'].jsonToTextTracks(this.textTracksJson_||[],this.tech_);// Listen to all HTML5-defined events and trigger them on the player
-TECH_EVENTS_RETRIGGER.forEach(function(event){_this2.on(_this2.tech_,event,_this2['handleTech'+(0,_toTitleCase2['default'])(event)+'_']);});this.on(this.tech_,'loadstart',this.handleTechLoadStart_);this.on(this.tech_,'waiting',this.handleTechWaiting_);this.on(this.tech_,'canplay',this.handleTechCanPlay_);this.on(this.tech_,'canplaythrough',this.handleTechCanPlayThrough_);this.on(this.tech_,'playing',this.handleTechPlaying_);this.on(this.tech_,'ended',this.handleTechEnded_);this.on(this.tech_,'seeking',this.handleTechSeeking_);this.on(this.tech_,'seeked',this.handleTechSeeked_);this.on(this.tech_,'play',this.handleTechPlay_);this.on(this.tech_,'firstplay',this.handleTechFirstPlay_);this.on(this.tech_,'pause',this.handleTechPause_);this.on(this.tech_,'durationchange',this.handleTechDurationChange_);this.on(this.tech_,'fullscreenchange',this.handleTechFullscreenChange_);this.on(this.tech_,'error',this.handleTechError_);this.on(this.tech_,'loadedmetadata',this.updateStyleEl_);this.on(this.tech_,'posterchange',this.handleTechPosterChange_);this.on(this.tech_,'textdata',this.handleTechTextData_);this.usingNativeControls(this.techGet_('controls'));if(this.controls()&&!this.usingNativeControls()){this.addTechControlsListeners_();}// Add the tech element in the DOM if it was not already there
-// Make sure to not insert the original video element if using Html5
-if(this.tech_.el().parentNode!==this.el()&&(techName!=='Html5'||!this.tag)){Dom.insertElFirst(this.tech_.el(),this.el());}// Get rid of the original video tag reference after the first tech is loaded
-if(this.tag){this.tag.player=null;this.tag=null;}};/**
+   */
+
+
+  Player.prototype.loadTech_ = function loadTech_(techName, source) {
+    var _this2 = this;
+
+    // Pause and remove current playback technology
+    if (this.tech_) {
+      this.unloadTech_();
+    }
+
+    // get rid of the HTML5 video tag as soon as we are using another tech
+    if (techName !== 'Html5' && this.tag) {
+      _tech2['default'].getTech('Html5').disposeMediaElement(this.tag);
+      this.tag.player = null;
+      this.tag = null;
+    }
+
+    this.techName_ = techName;
+
+    // Turn off API access because we're loading a new tech that might load asynchronously
+    this.isReady_ = false;
+
+    // Grab tech-specific options from player options and add source and parent element to use.
+    var techOptions = (0, _obj.assign)({
+      source: source,
+      'nativeControlsForTouch': this.options_.nativeControlsForTouch,
+      'playerId': this.id(),
+      'techId': this.id() + '_' + techName + '_api',
+      'videoTracks': this.videoTracks_,
+      'textTracks': this.textTracks_,
+      'audioTracks': this.audioTracks_,
+      'autoplay': this.options_.autoplay,
+      'preload': this.options_.preload,
+      'loop': this.options_.loop,
+      'muted': this.options_.muted,
+      'poster': this.poster(),
+      'language': this.language(),
+      'playerElIngest': this.playerElIngest_ || false,
+      'vtt.js': this.options_['vtt.js']
+    }, this.options_[techName.toLowerCase()]);
+
+    if (this.tag) {
+      techOptions.tag = this.tag;
+    }
+
+    if (source) {
+      this.currentType_ = source.type;
+
+      if (source.src === this.cache_.src && this.cache_.currentTime > 0) {
+        techOptions.startTime = this.cache_.currentTime;
+      }
+
+      this.cache_.sources = null;
+      this.cache_.source = source;
+      this.cache_.src = source.src;
+    }
+
+    // Initialize tech instance
+    var TechComponent = _tech2['default'].getTech(techName);
+
+    // Support old behavior of techs being registered as components.
+    // Remove once that deprecated behavior is removed.
+    if (!TechComponent) {
+      TechComponent = _component2['default'].getComponent(techName);
+    }
+    this.tech_ = new TechComponent(techOptions);
+
+    // player.triggerReady is always async, so don't need this to be async
+    this.tech_.ready(Fn.bind(this, this.handleTechReady_), true);
+
+    _textTrackListConverter2['default'].jsonToTextTracks(this.textTracksJson_ || [], this.tech_);
+
+    // Listen to all HTML5-defined events and trigger them on the player
+    TECH_EVENTS_RETRIGGER.forEach(function (event) {
+      _this2.on(_this2.tech_, event, _this2['handleTech' + (0, _toTitleCase2['default'])(event) + '_']);
+    });
+    this.on(this.tech_, 'loadstart', this.handleTechLoadStart_);
+    this.on(this.tech_, 'waiting', this.handleTechWaiting_);
+    this.on(this.tech_, 'canplay', this.handleTechCanPlay_);
+    this.on(this.tech_, 'canplaythrough', this.handleTechCanPlayThrough_);
+    this.on(this.tech_, 'playing', this.handleTechPlaying_);
+    this.on(this.tech_, 'ended', this.handleTechEnded_);
+    this.on(this.tech_, 'seeking', this.handleTechSeeking_);
+    this.on(this.tech_, 'seeked', this.handleTechSeeked_);
+    this.on(this.tech_, 'play', this.handleTechPlay_);
+    this.on(this.tech_, 'firstplay', this.handleTechFirstPlay_);
+    this.on(this.tech_, 'pause', this.handleTechPause_);
+    this.on(this.tech_, 'durationchange', this.handleTechDurationChange_);
+    this.on(this.tech_, 'fullscreenchange', this.handleTechFullscreenChange_);
+    this.on(this.tech_, 'error', this.handleTechError_);
+    this.on(this.tech_, 'loadedmetadata', this.updateStyleEl_);
+    this.on(this.tech_, 'posterchange', this.handleTechPosterChange_);
+    this.on(this.tech_, 'textdata', this.handleTechTextData_);
+
+    this.usingNativeControls(this.techGet_('controls'));
+
+    if (this.controls() && !this.usingNativeControls()) {
+      this.addTechControlsListeners_();
+    }
+
+    // Add the tech element in the DOM if it was not already there
+    // Make sure to not insert the original video element if using Html5
+    if (this.tech_.el().parentNode !== this.el() && (techName !== 'Html5' || !this.tag)) {
+      Dom.insertElFirst(this.tech_.el(), this.el());
+    }
+
+    // Get rid of the original video tag reference after the first tech is loaded
+    if (this.tag) {
+      this.tag.player = null;
+      this.tag = null;
+    }
+  };
+
+  /**
    * Unload and dispose of the current playback {@link Tech}.
    *
    * @private
-   */Player.prototype.unloadTech_=function unloadTech_(){// Save the current text tracks so that we can reuse the same text tracks with the next tech
-this.videoTracks_=this.videoTracks();this.textTracks_=this.textTracks();this.audioTracks_=this.audioTracks();this.textTracksJson_=_textTrackListConverter2['default'].textTracksToJson(this.tech_);this.isReady_=false;this.tech_.dispose();this.tech_=false;};/**
+   */
+
+
+  Player.prototype.unloadTech_ = function unloadTech_() {
+    // Save the current text tracks so that we can reuse the same text tracks with the next tech
+    this.videoTracks_ = this.videoTracks();
+    this.textTracks_ = this.textTracks();
+    this.audioTracks_ = this.audioTracks();
+    this.textTracksJson_ = _textTrackListConverter2['default'].textTracksToJson(this.tech_);
+
+    this.isReady_ = false;
+
+    this.tech_.dispose();
+
+    this.tech_ = false;
+  };
+
+  /**
    * Return a reference to the current {@link Tech}, but only if given an object with the
    * `IWillNotUseThisInPlugins` property having a true value. This is try and prevent misuse
    * of techs by plugins.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *      // function call throws an error if we
-   *       // dont add {IWillNotUseThisInPlugins: true}
-   *      var tech = myPlayer.tech({IWillNotUseThisInPlugins: true});
-   *   });
-   * ```
    *
    * @param {Object} safety
    *        An object that must contain `{IWillNotUseThisInPlugins: true}`
@@ -9541,7 +9859,20 @@ this.videoTracks_=this.videoTracks();this.textTracks_=this.textTracks();this.aud
    *
    * @return {Tech}
    *         The Tech
-   */Player.prototype.tech=function tech(safety){if(safety&&safety.IWillNotUseThisInPlugins){return this.tech_;}var errorText='\n      Please make sure that you are not using this inside of a plugin.\n      To disable this alert and error, please pass in an object with\n      `IWillNotUseThisInPlugins` to the `tech` method. See\n      https://github.com/videojs/video.js/issues/2617 for more info.\n    ';_window2['default'].alert(errorText);throw new Error(errorText);};/**
+   */
+
+
+  Player.prototype.tech = function tech(safety) {
+    if (safety && safety.IWillNotUseThisInPlugins) {
+      return this.tech_;
+    }
+    var errorText = '\n      Please make sure that you are not using this inside of a plugin.\n      To disable this alert and error, please pass in an object with\n      `IWillNotUseThisInPlugins` to the `tech` method. See\n      https://github.com/videojs/video.js/issues/2617 for more info.\n    ';
+
+    _window2['default'].alert(errorText);
+    throw new Error(errorText);
+  };
+
+  /**
    * Set up click and touch listeners for the playback element
    *
    * - On desktops: a click on the video itself will toggle playback
@@ -9561,36 +9892,86 @@ this.videoTracks_=this.videoTracks();this.textTracks_=this.textTracks();this.aud
    * on any controls will still keep the user active
    *
    * @private
-   */Player.prototype.addTechControlsListeners_=function addTechControlsListeners_(){// Make sure to remove all the previous listeners in case we are called multiple times.
-this.removeTechControlsListeners_();// Some browsers (Chrome & IE) don't trigger a click on a flash swf, but do
-// trigger mousedown/up.
-// http://stackoverflow.com/questions/1444562/javascript-onclick-event-over-flash-object
-// Any touch events are set to block the mousedown event from happening
-this.on(this.tech_,'mousedown',this.handleTechClick_);// If the controls were hidden we don't want that to change without a tap event
-// so we'll check if the controls were already showing before reporting user
-// activity
-this.on(this.tech_,'touchstart',this.handleTechTouchStart_);this.on(this.tech_,'touchmove',this.handleTechTouchMove_);this.on(this.tech_,'touchend',this.handleTechTouchEnd_);// The tap listener needs to come after the touchend listener because the tap
-// listener cancels out any reportedUserActivity when setting userActive(false)
-this.on(this.tech_,'tap',this.handleTechTap_);};/**
+   */
+
+
+  Player.prototype.addTechControlsListeners_ = function addTechControlsListeners_() {
+    // Make sure to remove all the previous listeners in case we are called multiple times.
+    this.removeTechControlsListeners_();
+
+    // Some browsers (Chrome & IE) don't trigger a click on a flash swf, but do
+    // trigger mousedown/up.
+    // http://stackoverflow.com/questions/1444562/javascript-onclick-event-over-flash-object
+    // Any touch events are set to block the mousedown event from happening
+    this.on(this.tech_, 'mousedown', this.handleTechClick_);
+
+    // If the controls were hidden we don't want that to change without a tap event
+    // so we'll check if the controls were already showing before reporting user
+    // activity
+    this.on(this.tech_, 'touchstart', this.handleTechTouchStart_);
+    this.on(this.tech_, 'touchmove', this.handleTechTouchMove_);
+    this.on(this.tech_, 'touchend', this.handleTechTouchEnd_);
+
+    // The tap listener needs to come after the touchend listener because the tap
+    // listener cancels out any reportedUserActivity when setting userActive(false)
+    this.on(this.tech_, 'tap', this.handleTechTap_);
+  };
+
+  /**
    * Remove the listeners used for click and tap controls. This is needed for
    * toggling to controls disabled, where a tap/touch should do nothing.
    *
    * @private
-   */Player.prototype.removeTechControlsListeners_=function removeTechControlsListeners_(){// We don't want to just use `this.off()` because there might be other needed
-// listeners added by techs that extend this.
-this.off(this.tech_,'tap',this.handleTechTap_);this.off(this.tech_,'touchstart',this.handleTechTouchStart_);this.off(this.tech_,'touchmove',this.handleTechTouchMove_);this.off(this.tech_,'touchend',this.handleTechTouchEnd_);this.off(this.tech_,'mousedown',this.handleTechClick_);};/**
+   */
+
+
+  Player.prototype.removeTechControlsListeners_ = function removeTechControlsListeners_() {
+    // We don't want to just use `this.off()` because there might be other needed
+    // listeners added by techs that extend this.
+    this.off(this.tech_, 'tap', this.handleTechTap_);
+    this.off(this.tech_, 'touchstart', this.handleTechTouchStart_);
+    this.off(this.tech_, 'touchmove', this.handleTechTouchMove_);
+    this.off(this.tech_, 'touchend', this.handleTechTouchEnd_);
+    this.off(this.tech_, 'mousedown', this.handleTechClick_);
+  };
+
+  /**
    * Player waits for the tech to be ready
    *
    * @private
-   */Player.prototype.handleTechReady_=function handleTechReady_(){this.triggerReady();// Keep the same volume as before
-if(this.cache_.volume){this.techCall_('setVolume',this.cache_.volume);}// Look if the tech found a higher resolution poster while loading
-this.handleTechPosterChange_();// Update the duration if available
-this.handleTechDurationChange_();// Chrome and Safari both have issues with autoplay.
-// In Safari (5.1.1), when we move the video element into the container div, autoplay doesn't work.
-// In Chrome (15), if you have autoplay + a poster + no controls, the video gets hidden (but audio plays)
-// This fixes both issues. Need to wait for API, so it updates displays correctly
-if((this.src()||this.currentSrc())&&this.tag&&this.options_.autoplay&&this.paused()){try{// Chrome Fix. Fixed in Chrome v16.
-delete this.tag.poster;}catch(e){(0,_log2['default'])('deleting tag.poster throws in some browsers',e);}this.play();}};/**
+   */
+
+
+  Player.prototype.handleTechReady_ = function handleTechReady_() {
+    this.triggerReady();
+
+    // Keep the same volume as before
+    if (this.cache_.volume) {
+      this.techCall_('setVolume', this.cache_.volume);
+    }
+
+    // Look if the tech found a higher resolution poster while loading
+    this.handleTechPosterChange_();
+
+    // Update the duration if available
+    this.handleTechDurationChange_();
+
+    // Chrome and Safari both have issues with autoplay.
+    // In Safari (5.1.1), when we move the video element into the container div, autoplay doesn't work.
+    // In Chrome (15), if you have autoplay + a poster + no controls, the video gets hidden (but audio plays)
+    // This fixes both issues. Need to wait for API, so it updates displays correctly
+    if ((this.src() || this.currentSrc()) && this.tag && this.options_.autoplay && this.paused()) {
+      try {
+        // Chrome Fix. Fixed in Chrome v16.
+        delete this.tag.poster;
+      } catch (e) {
+        (0, _log2['default'])('deleting tag.poster throws in some browsers', e);
+      }
+      this.play();
+    }
+  };
+
+  /**
    * Retrigger the `loadstart` event that was triggered by the {@link Tech}. This
    * function will also trigger {@link Player#firstplay} if it is the first loadstart
    * for a video.
@@ -9599,18 +9980,38 @@ delete this.tag.poster;}catch(e){(0,_log2['default'])('deleting tag.poster throw
    * @fires Player#firstplay
    * @listens Tech#loadstart
    * @private
-   */Player.prototype.handleTechLoadStart_=function handleTechLoadStart_(){// TODO: Update to use `emptied` event instead. See #1277.
-this.removeClass('vjs-ended');// reset the error state
-this.error(null);// If it's already playing we want to trigger a firstplay event now.
-// The firstplay event relies on both the play and loadstart events
-// which can happen in any order for a new source
-if(!this.paused()){/**
+   */
+
+
+  Player.prototype.handleTechLoadStart_ = function handleTechLoadStart_() {
+    // TODO: Update to use `emptied` event instead. See #1277.
+
+    this.removeClass('vjs-ended');
+    this.removeClass('vjs-seeking');
+
+    // reset the error state
+    this.error(null);
+
+    // If it's already playing we want to trigger a firstplay event now.
+    // The firstplay event relies on both the play and loadstart events
+    // which can happen in any order for a new source
+    if (!this.paused()) {
+      /**
        * Fired when the user agent begins looking for media data
        *
        * @event Player#loadstart
        * @type {EventTarget~Event}
-       */this.trigger('loadstart');this.trigger('firstplay');}else{// reset the hasStarted state
-this.hasStarted(false);this.trigger('loadstart');}};/**
+       */
+      this.trigger('loadstart');
+      this.trigger('firstplay');
+    } else {
+      // reset the hasStarted state
+      this.hasStarted(false);
+      this.trigger('loadstart');
+    }
+  };
+
+  /**
    * Add/remove the vjs-has-started class
    *
    * @fires Player#firstplay
@@ -9621,133 +10022,272 @@ this.hasStarted(false);this.trigger('loadstart');}};/**
    *
    * @return {boolean}
    *         the boolean value of hasStarted
-   */Player.prototype.hasStarted=function hasStarted(_hasStarted){if(_hasStarted!==undefined){// only update if this is a new value
-if(this.hasStarted_!==_hasStarted){this.hasStarted_=_hasStarted;if(_hasStarted){this.addClass('vjs-has-started');// trigger the firstplay event if this newly has played
-this.trigger('firstplay');}else{this.removeClass('vjs-has-started');}}return this;}return!!this.hasStarted_;};/**
+   */
+
+
+  Player.prototype.hasStarted = function hasStarted(_hasStarted) {
+    if (_hasStarted !== undefined) {
+      // only update if this is a new value
+      if (this.hasStarted_ !== _hasStarted) {
+        this.hasStarted_ = _hasStarted;
+        if (_hasStarted) {
+          this.addClass('vjs-has-started');
+          // trigger the firstplay event if this newly has played
+          this.trigger('firstplay');
+        } else {
+          this.removeClass('vjs-has-started');
+        }
+      }
+      return this;
+    }
+    return !!this.hasStarted_;
+  };
+
+  /**
    * Fired whenever the media begins or resumes playback
    *
    * @see [Spec]{@link https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-play}
    * @fires Player#play
    * @listens Tech#play
    * @private
-   */Player.prototype.handleTechPlay_=function handleTechPlay_(){this.removeClass('vjs-ended');this.removeClass('vjs-paused');this.addClass('vjs-playing');// hide the poster when the user hits play
-this.hasStarted(true);/**
+   */
+
+
+  Player.prototype.handleTechPlay_ = function handleTechPlay_() {
+    this.removeClass('vjs-ended');
+    this.removeClass('vjs-paused');
+    this.addClass('vjs-playing');
+
+    // hide the poster when the user hits play
+    this.hasStarted(true);
+    /**
      * Triggered whenever an {@link Tech#play} event happens. Indicates that
      * playback has started or resumed.
      *
      * @event Player#play
      * @type {EventTarget~Event}
-     */this.trigger('play');};/**
+     */
+    this.trigger('play');
+  };
+
+  /**
    * Retrigger the `waiting` event that was triggered by the {@link Tech}.
    *
    * @fires Player#waiting
    * @listens Tech#waiting
    * @private
-   */Player.prototype.handleTechWaiting_=function handleTechWaiting_(){var _this3=this;this.addClass('vjs-waiting');/**
+   */
+
+
+  Player.prototype.handleTechWaiting_ = function handleTechWaiting_() {
+    var _this3 = this;
+
+    this.addClass('vjs-waiting');
+    /**
      * A readyState change on the DOM element has caused playback to stop.
      *
      * @event Player#waiting
      * @type {EventTarget~Event}
-     */this.trigger('waiting');this.one('timeupdate',function(){return _this3.removeClass('vjs-waiting');});};/**
+     */
+    this.trigger('waiting');
+    this.one('timeupdate', function () {
+      return _this3.removeClass('vjs-waiting');
+    });
+  };
+
+  /**
    * Retrigger the `canplay` event that was triggered by the {@link Tech}.
    * > Note: This is not consistent between browsers. See #1351
    *
    * @fires Player#canplay
    * @listens Tech#canplay
    * @private
-   */Player.prototype.handleTechCanPlay_=function handleTechCanPlay_(){this.removeClass('vjs-waiting');/**
+   */
+
+
+  Player.prototype.handleTechCanPlay_ = function handleTechCanPlay_() {
+    this.removeClass('vjs-waiting');
+    /**
      * The media has a readyState of HAVE_FUTURE_DATA or greater.
      *
      * @event Player#canplay
      * @type {EventTarget~Event}
-     */this.trigger('canplay');};/**
+     */
+    this.trigger('canplay');
+  };
+
+  /**
    * Retrigger the `canplaythrough` event that was triggered by the {@link Tech}.
    *
    * @fires Player#canplaythrough
    * @listens Tech#canplaythrough
    * @private
-   */Player.prototype.handleTechCanPlayThrough_=function handleTechCanPlayThrough_(){this.removeClass('vjs-waiting');/**
+   */
+
+
+  Player.prototype.handleTechCanPlayThrough_ = function handleTechCanPlayThrough_() {
+    this.removeClass('vjs-waiting');
+    /**
      * The media has a readyState of HAVE_ENOUGH_DATA or greater. This means that the
      * entire media file can be played without buffering.
      *
      * @event Player#canplaythrough
      * @type {EventTarget~Event}
-     */this.trigger('canplaythrough');};/**
+     */
+    this.trigger('canplaythrough');
+  };
+
+  /**
    * Retrigger the `playing` event that was triggered by the {@link Tech}.
    *
    * @fires Player#playing
    * @listens Tech#playing
    * @private
-   */Player.prototype.handleTechPlaying_=function handleTechPlaying_(){this.removeClass('vjs-waiting');/**
+   */
+
+
+  Player.prototype.handleTechPlaying_ = function handleTechPlaying_() {
+    this.removeClass('vjs-waiting');
+    /**
      * The media is no longer blocked from playback, and has started playing.
      *
      * @event Player#playing
      * @type {EventTarget~Event}
-     */this.trigger('playing');};/**
+     */
+    this.trigger('playing');
+  };
+
+  /**
    * Retrigger the `seeking` event that was triggered by the {@link Tech}.
    *
    * @fires Player#seeking
    * @listens Tech#seeking
    * @private
-   */Player.prototype.handleTechSeeking_=function handleTechSeeking_(){this.addClass('vjs-seeking');/**
+   */
+
+
+  Player.prototype.handleTechSeeking_ = function handleTechSeeking_() {
+    this.addClass('vjs-seeking');
+    /**
      * Fired whenever the player is jumping to a new time
      *
      * @event Player#seeking
      * @type {EventTarget~Event}
-     */this.trigger('seeking');};/**
+     */
+    this.trigger('seeking');
+  };
+
+  /**
    * Retrigger the `seeked` event that was triggered by the {@link Tech}.
    *
    * @fires Player#seeked
    * @listens Tech#seeked
    * @private
-   */Player.prototype.handleTechSeeked_=function handleTechSeeked_(){this.removeClass('vjs-seeking');/**
+   */
+
+
+  Player.prototype.handleTechSeeked_ = function handleTechSeeked_() {
+    this.removeClass('vjs-seeking');
+    /**
      * Fired when the player has finished jumping to a new time
      *
      * @event Player#seeked
      * @type {EventTarget~Event}
-     */this.trigger('seeked');};/**
+     */
+    this.trigger('seeked');
+  };
+
+  /**
    * Retrigger the `firstplay` event that was triggered by the {@link Tech}.
    *
    * @fires Player#firstplay
    * @listens Tech#firstplay
+   * @deprecated As of 6.0 passing the `starttime` option to the player will be deprecated
    * @private
-   */Player.prototype.handleTechFirstPlay_=function handleTechFirstPlay_(){// If the first starttime attribute is specified
-// then we will start at the given offset in seconds
-if(this.options_.starttime){this.currentTime(this.options_.starttime);}this.addClass('vjs-has-started');/**
+   */
+
+
+  Player.prototype.handleTechFirstPlay_ = function handleTechFirstPlay_() {
+    // If the first starttime attribute is specified
+    // then we will start at the given offset in seconds
+    if (this.options_.starttime) {
+      _log2['default'].warn('Passing the `starttime` option to the player will be deprecated in 6.0');
+      this.currentTime(this.options_.starttime);
+    }
+
+    this.addClass('vjs-has-started');
+    /**
      * Fired the first time a video is played. Not part of the HLS spec, and this is
      * probably not the best implementation yet, so use sparingly. If you don't have a
      * reason to prevent playback, use `myPlayer.one('play');` instead.
      *
      * @event Player#firstplay
      * @type {EventTarget~Event}
-     */this.trigger('firstplay');};/**
+     */
+    this.trigger('firstplay');
+  };
+
+  /**
    * Retrigger the `pause` event that was triggered by the {@link Tech}.
    *
    * @fires Player#pause
    * @listens Tech#pause
    * @private
-   */Player.prototype.handleTechPause_=function handleTechPause_(){this.removeClass('vjs-playing');this.addClass('vjs-paused');/**
+   */
+
+
+  Player.prototype.handleTechPause_ = function handleTechPause_() {
+    this.removeClass('vjs-playing');
+    this.addClass('vjs-paused');
+    /**
      * Fired whenever the media has been paused
      *
      * @event Player#pause
      * @type {EventTarget~Event}
-     */this.trigger('pause');};/**
+     */
+    this.trigger('pause');
+  };
+
+  /**
    * Retrigger the `ended` event that was triggered by the {@link Tech}.
    *
    * @fires Player#ended
    * @listens Tech#ended
    * @private
-   */Player.prototype.handleTechEnded_=function handleTechEnded_(){this.addClass('vjs-ended');if(this.options_.loop){this.currentTime(0);this.play();}else if(!this.paused()){this.pause();}/**
+   */
+
+
+  Player.prototype.handleTechEnded_ = function handleTechEnded_() {
+    this.addClass('vjs-ended');
+    if (this.options_.loop) {
+      this.currentTime(0);
+      this.play();
+    } else if (!this.paused()) {
+      this.pause();
+    }
+
+    /**
      * Fired when the end of the media resource is reached (currentTime == duration)
      *
      * @event Player#ended
      * @type {EventTarget~Event}
-     */this.trigger('ended');};/**
+     */
+    this.trigger('ended');
+  };
+
+  /**
    * Fired when the duration of the media resource is first known or changed
    *
    * @listens Tech#durationchange
    * @private
-   */Player.prototype.handleTechDurationChange_=function handleTechDurationChange_(){this.duration(this.techGet_('duration'));};/**
+   */
+
+
+  Player.prototype.handleTechDurationChange_ = function handleTechDurationChange_() {
+    this.duration(this.techGet_('duration'));
+  };
+
+  /**
    * Handle a click on the media element to play/pause
    *
    * @param {EventTarget~Event} event
@@ -9755,27 +10295,67 @@ if(this.options_.starttime){this.currentTime(this.options_.starttime);}this.addC
    *
    * @listens Tech#mousedown
    * @private
-   */Player.prototype.handleTechClick_=function handleTechClick_(event){// We're using mousedown to detect clicks thanks to Flash, but mousedown
-// will also be triggered with right-clicks, so we need to prevent that
-if(event.button!==0){return;}// When controls are disabled a click should not toggle playback because
-// the click is considered a control
-if(this.controls()){if(this.paused()){this.play();}else{this.pause();}}};/**
+   */
+
+
+  Player.prototype.handleTechClick_ = function handleTechClick_(event) {
+    // We're using mousedown to detect clicks thanks to Flash, but mousedown
+    // will also be triggered with right-clicks, so we need to prevent that
+    if (event.button !== 0) {
+      return;
+    }
+
+    // When controls are disabled a click should not toggle playback because
+    // the click is considered a control
+    if (this.controls()) {
+      if (this.paused()) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    }
+  };
+
+  /**
    * Handle a tap on the media element. It will toggle the user
    * activity state, which hides and shows the controls.
    *
    * @listens Tech#tap
    * @private
-   */Player.prototype.handleTechTap_=function handleTechTap_(){this.userActive(!this.userActive());};/**
+   */
+
+
+  Player.prototype.handleTechTap_ = function handleTechTap_() {
+    this.userActive(!this.userActive());
+  };
+
+  /**
    * Handle touch to start
    *
    * @listens Tech#touchstart
    * @private
-   */Player.prototype.handleTechTouchStart_=function handleTechTouchStart_(){this.userWasActive=this.userActive();};/**
+   */
+
+
+  Player.prototype.handleTechTouchStart_ = function handleTechTouchStart_() {
+    this.userWasActive = this.userActive();
+  };
+
+  /**
    * Handle touch to move
    *
    * @listens Tech#touchmove
    * @private
-   */Player.prototype.handleTechTouchMove_=function handleTechTouchMove_(){if(this.userWasActive){this.reportUserActivity();}};/**
+   */
+
+
+  Player.prototype.handleTechTouchMove_ = function handleTechTouchMove_() {
+    if (this.userWasActive) {
+      this.reportUserActivity();
+    }
+  };
+
+  /**
    * Handle touch to end
    *
    * @param {EventTarget~Event} event
@@ -9784,19 +10364,44 @@ if(this.controls()){if(this.paused()){this.play();}else{this.pause();}}};/**
    *
    * @listens Tech#touchend
    * @private
-   */Player.prototype.handleTechTouchEnd_=function handleTechTouchEnd_(event){// Stop the mouse events from also happening
-event.preventDefault();};/**
+   */
+
+
+  Player.prototype.handleTechTouchEnd_ = function handleTechTouchEnd_(event) {
+    // Stop the mouse events from also happening
+    event.preventDefault();
+  };
+
+  /**
    * Fired when the player switches in or out of fullscreen mode
    *
    * @private
    * @listens Player#fullscreenchange
-   */Player.prototype.handleFullscreenChange_=function handleFullscreenChange_(){if(this.isFullscreen()){this.addClass('vjs-fullscreen');}else{this.removeClass('vjs-fullscreen');}};/**
+   */
+
+
+  Player.prototype.handleFullscreenChange_ = function handleFullscreenChange_() {
+    if (this.isFullscreen()) {
+      this.addClass('vjs-fullscreen');
+    } else {
+      this.removeClass('vjs-fullscreen');
+    }
+  };
+
+  /**
    * native click events on the SWF aren't triggered on IE11, Win8.1RT
    * use stageclick events triggered from inside the SWF instead
    *
    * @private
    * @listens stageclick
-   */Player.prototype.handleStageClick_=function handleStageClick_(){this.reportUserActivity();};/**
+   */
+
+
+  Player.prototype.handleStageClick_ = function handleStageClick_() {
+    this.reportUserActivity();
+  };
+
+  /**
    * Handle Tech Fullscreen Change
    *
    * @param {EventTarget~Event} event
@@ -9808,33 +10413,74 @@ event.preventDefault();};/**
    * @private
    * @listens Tech#fullscreenchange
    * @fires Player#fullscreenchange
-   */Player.prototype.handleTechFullscreenChange_=function handleTechFullscreenChange_(event,data){if(data){this.isFullscreen(data.isFullscreen);}/**
+   */
+
+
+  Player.prototype.handleTechFullscreenChange_ = function handleTechFullscreenChange_(event, data) {
+    if (data) {
+      this.isFullscreen(data.isFullscreen);
+    }
+    /**
      * Fired when going in and out of fullscreen.
      *
      * @event Player#fullscreenchange
      * @type {EventTarget~Event}
-     */this.trigger('fullscreenchange');};/**
+     */
+    this.trigger('fullscreenchange');
+  };
+
+  /**
    * Fires when an error occurred during the loading of an audio/video.
    *
    * @private
    * @listens Tech#error
-   */Player.prototype.handleTechError_=function handleTechError_(){var error=this.tech_.error();this.error(error);};/**
+   */
+
+
+  Player.prototype.handleTechError_ = function handleTechError_() {
+    var error = this.tech_.error();
+
+    this.error(error);
+  };
+
+  /**
    * Retrigger the `textdata` event that was triggered by the {@link Tech}.
    *
    * @fires Player#textdata
    * @listens Tech#textdata
    * @private
-   */Player.prototype.handleTechTextData_=function handleTechTextData_(){var data=null;if(arguments.length>1){data=arguments[1];}/**
+   */
+
+
+  Player.prototype.handleTechTextData_ = function handleTechTextData_() {
+    var data = null;
+
+    if (arguments.length > 1) {
+      data = arguments[1];
+    }
+
+    /**
      * Fires when we get a textdata event from tech
      *
      * @event Player#textdata
      * @type {EventTarget~Event}
-     */this.trigger('textdata',data);};/**
+     */
+    this.trigger('textdata', data);
+  };
+
+  /**
    * Get object for cached values.
    *
    * @return {Object}
    *         get the current object cache
-   */Player.prototype.getCache=function getCache(){return this.cache_;};/**
+   */
+
+
+  Player.prototype.getCache = function getCache() {
+    return this.cache_;
+  };
+
+  /**
    * Pass values to the playback tech
    *
    * @param {string} [method]
@@ -9844,9 +10490,30 @@ event.preventDefault();};/**
    *        the argument to pass
    *
    * @private
-   */Player.prototype.techCall_=function techCall_(method,arg){// If it's not ready yet, call method when it is
-if(this.tech_&&!this.tech_.isReady_){this.tech_.ready(function(){this[method](arg);},true);// Otherwise call method now
-}else{try{if(this.tech_){this.tech_[method](arg);}}catch(e){(0,_log2['default'])(e);throw e;}}};/**
+   */
+
+
+  Player.prototype.techCall_ = function techCall_(method, arg) {
+    // If it's not ready yet, call method when it is
+    if (this.tech_ && !this.tech_.isReady_) {
+      this.tech_.ready(function () {
+        this[method](arg);
+      }, true);
+
+      // Otherwise call method now
+    } else {
+      try {
+        if (this.tech_) {
+          this.tech_[method](arg);
+        }
+      } catch (e) {
+        (0, _log2['default'])(e);
+        throw e;
+      }
+    }
+  };
+
+  /**
    * Get calls can't wait for the tech, and sometimes don't need to.
    *
    * @param {string} method
@@ -9856,74 +10523,85 @@ if(this.tech_&&!this.tech_.isReady_){this.tech_.ready(function(){this[method](ar
    *         the method or undefined
    *
    * @private
-   */Player.prototype.techGet_=function techGet_(method){if(this.tech_&&this.tech_.isReady_){// Flash likes to die and reload when you hide or reposition it.
-// In these cases the object methods go away and we get errors.
-// When that happens we'll catch the errors and inform tech that it's not ready any more.
-try{return this.tech_[method]();}catch(e){// When building additional tech libs, an expected method may not be defined yet
-if(this.tech_[method]===undefined){(0,_log2['default'])('Video.js: '+method+' method not defined for '+this.techName_+' playback technology.',e);// When a method isn't available on the object it throws a TypeError
-}else if(e.name==='TypeError'){(0,_log2['default'])('Video.js: '+method+' unavailable on '+this.techName_+' playback technology element.',e);this.tech_.isReady_=false;}else{(0,_log2['default'])(e);}throw e;}}return;};/**
+   */
+
+
+  Player.prototype.techGet_ = function techGet_(method) {
+    if (this.tech_ && this.tech_.isReady_) {
+
+      // Flash likes to die and reload when you hide or reposition it.
+      // In these cases the object methods go away and we get errors.
+      // When that happens we'll catch the errors and inform tech that it's not ready any more.
+      try {
+        return this.tech_[method]();
+      } catch (e) {
+        // When building additional tech libs, an expected method may not be defined yet
+        if (this.tech_[method] === undefined) {
+          (0, _log2['default'])('Video.js: ' + method + ' method not defined for ' + this.techName_ + ' playback technology.', e);
+
+          // When a method isn't available on the object it throws a TypeError
+        } else if (e.name === 'TypeError') {
+          (0, _log2['default'])('Video.js: ' + method + ' unavailable on ' + this.techName_ + ' playback technology element.', e);
+          this.tech_.isReady_ = false;
+        } else {
+          (0, _log2['default'])(e);
+        }
+        throw e;
+      }
+    }
+
+    return;
+  };
+
+  /**
    * start media playback
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     myPlayer.play();
-   *   });
-   * ```
    *
    * @return {Player}
    *         A reference to the player object this function was called on
-   */Player.prototype.play=function play(){// Only calls the tech's play if we already have a src loaded
-if(this.src()||this.currentSrc()){this.techCall_('play');}else{this.tech_.one('loadstart',function(){this.play();});}return this;};/**
+   */
+
+
+  Player.prototype.play = function play() {
+    // Only calls the tech's play if we already have a src loaded
+    if (this.src() || this.currentSrc()) {
+      this.techCall_('play');
+    } else {
+      this.tech_.one('loadstart', function () {
+        this.play();
+      });
+    }
+
+    return this;
+  };
+
+  /**
    * Pause the video playback
    *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     myPlayer.play();
-   *     myPlayer.pause();
-   *   });
-   * ```
-   *
    * @return {Player}
    *         A reference to the player object this function was called on
-   */Player.prototype.pause=function pause(){this.techCall_('pause');return this;};/**
+   */
+
+
+  Player.prototype.pause = function pause() {
+    this.techCall_('pause');
+    return this;
+  };
+
+  /**
    * Check if the player is paused or has yet to play
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *
-   *   myPlayer.ready(function() {
-   *     // true
-   *     console.log(myPlayer.paused());
-   *     // false
-   *     console.log(!myPlayer.paused());
-   *
-   *     myPlayer.play();
-   *     // false
-   *     console.log(myPlayer.paused());
-   *     // true
-   *     console.log(!myPlayer.paused());
-   *
-   *     myPlayer.pause();
-   *     // true
-   *     console.log(myPlayer.paused());
-   *     // false
-   *     console.log(!myPlayer.paused());
-   *   });
-   *
-   * ```
    *
    * @return {boolean}
    *         - false: if the media is currently playing
    *         - true: if media is not currently playing
-   */Player.prototype.paused=function paused(){// The initial state of paused should be true (in Safari it's actually false)
-return this.techGet_('paused')===false?false:true;};/**
+   */
+
+
+  Player.prototype.paused = function paused() {
+    // The initial state of paused should be true (in Safari it's actually false)
+    return this.techGet_('paused') === false ? false : true;
+  };
+
+  /**
    * Returns whether or not the user is "scrubbing". Scrubbing is
    * when the user has clicked the progress bar handle and is
    * dragging it along the progress bar.
@@ -9934,47 +10612,59 @@ return this.techGet_('paused')===false?false:true;};/**
    * @return {boolean|Player}
    *         A instance of the player that called this function when setting,
    *         and the value of scrubbing when getting
-   */Player.prototype.scrubbing=function scrubbing(isScrubbing){if(isScrubbing!==undefined){this.scrubbing_=!!isScrubbing;if(isScrubbing){this.addClass('vjs-scrubbing');}else{this.removeClass('vjs-scrubbing');}return this;}return this.scrubbing_;};/**
+   */
+
+
+  Player.prototype.scrubbing = function scrubbing(isScrubbing) {
+    if (isScrubbing !== undefined) {
+      this.scrubbing_ = !!isScrubbing;
+
+      if (isScrubbing) {
+        this.addClass('vjs-scrubbing');
+      } else {
+        this.removeClass('vjs-scrubbing');
+      }
+
+      return this;
+    }
+
+    return this.scrubbing_;
+  };
+
+  /**
    * Get or set the current time (in seconds)
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     // set current time to 2 minutes into the video
-   *     myPlayer.currentTime(120);
-   *
-   *     // get the current time, should be 120 seconds
-   *     var whereYouAt = myPlayer.currentTime();
-   *   });
-   * ```
    *
    * @param {number|string} [seconds]
    *        The time to seek to in seconds
    *
    * @return {Player|number}
    *         - the current time in seconds when getting
-   *         - a reference to the current player object when
-   *           getting
-   */Player.prototype.currentTime=function currentTime(seconds){if(seconds!==undefined){this.techCall_('setCurrentTime',seconds);return this;}// cache last currentTime and return. default to 0 seconds
-//
-// Caching the currentTime is meant to prevent a massive amount of reads on the tech's
-// currentTime when scrubbing, but may not provide much performance benefit afterall.
-// Should be tested. Also something has to read the actual current time or the cache will
-// never get updated.
-this.cache_.currentTime=this.techGet_('currentTime')||0;return this.cache_.currentTime;};/**
+   *         - a reference to the current player object when setting
+   */
+
+
+  Player.prototype.currentTime = function currentTime(seconds) {
+    if (seconds !== undefined) {
+
+      this.techCall_('setCurrentTime', seconds);
+
+      return this;
+    }
+
+    // cache last currentTime and return. default to 0 seconds
+    //
+    // Caching the currentTime is meant to prevent a massive amount of reads on the tech's
+    // currentTime when scrubbing, but may not provide much performance benefit afterall.
+    // Should be tested. Also something has to read the actual current time or the cache will
+    // never get updated.
+    this.cache_.currentTime = this.techGet_('currentTime') || 0;
+    return this.cache_.currentTime;
+  };
+
+  /**
    * Normally gets the length in time of the video in seconds;
    * in all but the rarest use cases an argument will NOT be passed to the method
    *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     var lengthOfVideo = myPlayer.duration();
-   *   });
-   * ```
    * > **NOTE**: The video must have started loading before the duration can be
    * known, and in the case of Flash, may not be known until the video starts
    * playing.
@@ -9988,99 +10678,115 @@ this.cache_.currentTime=this.techGet_('currentTime')||0;return this.cache_.curre
    *         - The duration of the video in seconds when getting
    *         - A reference to the player that called this function
    *           when setting
-   */Player.prototype.duration=function duration(seconds){if(seconds===undefined){return this.cache_.duration||0;}seconds=parseFloat(seconds)||0;// Standardize on Inifity for signaling video is live
-if(seconds<0){seconds=Infinity;}if(seconds!==this.cache_.duration){// Cache the last set value for optimized scrubbing (esp. Flash)
-this.cache_.duration=seconds;if(seconds===Infinity){this.addClass('vjs-live');}else{this.removeClass('vjs-live');}/**
+   */
+
+
+  Player.prototype.duration = function duration(seconds) {
+    if (seconds === undefined) {
+      return this.cache_.duration || 0;
+    }
+
+    seconds = parseFloat(seconds) || 0;
+
+    // Standardize on Inifity for signaling video is live
+    if (seconds < 0) {
+      seconds = Infinity;
+    }
+
+    if (seconds !== this.cache_.duration) {
+      // Cache the last set value for optimized scrubbing (esp. Flash)
+      this.cache_.duration = seconds;
+
+      if (seconds === Infinity) {
+        this.addClass('vjs-live');
+      } else {
+        this.removeClass('vjs-live');
+      }
+      /**
        * @event Player#durationchange
        * @type {EventTarget~Event}
-       */this.trigger('durationchange');}return this;};/**
+       */
+      this.trigger('durationchange');
+    }
+
+    return this;
+  };
+
+  /**
    * Calculates how much time is left in the video. Not part
    * of the native video API.
    *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *      myPlayer.currentTime(10);
-   *
-   *      // should be 10 seconds less than duration
-   *      console.log(myPlayer.remainingTime());
-   *   });
-   * ```
-   *
    * @return {number}
    *         The time remaining in seconds
-   */Player.prototype.remainingTime=function remainingTime(){return this.duration()-this.currentTime();};//
-// Kind of like an array of portions of the video that have been downloaded.
-/**
+   */
+
+
+  Player.prototype.remainingTime = function remainingTime() {
+    return this.duration() - this.currentTime();
+  };
+
+  //
+  // Kind of like an array of portions of the video that have been downloaded.
+
+  /**
    * Get a TimeRange object with an array of the times of the video
    * that have been downloaded. If you just want the percent of the
    * video that's been downloaded, use bufferedPercent.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     var bufferedTimeRange = myPlayer.buffered();
-   *
-   *     // number of different ranges of time have been buffered.
-   *     // Usually 1
-   *     var numberOfRanges = bufferedTimeRange.length,
-   *
-   *     // Time in seconds when the first range starts.
-   *     // Usually 0
-   *     var firstRangeStart = bufferedTimeRange.start(0),
-   *
-   *     // Time in seconds when the first range ends
-   *     var firstRangeEnd = bufferedTimeRange.end(0),
-   *
-   *     // Length in seconds of the first time range
-   *     var firstRangeLength = firstRangeEnd - firstRangeStart;
-   *   });
-   * ```
    *
    * @see [Buffered Spec]{@link http://dev.w3.org/html5/spec/video.html#dom-media-buffered}
    *
    * @return {TimeRange}
    *         A mock TimeRange object (following HTML spec)
-   */Player.prototype.buffered=function buffered(){var buffered=this.techGet_('buffered');if(!buffered||!buffered.length){buffered=(0,_timeRanges.createTimeRange)(0,0);}return buffered;};/**
+   */
+
+
+  Player.prototype.buffered = function buffered() {
+    var buffered = this.techGet_('buffered');
+
+    if (!buffered || !buffered.length) {
+      buffered = (0, _timeRanges.createTimeRange)(0, 0);
+    }
+
+    return buffered;
+  };
+
+  /**
    * Get the percent (as a decimal) of the video that's been downloaded.
    * This method is not a part of the native HTML video API.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     // example 0.11 aka 11%
-   *     var howMuchIsDownloaded = myPlayer.bufferedPercent();
-   *   });
-   * ```
    *
    * @return {number}
    *         A decimal between 0 and 1 representing the percent
    *         that is bufferred 0 being 0% and 1 being 100%
-   */Player.prototype.bufferedPercent=function bufferedPercent(){return(0,_buffer.bufferedPercent)(this.buffered(),this.duration());};/**
+   */
+
+
+  Player.prototype.bufferedPercent = function bufferedPercent() {
+    return (0, _buffer.bufferedPercent)(this.buffered(), this.duration());
+  };
+
+  /**
    * Get the ending time of the last buffered time range
    * This is used in the progress bar to encapsulate all time ranges.
    *
    * @return {number}
    *         The end of the last buffered time range
-   */Player.prototype.bufferedEnd=function bufferedEnd(){var buffered=this.buffered();var duration=this.duration();var end=buffered.end(buffered.length-1);if(end>duration){end=duration;}return end;};/**
+   */
+
+
+  Player.prototype.bufferedEnd = function bufferedEnd() {
+    var buffered = this.buffered();
+    var duration = this.duration();
+    var end = buffered.end(buffered.length - 1);
+
+    if (end > duration) {
+      end = duration;
+    }
+
+    return end;
+  };
+
+  /**
    * Get or set the current volume of the media
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     // get
-   *     var howLoudIsIt = myPlayer.volume();
-   *     // set
-   *     myPlayer.volume(0.5); // Set volume to half
-   *   });
-   * ```
    *
    * @param  {number} [percentAsDecimal]
    *         The new volume as a decimal percent:
@@ -10091,23 +10797,28 @@ this.cache_.duration=seconds;if(seconds===Infinity){this.addClass('vjs-live');}e
    * @return {Player|number}
    *         a reference to the calling player when setting and the
    *         current volume as a percent when getting
-   */Player.prototype.volume=function volume(percentAsDecimal){var vol=void 0;if(percentAsDecimal!==undefined){// Force value to between 0 and 1
-vol=Math.max(0,Math.min(1,parseFloat(percentAsDecimal)));this.cache_.volume=vol;this.techCall_('setVolume',vol);return this;}// Default to 1 when returning current volume.
-vol=parseFloat(this.techGet_('volume'));return isNaN(vol)?1:vol;};/**
+   */
+
+
+  Player.prototype.volume = function volume(percentAsDecimal) {
+    var vol = void 0;
+
+    if (percentAsDecimal !== undefined) {
+      // Force value to between 0 and 1
+      vol = Math.max(0, Math.min(1, parseFloat(percentAsDecimal)));
+      this.cache_.volume = vol;
+      this.techCall_('setVolume', vol);
+
+      return this;
+    }
+
+    // Default to 1 when returning current volume.
+    vol = parseFloat(this.techGet_('volume'));
+    return isNaN(vol) ? 1 : vol;
+  };
+
+  /**
    * Get the current muted state, or turn mute on or off
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     // get, should be false
-   *     console.log(myPlayer.muted());
-   *     // set to true
-   *     myPlayer.muted(true);
-   *     // get should be true
-   *     console.log(myPlayer.muted());
-   *   });
-   * ```
    *
    * @param {boolean} [muted]
    *        - true to mute
@@ -10117,31 +10828,34 @@ vol=parseFloat(this.techGet_('volume'));return isNaN(vol)?1:vol;};/**
    *         - true if mute is on and getting
    *         - false if mute is off and getting
    *         - A reference to the current player when setting
-   */Player.prototype.muted=function muted(_muted){if(_muted!==undefined){this.techCall_('setMuted',_muted);return this;}return this.techGet_('muted')||false;};/**
+   */
+
+
+  Player.prototype.muted = function muted(_muted) {
+    if (_muted !== undefined) {
+      this.techCall_('setMuted', _muted);
+      return this;
+    }
+    return this.techGet_('muted') || false;
+  };
+
+  /**
    * Check if current tech can support native fullscreen
    * (e.g. with built in controls like iOS, so not our flash swf)
    *
    * @return {boolean}
    *         if native fullscreen is supported
-   */Player.prototype.supportsFullScreen=function supportsFullScreen(){return this.techGet_('supportsFullScreen')||false;};/**
+   */
+
+
+  Player.prototype.supportsFullScreen = function supportsFullScreen() {
+    return this.techGet_('supportsFullScreen') || false;
+  };
+
+  /**
    * Check if the player is in fullscreen mode or tell the player that it
    * is or is not in fullscreen mode.
    *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     // get, should be false
-   *     console.log(myPlayer.isFullscreen());
-   *
-   *     // set, tell the player it's in fullscreen
-   *     myPlayer.isFullscreen(true);
-   *
-   *     // get, should be true
-   *     console.log(myPlayer.isFullscreen());
-   *   });
-   * ```
    * > NOTE: As of the latest HTML5 spec, isFullscreen is no longer an official
    * property and instead document.fullscreenElement is used. But isFullscreen is
    * still a valuable property for internal player workings.
@@ -10153,16 +10867,19 @@ vol=parseFloat(this.techGet_('volume'));return isNaN(vol)?1:vol;};/**
    *         - true if fullscreen is on and getting
    *         - false if fullscreen is off and getting
    *         - A reference to the current player when setting
-   */Player.prototype.isFullscreen=function isFullscreen(isFS){if(isFS!==undefined){this.isFullscreen_=!!isFS;return this;}return!!this.isFullscreen_;};/**
+   */
+
+
+  Player.prototype.isFullscreen = function isFullscreen(isFS) {
+    if (isFS !== undefined) {
+      this.isFullscreen_ = !!isFS;
+      return this;
+    }
+    return !!this.isFullscreen_;
+  };
+
+  /**
    * Increase the size of the video to full screen
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     myPlayer.requestFullscreen();
-   *   });
-   * ```
    * In some browsers, full screen is not supported natively, so it enters
    * "full window mode", where the video fills the browser window.
    * In browsers and devices that support native full screen, sometimes the
@@ -10173,75 +10890,164 @@ vol=parseFloat(this.techGet_('volume'));return isNaN(vol)?1:vol;};/**
    * @fires Player#fullscreenchange
    * @return {Player}
    *         A reference to the current player
-   */Player.prototype.requestFullscreen=function requestFullscreen(){var fsApi=_fullscreenApi2['default'];this.isFullscreen(true);if(fsApi.requestFullscreen){// the browser supports going fullscreen at the element level so we can
-// take the controls fullscreen as well as the video
-// Trigger fullscreenchange event after change
-// We have to specifically add this each time, and remove
-// when canceling fullscreen. Otherwise if there's multiple
-// players on a page, they would all be reacting to the same fullscreen
-// events
-Events.on(_document2['default'],fsApi.fullscreenchange,Fn.bind(this,function documentFullscreenChange(e){this.isFullscreen(_document2['default'][fsApi.fullscreenElement]);// If cancelling fullscreen, remove event listener.
-if(this.isFullscreen()===false){Events.off(_document2['default'],fsApi.fullscreenchange,documentFullscreenChange);}/**
+   */
+
+
+  Player.prototype.requestFullscreen = function requestFullscreen() {
+    var fsApi = _fullscreenApi2['default'];
+
+    this.isFullscreen(true);
+
+    if (fsApi.requestFullscreen) {
+      // the browser supports going fullscreen at the element level so we can
+      // take the controls fullscreen as well as the video
+
+      // Trigger fullscreenchange event after change
+      // We have to specifically add this each time, and remove
+      // when canceling fullscreen. Otherwise if there's multiple
+      // players on a page, they would all be reacting to the same fullscreen
+      // events
+      Events.on(_document2['default'], fsApi.fullscreenchange, Fn.bind(this, function documentFullscreenChange(e) {
+        this.isFullscreen(_document2['default'][fsApi.fullscreenElement]);
+
+        // If cancelling fullscreen, remove event listener.
+        if (this.isFullscreen() === false) {
+          Events.off(_document2['default'], fsApi.fullscreenchange, documentFullscreenChange);
+        }
+        /**
          * @event Player#fullscreenchange
          * @type {EventTarget~Event}
-         */this.trigger('fullscreenchange');}));this.el_[fsApi.requestFullscreen]();}else if(this.tech_.supportsFullScreen()){// we can't take the video.js controls fullscreen but we can go fullscreen
-// with native controls
-this.techCall_('enterFullScreen');}else{// fullscreen isn't supported so we'll just stretch the video element to
-// fill the viewport
-this.enterFullWindow();/**
+         */
+        this.trigger('fullscreenchange');
+      }));
+
+      this.el_[fsApi.requestFullscreen]();
+    } else if (this.tech_.supportsFullScreen()) {
+      // we can't take the video.js controls fullscreen but we can go fullscreen
+      // with native controls
+      this.techCall_('enterFullScreen');
+    } else {
+      // fullscreen isn't supported so we'll just stretch the video element to
+      // fill the viewport
+      this.enterFullWindow();
+      /**
        * @event Player#fullscreenchange
        * @type {EventTarget~Event}
-       */this.trigger('fullscreenchange');}return this;};/**
+       */
+      this.trigger('fullscreenchange');
+    }
+
+    return this;
+  };
+
+  /**
    * Return the video to its normal size after having been in full screen mode
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   *   myPlayer.ready(function() {
-   *     myPlayer.requestFullscreen();
-   *     myPlayer.exitFullscreen();
-   *   });
-   * ```
    *
    * @fires Player#fullscreenchange
    *
    * @return {Player}
    *         A reference to the current player
-   */Player.prototype.exitFullscreen=function exitFullscreen(){var fsApi=_fullscreenApi2['default'];this.isFullscreen(false);// Check for browser element fullscreen support
-if(fsApi.requestFullscreen){_document2['default'][fsApi.exitFullscreen]();}else if(this.tech_.supportsFullScreen()){this.techCall_('exitFullScreen');}else{this.exitFullWindow();/**
+   */
+
+
+  Player.prototype.exitFullscreen = function exitFullscreen() {
+    var fsApi = _fullscreenApi2['default'];
+
+    this.isFullscreen(false);
+
+    // Check for browser element fullscreen support
+    if (fsApi.requestFullscreen) {
+      _document2['default'][fsApi.exitFullscreen]();
+    } else if (this.tech_.supportsFullScreen()) {
+      this.techCall_('exitFullScreen');
+    } else {
+      this.exitFullWindow();
+      /**
        * @event Player#fullscreenchange
        * @type {EventTarget~Event}
-       */this.trigger('fullscreenchange');}return this;};/**
+       */
+      this.trigger('fullscreenchange');
+    }
+
+    return this;
+  };
+
+  /**
    * When fullscreen isn't supported we can stretch the
    * video container to as wide as the browser will let us.
    *
    * @fires Player#enterFullWindow
-   */Player.prototype.enterFullWindow=function enterFullWindow(){this.isFullWindow=true;// Storing original doc overflow value to return to when fullscreen is off
-this.docOrigOverflow=_document2['default'].documentElement.style.overflow;// Add listener for esc key to exit fullscreen
-Events.on(_document2['default'],'keydown',Fn.bind(this,this.fullWindowOnEscKey));// Hide any scroll bars
-_document2['default'].documentElement.style.overflow='hidden';// Apply fullscreen styles
-Dom.addElClass(_document2['default'].body,'vjs-full-window');/**
+   */
+
+
+  Player.prototype.enterFullWindow = function enterFullWindow() {
+    this.isFullWindow = true;
+
+    // Storing original doc overflow value to return to when fullscreen is off
+    this.docOrigOverflow = _document2['default'].documentElement.style.overflow;
+
+    // Add listener for esc key to exit fullscreen
+    Events.on(_document2['default'], 'keydown', Fn.bind(this, this.fullWindowOnEscKey));
+
+    // Hide any scroll bars
+    _document2['default'].documentElement.style.overflow = 'hidden';
+
+    // Apply fullscreen styles
+    Dom.addElClass(_document2['default'].body, 'vjs-full-window');
+
+    /**
      * @event Player#enterFullWindow
      * @type {EventTarget~Event}
-     */this.trigger('enterFullWindow');};/**
+     */
+    this.trigger('enterFullWindow');
+  };
+
+  /**
    * Check for call to either exit full window or
    * full screen on ESC key
    *
    * @param {string} event
    *        Event to check for key press
-   */Player.prototype.fullWindowOnEscKey=function fullWindowOnEscKey(event){if(event.keyCode===27){if(this.isFullscreen()===true){this.exitFullscreen();}else{this.exitFullWindow();}}};/**
+   */
+
+
+  Player.prototype.fullWindowOnEscKey = function fullWindowOnEscKey(event) {
+    if (event.keyCode === 27) {
+      if (this.isFullscreen() === true) {
+        this.exitFullscreen();
+      } else {
+        this.exitFullWindow();
+      }
+    }
+  };
+
+  /**
    * Exit full window
    *
    * @fires Player#exitFullWindow
-   */Player.prototype.exitFullWindow=function exitFullWindow(){this.isFullWindow=false;Events.off(_document2['default'],'keydown',this.fullWindowOnEscKey);// Unhide scroll bars.
-_document2['default'].documentElement.style.overflow=this.docOrigOverflow;// Remove fullscreen styles
-Dom.removeElClass(_document2['default'].body,'vjs-full-window');// Resize the box, controller, and poster to original sizes
-// this.positionAll();
-/**
+   */
+
+
+  Player.prototype.exitFullWindow = function exitFullWindow() {
+    this.isFullWindow = false;
+    Events.off(_document2['default'], 'keydown', this.fullWindowOnEscKey);
+
+    // Unhide scroll bars.
+    _document2['default'].documentElement.style.overflow = this.docOrigOverflow;
+
+    // Remove fullscreen styles
+    Dom.removeElClass(_document2['default'].body, 'vjs-full-window');
+
+    // Resize the box, controller, and poster to original sizes
+    // this.positionAll();
+    /**
      * @event Player#exitFullWindow
      * @type {EventTarget~Event}
-     */this.trigger('exitFullWindow');};/**
+     */
+    this.trigger('exitFullWindow');
+  };
+
+  /**
    * Check whether the player can play a given mimetype
    *
    * @see https://www.w3.org/TR/2011/WD-html5-20110113/video.html#dom-navigator-canplaytype
@@ -10251,12 +11057,43 @@ Dom.removeElClass(_document2['default'].body,'vjs-full-window');// Resize the bo
    *
    * @return {string}
    *         'probably', 'maybe', or '' (empty string)
-   */Player.prototype.canPlayType=function canPlayType(type){var can=void 0;// Loop through each playback technology in the options order
-for(var i=0,j=this.options_.techOrder;i<j.length;i++){var techName=(0,_toTitleCase2['default'])(j[i]);var tech=_tech2['default'].getTech(techName);// Support old behavior of techs being registered as components.
-// Remove once that deprecated behavior is removed.
-if(!tech){tech=_component2['default'].getComponent(techName);}// Check if the current tech is defined before continuing
-if(!tech){_log2['default'].error('The "'+techName+'" tech is undefined. Skipped browser support check for that tech.');continue;}// Check if the browser supports this technology
-if(tech.isSupported()){can=tech.canPlayType(type);if(can){return can;}}}return'';};/**
+   */
+
+
+  Player.prototype.canPlayType = function canPlayType(type) {
+    var can = void 0;
+
+    // Loop through each playback technology in the options order
+    for (var i = 0, j = this.options_.techOrder; i < j.length; i++) {
+      var techName = (0, _toTitleCase2['default'])(j[i]);
+      var tech = _tech2['default'].getTech(techName);
+
+      // Support old behavior of techs being registered as components.
+      // Remove once that deprecated behavior is removed.
+      if (!tech) {
+        tech = _component2['default'].getComponent(techName);
+      }
+
+      // Check if the current tech is defined before continuing
+      if (!tech) {
+        _log2['default'].error('The "' + techName + '" tech is undefined. Skipped browser support check for that tech.');
+        continue;
+      }
+
+      // Check if the browser supports this technology
+      if (tech.isSupported()) {
+        can = tech.canPlayType(type);
+
+        if (can) {
+          return can;
+        }
+      }
+    }
+
+    return '';
+  };
+
+  /**
    * Select source based on tech-order or source-order
    * Uses source-order selection if `options.sourceOrder` is truthy. Otherwise,
    * defaults to tech-order selection
@@ -10266,57 +11103,86 @@ if(tech.isSupported()){can=tech.canPlayType(type);if(can){return can;}}}return''
    *
    * @return {Object|boolean}
    *         Object of source and tech order or false
-   */Player.prototype.selectSource=function selectSource(sources){var _this4=this;// Get only the techs specified in `techOrder` that exist and are supported by the
-// current platform
-var techs=this.options_.techOrder.map(_toTitleCase2['default']).map(function(techName){// `Component.getComponent(...)` is for support of old behavior of techs
-// being registered as components.
-// Remove once that deprecated behavior is removed.
-return[techName,_tech2['default'].getTech(techName)||_component2['default'].getComponent(techName)];}).filter(function(_ref){var techName=_ref[0],tech=_ref[1];// Check if the current tech is defined before continuing
-if(tech){// Check if the browser supports this technology
-return tech.isSupported();}_log2['default'].error('The "'+techName+'" tech is undefined. Skipped browser support check for that tech.');return false;});// Iterate over each `innerArray` element once per `outerArray` element and execute
-// `tester` with both. If `tester` returns a non-falsy value, exit early and return
-// that value.
-var findFirstPassingTechSourcePair=function findFirstPassingTechSourcePair(outerArray,innerArray,tester){var found=void 0;outerArray.some(function(outerChoice){return innerArray.some(function(innerChoice){found=tester(outerChoice,innerChoice);if(found){return true;}});});return found;};var foundSourceAndTech=void 0;var flip=function flip(fn){return function(a,b){return fn(b,a);};};var finder=function finder(_ref2,source){var techName=_ref2[0],tech=_ref2[1];if(tech.canPlaySource(source,_this4.options_[techName.toLowerCase()])){return{source:source,tech:techName};}};// Depending on the truthiness of `options.sourceOrder`, we swap the order of techs and sources
-// to select from them based on their priority.
-if(this.options_.sourceOrder){// Source-first ordering
-foundSourceAndTech=findFirstPassingTechSourcePair(sources,techs,flip(finder));}else{// Tech-first ordering
-foundSourceAndTech=findFirstPassingTechSourcePair(techs,sources,finder);}return foundSourceAndTech||false;};/**
+   */
+
+
+  Player.prototype.selectSource = function selectSource(sources) {
+    var _this4 = this;
+
+    // Get only the techs specified in `techOrder` that exist and are supported by the
+    // current platform
+    var techs = this.options_.techOrder.map(_toTitleCase2['default']).map(function (techName) {
+      // `Component.getComponent(...)` is for support of old behavior of techs
+      // being registered as components.
+      // Remove once that deprecated behavior is removed.
+      return [techName, _tech2['default'].getTech(techName) || _component2['default'].getComponent(techName)];
+    }).filter(function (_ref) {
+      var techName = _ref[0],
+          tech = _ref[1];
+
+      // Check if the current tech is defined before continuing
+      if (tech) {
+        // Check if the browser supports this technology
+        return tech.isSupported();
+      }
+
+      _log2['default'].error('The "' + techName + '" tech is undefined. Skipped browser support check for that tech.');
+      return false;
+    });
+
+    // Iterate over each `innerArray` element once per `outerArray` element and execute
+    // `tester` with both. If `tester` returns a non-falsy value, exit early and return
+    // that value.
+    var findFirstPassingTechSourcePair = function findFirstPassingTechSourcePair(outerArray, innerArray, tester) {
+      var found = void 0;
+
+      outerArray.some(function (outerChoice) {
+        return innerArray.some(function (innerChoice) {
+          found = tester(outerChoice, innerChoice);
+
+          if (found) {
+            return true;
+          }
+        });
+      });
+
+      return found;
+    };
+
+    var foundSourceAndTech = void 0;
+    var flip = function flip(fn) {
+      return function (a, b) {
+        return fn(b, a);
+      };
+    };
+    var finder = function finder(_ref2, source) {
+      var techName = _ref2[0],
+          tech = _ref2[1];
+
+      if (tech.canPlaySource(source, _this4.options_[techName.toLowerCase()])) {
+        return { source: source, tech: techName };
+      }
+    };
+
+    // Depending on the truthiness of `options.sourceOrder`, we swap the order of techs and sources
+    // to select from them based on their priority.
+    if (this.options_.sourceOrder) {
+      // Source-first ordering
+      foundSourceAndTech = findFirstPassingTechSourcePair(sources, techs, flip(finder));
+    } else {
+      // Tech-first ordering
+      foundSourceAndTech = findFirstPassingTechSourcePair(techs, sources, finder);
+    }
+
+    return foundSourceAndTech || false;
+  };
+
+  /**
    * The source function updates the video source
    * There are three types of variables you can pass as the argument.
    * **URL string**: A URL to the the video file. Use this method if you are sure
    * the current playback technology (HTML5/Flash) can support the source you
    * provide. Currently only MP4 files can be used in both HTML5 and Flash.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src("http://www.example.com/path/to/video.mp4");
-   * ```
-   *
-   * **Source Object (or element):* * A javascript object containing information
-   * about the source file. Use this method if you want the player to determine if
-   * it can support the file using the type information.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src({type: "video/mp4", src: "http://www.example.com/path/to/video.mp4"});
-   * ```
-   *
-   * **Array of Source Objects:* * To provide multiple versions of the source so
-   * that it can be played using HTML5 across browsers you can use an array of
-   * source objects. Video.js will detect which version is supported and load that
-   * file.
-   *
-   * ```js
-   *   var myPlayer = videojs('some-player-id');
-   *
-   *   myPlayer.src([
-   *     {type: "video/mp4", src: "http://www.example.com/path/to/video.mp4"},
-   *     {type: "video/webm", src: "http://www.example.com/path/to/video.webm"},
-   *     {type: "video/ogg", src: "http://www.example.com/path/to/video.ogv"}
-   *   ]);
-   * ```
    *
    * @param {Tech~SourceObject|Tech~SourceObject[]} [source]
    *        One SourceObject or an array of SourceObjects
@@ -10324,70 +11190,205 @@ foundSourceAndTech=findFirstPassingTechSourcePair(techs,sources,finder);}return 
    * @return {string|Player}
    *         - The current video source when getting
    *         - The player when setting
-   */Player.prototype.src=function src(source){if(source===undefined){return this.techGet_('src');}var currentTech=_tech2['default'].getTech(this.techName_);// Support old behavior of techs being registered as components.
-// Remove once that deprecated behavior is removed.
-if(!currentTech){currentTech=_component2['default'].getComponent(this.techName_);}// case: Array of source objects to choose from and pick the best to play
-if(Array.isArray(source)){this.sourceList_(source);// case: URL String (http://myvideo...)
-}else if(typeof source==='string'){// create a source object from the string
-this.src({src:source});// case: Source object { src: '', type: '' ... }
-}else if(source instanceof Object){// check if the source has a type and the loaded tech cannot play the source
-// if there's no type we'll just try the current tech
-if(source.type&&!currentTech.canPlaySource(source,this.options_[this.techName_.toLowerCase()])){// create a source list with the current source and send through
-// the tech loop to check for a compatible technology
-this.sourceList_([source]);}else{this.cache_.sources=null;this.cache_.source=source;this.cache_.src=source.src;this.currentType_=source.type||'';// wait until the tech is ready to set the source
-this.ready(function(){// The setSource tech method was added with source handlers
-// so older techs won't support it
-// We need to check the direct prototype for the case where subclasses
-// of the tech do not support source handlers
-if(currentTech.prototype.hasOwnProperty('setSource')){this.techCall_('setSource',source);}else{this.techCall_('src',source.src);}if(this.options_.preload==='auto'){this.load();}if(this.options_.autoplay){this.play();}// Set the source synchronously if possible (#2326)
-},true);}}return this;};/**
+   */
+
+
+  Player.prototype.src = function src(source) {
+    if (source === undefined) {
+      return this.techGet_('src');
+    }
+
+    var currentTech = _tech2['default'].getTech(this.techName_);
+
+    // Support old behavior of techs being registered as components.
+    // Remove once that deprecated behavior is removed.
+    if (!currentTech) {
+      currentTech = _component2['default'].getComponent(this.techName_);
+    }
+
+    // case: Array of source objects to choose from and pick the best to play
+    if (Array.isArray(source)) {
+      this.sourceList_(source);
+
+      // case: URL String (http://myvideo...)
+    } else if (typeof source === 'string') {
+      // create a source object from the string
+      this.src({ src: source });
+
+      // case: Source object { src: '', type: '' ... }
+    } else if (source instanceof Object) {
+      // check if the source has a type and the loaded tech cannot play the source
+      // if there's no type we'll just try the current tech
+      if (source.type && !currentTech.canPlaySource(source, this.options_[this.techName_.toLowerCase()])) {
+        // create a source list with the current source and send through
+        // the tech loop to check for a compatible technology
+        this.sourceList_([source]);
+      } else {
+        this.cache_.sources = null;
+        this.cache_.source = source;
+        this.cache_.src = source.src;
+
+        this.currentType_ = source.type || '';
+
+        // wait until the tech is ready to set the source
+        this.ready(function () {
+
+          // The setSource tech method was added with source handlers
+          // so older techs won't support it
+          // We need to check the direct prototype for the case where subclasses
+          // of the tech do not support source handlers
+          if (currentTech.prototype.hasOwnProperty('setSource')) {
+            this.techCall_('setSource', source);
+          } else {
+            this.techCall_('src', source.src);
+          }
+
+          if (this.options_.preload === 'auto') {
+            this.load();
+          }
+
+          if (this.options_.autoplay) {
+            this.play();
+          }
+
+          // Set the source synchronously if possible (#2326)
+        }, true);
+      }
+    }
+
+    return this;
+  };
+
+  /**
    * Handle an array of source objects
    *
    * @param  {Tech~SourceObject[]} sources
    *         Array of source objects
    *
    * @private
-   */Player.prototype.sourceList_=function sourceList_(sources){var sourceTech=this.selectSource(sources);if(sourceTech){if(sourceTech.tech===this.techName_){// if this technology is already loaded, set the source
-this.src(sourceTech.source);}else{// load this technology with the chosen source
-this.loadTech_(sourceTech.tech,sourceTech.source);}this.cache_.sources=sources;}else{// We need to wrap this in a timeout to give folks a chance to add error event handlers
-this.setTimeout(function(){this.error({code:4,message:this.localize(this.options_.notSupportedMessage)});},0);// we could not find an appropriate tech, but let's still notify the delegate that this is it
-// this needs a better comment about why this is needed
-this.triggerReady();}};/**
+   */
+
+
+  Player.prototype.sourceList_ = function sourceList_(sources) {
+    var sourceTech = this.selectSource(sources);
+
+    if (sourceTech) {
+      if (sourceTech.tech === this.techName_) {
+        // if this technology is already loaded, set the source
+        this.src(sourceTech.source);
+      } else {
+        // load this technology with the chosen source
+        this.loadTech_(sourceTech.tech, sourceTech.source);
+      }
+
+      this.cache_.sources = sources;
+    } else {
+      // We need to wrap this in a timeout to give folks a chance to add error event handlers
+      this.setTimeout(function () {
+        this.error({ code: 4, message: this.localize(this.options_.notSupportedMessage) });
+      }, 0);
+
+      // we could not find an appropriate tech, but let's still notify the delegate that this is it
+      // this needs a better comment about why this is needed
+      this.triggerReady();
+    }
+  };
+
+  /**
    * Begin loading the src data.
    *
    * @return {Player}
    *         A reference to the player
-   */Player.prototype.load=function load(){this.techCall_('load');return this;};/**
+   */
+
+
+  Player.prototype.load = function load() {
+    this.techCall_('load');
+    return this;
+  };
+
+  /**
    * Reset the player. Loads the first tech in the techOrder,
    * and calls `reset` on the tech`.
    *
    * @return {Player}
    *         A reference to the player
-   */Player.prototype.reset=function reset(){this.loadTech_((0,_toTitleCase2['default'])(this.options_.techOrder[0]),null);this.techCall_('reset');return this;};/**
+   */
+
+
+  Player.prototype.reset = function reset() {
+    this.loadTech_((0, _toTitleCase2['default'])(this.options_.techOrder[0]), null);
+    this.techCall_('reset');
+    return this;
+  };
+
+  /**
    * Returns all of the current source objects.
    *
    * @return {Tech~SourceObject[]}
    *         The current source objects
-   */Player.prototype.currentSources=function currentSources(){var source=this.currentSource();var sources=[];// assume `{}` or `{ src }`
-if(Object.keys(source).length!==0){sources.push(source);}return this.cache_.sources||sources;};/**
+   */
+
+
+  Player.prototype.currentSources = function currentSources() {
+    var source = this.currentSource();
+    var sources = [];
+
+    // assume `{}` or `{ src }`
+    if (Object.keys(source).length !== 0) {
+      sources.push(source);
+    }
+
+    return this.cache_.sources || sources;
+  };
+
+  /**
    * Returns the current source object.
    *
    * @return {Tech~SourceObject}
    *         The current source object
-   */Player.prototype.currentSource=function currentSource(){var source={};var src=this.currentSrc();if(src){source.src=src;}return this.cache_.source||source;};/**
+   */
+
+
+  Player.prototype.currentSource = function currentSource() {
+    var source = {};
+    var src = this.currentSrc();
+
+    if (src) {
+      source.src = src;
+    }
+
+    return this.cache_.source || source;
+  };
+
+  /**
    * Returns the fully qualified URL of the current source value e.g. http://mysite.com/video.mp4
    * Can be used in conjuction with `currentType` to assist in rebuilding the current source object.
    *
    * @return {string}
    *         The current source
-   */Player.prototype.currentSrc=function currentSrc(){return this.techGet_('currentSrc')||this.cache_.src||'';};/**
+   */
+
+
+  Player.prototype.currentSrc = function currentSrc() {
+    return this.techGet_('currentSrc') || this.cache_.src || '';
+  };
+
+  /**
    * Get the current source type e.g. video/mp4
    * This can allow you rebuild the current source object so that you could load the same
    * source and tech later
    *
    * @return {string}
    *         The source MIME type
-   */Player.prototype.currentType=function currentType(){return this.currentType_||'';};/**
+   */
+
+
+  Player.prototype.currentType = function currentType() {
+    return this.currentType_ || '';
+  };
+
+  /**
    * Get or set the preload attribute
    *
    * @param {boolean} [value]
@@ -10397,7 +11398,19 @@ if(Object.keys(source).length!==0){sources.push(source);}return this.cache_.sour
    * @return {string|Player}
    *         - the preload attribute value when getting
    *         - the player when setting
-   */Player.prototype.preload=function preload(value){if(value!==undefined){this.techCall_('setPreload',value);this.options_.preload=value;return this;}return this.techGet_('preload');};/**
+   */
+
+
+  Player.prototype.preload = function preload(value) {
+    if (value !== undefined) {
+      this.techCall_('setPreload', value);
+      this.options_.preload = value;
+      return this;
+    }
+    return this.techGet_('preload');
+  };
+
+  /**
    * Get or set the autoplay attribute.
    *
    * @param {boolean} [value]
@@ -10407,7 +11420,19 @@ if(Object.keys(source).length!==0){sources.push(source);}return this.cache_.sour
    * @return {string|Player}
    *         - the current value of autoplay
    *         - the player when setting
-   */Player.prototype.autoplay=function autoplay(value){if(value!==undefined){this.techCall_('setAutoplay',value);this.options_.autoplay=value;return this;}return this.techGet_('autoplay',value);};/**
+   */
+
+
+  Player.prototype.autoplay = function autoplay(value) {
+    if (value !== undefined) {
+      this.techCall_('setAutoplay', value);
+      this.options_.autoplay = value;
+      return this;
+    }
+    return this.techGet_('autoplay', value);
+  };
+
+  /**
    * Get or set the loop attribute on the video element.
    *
    * @param {boolean} [value]
@@ -10417,20 +11442,20 @@ if(Object.keys(source).length!==0){sources.push(source);}return this.cache_.sour
    * @return {string|Player}
    *         - the current value of loop when getting
    *         - the player when setting
-   */Player.prototype.loop=function loop(value){if(value!==undefined){this.techCall_('setLoop',value);this.options_.loop=value;return this;}return this.techGet_('loop');};/**
+   */
+
+
+  Player.prototype.loop = function loop(value) {
+    if (value !== undefined) {
+      this.techCall_('setLoop', value);
+      this.options_.loop = value;
+      return this;
+    }
+    return this.techGet_('loop');
+  };
+
+  /**
    * Get or set the poster image source url
-   *
-   * EXAMPLE
-   * ```js
-   *   var myPlayer = videojs('example_video_1');
-   *
-   *   // set
-   *   myPlayer.poster('http://example.com/myImage.jpg');
-   *
-   *   // get
-   *   console.log(myPlayer.poster());
-   *   // 'http://example.com/myImage.jpg'
-   * ```
    *
    * @fires Player#posterchange
    *
@@ -10440,17 +11465,39 @@ if(Object.keys(source).length!==0){sources.push(source);}return this.cache_.sour
    * @return {string|Player}
    *         - the current value of poster when getting
    *         - the player when setting
-   */Player.prototype.poster=function poster(src){if(src===undefined){return this.poster_;}// The correct way to remove a poster is to set as an empty string
-// other falsey values will throw errors
-if(!src){src='';}// update the internal poster variable
-this.poster_=src;// update the tech's poster
-this.techCall_('setPoster',src);// alert components that the poster has been set
-/**
+   */
+
+
+  Player.prototype.poster = function poster(src) {
+    if (src === undefined) {
+      return this.poster_;
+    }
+
+    // The correct way to remove a poster is to set as an empty string
+    // other falsey values will throw errors
+    if (!src) {
+      src = '';
+    }
+
+    // update the internal poster variable
+    this.poster_ = src;
+
+    // update the tech's poster
+    this.techCall_('setPoster', src);
+
+    // alert components that the poster has been set
+    /**
      * This event fires when the poster image is changed on the player.
      *
      * @event Player#posterchange
      * @type {EventTarget~Event}
-     */this.trigger('posterchange');return this;};/**
+     */
+    this.trigger('posterchange');
+
+    return this;
+  };
+
+  /**
    * Some techs (e.g. YouTube) can provide a poster source in an
    * asynchronous way. We want the poster component to use this
    * poster source so that it covers up the tech's controls.
@@ -10461,8 +11508,19 @@ this.techCall_('setPoster',src);// alert components that the poster has been set
    * @fires Player#posterchange
    * @listens Tech#posterchange
    * @private
-   */Player.prototype.handleTechPosterChange_=function handleTechPosterChange_(){if(!this.poster_&&this.tech_&&this.tech_.poster){this.poster_=this.tech_.poster()||'';// Let components know the poster has changed
-this.trigger('posterchange');}};/**
+   */
+
+
+  Player.prototype.handleTechPosterChange_ = function handleTechPosterChange_() {
+    if (!this.poster_ && this.tech_ && this.tech_.poster) {
+      this.poster_ = this.tech_.poster() || '';
+
+      // Let components know the poster has changed
+      this.trigger('posterchange');
+    }
+  };
+
+  /**
    * Get or set whether or not the controls are showing.
    *
    * @fires Player#controlsenabled
@@ -10474,14 +11532,53 @@ this.trigger('posterchange');}};/**
    * @return {boolean|Player}
    *         - the current value of controls when getting
    *         - the player when setting
-   */Player.prototype.controls=function controls(bool){if(bool!==undefined){bool=!!bool;// Don't trigger a change event unless it actually changed
-if(this.controls_!==bool){this.controls_=bool;if(this.usingNativeControls()){this.techCall_('setControls',bool);}if(bool){this.removeClass('vjs-controls-disabled');this.addClass('vjs-controls-enabled');/**
+   */
+
+
+  Player.prototype.controls = function controls(bool) {
+    if (bool !== undefined) {
+      bool = !!bool;
+
+      // Don't trigger a change event unless it actually changed
+      if (this.controls_ !== bool) {
+        this.controls_ = bool;
+
+        if (this.usingNativeControls()) {
+          this.techCall_('setControls', bool);
+        }
+
+        if (bool) {
+          this.removeClass('vjs-controls-disabled');
+          this.addClass('vjs-controls-enabled');
+          /**
            * @event Player#controlsenabled
            * @type {EventTarget~Event}
-           */this.trigger('controlsenabled');if(!this.usingNativeControls()){this.addTechControlsListeners_();}}else{this.removeClass('vjs-controls-enabled');this.addClass('vjs-controls-disabled');/**
+           */
+          this.trigger('controlsenabled');
+
+          if (!this.usingNativeControls()) {
+            this.addTechControlsListeners_();
+          }
+        } else {
+          this.removeClass('vjs-controls-enabled');
+          this.addClass('vjs-controls-disabled');
+          /**
            * @event Player#controlsdisabled
            * @type {EventTarget~Event}
-           */this.trigger('controlsdisabled');if(!this.usingNativeControls()){this.removeTechControlsListeners_();}}}return this;}return!!this.controls_;};/**
+           */
+          this.trigger('controlsdisabled');
+
+          if (!this.usingNativeControls()) {
+            this.removeTechControlsListeners_();
+          }
+        }
+      }
+      return this;
+    }
+    return !!this.controls_;
+  };
+
+  /**
    * Toggle native controls on/off. Native controls are the controls built into
    * devices (e.g. default iPhone controls), Flash, or other techs
    * (e.g. Vimeo Controls)
@@ -10498,18 +11595,44 @@ if(this.controls_!==bool){this.controls_=bool;if(this.usingNativeControls()){thi
    * @return {boolean|Player}
    *         - the current value of native controls when getting
    *         - the player when setting
-   */Player.prototype.usingNativeControls=function usingNativeControls(bool){if(bool!==undefined){bool=!!bool;// Don't trigger a change event unless it actually changed
-if(this.usingNativeControls_!==bool){this.usingNativeControls_=bool;if(bool){this.addClass('vjs-using-native-controls');/**
+   */
+
+
+  Player.prototype.usingNativeControls = function usingNativeControls(bool) {
+    if (bool !== undefined) {
+      bool = !!bool;
+
+      // Don't trigger a change event unless it actually changed
+      if (this.usingNativeControls_ !== bool) {
+        this.usingNativeControls_ = bool;
+        if (bool) {
+          this.addClass('vjs-using-native-controls');
+
+          /**
            * player is using the native device controls
            *
            * @event Player#usingnativecontrols
            * @type {EventTarget~Event}
-           */this.trigger('usingnativecontrols');}else{this.removeClass('vjs-using-native-controls');/**
+           */
+          this.trigger('usingnativecontrols');
+        } else {
+          this.removeClass('vjs-using-native-controls');
+
+          /**
            * player is using the custom HTML controls
            *
            * @event Player#usingcustomcontrols
            * @type {EventTarget~Event}
-           */this.trigger('usingcustomcontrols');}}return this;}return!!this.usingNativeControls_;};/**
+           */
+          this.trigger('usingcustomcontrols');
+        }
+      }
+      return this;
+    }
+    return !!this.usingNativeControls_;
+  };
+
+  /**
    * Set or get the current MediaError
    *
    * @fires Player#error
@@ -10521,19 +11644,55 @@ if(this.usingNativeControls_!==bool){this.usingNativeControls_=bool;if(bool){thi
    * @return {MediaError|null|Player}
    *         - The current MediaError when getting (or null)
    *         - The player when setting
-   */Player.prototype.error=function error(err){if(err===undefined){return this.error_||null;}// restoring to default
-if(err===null){this.error_=err;this.removeClass('vjs-error');if(this.errorDisplay){this.errorDisplay.close();}return this;}this.error_=new _mediaError2['default'](err);// add the vjs-error classname to the player
-this.addClass('vjs-error');// log the name of the error type and any message
-// ie8 just logs "[object object]" if you just log the error object
-_log2['default'].error('(CODE:'+this.error_.code+' '+_mediaError2['default'].errorTypes[this.error_.code]+')',this.error_.message,this.error_);/**
+   */
+
+
+  Player.prototype.error = function error(err) {
+    if (err === undefined) {
+      return this.error_ || null;
+    }
+
+    // restoring to default
+    if (err === null) {
+      this.error_ = err;
+      this.removeClass('vjs-error');
+      if (this.errorDisplay) {
+        this.errorDisplay.close();
+      }
+      return this;
+    }
+
+    this.error_ = new _mediaError2['default'](err);
+
+    // add the vjs-error classname to the player
+    this.addClass('vjs-error');
+
+    // log the name of the error type and any message
+    // ie8 just logs "[object object]" if you just log the error object
+    _log2['default'].error('(CODE:' + this.error_.code + ' ' + _mediaError2['default'].errorTypes[this.error_.code] + ')', this.error_.message, this.error_);
+
+    /**
      * @event Player#error
      * @type {EventTarget~Event}
-     */this.trigger('error');return this;};/**
+     */
+    this.trigger('error');
+
+    return this;
+  };
+
+  /**
    * Report user activity
    *
    * @param {Object} event
    *        Event object
-   */Player.prototype.reportUserActivity=function reportUserActivity(event){this.userActivity_=true;};/**
+   */
+
+
+  Player.prototype.reportUserActivity = function reportUserActivity(event) {
+    this.userActivity_ = true;
+  };
+
+  /**
    * Get/set if user is active
    *
    * @fires Player#useractive
@@ -10545,55 +11704,148 @@ _log2['default'].error('(CODE:'+this.error_.code+' '+_mediaError2['default'].err
    * @return {boolean|Player}
    *         - the current value of userActive when getting
    *         - the player when setting
-   */Player.prototype.userActive=function userActive(bool){if(bool!==undefined){bool=!!bool;if(bool!==this.userActive_){this.userActive_=bool;if(bool){// If the user was inactive and is now active we want to reset the
-// inactivity timer
-this.userActivity_=true;this.removeClass('vjs-user-inactive');this.addClass('vjs-user-active');/**
+   */
+
+
+  Player.prototype.userActive = function userActive(bool) {
+    if (bool !== undefined) {
+      bool = !!bool;
+      if (bool !== this.userActive_) {
+        this.userActive_ = bool;
+        if (bool) {
+          // If the user was inactive and is now active we want to reset the
+          // inactivity timer
+          this.userActivity_ = true;
+          this.removeClass('vjs-user-inactive');
+          this.addClass('vjs-user-active');
+          /**
            * @event Player#useractive
            * @type {EventTarget~Event}
-           */this.trigger('useractive');}else{// We're switching the state to inactive manually, so erase any other
-// activity
-this.userActivity_=false;// Chrome/Safari/IE have bugs where when you change the cursor it can
-// trigger a mousemove event. This causes an issue when you're hiding
-// the cursor when the user is inactive, and a mousemove signals user
-// activity. Making it impossible to go into inactive mode. Specifically
-// this happens in fullscreen when we really need to hide the cursor.
-//
-// When this gets resolved in ALL browsers it can be removed
-// https://code.google.com/p/chromium/issues/detail?id=103041
-if(this.tech_){this.tech_.one('mousemove',function(e){e.stopPropagation();e.preventDefault();});}this.removeClass('vjs-user-active');this.addClass('vjs-user-inactive');/**
+           */
+          this.trigger('useractive');
+        } else {
+          // We're switching the state to inactive manually, so erase any other
+          // activity
+          this.userActivity_ = false;
+
+          // Chrome/Safari/IE have bugs where when you change the cursor it can
+          // trigger a mousemove event. This causes an issue when you're hiding
+          // the cursor when the user is inactive, and a mousemove signals user
+          // activity. Making it impossible to go into inactive mode. Specifically
+          // this happens in fullscreen when we really need to hide the cursor.
+          //
+          // When this gets resolved in ALL browsers it can be removed
+          // https://code.google.com/p/chromium/issues/detail?id=103041
+          if (this.tech_) {
+            this.tech_.one('mousemove', function (e) {
+              e.stopPropagation();
+              e.preventDefault();
+            });
+          }
+
+          this.removeClass('vjs-user-active');
+          this.addClass('vjs-user-inactive');
+          /**
            * @event Player#userinactive
            * @type {EventTarget~Event}
-           */this.trigger('userinactive');}}return this;}return this.userActive_;};/**
+           */
+          this.trigger('userinactive');
+        }
+      }
+      return this;
+    }
+    return this.userActive_;
+  };
+
+  /**
    * Listen for user activity based on timeout value
    *
    * @private
-   */Player.prototype.listenForUserActivity_=function listenForUserActivity_(){var mouseInProgress=void 0;var lastMoveX=void 0;var lastMoveY=void 0;var handleActivity=Fn.bind(this,this.reportUserActivity);var handleMouseMove=function handleMouseMove(e){// #1068 - Prevent mousemove spamming
-// Chrome Bug: https://code.google.com/p/chromium/issues/detail?id=366970
-if(e.screenX!==lastMoveX||e.screenY!==lastMoveY){lastMoveX=e.screenX;lastMoveY=e.screenY;handleActivity();}};var handleMouseDown=function handleMouseDown(){handleActivity();// For as long as the they are touching the device or have their mouse down,
-// we consider them active even if they're not moving their finger or mouse.
-// So we want to continue to update that they are active
-this.clearInterval(mouseInProgress);// Setting userActivity=true now and setting the interval to the same time
-// as the activityCheck interval (250) should ensure we never miss the
-// next activityCheck
-mouseInProgress=this.setInterval(handleActivity,250);};var handleMouseUp=function handleMouseUp(event){handleActivity();// Stop the interval that maintains activity if the mouse/touch is down
-this.clearInterval(mouseInProgress);};// Any mouse movement will be considered user activity
-this.on('mousedown',handleMouseDown);this.on('mousemove',handleMouseMove);this.on('mouseup',handleMouseUp);// Listen for keyboard navigation
-// Shouldn't need to use inProgress interval because of key repeat
-this.on('keydown',handleActivity);this.on('keyup',handleActivity);// Run an interval every 250 milliseconds instead of stuffing everything into
-// the mousemove/touchmove function itself, to prevent performance degradation.
-// `this.reportUserActivity` simply sets this.userActivity_ to true, which
-// then gets picked up by this loop
-// http://ejohn.org/blog/learning-from-twitter/
-var inactivityTimeout=void 0;this.setInterval(function(){// Check to see if mouse/touch activity has happened
-if(this.userActivity_){// Reset the activity tracker
-this.userActivity_=false;// If the user state was inactive, set the state to active
-this.userActive(true);// Clear any existing inactivity timeout to start the timer over
-this.clearTimeout(inactivityTimeout);var timeout=this.options_.inactivityTimeout;if(timeout>0){// In <timeout> milliseconds, if no more activity has occurred the
-// user will be considered inactive
-inactivityTimeout=this.setTimeout(function(){// Protect against the case where the inactivityTimeout can trigger just
-// before the next user activity is picked up by the activity check loop
-// causing a flicker
-if(!this.userActivity_){this.userActive(false);}},timeout);}}},250);};/**
+   */
+
+
+  Player.prototype.listenForUserActivity_ = function listenForUserActivity_() {
+    var mouseInProgress = void 0;
+    var lastMoveX = void 0;
+    var lastMoveY = void 0;
+    var handleActivity = Fn.bind(this, this.reportUserActivity);
+
+    var handleMouseMove = function handleMouseMove(e) {
+      // #1068 - Prevent mousemove spamming
+      // Chrome Bug: https://code.google.com/p/chromium/issues/detail?id=366970
+      if (e.screenX !== lastMoveX || e.screenY !== lastMoveY) {
+        lastMoveX = e.screenX;
+        lastMoveY = e.screenY;
+        handleActivity();
+      }
+    };
+
+    var handleMouseDown = function handleMouseDown() {
+      handleActivity();
+      // For as long as the they are touching the device or have their mouse down,
+      // we consider them active even if they're not moving their finger or mouse.
+      // So we want to continue to update that they are active
+      this.clearInterval(mouseInProgress);
+      // Setting userActivity=true now and setting the interval to the same time
+      // as the activityCheck interval (250) should ensure we never miss the
+      // next activityCheck
+      mouseInProgress = this.setInterval(handleActivity, 250);
+    };
+
+    var handleMouseUp = function handleMouseUp(event) {
+      handleActivity();
+      // Stop the interval that maintains activity if the mouse/touch is down
+      this.clearInterval(mouseInProgress);
+    };
+
+    // Any mouse movement will be considered user activity
+    this.on('mousedown', handleMouseDown);
+    this.on('mousemove', handleMouseMove);
+    this.on('mouseup', handleMouseUp);
+
+    // Listen for keyboard navigation
+    // Shouldn't need to use inProgress interval because of key repeat
+    this.on('keydown', handleActivity);
+    this.on('keyup', handleActivity);
+
+    // Run an interval every 250 milliseconds instead of stuffing everything into
+    // the mousemove/touchmove function itself, to prevent performance degradation.
+    // `this.reportUserActivity` simply sets this.userActivity_ to true, which
+    // then gets picked up by this loop
+    // http://ejohn.org/blog/learning-from-twitter/
+    var inactivityTimeout = void 0;
+
+    this.setInterval(function () {
+      // Check to see if mouse/touch activity has happened
+      if (this.userActivity_) {
+        // Reset the activity tracker
+        this.userActivity_ = false;
+
+        // If the user state was inactive, set the state to active
+        this.userActive(true);
+
+        // Clear any existing inactivity timeout to start the timer over
+        this.clearTimeout(inactivityTimeout);
+
+        var timeout = this.options_.inactivityTimeout;
+
+        if (timeout > 0) {
+          // In <timeout> milliseconds, if no more activity has occurred the
+          // user will be considered inactive
+          inactivityTimeout = this.setTimeout(function () {
+            // Protect against the case where the inactivityTimeout can trigger just
+            // before the next user activity is picked up by the activity check loop
+            // causing a flicker
+            if (!this.userActivity_) {
+              this.userActive(false);
+            }
+          }, timeout);
+        }
+      }
+    }, 250);
+  };
+
+  /**
    * Gets or sets the current playback rate. A playback rate of
    * 1.0 represents normal speed and 0.5 would indicate half-speed
    * playback, for instance.
@@ -10606,7 +11858,22 @@ if(!this.userActivity_){this.userActive(false);}},timeout);}}},250);};/**
    * @return {number|Player}
    *         - The current playback rate when getting or 1.0
    *         - the player when setting
-   */Player.prototype.playbackRate=function playbackRate(rate){if(rate!==undefined){this.techCall_('setPlaybackRate',rate);return this;}if(this.tech_&&this.tech_.featuresPlaybackRate){return this.techGet_('playbackRate');}return 1.0;};/**
+   */
+
+
+  Player.prototype.playbackRate = function playbackRate(rate) {
+    if (rate !== undefined) {
+      this.techCall_('setPlaybackRate', rate);
+      return this;
+    }
+
+    if (this.tech_ && this.tech_.featuresPlaybackRate) {
+      return this.techGet_('playbackRate');
+    }
+    return 1.0;
+  };
+
+  /**
    * Gets or sets the audio flag
    *
    * @param {boolean} bool
@@ -10616,25 +11883,61 @@ if(!this.userActivity_){this.userActive(false);}},timeout);}}},250);};/**
    * @return {Player|boolean}
    *         - the current value of isAudio when getting
    *         - the player if setting
-   */Player.prototype.isAudio=function isAudio(bool){if(bool!==undefined){this.isAudio_=!!bool;return this;}return!!this.isAudio_;};/**
+   */
+
+
+  Player.prototype.isAudio = function isAudio(bool) {
+    if (bool !== undefined) {
+      this.isAudio_ = !!bool;
+      return this;
+    }
+
+    return !!this.isAudio_;
+  };
+
+  /**
    * Get the {@link VideoTrackList}
    *
    * @see https://html.spec.whatwg.org/multipage/embedded-content.html#videotracklist
    *
    * @return {VideoTrackList}
    *         the current video track list
-   */Player.prototype.videoTracks=function videoTracks(){// if we have not yet loadTech_, we create videoTracks_
-// these will be passed to the tech during loading
-if(!this.tech_){this.videoTracks_=this.videoTracks_||new _videoTrackList2['default']();return this.videoTracks_;}return this.tech_.videoTracks();};/**
+   */
+
+
+  Player.prototype.videoTracks = function videoTracks() {
+    // if we have not yet loadTech_, we create videoTracks_
+    // these will be passed to the tech during loading
+    if (!this.tech_) {
+      this.videoTracks_ = this.videoTracks_ || new _videoTrackList2['default']();
+      return this.videoTracks_;
+    }
+
+    return this.tech_.videoTracks();
+  };
+
+  /**
    * Get the {@link AudioTrackList}
    *
    * @see https://html.spec.whatwg.org/multipage/embedded-content.html#audiotracklist
    *
    * @return {AudioTrackList}
    *         the current audio track list
-   */Player.prototype.audioTracks=function audioTracks(){// if we have not yet loadTech_, we create videoTracks_
-// these will be passed to the tech during loading
-if(!this.tech_){this.audioTracks_=this.audioTracks_||new _audioTrackList2['default']();return this.audioTracks_;}return this.tech_.audioTracks();};/**
+   */
+
+
+  Player.prototype.audioTracks = function audioTracks() {
+    // if we have not yet loadTech_, we create videoTracks_
+    // these will be passed to the tech during loading
+    if (!this.tech_) {
+      this.audioTracks_ = this.audioTracks_ || new _audioTrackList2['default']();
+      return this.audioTracks_;
+    }
+
+    return this.tech_.audioTracks();
+  };
+
+  /**
    * Get the {@link TextTrackList}
    *
    * Text tracks are tracks of timed text events.
@@ -10652,9 +11955,18 @@ if(!this.tech_){this.audioTracks_=this.audioTracks_||new _audioTrackList2['defau
    * @return {TextTrackList|undefined}
    *         The current TextTrackList or undefined if
    *         or undefined if we don't have a tech
-   */Player.prototype.textTracks=function textTracks(){// cannot use techGet_ directly because it checks to see whether the tech is ready.
-// Flash is unlikely to be ready in time but textTracks should still work.
-if(this.tech_){return this.tech_.textTracks();}};/**
+   */
+
+
+  Player.prototype.textTracks = function textTracks() {
+    // cannot use techGet_ directly because it checks to see whether the tech is ready.
+    // Flash is unlikely to be ready in time but textTracks should still work.
+    if (this.tech_) {
+      return this.tech_.textTracks();
+    }
+  };
+
+  /**
    * Get the "remote" {@link TextTrackList}. Remote Text Tracks
    * are tracks that were added to the HTML video element and can
    * be removed, whereas normal texttracks cannot be removed.
@@ -10663,7 +11975,16 @@ if(this.tech_){return this.tech_.textTracks();}};/**
    * @return {TextTrackList|undefined}
    *         The current remote text track list or undefined
    *         if we don't have a tech
-   */Player.prototype.remoteTextTracks=function remoteTextTracks(){if(this.tech_){return this.tech_.remoteTextTracks();}};/**
+   */
+
+
+  Player.prototype.remoteTextTracks = function remoteTextTracks() {
+    if (this.tech_) {
+      return this.tech_.remoteTextTracks();
+    }
+  };
+
+  /**
    * Get the "remote" {@link HTMLTrackElementList}.
    * This gives the user all of the DOM elements that match up
    * with the remote {@link TextTrackList}.
@@ -10671,7 +11992,16 @@ if(this.tech_){return this.tech_.textTracks();}};/**
    * @return {HTMLTrackElementList}
    *         The current remote text track list elements
    *         or undefined if we don't have a tech
-   */Player.prototype.remoteTextTrackEls=function remoteTextTrackEls(){if(this.tech_){return this.tech_.remoteTextTrackEls();}};/**
+   */
+
+
+  Player.prototype.remoteTextTrackEls = function remoteTextTrackEls() {
+    if (this.tech_) {
+      return this.tech_.remoteTextTrackEls();
+    }
+  };
+
+  /**
    * A helper method for adding a {@link TextTrack} to our
    * {@link TextTrackList}.
    *
@@ -10691,7 +12021,16 @@ if(this.tech_){return this.tech_.textTracks();}};/**
    * @return {TextTrack|undefined}
    *         the TextTrack that was added or undefined
    *         if there is no tech
-   */Player.prototype.addTextTrack=function addTextTrack(kind,label,language){if(this.tech_){return this.tech_.addTextTrack(kind,label,language);}};/**
+   */
+
+
+  Player.prototype.addTextTrack = function addTextTrack(kind, label, language) {
+    if (this.tech_) {
+      return this.tech_.addTextTrack(kind, label, language);
+    }
+  };
+
+  /**
    * Create a remote {@link TextTrack} and an {@link HTMLTrackElement}. It will
    * automatically removed from the video element whenever the source changes, unless
    * manualCleanup is set to false.
@@ -10709,7 +12048,16 @@ if(this.tech_){return this.tech_.textTracks();}};/**
    *
    * @deprecated The default value of the "manualCleanup" parameter will default
    *             to "false" in upcoming versions of Video.js
-   */Player.prototype.addRemoteTextTrack=function addRemoteTextTrack(options,manualCleanup){if(this.tech_){return this.tech_.addRemoteTextTrack(options,manualCleanup);}};/**
+   */
+
+
+  Player.prototype.addRemoteTextTrack = function addRemoteTextTrack(options, manualCleanup) {
+    if (this.tech_) {
+      return this.tech_.addRemoteTextTrack(options, manualCleanup);
+    }
+  };
+
+  /**
    * Remove a remote {@link TextTrack} from the respective
    * {@link TextTrackList} and {@link HTMLTrackElementList}.
    *
@@ -10718,25 +12066,54 @@ if(this.tech_){return this.tech_.textTracks();}};/**
    *
    * @return {undefined}
    *         does not return anything
-   */Player.prototype.removeRemoteTextTrack=function removeRemoteTextTrack(){var _ref3=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{},_ref3$track=_ref3.track,track=_ref3$track===undefined?arguments[0]:_ref3$track;// destructure the input into an object with a track argument, defaulting to arguments[0]
-// default the whole argument to an empty object if nothing was passed in
-if(this.tech_){return this.tech_.removeRemoteTextTrack(track);}};/**
+   */
+
+
+  Player.prototype.removeRemoteTextTrack = function removeRemoteTextTrack() {
+    var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref3$track = _ref3.track,
+        track = _ref3$track === undefined ? arguments[0] : _ref3$track;
+
+    // destructure the input into an object with a track argument, defaulting to arguments[0]
+    // default the whole argument to an empty object if nothing was passed in
+
+    if (this.tech_) {
+      return this.tech_.removeRemoteTextTrack(track);
+    }
+  };
+
+  /**
    * Get video width
    *
    * @return {number}
    *         current video width
-   */Player.prototype.videoWidth=function videoWidth(){return this.tech_&&this.tech_.videoWidth&&this.tech_.videoWidth()||0;};/**
+   */
+
+
+  Player.prototype.videoWidth = function videoWidth() {
+    return this.tech_ && this.tech_.videoWidth && this.tech_.videoWidth() || 0;
+  };
+
+  /**
    * Get video height
    *
    * @return {number}
    *         current video height
-   */Player.prototype.videoHeight=function videoHeight(){return this.tech_&&this.tech_.videoHeight&&this.tech_.videoHeight()||0;};// Methods to add support for
-// initialTime: function() { return this.techCall_('initialTime'); },
-// startOffsetTime: function() { return this.techCall_('startOffsetTime'); },
-// played: function() { return this.techCall_('played'); },
-// defaultPlaybackRate: function() { return this.techCall_('defaultPlaybackRate'); },
-// defaultMuted: function() { return this.techCall_('defaultMuted'); }
-/**
+   */
+
+
+  Player.prototype.videoHeight = function videoHeight() {
+    return this.tech_ && this.tech_.videoHeight && this.tech_.videoHeight() || 0;
+  };
+
+  // Methods to add support for
+  // initialTime: function() { return this.techCall_('initialTime'); },
+  // startOffsetTime: function() { return this.techCall_('startOffsetTime'); },
+  // played: function() { return this.techCall_('played'); },
+  // defaultPlaybackRate: function() { return this.techCall_('defaultPlaybackRate'); },
+  // defaultMuted: function() { return this.techCall_('defaultMuted'); }
+
+  /**
    * The player's language code
    * NOTE: The language should be set in the player options if you want the
    * the controls to be built with a specific language. Changing the lanugage
@@ -10748,21 +12125,60 @@ if(this.tech_){return this.tech_.removeRemoteTextTrack(track);}};/**
    * @return {string|Player}
    *         - The current language code when getting
    *         - A reference to the player when setting
-   */Player.prototype.language=function language(code){if(code===undefined){return this.language_;}this.language_=String(code).toLowerCase();return this;};/**
+   */
+
+
+  Player.prototype.language = function language(code) {
+    if (code === undefined) {
+      return this.language_;
+    }
+
+    this.language_ = String(code).toLowerCase();
+    return this;
+  };
+
+  /**
    * Get the player's language dictionary
    * Merge every time, because a newly added plugin might call videojs.addLanguage() at any time
    * Languages specified directly in the player options have precedence
    *
    * @return {Array}
    *         An array of of supported languages
-   */Player.prototype.languages=function languages(){return(0,_mergeOptions2['default'])(Player.prototype.options_.languages,this.languages_);};/**
+   */
+
+
+  Player.prototype.languages = function languages() {
+    return (0, _mergeOptions2['default'])(Player.prototype.options_.languages, this.languages_);
+  };
+
+  /**
    * returns a JavaScript object reperesenting the current track
    * information. **DOES not return it as JSON**
    *
    * @return {Object}
    *         Object representing the current of track info
-   */Player.prototype.toJSON=function toJSON(){var options=(0,_mergeOptions2['default'])(this.options_);var tracks=options.tracks;options.tracks=[];for(var i=0;i<tracks.length;i++){var track=tracks[i];// deep merge tracks and null out player so no circular references
-track=(0,_mergeOptions2['default'])(track);track.player=undefined;options.tracks[i]=track;}return options;};/**
+   */
+
+
+  Player.prototype.toJSON = function toJSON() {
+    var options = (0, _mergeOptions2['default'])(this.options_);
+    var tracks = options.tracks;
+
+    options.tracks = [];
+
+    for (var i = 0; i < tracks.length; i++) {
+      var track = tracks[i];
+
+      // deep merge tracks and null out player so no circular references
+      track = (0, _mergeOptions2['default'])(track);
+      track.player = undefined;
+      options.tracks[i] = track;
+    }
+
+    return options;
+  };
+
+  /**
    * Creates a simple modal dialog (an instance of the {@link ModalDialog}
    * component) that immediately overlays the player with arbitrary
    * content and removes itself when closed.
@@ -10777,7 +12193,26 @@ track=(0,_mergeOptions2['default'])(track);track.player=undefined;options.tracks
    *
    * @return {ModalDialog}
    *         the {@link ModalDialog} that was created
-   */Player.prototype.createModal=function createModal(content,options){var _this5=this;options=options||{};options.content=content||'';var modal=new _modalDialog2['default'](this,options);this.addChild(modal);modal.on('dispose',function(){_this5.removeChild(modal);});return modal.open();};/**
+   */
+
+
+  Player.prototype.createModal = function createModal(content, options) {
+    var _this5 = this;
+
+    options = options || {};
+    options.content = content || '';
+
+    var modal = new _modalDialog2['default'](this, options);
+
+    this.addChild(modal);
+    modal.on('dispose', function () {
+      _this5.removeChild(modal);
+    });
+
+    return modal.open();
+  };
+
+  /**
    * Gets tag settings
    *
    * @param {Element} tag
@@ -10786,121 +12221,241 @@ track=(0,_mergeOptions2['default'])(track);track.player=undefined;options.tracks
    * @return {Object}
    *         An object containing all of the settings
    *         for a player tag
-   */Player.getTagSettings=function getTagSettings(tag){var baseOptions={sources:[],tracks:[]};var tagOptions=Dom.getElAttributes(tag);var dataSetup=tagOptions['data-setup'];if(Dom.hasElClass(tag,'vjs-fluid')){tagOptions.fluid=true;}// Check if data-setup attr exists.
-if(dataSetup!==null){// Parse options JSON
-// If empty string, make it a parsable json object.
-var _safeParseTuple=(0,_tuple2['default'])(dataSetup||'{}'),err=_safeParseTuple[0],data=_safeParseTuple[1];if(err){_log2['default'].error(err);}(0,_obj.assign)(tagOptions,data);}(0,_obj.assign)(baseOptions,tagOptions);// Get tag children settings
-if(tag.hasChildNodes()){var children=tag.childNodes;for(var i=0,j=children.length;i<j;i++){var child=children[i];// Change case needed: http://ejohn.org/blog/nodename-case-sensitivity/
-var childName=child.nodeName.toLowerCase();if(childName==='source'){baseOptions.sources.push(Dom.getElAttributes(child));}else if(childName==='track'){baseOptions.tracks.push(Dom.getElAttributes(child));}}}return baseOptions;};/**
+   */
+
+
+  Player.getTagSettings = function getTagSettings(tag) {
+    var baseOptions = {
+      sources: [],
+      tracks: []
+    };
+
+    var tagOptions = Dom.getElAttributes(tag);
+    var dataSetup = tagOptions['data-setup'];
+
+    if (Dom.hasElClass(tag, 'vjs-fluid')) {
+      tagOptions.fluid = true;
+    }
+
+    // Check if data-setup attr exists.
+    if (dataSetup !== null) {
+      // Parse options JSON
+      // If empty string, make it a parsable json object.
+      var _safeParseTuple = (0, _tuple2['default'])(dataSetup || '{}'),
+          err = _safeParseTuple[0],
+          data = _safeParseTuple[1];
+
+      if (err) {
+        _log2['default'].error(err);
+      }
+      (0, _obj.assign)(tagOptions, data);
+    }
+
+    (0, _obj.assign)(baseOptions, tagOptions);
+
+    // Get tag children settings
+    if (tag.hasChildNodes()) {
+      var children = tag.childNodes;
+
+      for (var i = 0, j = children.length; i < j; i++) {
+        var child = children[i];
+        // Change case needed: http://ejohn.org/blog/nodename-case-sensitivity/
+        var childName = child.nodeName.toLowerCase();
+
+        if (childName === 'source') {
+          baseOptions.sources.push(Dom.getElAttributes(child));
+        } else if (childName === 'track') {
+          baseOptions.tracks.push(Dom.getElAttributes(child));
+        }
+      }
+    }
+
+    return baseOptions;
+  };
+
+  /**
    * Determine wether or not flexbox is supported
    *
    * @return {boolean}
    *         - true if flexbox is supported
    *         - false if flexbox is not supported
-   */Player.prototype.flexNotSupported_=function flexNotSupported_(){var elem=_document2['default'].createElement('i');// Note: We don't actually use flexBasis (or flexOrder), but it's one of the more
-// common flex features that we can rely on when checking for flex support.
-return!('flexBasis'in elem.style||'webkitFlexBasis'in elem.style||'mozFlexBasis'in elem.style||'msFlexBasis'in elem.style||// IE10-specific (2012 flex spec)
-'msFlexOrder'in elem.style);};return Player;}(_component2['default']);/**
+   */
+
+
+  Player.prototype.flexNotSupported_ = function flexNotSupported_() {
+    var elem = _document2['default'].createElement('i');
+
+    // Note: We don't actually use flexBasis (or flexOrder), but it's one of the more
+    // common flex features that we can rely on when checking for flex support.
+    return !('flexBasis' in elem.style || 'webkitFlexBasis' in elem.style || 'mozFlexBasis' in elem.style || 'msFlexBasis' in elem.style ||
+    // IE10-specific (2012 flex spec)
+    'msFlexOrder' in elem.style);
+  };
+
+  return Player;
+}(_component2['default']);
+
+/**
  * Global player list
  *
  * @type {Object}
- */Player.players={};var navigator=_window2['default'].navigator;/*
+ */
+
+
+Player.players = {};
+
+var navigator = _window2['default'].navigator;
+
+/*
  * Player instance options, surfaced using options
  * options = Player.prototype.options_
  * Make changes in options, not here.
  *
  * @type {Object}
  * @private
- */Player.prototype.options_={// Default order of fallback technology
-techOrder:['html5','flash'],// techOrder: ['flash','html5'],
-html5:{},flash:{},// defaultVolume: 0.85,
-defaultVolume:0.00,// default inactivity timeout
-inactivityTimeout:2000,// default playback rates
-playbackRates:[],// Add playback rate selection by adding rates
-// 'playbackRates': [0.5, 1, 1.5, 2],
-// Included control sets
-children:['mediaLoader','posterImage','textTrackDisplay','loadingSpinner','bigPlayButton','controlBar','errorDisplay','textTrackSettings'],language:navigator&&(navigator.languages&&navigator.languages[0]||navigator.userLanguage||navigator.language)||'en',// locales and their language translations
-languages:{},// Default message to show when a video cannot be played.
-notSupportedMessage:'No compatible source was found for this media.'};[/**
-   * Returns whether or not the player is in the "ended" state.
-   *
-   * @return {Boolean} True if the player is in the ended state, false if not.
-   * @method Player.prototype.ended
-   */'ended',/**
-   * Returns whether or not the player is in the "seeking" state.
-   *
-   * @return {Boolean} True if the player is in the seeking state, false if not.
-   * @method Player.prototype.seeking
-   */'seeking',/**
-   * Returns the TimeRanges of the media that are currently available
-   * for seeking to.
-   *
-   * @return {TimeRanges} the seekable intervals of the media timeline
-   * @method Player.prototype.seekable
-   */'seekable',/**
-   * Returns the current state of network activity for the element, from
-   * the codes in the list below.
-   * - NETWORK_EMPTY (numeric value 0)
-   *   The element has not yet been initialised. All attributes are in
-   *   their initial states.
-   * - NETWORK_IDLE (numeric value 1)
-   *   The element's resource selection algorithm is active and has
-   *   selected a resource, but it is not actually using the network at
-   *   this time.
-   * - NETWORK_LOADING (numeric value 2)
-   *   The user agent is actively trying to download data.
-   * - NETWORK_NO_SOURCE (numeric value 3)
-   *   The element's resource selection algorithm is active, but it has
-   *   not yet found a resource to use.
-   *
-   * @see https://html.spec.whatwg.org/multipage/embedded-content.html#network-states
-   * @return {number} the current network activity state
-   * @method Player.prototype.networkState
-   */'networkState',/**
-   * Returns a value that expresses the current state of the element
-   * with respect to rendering the current playback position, from the
-   * codes in the list below.
-   * - HAVE_NOTHING (numeric value 0)
-   *   No information regarding the media resource is available.
-   * - HAVE_METADATA (numeric value 1)
-   *   Enough of the resource has been obtained that the duration of the
-   *   resource is available.
-   * - HAVE_CURRENT_DATA (numeric value 2)
-   *   Data for the immediate current playback position is available.
-   * - HAVE_FUTURE_DATA (numeric value 3)
-   *   Data for the immediate current playback position is available, as
-   *   well as enough data for the user agent to advance the current
-   *   playback position in the direction of playback.
-   * - HAVE_ENOUGH_DATA (numeric value 4)
-   *   The user agent estimates that enough data is available for
-   *   playback to proceed uninterrupted.
-   *
-   * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate
-   * @return {number} the current playback rendering state
-   * @method Player.prototype.readyState
-   */'readyState'].forEach(function(fn){Player.prototype[fn]=function(){return this.techGet_(fn);};});TECH_EVENTS_RETRIGGER.forEach(function(event){Player.prototype['handleTech'+(0,_toTitleCase2['default'])(event)+'_']=function(){return this.trigger(event);};});/**
+ */
+Player.prototype.options_ = {
+  // Default order of fallback technology
+  techOrder: ['html5', 'flash'],
+  // techOrder: ['flash','html5'],
+
+  html5: {},
+  flash: {},
+
+  // defaultVolume: 0.85,
+  defaultVolume: 0.00,
+
+  // default inactivity timeout
+  inactivityTimeout: 2000,
+
+  // default playback rates
+  playbackRates: [],
+  // Add playback rate selection by adding rates
+  // 'playbackRates': [0.5, 1, 1.5, 2],
+
+  // Included control sets
+  children: ['mediaLoader', 'posterImage', 'textTrackDisplay', 'loadingSpinner', 'bigPlayButton', 'controlBar', 'errorDisplay', 'textTrackSettings'],
+
+  language: navigator && (navigator.languages && navigator.languages[0] || navigator.userLanguage || navigator.language) || 'en',
+
+  // locales and their language translations
+  languages: {},
+
+  // Default message to show when a video cannot be played.
+  notSupportedMessage: 'No compatible source was found for this media.'
+};
+
+[
+/**
+ * Returns whether or not the player is in the "ended" state.
+ *
+ * @return {Boolean} True if the player is in the ended state, false if not.
+ * @method Player#ended
+ */
+'ended',
+/**
+ * Returns whether or not the player is in the "seeking" state.
+ *
+ * @return {Boolean} True if the player is in the seeking state, false if not.
+ * @method Player#seeking
+ */
+'seeking',
+/**
+ * Returns the TimeRanges of the media that are currently available
+ * for seeking to.
+ *
+ * @return {TimeRanges} the seekable intervals of the media timeline
+ * @method Player#seekable
+ */
+'seekable',
+/**
+ * Returns the current state of network activity for the element, from
+ * the codes in the list below.
+ * - NETWORK_EMPTY (numeric value 0)
+ *   The element has not yet been initialised. All attributes are in
+ *   their initial states.
+ * - NETWORK_IDLE (numeric value 1)
+ *   The element's resource selection algorithm is active and has
+ *   selected a resource, but it is not actually using the network at
+ *   this time.
+ * - NETWORK_LOADING (numeric value 2)
+ *   The user agent is actively trying to download data.
+ * - NETWORK_NO_SOURCE (numeric value 3)
+ *   The element's resource selection algorithm is active, but it has
+ *   not yet found a resource to use.
+ *
+ * @see https://html.spec.whatwg.org/multipage/embedded-content.html#network-states
+ * @return {number} the current network activity state
+ * @method Player#networkState
+ */
+'networkState',
+/**
+ * Returns a value that expresses the current state of the element
+ * with respect to rendering the current playback position, from the
+ * codes in the list below.
+ * - HAVE_NOTHING (numeric value 0)
+ *   No information regarding the media resource is available.
+ * - HAVE_METADATA (numeric value 1)
+ *   Enough of the resource has been obtained that the duration of the
+ *   resource is available.
+ * - HAVE_CURRENT_DATA (numeric value 2)
+ *   Data for the immediate current playback position is available.
+ * - HAVE_FUTURE_DATA (numeric value 3)
+ *   Data for the immediate current playback position is available, as
+ *   well as enough data for the user agent to advance the current
+ *   playback position in the direction of playback.
+ * - HAVE_ENOUGH_DATA (numeric value 4)
+ *   The user agent estimates that enough data is available for
+ *   playback to proceed uninterrupted.
+ *
+ * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-readystate
+ * @return {number} the current playback rendering state
+ * @method Player#readyState
+ */
+'readyState'].forEach(function (fn) {
+  Player.prototype[fn] = function () {
+    return this.techGet_(fn);
+  };
+});
+
+TECH_EVENTS_RETRIGGER.forEach(function (event) {
+  Player.prototype['handleTech' + (0, _toTitleCase2['default'])(event) + '_'] = function () {
+    return this.trigger(event);
+  };
+});
+
+/**
  * Fired when the player has initial duration and dimension information
  *
  * @event Player#loadedmetadata
  * @type {EventTarget~Event}
- *//**
+ */
+
+/**
  * Fired when the player has downloaded data at the current playback position
  *
  * @event Player#loadeddata
  * @type {EventTarget~Event}
- *//**
+ */
+
+/**
  * Fired when the current playback position has changed *
  * During playback this is fired every 15-250 milliseconds, depending on the
  * playback technology in use.
  *
  * @event Player#timeupdate
  * @type {EventTarget~Event}
- *//**
+ */
+
+/**
  * Fired when the volume changes
  *
  * @event Player#volumechange
  * @type {EventTarget~Event}
- */_component2['default'].registerComponent('Player',Player);exports['default']=Player;
+ */
+
+_component2['default'].registerComponent('Player', Player);
+exports['default'] = Player;
 
 },{"1":1,"4":4,"41":41,"44":44,"45":45,"46":46,"5":5,"50":50,"55":55,"59":59,"60":60,"61":61,"62":62,"63":63,"68":68,"69":69,"71":71,"76":76,"78":78,"79":79,"8":8,"81":81,"82":82,"83":83,"85":85,"86":86,"87":87,"88":88,"89":89,"90":90,"91":91,"94":94,"95":95,"97":97}],52:[function(_dereq_,module,exports){
 'use strict';
@@ -10913,9 +12468,6 @@ var _player2 = _interopRequireDefault(_player);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-/**
- *
- */
 /**
  * The method for registering a video.js plugin. {@link videojs:videojs.registerPlugin].
  *
@@ -11287,7 +12839,7 @@ var PosterImage = function (_ClickableComponent) {
   /**
    * Set the source of the `PosterImage` depending on the display method.
    *
-   * @param {String} url
+   * @param {string} url
    *        The URL to the source for the `PosterImage`.
    */
 
@@ -11323,7 +12875,10 @@ var PosterImage = function (_ClickableComponent) {
 
   PosterImage.prototype.handleClick = function handleClick(event) {
     // We don't want a click to trigger playback when controls are disabled
-    // but CSS should be hiding the poster to prevent that from happening
+    if (!this.player_.controls()) {
+      return;
+    }
+
     if (this.player_.paused()) {
       this.player_.play();
     } else {
@@ -11343,6 +12898,10 @@ exports['default'] = PosterImage;
 exports.__esModule = true;
 exports.hasLoaded = exports.autoSetupTimeout = exports.autoSetup = undefined;
 
+var _dom = _dereq_(81);
+
+var Dom = _interopRequireWildcard(_dom);
+
 var _events = _dereq_(82);
 
 var Events = _interopRequireWildcard(_events);
@@ -11359,20 +12918,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-var _windowLoaded = false; /**
-                            * Functions for setting up a player without user insteraction based on the data-setup
-                            * `attribute` of the video tag.
-                            *
-                            * @file setup.js
-                            * @module setup
-                            */
-
+/**
+ * @file setup.js - Functions for setting up a player without
+ * user interaction based on the data-setup `attribute` of the video tag.
+ *
+ * @module setup
+ */
+var _windowLoaded = false;
 var videojs = void 0;
 
 /**
  * Set up any tags that have a data-setup `attribute` when the player is started.
  */
 var autoSetup = function autoSetup() {
+
+  // Protect against breakage in non-browser environments.
+  if (!Dom.isReal()) {
+    return;
+  }
+
   // One day, when we stop supporting IE8, go back to this, but in the meantime...*hack hack hack*
   // var vids = Array.prototype.slice.call(document.getElementsByTagName('video'));
   // var audios = Array.prototype.slice.call(document.getElementsByTagName('audio'));
@@ -11435,16 +12999,22 @@ var autoSetup = function autoSetup() {
 /**
  * Wait until the page is loaded before running autoSetup. This will be called in
  * autoSetup if `hasLoaded` returns false.
+ *
+ * @param {number} wait
+ *        How long to wait in ms
+ *
+ * @param {videojs} [vjs]
+ *        The videojs library function
  */
 function autoSetupTimeout(wait, vjs) {
   if (vjs) {
     videojs = vjs;
   }
 
-  setTimeout(autoSetup, wait);
+  _window2['default'].setTimeout(autoSetup, wait);
 }
 
-if (_document2['default'].readyState === 'complete') {
+if (Dom.isReal() && _document2['default'].readyState === 'complete') {
   _windowLoaded = true;
 } else {
   /**
@@ -11468,7 +13038,7 @@ exports.autoSetup = autoSetup;
 exports.autoSetupTimeout = autoSetupTimeout;
 exports.hasLoaded = hasLoaded;
 
-},{"82":82,"94":94,"95":95}],57:[function(_dereq_,module,exports){
+},{"81":81,"82":82,"94":94,"95":95}],57:[function(_dereq_,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -11933,8 +13503,7 @@ function FlashRtmpDecorator(Flash) {
   /**
    * Regular expression used to check if the source is an rtmp source.
    *
-   * @property
-   * @type {RegExp}
+   * @property {RegExp} Flash.RTMP_RE
    */
   Flash.RTMP_RE = /^rtmp[set]?:\/\//i;
 
@@ -12153,7 +13722,7 @@ var Flash = function (_Tech) {
     // Otherwise this adds a CDN url.
     // The CDN also auto-adds a swf URL for that specific version.
     if (!options.swf) {
-      var ver = '5.1.0';
+      var ver = '5.3.0';
 
       options.swf = '//vjs.zencdn.net/swf/' + ver + '/video-js.swf';
     }
@@ -12485,7 +14054,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `rtmpConnection` from the swf.
  *
- * @method Flash.prototype.rtmpConnection
+ * @method Flash#rtmpConnection
  * @return {string}
  *         The current value of `rtmpConnection` on the swf.
  */
@@ -12493,7 +14062,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `rtmpStream` from the swf.
  *
- * @method Flash.prototype.rtmpStream
+ * @method Flash#rtmpStream
  * @return {string}
  *         The current value of `rtmpStream` on the swf.
  */
@@ -12508,7 +14077,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * - auto: allow the media and metadata for the media to be downloaded before
  *    interaction
  *
- * @method Flash.prototype.preload
+ * @method Flash#preload
  * @return {string}
  *         The value of `preload` from the swf. Will be 'none', 'metadata',
  *         or 'auto'.
@@ -12517,7 +14086,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `defaultPlaybackRate` from the swf.
  *
- * @method Flash.prototype.defaultPlaybackRate
+ * @method Flash#defaultPlaybackRate
  * @return {number}
  *         The current value of `defaultPlaybackRate` on the swf.
  */
@@ -12528,7 +14097,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  *   - if playbackRate is set to 2, media will play twice as fast.
  *   - if playbackRate is set to 0.5, media will play half as fast.
  *
- * @method Flash.prototype.playbackRate
+ * @method Flash#playbackRate
  * @return {number}
  *         The value of `playbackRate` from the swf. A number indicating
  *         the current playback speed of the media, where 1 is normal speed.
@@ -12538,7 +14107,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `autoplay` from the swf. `autoplay` indicates
  * that the media should start to play as soon as the page is ready.
  *
- * @method Flash.prototype.autoplay
+ * @method Flash#autoplay
  * @return {boolean}
  *         - The value of `autoplay` from the swf.
  *         - True indicates that the media ashould start as soon as the page loads.
@@ -12550,7 +14119,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * that the media should return to the start of the media and continue playing once
  * it reaches the end.
  *
- * @method Flash.prototype.loop
+ * @method Flash#loop
  * @return {boolean}
  *         - The value of `loop` from the swf.
  *         - True indicates that playback should seek back to start once
@@ -12562,7 +14131,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `mediaGroup` from the swf.
  *
- * @method Flash.prototype.mediaGroup
+ * @method Flash#mediaGroup
  * @return {string}
  *         The current value of `mediaGroup` on the swf.
  */
@@ -12570,7 +14139,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `controller` from the swf.
  *
- * @method Flash.prototype.controller
+ * @method Flash#controller
  * @return {string}
  *         The current value of `controller` on the swf.
  */
@@ -12579,7 +14148,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `controls` from the swf. `controls` indicates
  * whether the native flash controls should be shown or hidden.
  *
- * @method Html5.prototype.controls
+ * @method Flash#controls
  * @return {boolean}
  *         - The value of `controls` from the swf.
  *         - True indicates that native controls should be showing.
@@ -12591,7 +14160,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * audio level as a percentage in decimal form. This means that 1 is 100%, 0.5 is 50%, and
  * so on.
  *
- * @method Flash.prototype.volume
+ * @method Flash#volume
  * @return {number}
  *         The volume percent as a decimal. Value will be between 0-1.
  */
@@ -12600,7 +14169,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of the `muted` from the swf. `muted` indicates the current
  * audio level should be silent.
  *
- * @method Flash.prototype.muted
+ * @method Flash#muted
  * @return {boolean}
  *         - True if the audio should be set to silent
  *         - False otherwise
@@ -12612,7 +14181,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * media. `muted` and `defaultMuted` can have different values. `muted` indicates the
  * current state.
  *
- * @method Flash.prototype.defaultMuted
+ * @method Flash#defaultMuted
  * @return {boolean}
  *         - The value of `defaultMuted` from the swf.
  *         - True indicates that the media should start muted.
@@ -12627,7 +14196,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * - 2: NETWORK_LOADING
  * - 3: NETWORK_NO_SOURCE
  *
- * @method Flash.prototype.networkState
+ * @method Flash#networkState
  * @return {number}
  *         The value of `networkState` from the swf. This will be a number
  *         from the list in the description.
@@ -12643,7 +14212,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * - 3: HAVE_FUTURE_DATA
  * - 4: HAVE_ENOUGH_DATA
  *
- * @method Flash.prototype.readyState
+ * @method Flash#readyState
  * @return {number}
  *         The value of `readyState` from the swf. This will be a number
  *         from the list in the description.
@@ -12659,7 +14228,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * - 3: HAVE_FUTURE_DATA
  * - 4: HAVE_ENOUGH_DATA
  *
- * @method Flash.prototype.readyState
+ * @method Flash#readyState
  * @return {number}
  *         The value of `readyState` from the swf. This will be a number
  *         from the list in the description.
@@ -12668,7 +14237,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `initialTime` from the swf.
  *
- * @method Flash.prototype.initialTime
+ * @method Flash#initialTime
  * @return {number}
  *         The `initialTime` proprety on the swf.
  */
@@ -12676,7 +14245,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Get the value of `startOffsetTime` from the swf.
  *
- * @method Flash.prototype.startOffsetTime
+ * @method Flash#startOffsetTime
  * @return {number}
  *         The `startOffsetTime` proprety on the swf.
  */
@@ -12685,7 +14254,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `paused` from the swf. `paused` indicates whether the swf
  * is current paused or not.
  *
- * @method Flash.prototype.paused
+ * @method Flash#paused
  * @return {boolean}
  *         The value of `paused` from the swf.
  */
@@ -12694,7 +14263,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `ended` from the swf. `ended` indicates whether
  * the media has reached the end or not.
  *
- * @method Flash.prototype.ended
+ * @method Flash#ended
  * @return {boolean}
  *         - True indicates that the media has ended.
  *         - False indicates that the media has not ended.
@@ -12706,7 +14275,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `videoWidth` from the swf. `videoWidth` indicates
  * the current width of the media in css pixels.
  *
- * @method Flash.prototype.videoWidth
+ * @method Flash#videoWidth
  * @return {number}
  *         The value of `videoWidth` from the swf. This will be a number
  *         in css pixels.
@@ -12726,7 +14295,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Set the value of `rtmpConnection` on the swf.
  *
- * @method Flash.prototype.setRtmpConnection
+ * @method Flash#setRtmpConnection
  * @param {string} rtmpConnection
  *        New value to set the `rtmpConnection` property to.
  */
@@ -12734,7 +14303,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Set the value of `rtmpStream` on the swf.
  *
- * @method Flash.prototype.setRtmpStream
+ * @method Flash#setRtmpStream
  * @param {string} rtmpStream
  *        New value to set the `rtmpStream` property to.
  */
@@ -12749,7 +14318,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * - auto: allow the media and metadata for the media to be downloaded before
  *    interaction
  *
- * @method Flash.prototype.setPreload
+ * @method Flash#setPreload
  * @param {string} preload
  *        The value of `preload` to set on the swf. Should be 'none', 'metadata',
  *        or 'auto'.
@@ -12758,7 +14327,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Set the value of `defaultPlaybackRate` on the swf.
  *
- * @method Flash.prototype.setDefaultPlaybackRate
+ * @method Flash#setDefaultPlaybackRate
  * @param {number} defaultPlaybackRate
  *        New value to set the `defaultPlaybackRate` property to.
  */
@@ -12769,7 +14338,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  *   - if playbackRate is set to 2, media will play twice as fast.
  *   - if playbackRate is set to 0.5, media will play half as fast.
  *
- * @method Flash.prototype.setPlaybackRate
+ * @method Flash#setPlaybackRate
  * @param {number} playbackRate
  *        New value of `playbackRate` on the swf. A number indicating
  *        the current playback speed of the media, where 1 is normal speed.
@@ -12779,7 +14348,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Set the value of `autoplay` on the swf. `autoplay` indicates
  * that the media should start to play as soon as the page is ready.
  *
- * @method Flash.prototype.setAutoplay
+ * @method Flash#setAutoplay
  * @param {boolean} autoplay
  *        - The value of `autoplay` from the swf.
  *        - True indicates that the media ashould start as soon as the page loads.
@@ -12791,7 +14360,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * that the media should return to the start of the media and continue playing once
  * it reaches the end.
  *
- * @method Flash.prototype.setLoop
+ * @method Flash#setLoop
  * @param {boolean} loop
  *        - True indicates that playback should seek back to start once
  *          the end of a media is reached.
@@ -12802,7 +14371,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Set the value of `mediaGroup` on the swf.
  *
- * @method Flash.prototype.setMediaGroup
+ * @method Flash#setMediaGroup
  * @param {string} mediaGroup
  *        New value of `mediaGroup` to set on the swf.
  */
@@ -12810,7 +14379,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
 /**
  * Set the value of `controller` on the swf.
  *
- * @method Flash.prototype.setController
+ * @method Flash#setController
  * @param {string} controller
  *        New value the current value of `controller` on the swf.
  */
@@ -12819,7 +14388,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Get the value of `controls` from the swf. `controls` indicates
  * whether the native flash controls should be shown or hidden.
  *
- * @method Flash.prototype.controls
+ * @method Flash#controls
  * @return {boolean}
  *         - The value of `controls` from the swf.
  *         - True indicates that native controls should be showing.
@@ -12831,7 +14400,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * audio level as a percentage in decimal form. This means that 1 is 100%, 0.5 is 50%, and
  * so on.
  *
- * @method Flash.prototype.setVolume
+ * @method Flash#setVolume
  * @param {number} percentAsDecimal
  *         The volume percent as a decimal. Value will be between 0-1.
  */
@@ -12840,7 +14409,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * Set the value of the `muted` on the swf. `muted` indicates that the current
  * audio level should be silent.
  *
- * @method Flash.prototype.setMuted
+ * @method Flash#setMuted
  * @param {boolean} muted
  *         - True if the audio should be set to silent
  *         - False otherwise
@@ -12852,7 +14421,7 @@ for (var _i = 0; _i < _readOnly.length; _i++) {
  * media. `muted` and `defaultMuted` can have different values. `muted` indicates the
  * current state.
  *
- * @method Flash.prototype.setDefaultMuted
+ * @method Flash#setDefaultMuted
  * @param {boolean} defaultMuted
  *         - True indicates that the media should start muted.
  *         - False indicates that the media should not start muted.
@@ -13192,8 +14761,6 @@ exports['default'] = Flash;
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _templateObject = _taggedTemplateLiteralLoose(['Text Tracks are being loaded from another origin but the crossorigin attribute isn\'t used.\n            This may prevent text tracks from loading.'], ['Text Tracks are being loaded from another origin but the crossorigin attribute isn\'t used.\n            This may prevent text tracks from loading.']);
 
 var _tech = _dereq_(62);
@@ -13441,13 +15008,16 @@ var Html5 = function (_Tech) {
     // Check if this browser supports moving the element into the box.
     // On the iPhone video will break if you move the element,
     // So we have to create a brand new element.
-    if (!el || this.movingMediaElementInDOM === false) {
+    // If we ingested the player div, we do not need to move the media element.
+    if (!el || !(this.options_.playerElIngest || this.movingMediaElementInDOM)) {
 
       // If the original tag is still there, clone and remove it.
       if (el) {
         var clone = el.cloneNode(true);
 
-        el.parentNode.insertBefore(clone, el);
+        if (el.parentNode) {
+          el.parentNode.insertBefore(clone, el);
+        }
         Html5.disposeMediaElement(el);
         el = clone;
       } else {
@@ -13502,8 +15072,6 @@ var Html5 = function (_Tech) {
 
 
   Html5.prototype.handleLateInit_ = function handleLateInit_(el) {
-    var _this3 = this;
-
     if (el.networkState === 0 || el.networkState === 3) {
       // The video element hasn't started loading the source yet
       // or didn't find a source
@@ -13511,50 +15079,44 @@ var Html5 = function (_Tech) {
     }
 
     if (el.readyState === 0) {
-      var _ret = function () {
-        // NetworkState is set synchronously BUT loadstart is fired at the
-        // end of the current stack, usually before setInterval(fn, 0).
-        // So at this point we know loadstart may have already fired or is
-        // about to fire, and either way the player hasn't seen it yet.
-        // We don't want to fire loadstart prematurely here and cause a
-        // double loadstart so we'll wait and see if it happens between now
-        // and the next loop, and fire it if not.
-        // HOWEVER, we also want to make sure it fires before loadedmetadata
-        // which could also happen between now and the next loop, so we'll
-        // watch for that also.
-        var loadstartFired = false;
-        var setLoadstartFired = function setLoadstartFired() {
-          loadstartFired = true;
-        };
+      // NetworkState is set synchronously BUT loadstart is fired at the
+      // end of the current stack, usually before setInterval(fn, 0).
+      // So at this point we know loadstart may have already fired or is
+      // about to fire, and either way the player hasn't seen it yet.
+      // We don't want to fire loadstart prematurely here and cause a
+      // double loadstart so we'll wait and see if it happens between now
+      // and the next loop, and fire it if not.
+      // HOWEVER, we also want to make sure it fires before loadedmetadata
+      // which could also happen between now and the next loop, so we'll
+      // watch for that also.
+      var loadstartFired = false;
+      var setLoadstartFired = function setLoadstartFired() {
+        loadstartFired = true;
+      };
 
-        _this3.on('loadstart', setLoadstartFired);
+      this.on('loadstart', setLoadstartFired);
 
-        var triggerLoadstart = function triggerLoadstart() {
-          // We did miss the original loadstart. Make sure the player
-          // sees loadstart before loadedmetadata
-          if (!loadstartFired) {
-            this.trigger('loadstart');
-          }
-        };
+      var triggerLoadstart = function triggerLoadstart() {
+        // We did miss the original loadstart. Make sure the player
+        // sees loadstart before loadedmetadata
+        if (!loadstartFired) {
+          this.trigger('loadstart');
+        }
+      };
 
-        _this3.on('loadedmetadata', triggerLoadstart);
+      this.on('loadedmetadata', triggerLoadstart);
 
-        _this3.ready(function () {
-          this.off('loadstart', setLoadstartFired);
-          this.off('loadedmetadata', triggerLoadstart);
+      this.ready(function () {
+        this.off('loadstart', setLoadstartFired);
+        this.off('loadedmetadata', triggerLoadstart);
 
-          if (!loadstartFired) {
-            // We did miss the original native loadstart. Fire it now.
-            this.trigger('loadstart');
-          }
-        });
+        if (!loadstartFired) {
+          // We did miss the original native loadstart. Fire it now.
+          this.trigger('loadstart');
+        }
+      });
 
-        return {
-          v: void 0
-        };
-      }();
-
-      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      return;
     }
 
     // From here on we know that loadstart already fired and we missed it.
@@ -13705,9 +15267,9 @@ var Html5 = function (_Tech) {
     }
 
     for (var _i = 0; _i < removeTracks.length; _i++) {
-      var _track = removeTracks[_i];
+      var track = removeTracks[_i];
 
-      techTracks.removeTrack_(_track);
+      techTracks.removeTrack_(track);
     }
   };
 
@@ -13767,7 +15329,7 @@ var Html5 = function (_Tech) {
 
 
   Html5.prototype.duration = function duration() {
-    var _this4 = this;
+    var _this3 = this;
 
     // Android Chrome will report duration as Infinity for VOD HLS until after
     // playback has started, which triggers the live display erroneously.
@@ -13775,26 +15337,20 @@ var Html5 = function (_Tech) {
     // the duration can be reliably known.
     if (this.el_.duration === Infinity && browser.IS_ANDROID && browser.IS_CHROME) {
       if (this.el_.currentTime === 0) {
-        var _ret2 = function () {
-          // Wait for the first `timeupdate` with currentTime > 0 - there may be
-          // several with 0
-          var checkProgress = function checkProgress() {
-            if (_this4.el_.currentTime > 0) {
-              // Trigger durationchange for genuinely live video
-              if (_this4.el_.duration === Infinity) {
-                _this4.trigger('durationchange');
-              }
-              _this4.off('timeupdate', checkProgress);
+        // Wait for the first `timeupdate` with currentTime > 0 - there may be
+        // several with 0
+        var checkProgress = function checkProgress() {
+          if (_this3.el_.currentTime > 0) {
+            // Trigger durationchange for genuinely live video
+            if (_this3.el_.duration === Infinity) {
+              _this3.trigger('durationchange');
             }
-          };
+            _this3.off('timeupdate', checkProgress);
+          }
+        };
 
-          _this4.on('timeupdate', checkProgress);
-          return {
-            v: NaN
-          };
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+        this.on('timeupdate', checkProgress);
+        return NaN;
       }
     }
     return this.el_.duration || NaN;
@@ -13837,7 +15393,7 @@ var Html5 = function (_Tech) {
 
 
   Html5.prototype.proxyWebkitFullscreen_ = function proxyWebkitFullscreen_() {
-    var _this5 = this;
+    var _this4 = this;
 
     if (!('webkitDisplayingFullscreen' in this.el_)) {
       return;
@@ -13855,8 +15411,8 @@ var Html5 = function (_Tech) {
 
     this.on('webkitbeginfullscreen', beginFn);
     this.on('dispose', function () {
-      _this5.off('webkitbeginfullscreen', beginFn);
-      _this5.off('webkitendfullscreen', endFn);
+      _this4.off('webkitbeginfullscreen', beginFn);
+      _this4.off('webkitendfullscreen', endFn);
     });
   };
 
@@ -14113,22 +15669,23 @@ var Html5 = function (_Tech) {
 
 /* HTML5 Support Testing ---------------------------------------------------- */
 
-/**
- * Element for testing browser HTML5 media capabilities
- *
- * @type {Element}
- * @constant
- * @private
- */
+if (Dom.isReal()) {
 
+  /**
+   * Element for testing browser HTML5 media capabilities
+   *
+   * @type {Element}
+   * @constant
+   * @private
+   */
+  Html5.TEST_VID = _document2['default'].createElement('video');
+  var track = _document2['default'].createElement('track');
 
-Html5.TEST_VID = _document2['default'].createElement('video');
-var track = _document2['default'].createElement('track');
-
-track.kind = 'captions';
-track.srclang = 'en';
-track.label = 'English';
-Html5.TEST_VID.appendChild(track);
+  track.kind = 'captions';
+  track.srclang = 'en';
+  track.label = 'English';
+  Html5.TEST_VID.appendChild(track);
+}
 
 /**
  * Check if HTML5 media is supported by this browser/device.
@@ -14145,7 +15702,7 @@ Html5.isSupported = function () {
     return false;
   }
 
-  return !!Html5.TEST_VID.canPlayType;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.canPlayType);
 };
 
 /**
@@ -14212,9 +15769,7 @@ Html5.supportsNativeTextTracks = function () {
  *        - False otherwise
  */
 Html5.supportsNativeVideoTracks = function () {
-  var supportsVideoTracks = !!Html5.TEST_VID.videoTracks;
-
-  return supportsVideoTracks;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.videoTracks);
 };
 
 /**
@@ -14225,9 +15780,7 @@ Html5.supportsNativeVideoTracks = function () {
  *        - False otherwise
  */
 Html5.supportsNativeAudioTracks = function () {
-  var supportsAudioTracks = !!Html5.TEST_VID.audioTracks;
-
-  return supportsAudioTracks;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.audioTracks);
 };
 
 /**
@@ -14320,31 +15873,23 @@ Html5.prototype.featuresNativeVideoTracks = Html5.supportsNativeVideoTracks();
 Html5.prototype.featuresNativeAudioTracks = Html5.supportsNativeAudioTracks();
 
 // HTML5 Feature detection and Device Fixes --------------------------------- //
-var canPlayType = void 0;
+var canPlayType = Html5.TEST_VID && Html5.TEST_VID.constructor.prototype.canPlayType;
 var mpegurlRE = /^application\/(?:x-|vnd\.apple\.)mpegurl/i;
 var mp4RE = /^video\/mp4/i;
 
 Html5.patchCanPlayType = function () {
+
   // Android 4.0 and above can play HLS to some extent but it reports being unable to do so
   if (browser.ANDROID_VERSION >= 4.0 && !browser.IS_FIREFOX) {
-    if (!canPlayType) {
-      canPlayType = Html5.TEST_VID.constructor.prototype.canPlayType;
-    }
-
     Html5.TEST_VID.constructor.prototype.canPlayType = function (type) {
       if (type && mpegurlRE.test(type)) {
         return 'maybe';
       }
       return canPlayType.call(this, type);
     };
-  }
 
-  // Override Android 2.2 and less canPlayType method which is broken
-  if (browser.IS_OLD_ANDROID) {
-    if (!canPlayType) {
-      canPlayType = Html5.TEST_VID.constructor.prototype.canPlayType;
-    }
-
+    // Override Android 2.2 and less canPlayType method which is broken
+  } else if (browser.IS_OLD_ANDROID) {
     Html5.TEST_VID.constructor.prototype.canPlayType = function (type) {
       if (type && mp4RE.test(type)) {
         return 'maybe';
@@ -14358,7 +15903,6 @@ Html5.unpatchCanPlayType = function () {
   var r = Html5.TEST_VID.constructor.prototype.canPlayType;
 
   Html5.TEST_VID.constructor.prototype.canPlayType = canPlayType;
-  canPlayType = null;
   return r;
 };
 
@@ -14432,7 +15976,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `paused` from the media element. `paused` indicates whether the media element
  * is currently paused or not.
  *
- * @method Html5.prototype.paused
+ * @method Html5#paused
  * @return {boolean}
  *         The value of `paused` from the media element.
  *
@@ -14444,7 +15988,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `currentTime` from the media element. `currentTime` indicates
  * the current second that the media is at in playback.
  *
- * @method Html5.prototype.currentTime
+ * @method Html5#currentTime
  * @return {number}
  *         The value of `currentTime` from the media element.
  *
@@ -14457,7 +16001,7 @@ Html5.resetMediaElement = function (el) {
  * object that represents the parts of the media that are already downloaded and
  * available for playback.
  *
- * @method Html5.prototype.buffered
+ * @method Html5#buffered
  * @return {TimeRange}
  *         The value of `buffered` from the media element.
  *
@@ -14470,7 +16014,7 @@ Html5.resetMediaElement = function (el) {
  * the current playback volume of audio for a media. `volume` will be a value from 0
  * (silent) to 1 (loudest and default).
  *
- * @method Html5.prototype.volume
+ * @method Html5#volume
  * @return {number}
  *         The value of `volume` from the media element. Value will be between 0-1.
  *
@@ -14483,7 +16027,7 @@ Html5.resetMediaElement = function (el) {
  * that the volume for the media should be set to silent. This does not actually change
  * the `volume` attribute.
  *
- * @method Html5.prototype.muted
+ * @method Html5#muted
  * @return {boolean}
  *         - True if the value of `volume` should be ignored and the audio set to silent.
  *         - False if the value of `volume` should be used.
@@ -14496,7 +16040,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `poster` from the media element. `poster` indicates
  * that the url of an image file that can/will be shown when no media data is available.
  *
- * @method Html5.prototype.poster
+ * @method Html5#poster
  * @return {string}
  *         The value of `poster` from the media element. Value will be a url to an
  *         image.
@@ -14515,7 +16059,7 @@ Html5.resetMediaElement = function (el) {
  * - auto: allow the media and metadata for the media to be downloaded before
  *    interaction
  *
- * @method Html5.prototype.preload
+ * @method Html5#preload
  * @return {string}
  *         The value of `preload` from the media element. Will be 'none', 'metadata',
  *         or 'auto'.
@@ -14528,7 +16072,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `autoplay` from the media element. `autoplay` indicates
  * that the media should start to play as soon as the page is ready.
  *
- * @method Html5.prototype.autoplay
+ * @method Html5#autoplay
  * @return {boolean}
  *         - The value of `autoplay` from the media element.
  *         - True indicates that the media should start as soon as the page loads.
@@ -14542,7 +16086,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `controls` from the media element. `controls` indicates
  * whether the native media controls should be shown or hidden.
  *
- * @method Html5.prototype.controls
+ * @method Html5#controls
  * @return {boolean}
  *         - The value of `controls` from the media element.
  *         - True indicates that native controls should be showing.
@@ -14557,7 +16101,7 @@ Html5.resetMediaElement = function (el) {
  * that the media should return to the start of the media and continue playing once
  * it reaches the end.
  *
- * @method Html5.prototype.loop
+ * @method Html5#loop
  * @return {boolean}
  *         - The value of `loop` from the media element.
  *         - True indicates that playback should seek back to start once
@@ -14574,7 +16118,7 @@ Html5.resetMediaElement = function (el) {
  * MediaError that may have occured during playback. If error returns null there is no
  * current error.
  *
- * @method Html5.prototype.error
+ * @method Html5#error
  * @return {MediaError|null}
  *         The value of `error` from the media element. Will be `MediaError` if there
  *         is a current error and null otherwise.
@@ -14587,7 +16131,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `seeking` from the media element. `seeking` indicates whether the
  * media is currently seeking to a new position or not.
  *
- * @method Html5.prototype.seeking
+ * @method Html5#seeking
  * @return {boolean}
  *         - The value of `seeking` from the media element.
  *         - True indicates that the media is currently seeking to a new position.
@@ -14601,7 +16145,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `seekable` from the media element. `seekable` returns a
  * `TimeRange` object indicating ranges of time that can currently be `seeked` to.
  *
- * @method Html5.prototype.seekable
+ * @method Html5#seekable
  * @return {TimeRange}
  *         The value of `seekable` from the media element. A `TimeRange` object
  *         indicating the current ranges of time that can be seeked to.
@@ -14614,7 +16158,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `ended` from the media element. `ended` indicates whether
  * the media has reached the end or not.
  *
- * @method Html5.prototype.ended
+ * @method Html5#ended
  * @return {boolean}
  *         - The value of `ended` from the media element.
  *         - True indicates that the media has ended.
@@ -14630,7 +16174,7 @@ Html5.resetMediaElement = function (el) {
  * media. `muted` and `defaultMuted` can have different values. `muted` indicates the
  * current state.
  *
- * @method Html5.prototype.defaultMuted
+ * @method Html5#defaultMuted
  * @return {boolean}
  *         - The value of `defaultMuted` from the media element.
  *         - True indicates that the media should start muted.
@@ -14646,7 +16190,7 @@ Html5.resetMediaElement = function (el) {
  *   - if playbackRate is set to 2, media will play twice as fast.
  *   - if playbackRate is set to 0.5, media will play half as fast.
  *
- * @method Html5.prototype.playbackRate
+ * @method Html5#playbackRate
  * @return {number}
  *         The value of `playbackRate` from the media element. A number indicating
  *         the current playback speed of the media, where 1 is normal speed.
@@ -14659,7 +16203,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `played` from the media element. `played` returns a `TimeRange`
  * object representing points in the media timeline that have been played.
  *
- * @method Html5.prototype.played
+ * @method Html5#played
  * @return {TimeRange}
  *         The value of `played` from the media element. A `TimeRange` object indicating
  *         the ranges of time that have been played.
@@ -14676,7 +16220,7 @@ Html5.resetMediaElement = function (el) {
  * - 2: NETWORK_LOADING
  * - 3: NETWORK_NO_SOURCE
  *
- * @method Html5.prototype.networkState
+ * @method Html5#networkState
  * @return {number}
  *         The value of `networkState` from the media element. This will be a number
  *         from the list in the description.
@@ -14695,7 +16239,7 @@ Html5.resetMediaElement = function (el) {
  * - 3: HAVE_FUTURE_DATA
  * - 4: HAVE_ENOUGH_DATA
  *
- * @method Html5.prototype.readyState
+ * @method Html5#readyState
  * @return {number}
  *         The value of `readyState` from the media element. This will be a number
  *         from the list in the description.
@@ -14708,7 +16252,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `videoWidth` from the video element. `videoWidth` indicates
  * the current width of the video in css pixels.
  *
- * @method Html5.prototype.videoWidth
+ * @method Html5#videoWidth
  * @return {number}
  *         The value of `videoWidth` from the video element. This will be a number
  *         in css pixels.
@@ -14721,7 +16265,7 @@ Html5.resetMediaElement = function (el) {
  * Get the value of `videoHeight` from the video element. `videoHeigth` indicates
  * the current height of the video in css pixels.
  *
- * @method Html5.prototype.videoHeight
+ * @method Html5#videoHeight
  * @return {number}
  *         The value of `videoHeight` from the video element. This will be a number
  *         in css pixels.
@@ -14742,7 +16286,7 @@ Html5.resetMediaElement = function (el) {
  * audio level as a percentage in decimal form. This means that 1 is 100%, 0.5 is 50%, and
  * so on.
  *
- * @method Html5.prototype.setVolume
+ * @method Html5#setVolume
  * @param {number} percentAsDecimal
  *        The volume percent as a decimal. Valid range is from 0-1.
  *
@@ -14754,7 +16298,7 @@ Html5.resetMediaElement = function (el) {
  * Set the value of `muted` on the media element. `muted` indicates the current
  * audio level should be silent.
  *
- * @method Html5.prototype.setMuted
+ * @method Html5#setMuted
  * @param {boolean} muted
  *        - True if the audio should be set to silent
  *        - False otherwise
@@ -14767,7 +16311,7 @@ Html5.resetMediaElement = function (el) {
  * Set the value of `src` on the media element. `src` indicates the current
  * {@link Tech~SourceObject} for the media.
  *
- * @method Html5.prototype.setSrc
+ * @method Html5#setSrc
  * @param {Tech~SourceObject} src
  *        The source object to set as the current source.
  *
@@ -14779,7 +16323,7 @@ Html5.resetMediaElement = function (el) {
  * Set the value of `poster` on the media element. `poster` is the url to
  * an image file that can/will be shown when no media data is available.
  *
- * @method Html5.prototype.setPoster
+ * @method Html5#setPoster
  * @param {string} poster
  *        The url to an image that should be used as the `poster` for the media
  *        element.
@@ -14798,7 +16342,7 @@ Html5.resetMediaElement = function (el) {
  * - auto: allow the media and metadata for the media to be downloaded before
  *    interaction
  *
- * @method Html5.prototype.setPreload
+ * @method Html5#setPreload
  * @param {string} preload
  *         The value of `preload` to set on the media element. Must be 'none', 'metadata',
  *         or 'auto'.
@@ -14811,7 +16355,7 @@ Html5.resetMediaElement = function (el) {
  * Set the value of `autoplay` on the media element. `autoplay` indicates
  * that the media should start to play as soon as the page is ready.
  *
- * @method Html5.prototype.setAutoplay
+ * @method Html5#setAutoplay
  * @param {boolean} autoplay
  *         - True indicates that the media should start as soon as the page loads.
  *         - False indicates that the media should not start as soon as the page loads.
@@ -14825,7 +16369,7 @@ Html5.resetMediaElement = function (el) {
  * that the media should return to the start of the media and continue playing once
  * it reaches the end.
  *
- * @method Html5.prototype.setLoop
+ * @method Html5#setLoop
  * @param {boolean} loop
  *         - True indicates that playback should seek back to start once
  *           the end of a media is reached.
@@ -14842,7 +16386,7 @@ Html5.resetMediaElement = function (el) {
  *   - if playbackRate is set to 2, media will play twice as fast.
  *   - if playbackRate is set to 0.5, media will play half as fast.
  *
- * @method Html5.prototype.setPlaybackRate
+ * @method Html5#setPlaybackRate
  * @return {number}
  *         The value of `playbackRate` from the media element. A number indicating
  *         the current playback speed of the media, where 1 is normal speed.
@@ -14861,7 +16405,7 @@ Html5.resetMediaElement = function (el) {
  * A wrapper around the media elements `pause` function. This will call the `HTML5`
  * media elements `pause` function.
  *
- * @method Html5.prototype.pause
+ * @method Html5#pause
  * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-media-pause}
  */
 'pause',
@@ -14870,7 +16414,7 @@ Html5.resetMediaElement = function (el) {
  * A wrapper around the media elements `load` function. This will call the `HTML5`s
  * media element `load` function.
  *
- * @method Html5.prototype.load
+ * @method Html5#load
  * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-media-load}
  */
 'load'].forEach(function (prop) {
@@ -15118,6 +16662,8 @@ var _document = _dereq_(94);
 
 var _document2 = _interopRequireDefault(_document);
 
+var _obj = _dereq_(88);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -15133,14 +16679,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * An Object containing a structure like: `{src: 'url', type: 'mimetype'}` or string
  * that just contains the src url alone.
- *
- * ``` js
- *   var SourceObject = {
- *     src: 'http://example.com/some-video.mp4',
- *     type: 'video/mp4'
- *   };
- *   var SourceString = 'http://example.com/some-video.mp4';
- * ```
+ * * `var SourceObject = {src: 'http://ex.com/video.mp4', type: 'video/mp4'};`
+   * `var SourceString = 'http://example.com/some-video.mp4';`
  *
  * @typedef {Object|string} Tech~SourceObject
  *
@@ -15268,8 +16808,14 @@ var Tech = function (_Component) {
     _this.initTextTrackListeners();
     _this.initTrackListeners();
 
-    // Turn on component tap events
-    _this.emitTapEvents();
+    // Turn on component tap events only if not using native controls
+    if (!options.nativeControlsForTouch) {
+      _this.emitTapEvents();
+    }
+
+    if (_this.constructor) {
+      _this.name_ = _this.constructor.name || 'Unknown Tech';
+    }
     return _this;
   }
 
@@ -15693,45 +17239,63 @@ var Tech = function (_Component) {
    *
    * @fires Tech#vttjsloaded
    * @fires Tech#vttjserror
-   * @fires Tech#texttrackchange
    */
 
 
   Tech.prototype.addWebVttScript_ = function addWebVttScript_() {
     var _this4 = this;
 
-    if (!_window2['default'].WebVTT && this.el().parentNode !== null && this.el().parentNode !== undefined) {
-      (function () {
-        var script = _document2['default'].createElement('script');
+    if (_window2['default'].WebVTT) {
+      return;
+    }
 
-        script.src = _this4.options_['vtt.js'] || 'https://cdn.rawgit.com/gkatsev/vtt.js/vjs-v0.12.1/dist/vtt.min.js';
-        script.onload = function () {
-          /**
-           * Fired when vtt.js is loaded.
-           *
-           * @event Tech#vttjsloaded
-           * @type {EventTarget~Event}
-           */
-          _this4.trigger('vttjsloaded');
-        };
-        script.onerror = function () {
-          /**
-           * Fired when vtt.js was not loaded due to an error
-           *
-           * @event Tech#vttjsloaded
-           * @type {EventTarget~Event}
-           */
-          _this4.trigger('vttjserror');
-        };
-        _this4.on('dispose', function () {
-          script.onload = null;
-          script.onerror = null;
-        });
-        // but have not loaded yet and we set it to true before the inject so that
-        // we don't overwrite the injected window.WebVTT if it loads right away
-        _window2['default'].WebVTT = true;
-        _this4.el().parentNode.appendChild(script);
-      })();
+    // Initially, Tech.el_ is a child of a dummy-div wait until the Component system
+    // signals that the Tech is ready at which point Tech.el_ is part of the DOM
+    // before inserting the WebVTT script
+    if (_document2['default'].body.contains(this.el())) {
+      var vtt = {};
+
+      // load via require if available and vtt.js script location was not passed in
+      // as an option. novtt builds will turn the above require call into an empty object
+      // which will cause this if check to always fail.
+      if (!this.options_['vtt.js'] && (0, _obj.isPlain)(vtt) && Object.keys(vtt).length > 0) {
+        this.trigger('vttjsloaded');
+        return;
+      }
+
+      // load vtt.js via the script location option or the cdn of no location was
+      // passed in
+      var script = _document2['default'].createElement('script');
+
+      script.src = this.options_['vtt.js'] || 'https://vjs.zencdn.net/vttjs/0.12.3/vtt.min.js';
+      script.onload = function () {
+        /**
+         * Fired when vtt.js is loaded.
+         *
+         * @event Tech#vttjsloaded
+         * @type {EventTarget~Event}
+         */
+        _this4.trigger('vttjsloaded');
+      };
+      script.onerror = function () {
+        /**
+         * Fired when vtt.js was not loaded due to an error
+         *
+         * @event Tech#vttjsloaded
+         * @type {EventTarget~Event}
+         */
+        _this4.trigger('vttjserror');
+      };
+      this.on('dispose', function () {
+        script.onload = null;
+        script.onerror = null;
+      });
+      // but have not loaded yet and we set it to true before the inject so that
+      // we don't overwrite the injected window.WebVTT if it loads right away
+      _window2['default'].WebVTT = true;
+      this.el().parentNode.appendChild(script);
+    } else {
+      this.ready(this.addWebVttScript_);
     }
   };
 
@@ -15751,22 +17315,23 @@ var Tech = function (_Component) {
       return;
     }
 
-    this.remoteTextTracks().on('addtrack', function (e) {
-      _this5.textTracks().addTrack_(e.track);
-    });
+    var remoteTracks = this.remoteTextTracks();
+    var handleAddTrack = function handleAddTrack(e) {
+      return tracks.addTrack_(e.track);
+    };
+    var handleRemoveTrack = function handleRemoveTrack(e) {
+      return tracks.removeTrack_(e.track);
+    };
 
-    this.remoteTextTracks().on('removetrack', function (e) {
-      _this5.textTracks().removeTrack_(e.track);
-    });
+    remoteTracks.on('addtrack', handleAddTrack);
+    remoteTracks.on('removetrack', handleRemoveTrack);
 
-    // Initially, Tech.el_ is a child of a dummy-div wait until the Component system
-    // signals that the Tech is ready at which point Tech.el_ is part of the DOM
-    // before inserting the WebVTT script
-    this.on('ready', this.addWebVttScript_);
+    this.addWebVttScript_();
 
     var updateDisplay = function updateDisplay() {
       return _this5.trigger('texttrackchange');
     };
+
     var textTracksChanges = function textTracksChanges() {
       updateDisplay();
 
@@ -15782,9 +17347,21 @@ var Tech = function (_Component) {
 
     textTracksChanges();
     tracks.addEventListener('change', textTracksChanges);
+    tracks.addEventListener('addtrack', textTracksChanges);
+    tracks.addEventListener('removetrack', textTracksChanges);
 
     this.on('dispose', function () {
+      remoteTracks.off('addtrack', handleAddTrack);
+      remoteTracks.off('removetrack', handleRemoveTrack);
       tracks.removeEventListener('change', textTracksChanges);
+      tracks.removeEventListener('addtrack', textTracksChanges);
+      tracks.removeEventListener('removetrack', textTracksChanges);
+
+      for (var i = 0; i < tracks.length; i++) {
+        var track = tracks[i];
+
+        track.removeEventListener('cuechange', updateDisplay);
+      }
     });
   };
 
@@ -16160,10 +17737,7 @@ Tech.prototype.featuresNativeTextTracks = false;
  * Source handlers are scripts for handling specific formats.
  * The source handler pattern is used for adaptive formats (HLS, DASH) that
  * manually load video data and feed it into a Source Buffer (Media Source Extensions)
- *
- * ```js
- *   Tech.withSourceHandlers.call(MyTech);
- * ```
+ * Example: `Tech.withSourceHandlers.call(MyTech);`
  *
  * @param {Tech} _Tech
  *        The tech to add source handler functions to.
@@ -16409,7 +17983,7 @@ _component2['default'].registerComponent('MediaTechController', Tech);
 Tech.registerTech('Tech', Tech);
 exports['default'] = Tech;
 
-},{"46":46,"5":5,"63":63,"65":65,"66":66,"70":70,"72":72,"76":76,"79":79,"83":83,"86":86,"87":87,"90":90,"94":94,"95":95}],63:[function(_dereq_,module,exports){
+},{"46":46,"5":5,"63":63,"65":65,"66":66,"70":70,"72":72,"76":76,"79":79,"83":83,"86":86,"87":87,"88":88,"90":90,"94":94,"95":95}],63:[function(_dereq_,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -17330,7 +18904,7 @@ var TextTrackDisplay = function (_Component) {
       var tracks = this.options_.playerOptions.tracks || [];
 
       for (var i = 0; i < tracks.length; i++) {
-        this.player_.addRemoteTextTrack(tracks[i]);
+        this.player_.addRemoteTextTrack(tracks[i], true);
       }
 
       var modes = { captions: 1, subtitles: 1 };
@@ -17555,10 +19129,9 @@ exports['default'] = TextTrackDisplay;
 
 exports.__esModule = true;
 /**
- * Utilities for capturing text track state and re-creating tracks
- * based on a capture.
+ * @file text-track-list-converter.js Utilities for capturing text track state and
+ * re-creating tracks based on a capture.
  *
- * @file text-track-list-converter.js
  * @module text-track-list-converter
  */
 
@@ -18496,17 +20069,15 @@ var loadTrack = function loadTrack(src, track) {
     // NOTE: this is only used for the alt/video.novtt.js build
     if (typeof _window2['default'].WebVTT !== 'function') {
       if (track.tech_) {
-        (function () {
-          var loadHandler = function loadHandler() {
-            return parseCues(responseBody, track);
-          };
+        var loadHandler = function loadHandler() {
+          return parseCues(responseBody, track);
+        };
 
-          track.tech_.on('vttjsloaded', loadHandler);
-          track.tech_.on('vttjserror', function () {
-            _log2['default'].error('vttjs failed to load, stopping trying to process ' + track.src);
-            track.tech_.off('vttjsloaded', loadHandler);
-          });
-        })();
+        track.tech_.on('vttjsloaded', loadHandler);
+        track.tech_.on('vttjserror', function () {
+          _log2['default'].error('vttjs failed to load, stopping trying to process ' + track.src);
+          track.tech_.off('vttjsloaded', loadHandler);
+        });
       }
     } else {
       parseCues(responseBody, track);
@@ -18559,7 +20130,7 @@ var TextTrack = function (_Track) {
    *        If this track should default to on or off.
    */
   function TextTrack() {
-    var _this, _ret2;
+    var _this, _ret;
 
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -18614,7 +20185,9 @@ var TextTrack = function (_Track) {
     });
 
     if (mode !== 'disabled') {
-      tt.tech_.on('timeupdate', timeupdateHandler);
+      tt.tech_.ready(function () {
+        tt.tech_.on('timeupdate', timeupdateHandler);
+      }, true);
     }
 
     /**
@@ -18643,12 +20216,16 @@ var TextTrack = function (_Track) {
         return mode;
       },
       set: function set(newMode) {
+        var _this2 = this;
+
         if (!_trackEnums.TextTrackMode[newMode]) {
           return;
         }
         mode = newMode;
         if (mode === 'showing') {
-          this.tech_.on('timeupdate', timeupdateHandler);
+          this.tech_.ready(function () {
+            _this2.tech_.on('timeupdate', timeupdateHandler);
+          }, true);
         }
         /**
          * An event that fires when mode changes on this track. This allows
@@ -18733,7 +20310,7 @@ var TextTrack = function (_Track) {
       tt.loaded_ = true;
     }
 
-    return _ret2 = tt, _possibleConstructorReturn(_this, _ret2);
+    return _ret = tt, _possibleConstructorReturn(_this, _ret);
   }
 
   /**
@@ -18744,7 +20321,23 @@ var TextTrack = function (_Track) {
    */
 
 
-  TextTrack.prototype.addCue = function addCue(cue) {
+  TextTrack.prototype.addCue = function addCue(originalCue) {
+    var cue = originalCue;
+
+    if (_window2['default'].vttjs && !(originalCue instanceof _window2['default'].vttjs.VTTCue)) {
+      cue = new _window2['default'].vttjs.VTTCue(originalCue.startTime, originalCue.endTime, originalCue.text);
+
+      for (var prop in originalCue) {
+        if (!(prop in cue)) {
+          cue[prop] = originalCue[prop];
+        }
+      }
+
+      // make sure that `id` is copied over
+      cue.id = originalCue.id;
+      cue.originalCue_ = originalCue;
+    }
+
     var tracks = this.tech_.textTracks();
 
     if (tracks) {
@@ -18768,19 +20361,16 @@ var TextTrack = function (_Track) {
 
 
   TextTrack.prototype.removeCue = function removeCue(_removeCue) {
-    var removed = false;
+    var i = this.cues_.length;
 
-    for (var i = 0, l = this.cues_.length; i < l; i++) {
+    while (i--) {
       var cue = this.cues_[i];
 
-      if (cue === _removeCue) {
+      if (cue === _removeCue || cue.originalCue_ && cue.originalCue_ === _removeCue) {
         this.cues_.splice(i, 1);
-        removed = true;
+        this.cues.setCues_(this.cues_);
+        break;
       }
-    }
-
-    if (removed) {
-      this.cues.setCues_(this.cues_);
     }
   };
 
@@ -19083,7 +20673,7 @@ var TrackList = function (_EventTarget) {
 /**
  * Events that can be called with on + eventName. See {@link EventHandler}.
  *
- * @property
+ * @property {Object} TrackList#allowedEvents_
  * @private
  */
 
@@ -19576,15 +21166,17 @@ exports['default'] = VideoTrack;
 exports.__esModule = true;
 exports.BACKGROUND_SIZE_SUPPORTED = exports.TOUCH_ENABLED = exports.IS_ANY_SAFARI = exports.IS_SAFARI = exports.IE_VERSION = exports.IS_IE8 = exports.IS_CHROME = exports.IS_EDGE = exports.IS_FIREFOX = exports.IS_NATIVE_ANDROID = exports.IS_OLD_ANDROID = exports.ANDROID_VERSION = exports.IS_ANDROID = exports.IOS_VERSION = exports.IS_IOS = exports.IS_IPOD = exports.IS_IPHONE = exports.IS_IPAD = undefined;
 
-var _document = _dereq_(94);
+var _dom = _dereq_(81);
 
-var _document2 = _interopRequireDefault(_document);
+var Dom = _interopRequireWildcard(_dom);
 
 var _window = _dereq_(95);
 
 var _window2 = _interopRequireDefault(_window);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 /**
  * @file browser.js
@@ -19648,17 +21240,26 @@ var IS_FIREFOX = exports.IS_FIREFOX = /Firefox/i.test(USER_AGENT);
 var IS_EDGE = exports.IS_EDGE = /Edge/i.test(USER_AGENT);
 var IS_CHROME = exports.IS_CHROME = !IS_EDGE && /Chrome/i.test(USER_AGENT);
 var IS_IE8 = exports.IS_IE8 = /MSIE\s8\.0/.test(USER_AGENT);
-var IE_VERSION = exports.IE_VERSION = function (result) {
-  return result && parseFloat(result[1]);
-}(/MSIE\s(\d+)\.\d/.exec(USER_AGENT));
+var IE_VERSION = exports.IE_VERSION = function () {
+  var result = /MSIE\s(\d+)\.\d/.exec(USER_AGENT);
+  var version = result && parseFloat(result[1]);
+
+  if (!version && /Trident\/7.0/i.test(USER_AGENT) && /rv:11.0/.test(USER_AGENT)) {
+    // IE 11 has a different user agent string than other IE versions
+    version = 11.0;
+  }
+
+  return version;
+}();
 
 var IS_SAFARI = exports.IS_SAFARI = /Safari/i.test(USER_AGENT) && !IS_CHROME && !IS_ANDROID && !IS_EDGE;
 var IS_ANY_SAFARI = exports.IS_ANY_SAFARI = IS_SAFARI || IS_IOS;
 
-var TOUCH_ENABLED = exports.TOUCH_ENABLED = !!('ontouchstart' in _window2['default'] || _window2['default'].DocumentTouch && _document2['default'] instanceof _window2['default'].DocumentTouch);
-var BACKGROUND_SIZE_SUPPORTED = exports.BACKGROUND_SIZE_SUPPORTED = 'backgroundSize' in _document2['default'].createElement('video').style;
+var TOUCH_ENABLED = exports.TOUCH_ENABLED = Dom.isReal() && ('ontouchstart' in _window2['default'] || _window2['default'].DocumentTouch && _window2['default'].document instanceof _window2['default'].DocumentTouch);
 
-},{"94":94,"95":95}],79:[function(_dereq_,module,exports){
+var BACKGROUND_SIZE_SUPPORTED = exports.BACKGROUND_SIZE_SUPPORTED = Dom.isReal() && 'backgroundSize' in _window2['default'].document.createElement('video').style;
+
+},{"81":81,"95":95}],79:[function(_dereq_,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19761,6 +21362,7 @@ exports.$$ = exports.$ = undefined;
 
 var _templateObject = _taggedTemplateLiteralLoose(['Setting attributes in the second argument of createEl()\n                has been deprecated. Use the third argument instead.\n                createEl(type, properties, attributes). Attempting to set ', ' to ', '.'], ['Setting attributes in the second argument of createEl()\n                has been deprecated. Use the third argument instead.\n                createEl(type, properties, attributes). Attempting to set ', ' to ', '.']);
 
+exports.isReal = isReal;
 exports.isEl = isEl;
 exports.getEl = getEl;
 exports.createEl = createEl;
@@ -19864,6 +21466,23 @@ function throwIfWhitespace(str) {
  */
 function classRegExp(className) {
   return new RegExp('(^|\\s)' + className + '($|\\s)');
+}
+
+/**
+ * Whether the current DOM interface appears to be real.
+ *
+ * @return {Boolean}
+ */
+function isReal() {
+  return (
+
+    // Both document and window will never be undefined thanks to `global`.
+    _document2['default'] === _window2['default'].document &&
+
+    // In IE < 9, DOM methods return "object" as their type, so all we can
+    // confidently check is that it exists.
+    typeof _document2['default'].createElement !== 'undefined'
+  );
 }
 
 /**
@@ -20723,13 +22342,12 @@ function _cleanUpEvents(elem, type) {
  *        Event listener.
  */
 /**
- * @file events.js
- * @module events
- *
- * Event System (John Resig - Secrets of a JS Ninja http://jsninja.com/)
+ * @file events.js. An Event System (John Resig - Secrets of a JS Ninja http://jsninja.com/)
  * (Original book version wasn't completely usable, so fixed some things and made Closure Compiler compatible)
  * This should work very similarly to jQuery's events, however it's based off the book version which isn't as
  * robust as jquery's, so there's probably some differences.
+ *
+ * @module events
  */
 
 function _handleMultipleEvents(fn, elem, types, callback) {
@@ -20764,96 +22382,94 @@ function fixEvent(event) {
   // other expected methods like isPropagationStopped. Seems to be a problem
   // with the Javascript Ninja code. So we're just overriding all events now.
   if (!event || !event.isPropagationStopped) {
-    (function () {
-      var old = event || _window2['default'].event;
+    var old = event || _window2['default'].event;
 
-      event = {};
-      // Clone the old object so that we can modify the values event = {};
-      // IE8 Doesn't like when you mess with native event properties
-      // Firefox returns false for event.hasOwnProperty('type') and other props
-      //  which makes copying more difficult.
-      // TODO: Probably best to create a whitelist of event props
-      for (var key in old) {
-        // Safari 6.0.3 warns you if you try to copy deprecated layerX/Y
-        // Chrome warns you if you try to copy deprecated keyboardEvent.keyLocation
-        // and webkitMovementX/Y
-        if (key !== 'layerX' && key !== 'layerY' && key !== 'keyLocation' && key !== 'webkitMovementX' && key !== 'webkitMovementY') {
-          // Chrome 32+ warns if you try to copy deprecated returnValue, but
-          // we still want to if preventDefault isn't supported (IE8).
-          if (!(key === 'returnValue' && old.preventDefault)) {
-            event[key] = old[key];
-          }
+    event = {};
+    // Clone the old object so that we can modify the values event = {};
+    // IE8 Doesn't like when you mess with native event properties
+    // Firefox returns false for event.hasOwnProperty('type') and other props
+    //  which makes copying more difficult.
+    // TODO: Probably best to create a whitelist of event props
+    for (var key in old) {
+      // Safari 6.0.3 warns you if you try to copy deprecated layerX/Y
+      // Chrome warns you if you try to copy deprecated keyboardEvent.keyLocation
+      // and webkitMovementX/Y
+      if (key !== 'layerX' && key !== 'layerY' && key !== 'keyLocation' && key !== 'webkitMovementX' && key !== 'webkitMovementY') {
+        // Chrome 32+ warns if you try to copy deprecated returnValue, but
+        // we still want to if preventDefault isn't supported (IE8).
+        if (!(key === 'returnValue' && old.preventDefault)) {
+          event[key] = old[key];
         }
       }
+    }
 
-      // The event occurred on this element
-      if (!event.target) {
-        event.target = event.srcElement || _document2['default'];
+    // The event occurred on this element
+    if (!event.target) {
+      event.target = event.srcElement || _document2['default'];
+    }
+
+    // Handle which other element the event is related to
+    if (!event.relatedTarget) {
+      event.relatedTarget = event.fromElement === event.target ? event.toElement : event.fromElement;
+    }
+
+    // Stop the default browser action
+    event.preventDefault = function () {
+      if (old.preventDefault) {
+        old.preventDefault();
       }
+      event.returnValue = false;
+      old.returnValue = false;
+      event.defaultPrevented = true;
+    };
 
-      // Handle which other element the event is related to
-      if (!event.relatedTarget) {
-        event.relatedTarget = event.fromElement === event.target ? event.toElement : event.fromElement;
+    event.defaultPrevented = false;
+
+    // Stop the event from bubbling
+    event.stopPropagation = function () {
+      if (old.stopPropagation) {
+        old.stopPropagation();
       }
+      event.cancelBubble = true;
+      old.cancelBubble = true;
+      event.isPropagationStopped = returnTrue;
+    };
 
-      // Stop the default browser action
-      event.preventDefault = function () {
-        if (old.preventDefault) {
-          old.preventDefault();
-        }
-        event.returnValue = false;
-        old.returnValue = false;
-        event.defaultPrevented = true;
-      };
+    event.isPropagationStopped = returnFalse;
 
-      event.defaultPrevented = false;
-
-      // Stop the event from bubbling
-      event.stopPropagation = function () {
-        if (old.stopPropagation) {
-          old.stopPropagation();
-        }
-        event.cancelBubble = true;
-        old.cancelBubble = true;
-        event.isPropagationStopped = returnTrue;
-      };
-
-      event.isPropagationStopped = returnFalse;
-
-      // Stop the event from bubbling and executing other handlers
-      event.stopImmediatePropagation = function () {
-        if (old.stopImmediatePropagation) {
-          old.stopImmediatePropagation();
-        }
-        event.isImmediatePropagationStopped = returnTrue;
-        event.stopPropagation();
-      };
-
-      event.isImmediatePropagationStopped = returnFalse;
-
-      // Handle mouse position
-      if (event.clientX !== null && event.clientX !== undefined) {
-        var doc = _document2['default'].documentElement;
-        var body = _document2['default'].body;
-
-        event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
-        event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc && doc.clientTop || body && body.clientTop || 0);
+    // Stop the event from bubbling and executing other handlers
+    event.stopImmediatePropagation = function () {
+      if (old.stopImmediatePropagation) {
+        old.stopImmediatePropagation();
       }
+      event.isImmediatePropagationStopped = returnTrue;
+      event.stopPropagation();
+    };
 
-      // Handle key presses
-      event.which = event.charCode || event.keyCode;
+    event.isImmediatePropagationStopped = returnFalse;
 
-      // Fix button for mouse clicks:
-      // 0 == left; 1 == middle; 2 == right
-      if (event.button !== null && event.button !== undefined) {
+    // Handle mouse position
+    if (event.clientX !== null && event.clientX !== undefined) {
+      var doc = _document2['default'].documentElement;
+      var body = _document2['default'].body;
 
-        // The following is disabled because it does not pass videojs-standard
-        // and... yikes.
-        /* eslint-disable */
-        event.button = event.button & 1 ? 0 : event.button & 4 ? 1 : event.button & 2 ? 2 : 0;
-        /* eslint-enable */
-      }
-    })();
+      event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+      event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc && doc.clientTop || body && body.clientTop || 0);
+    }
+
+    // Handle key presses
+    event.which = event.charCode || event.keyCode;
+
+    // Fix button for mouse clicks:
+    // 0 == left; 1 == middle; 2 == right
+    if (event.button !== null && event.button !== undefined) {
+
+      // The following is disabled because it does not pass videojs-standard
+      // and... yikes.
+      /* eslint-disable */
+      event.button = event.button & 1 ? 0 : event.button & 4 ? 1 : event.button & 2 ? 2 : 0;
+      /* eslint-enable */
+    }
   }
 
   // Returns fixed-up instance
@@ -21490,6 +23106,22 @@ exports.isPlain = isPlain;
 var toString = Object.prototype.toString;
 
 /**
+ * Get the keys of an Object
+ *
+ * @param {Object}
+ *        The Object to get the keys from
+ *
+ * @return {string[]}
+ *         An array of the keys from the object. Returns an empty array if the
+ *         object passed in was invalid or had no keys.
+ *
+ * @private
+ */
+var keys = function keys(object) {
+  return isObject(object) ? Object.keys(object) : [];
+};
+
+/**
  * Array-like iteration for objects.
  *
  * @param {Object} object
@@ -21499,7 +23131,7 @@ var toString = Object.prototype.toString;
  *        The callback function which is called for each key in the object.
  */
 function each(object, fn) {
-  Object.keys(object).forEach(function (key) {
+  keys(object).forEach(function (key) {
     return fn(object[key], key);
   });
 }
@@ -21524,7 +23156,7 @@ function each(object, fn) {
 function reduce(object, fn) {
   var initial = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-  return Object.keys(object).reduce(function (accum, key) {
+  return keys(object).reduce(function (accum, key) {
     return fn(accum, object[key], key);
   }, initial);
 }
@@ -22099,7 +23731,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 // HTML5 Element Shim for IE8
-if (typeof HTMLVideoElement === 'undefined' && _window2['default'].document && _window2['default'].document.createElement) {
+if (typeof HTMLVideoElement === 'undefined' && Dom.isReal()) {
   _document2['default'].createElement('video');
   _document2['default'].createElement('audio');
   _document2['default'].createElement('track');
@@ -22109,10 +23741,7 @@ if (typeof HTMLVideoElement === 'undefined' && _window2['default'].document && _
  * Doubles as the main function for users to create a player instance and also
  * the main library object.
  * The `videojs` function can be used to initialize or retrieve a player.
- * ```js
- *   var myPlayer = videojs('my_video_id');
- * ```
- *
+  *
  * @param {string|Element} id
  *        Video element or video element ID
  *
@@ -22129,8 +23758,6 @@ if (typeof HTMLVideoElement === 'undefined' && _window2['default'].document && _
  */
 function videojs(id, options, ready) {
   var tag = void 0;
-
-  options = options || {};
 
   // Allow for element or ID to be passed in
   // String ID
@@ -22176,11 +23803,13 @@ function videojs(id, options, ready) {
     return tag.player || _player2['default'].players[tag.playerId];
   }
 
+  options = options || {};
+
   videojs.hooks('beforesetup').forEach(function (hookFunction) {
     var opts = hookFunction(tag, (0, _mergeOptions3['default'])(options));
 
     if (!(0, _obj.isObject)(opts) || Array.isArray(opts)) {
-      videojs.log.error('please return an object in beforesetup hooks');
+      _log2['default'].error('please return an object in beforesetup hooks');
       return;
     }
 
@@ -22263,7 +23892,7 @@ videojs.removeHook = function (type, fn) {
 };
 
 // Add default styles
-if (_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE !== true) {
+if (_window2['default'].VIDEOJS_NO_DYNAMIC_STYLE !== true && Dom.isReal()) {
   var style = Dom.$('.vjs-styles-defaults');
 
   if (!style) {
@@ -22287,16 +23916,11 @@ setup.autoSetupTimeout(1, videojs);
  *
  * @type {string}
  */
-videojs.VERSION = '5.14.1';
+videojs.VERSION = '5.19.2';
 
 /**
  * The global options object. These are the settings that take effect
  * if no overrides are specified when the player is created.
- *
- * ```js
- *     videojs.options.autoplay = true
- *     // -> all players will autoplay by default
- * ```
  *
  * @type {Object}
  */
@@ -22322,33 +23946,16 @@ videojs.players = _player2['default'].players;
 
 /**
  * Get a component class object by name
- * ```js
- *     var VjsButton = videojs.getComponent('Button');
- *     // Create a new instance of the component
- *     var myButton = new VjsButton(myPlayer);
- * ```
  *
  * @borrows Component.getComponent as videojs.getComponent
  */
 videojs.getComponent = _component2['default'].getComponent;
 
 /**
- * Register a component so it can referred to by name
- * Used when adding to other
- * components, either through addChild
- * `component.addChild('myComponent')`
- * or through default children options
- * `{ children: ['myComponent'] }`.
- * ```js
- *   // Get a component to subclass
- *   var VjsButton = videojs.getComponent('Button');
- *   // Subclass the component (see 'extend' doc for more info)
- *   var MySpecialButton = videojs.extend(VjsButton, {});
- *   // Register the new component
- *   VjsButton.registerComponent('MySepcialButton', MySepcialButton);
- *   // (optionally) add the new component as a default player child
- *   myPlayer.addChild('MySepcialButton');
- * ```
+ * Register a component so it can referred to by name. Used when adding to other
+ * components, either through addChild `component.addChild('myComponent')` or through
+ * default children options  `{ children: ['myComponent'] }`.
+ *
  * > NOTE: You could also just initialize the component before adding.
  * `component.addChild(new MyComponent());`
  *
@@ -22371,11 +23978,6 @@ videojs.registerComponent = function (name, comp) {
 
 /**
  * Get a Tech class object by name
- * ```js
- *   var Html5 = videojs.getTech('Html5');
- *   // Create a new instance of the component
- *   var html5 = new Html5(options);
- * ```
  *
  * @borrows Tech.getTech as videojs.getTech
  */
@@ -22384,17 +23986,6 @@ videojs.getTech = _tech2['default'].getTech;
 /**
  * Register a Tech so it can referred to by name.
  * This is used in the tech order for the player.
- *
- * ```js
- *     // get the Html5 Tech
- *     var Html5 = videojs.getTech('Html5');
- *     var MyTech = videojs.extend(Html5, {});
- *     // Register the new Tech
- *     VjsButton.registerTech('Tech', MyTech);
- *     var player = videojs('myplayer', {
- *       techOrder: ['myTech', 'html5']
- *     });
- * ```
  *
  * @borrows Tech.registerTech as videojs.registerTech
  */
@@ -22421,28 +24012,6 @@ videojs.TOUCH_ENABLED = browser.TOUCH_ENABLED;
 /**
  * Subclass an existing class
  * Mimics ES6 subclassing with the `extend` keyword
- * ```js
- *     // Create a basic javascript 'class'
- *     function MyClass(name) {
- *       // Set a property at initialization
- *       this.myName = name;
- *     }
- *     // Create an instance method
- *     MyClass.prototype.sayMyName = function() {
- *       alert(this.myName);
- *     };
- *     // Subclass the exisitng class and change the name
- *     // when initializing
- *     var MySubClass = videojs.extend(MyClass, {
- *       constructor: function(name) {
- *         // Call the super class constructor for the subclass
- *         MyClass.call(this, name)
- *       }
- *     });
- *     // Create an instance of the new sub class
- *     var myInstance = new MySubClass('John');
- *     myInstance.sayMyName(); // -> should alert "John"
- * ```
  *
  * @borrows extend:extendFn as videojs.extend
  */
@@ -22453,25 +24022,6 @@ videojs.extend = _extend2['default'];
  * Performs a deep merge like lodash.merge but **only merges plain objects**
  * (not arrays, elements, anything else)
  * Other values will be copied directly from the second object.
- * ```js
- *     var defaultOptions = {
- *       foo: true,
- *       bar: {
- *         a: true,
- *         b: [1,2,3]
- *       }
- *     };
- *     var newOptions = {
- *       foo: false,
- *       bar: {
- *         b: [4,5,6]
- *       }
- *     };
- *     var result = videojs.mergeOptions(defaultOptions, newOptions);
- *     // result.foo = false;
- *     // result.bar.a = true;
- *     // result.bar.b = [4,5,6];
- * ```
  *
  * @borrows merge-options:mergeOptions as videojs.mergeOptions
  */
@@ -22479,12 +24029,6 @@ videojs.mergeOptions = _mergeOptions3['default'];
 
 /**
  * Change the context (this) of a function
- *
- * ``` js
- *     videojs.bind(newContext, function() {
- *       this === newContext
- *     });
- * ```
  *
  * > NOTE: as of v5.0 we require an ES5 shim, so you should use the native
  * `function() {}.bind(newContext);` instead of this.
@@ -22498,40 +24042,6 @@ videojs.bind = Fn.bind;
  * Plugins are only initialized when options for the plugin are included
  * in the player options, or the plugin function on the player instance is
  * called.
- * **See the plugin guide in the docs for a more detailed example**
- * ```js
- *     // Make a plugin that alerts when the player plays
- *     videojs.plugin('myPlugin', function(myPluginOptions) {
- *       myPluginOptions = myPluginOptions || {};
- *
- *       var player = this;
- *       var alertText = myPluginOptions.text || 'Player is playing!'
- *
- *       player.on('play', function() {
- *         alert(alertText);
- *       });
- *     });
- *     // USAGE EXAMPLES
- *     // EXAMPLE 1: New player with plugin options, call plugin immediately
- *     var player1 = videojs('idOne', {
- *       myPlugin: {
- *         text: 'Custom text!'
- *       }
- *     });
- *     // Click play
- *     // --> Should alert 'Custom text!'
- *     // EXAMPLE 3: New player, initialize plugin later
- *     var player3 = videojs('idThree');
- *     // Click play
- *     // --> NO ALERT
- *     // Click pause
- *     // Initialize plugin using the plugin function on the player instance
- *     player3.myPlugin({
- *       text: 'Plugin added later!'
- *     });
- *     // Click play
- *     // --> Should alert 'Plugin added later!'
- * ```
  *
  * @borrows plugin:plugin as videojs.plugin
  */
@@ -22539,9 +24049,7 @@ videojs.plugin = _plugins2['default'];
 
 /**
  * Adding languages so that they're available to all players.
- * ```js
- *   videojs.addLanguage('es', { 'Hello': 'Hola' });
- * ```
+ * Example: `videojs.addLanguage('es', { 'Hello': 'Hola' });`
  *
  * @param {string} code
  *        The language code or dictionary property
@@ -22642,18 +24150,6 @@ videojs.trigger = Events.trigger;
 
 /**
  * A cross-browser XMLHttpRequest wrapper. Here's a simple example:
- *
- * ```js
- *     videojs.xhr({
- *       body: someJSONString,
- *       uri: "/foo",
- *       headers: {
- *         "Content-Type": "application/json"
- *       }
- *     }, function (err, resp, body) {
- *       // check resp.statusCode
- *     });
- * ```
  *
  * @param {Object} options
  *        settings for the request.
@@ -22910,10 +24406,9 @@ module.exports = function tsml (sa) {
 },{}],99:[function(_dereq_,module,exports){
 "use strict";
 var window = _dereq_(95)
-var once = _dereq_(101)
 var isFunction = _dereq_(100)
-var parseHeaders = _dereq_(104)
-var xtend = _dereq_(105)
+var parseHeaders = _dereq_(103)
+var xtend = _dereq_(104)
 
 module.exports = createXHR
 createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -22962,15 +24457,21 @@ function createXHR(uri, options, callback) {
 }
 
 function _createXHR(options) {
-    var callback = options.callback
-    if(typeof callback === "undefined"){
+    if(typeof options.callback === "undefined"){
         throw new Error("callback argument missing")
     }
-    callback = once(callback)
+
+    var called = false
+    var callback = function cbOnce(err, response, body){
+        if(!called){
+            called = true
+            options.callback(err, response, body)
+        }
+    }
 
     function readystatechange() {
         if (xhr.readyState === 4) {
-            loadFunc()
+            setTimeout(loadFunc, 0)
         }
     }
 
@@ -22980,8 +24481,8 @@ function _createXHR(options) {
 
         if (xhr.response) {
             body = xhr.response
-        } else if (xhr.responseType === "text" || !xhr.responseType) {
-            body = xhr.responseText || xhr.responseXML
+        } else {
+            body = xhr.responseText || getXml(xhr)
         }
 
         if (isJson) {
@@ -22993,22 +24494,13 @@ function _createXHR(options) {
         return body
     }
 
-    var failureResponse = {
-                body: undefined,
-                headers: {},
-                statusCode: 0,
-                method: method,
-                url: uri,
-                rawRequest: xhr
-            }
-
     function errorFunc(evt) {
         clearTimeout(timeoutTimer)
         if(!(evt instanceof Error)){
             evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
         }
         evt.statusCode = 0
-        callback(evt, failureResponse)
+        return callback(evt, failureResponse)
     }
 
     // will load the data & process the response in a special response object
@@ -23040,8 +24532,7 @@ function _createXHR(options) {
         } else {
             err = new Error("Internal XMLHttpRequest Error")
         }
-        callback(err, response, response.body)
-
+        return callback(err, response, response.body)
     }
 
     var xhr = options.xhr || null
@@ -23058,18 +24549,26 @@ function _createXHR(options) {
     var aborted
     var uri = xhr.url = options.uri || options.url
     var method = xhr.method = options.method || "GET"
-    var body = options.body || options.data || null
+    var body = options.body || options.data
     var headers = xhr.headers = options.headers || {}
     var sync = !!options.sync
     var isJson = false
     var timeoutTimer
+    var failureResponse = {
+        body: undefined,
+        headers: {},
+        statusCode: 0,
+        method: method,
+        url: uri,
+        rawRequest: xhr
+    }
 
-    if ("json" in options) {
+    if ("json" in options && options.json !== false) {
         isJson = true
         headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
         if (method !== "GET" && method !== "HEAD") {
             headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
-            body = JSON.stringify(options.json)
+            body = JSON.stringify(options.json === true ? body : options.json)
         }
     }
 
@@ -23079,6 +24578,9 @@ function _createXHR(options) {
     // IE9 must have onprogress be set to a unique function.
     xhr.onprogress = function () {
         // IE must die
+    }
+    xhr.onabort = function(){
+        aborted = true;
     }
     xhr.ontimeout = errorFunc
     xhr.open(method, uri, !sync, options.username, options.password)
@@ -23091,7 +24593,8 @@ function _createXHR(options) {
     // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
     if (!sync && options.timeout > 0 ) {
         timeoutTimer = setTimeout(function(){
-            aborted=true//IE9 may still call readystatechange
+            if (aborted) return
+            aborted = true//IE9 may still call readystatechange
             xhr.abort("timeout")
             var e = new Error("XMLHttpRequest timeout")
             e.code = "ETIMEDOUT"
@@ -23119,16 +24622,31 @@ function _createXHR(options) {
         options.beforeSend(xhr)
     }
 
-    xhr.send(body)
+    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
+    // XMLHttpRequest spec says to pass null as body to indicate no body
+    // See https://github.com/naugtur/xhr/issues/100.
+    xhr.send(body || null)
 
     return xhr
 
 
 }
 
+function getXml(xhr) {
+    if (xhr.responseType === "document") {
+        return xhr.responseXML
+    }
+    var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+        return xhr.responseXML
+    }
+
+    return null
+}
+
 function noop() {}
 
-},{"100":100,"101":101,"104":104,"105":105,"95":95}],100:[function(_dereq_,module,exports){
+},{"100":100,"103":103,"104":104,"95":95}],100:[function(_dereq_,module,exports){
 module.exports = isFunction
 
 var toString = Object.prototype.toString
@@ -23146,27 +24664,6 @@ function isFunction (fn) {
 };
 
 },{}],101:[function(_dereq_,module,exports){
-module.exports = once
-
-once.proto = once(function () {
-  Object.defineProperty(Function.prototype, 'once', {
-    value: function () {
-      return once(this)
-    },
-    configurable: true
-  })
-})
-
-function once (fn) {
-  var called = false
-  return function () {
-    if (called) return
-    called = true
-    return fn.apply(this, arguments)
-  }
-}
-
-},{}],102:[function(_dereq_,module,exports){
 var isFunction = _dereq_(100)
 
 module.exports = forEach
@@ -23214,7 +24711,7 @@ function forEachObject(object, iterator, context) {
     }
 }
 
-},{"100":100}],103:[function(_dereq_,module,exports){
+},{"100":100}],102:[function(_dereq_,module,exports){
 
 exports = module.exports = trim;
 
@@ -23230,9 +24727,9 @@ exports.right = function(str){
   return str.replace(/\s*$/, '');
 };
 
-},{}],104:[function(_dereq_,module,exports){
-var trim = _dereq_(103)
-  , forEach = _dereq_(102)
+},{}],103:[function(_dereq_,module,exports){
+var trim = _dereq_(102)
+  , forEach = _dereq_(101)
   , isArray = function(arg) {
       return Object.prototype.toString.call(arg) === '[object Array]';
     }
@@ -23262,7 +24759,7 @@ module.exports = function (headers) {
 
   return result
 }
-},{"102":102,"103":103}],105:[function(_dereq_,module,exports){
+},{"101":101,"102":102}],104:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;

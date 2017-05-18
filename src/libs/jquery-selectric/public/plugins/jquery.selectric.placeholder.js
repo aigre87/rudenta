@@ -1,39 +1,53 @@
-/*! Selectric Placeholder ϟ v0.1.0 (2014-09-03) - git.io/tjl9sQ - Copyright (c) 2014 Leonardo Santos - Dual licensed: MIT/GPL */
-;(function($) {
+/*! Selectric Placeholder ϟ v0.2.0 (2017-01-11) - git.io/tjl9sQ - Copyright (c) 2017 Leonardo Santos - MIT License */
+(function(factory) {
+  /* global define */
+  if ( typeof define === 'function' && define.amd ) {
+    define(['jquery'], factory);
+  } else if ( typeof module === 'object' && module.exports ) {
+    // Node/CommonJS
+    module.exports = function( root, jQuery ) {
+      if ( jQuery === undefined ) {
+        if ( typeof window !== 'undefined' ) {
+          jQuery = require('jquery');
+        } else {
+          jQuery = require('jquery')(root);
+        }
+      }
+      factory(jQuery);
+      return jQuery;
+    };
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function($) {
   'use strict';
 
-  $(function() {
-    if (!$.fn.selectric) {
-      $.error('Selectric not initialized');
-    }
+  if ( !$.fn.selectric ) {
+    $.error('Selectric not initialized');
+  }
 
-    var hooks = $.fn.selectric.hooks;
+  $.fn.selectricPlaceholder = function(opts) {
+    return this.each(function() {
+      var $this = $(this);
+      var data = $this.data('selectric');
+      var options = $.extend({
+        placeholderOnOpen: true
+      }, opts);
 
-    hooks.add('Init', 'placeholder', function(element, data) {
-      var $elm = $(element),
-          $wrapper = $elm.closest('.' + data.classes.wrapper);
+      data.elements.label.html(data.$element.attr('placeholder'));
 
-      $wrapper.find('.label').html($elm.attr('placeholder'));
+      $this.on('selectric-before-open', function(event, element, data) {
+        if ( options.placeholderOnOpen ) {
+          data.elements.label.data('value', data.elements.label.html()).html(data.$element.attr('placeholder'));
+        }
+      });
 
-      data.options = $.extend({ placeholderOnOpen: true }, data.options);
+      $this.on('selectric-before-close', function(event, element, data) {
+        if ( options.placeholderOnOpen ) {
+          data.elements.label.html(data.elements.label.data('value'));
+        }
+      });
     });
-
-    hooks.add('BeforeOpen', 'placeholder', function(element, data) {
-      if (data.options.placeholderOnOpen) {
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').data('value', $wrapper.find('.label').html()).html($elm.attr('placeholder'));
-      }
-    });
-
-    hooks.add('BeforeClose', 'placeholder', function(element, data) {
-      if (data.options.placeholderOnOpen) {
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').html($wrapper.find('.label').data('value'));
-      }
-    });
-  });
-}(jQuery));
+  };
+}));

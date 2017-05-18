@@ -185,15 +185,21 @@ class Html5 extends Tech {
     // Check if this browser supports moving the element into the box.
     // On the iPhone video will break if you move the element,
     // So we have to create a brand new element.
-    if (!el || this.movingMediaElementInDOM === false) {
+    // If we ingested the player div, we do not need to move the media element.
+    if (!el ||
+        !(this.options_.playerElIngest ||
+          this.movingMediaElementInDOM)) {
 
       // If the original tag is still there, clone and remove it.
       if (el) {
         const clone = el.cloneNode(true);
 
-        el.parentNode.insertBefore(clone, el);
+        if (el.parentNode) {
+          el.parentNode.insertBefore(clone, el);
+        }
         Html5.disposeMediaElement(el);
         el = clone;
+
       } else {
         el = document.createElement('video');
 
@@ -792,20 +798,23 @@ class Html5 extends Tech {
 
 /* HTML5 Support Testing ---------------------------------------------------- */
 
-/**
- * Element for testing browser HTML5 media capabilities
- *
- * @type {Element}
- * @constant
- * @private
- */
-Html5.TEST_VID = document.createElement('video');
-const track = document.createElement('track');
+if (Dom.isReal()) {
 
-track.kind = 'captions';
-track.srclang = 'en';
-track.label = 'English';
-Html5.TEST_VID.appendChild(track);
+  /**
+   * Element for testing browser HTML5 media capabilities
+   *
+   * @type {Element}
+   * @constant
+   * @private
+   */
+  Html5.TEST_VID = document.createElement('video');
+  const track = document.createElement('track');
+
+  track.kind = 'captions';
+  track.srclang = 'en';
+  track.label = 'English';
+  Html5.TEST_VID.appendChild(track);
+}
 
 /**
  * Check if HTML5 media is supported by this browser/device.
@@ -822,7 +831,7 @@ Html5.isSupported = function() {
     return false;
   }
 
-  return !!Html5.TEST_VID.canPlayType;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.canPlayType);
 };
 
 /**
@@ -889,9 +898,7 @@ Html5.supportsNativeTextTracks = function() {
  *        - False otherwise
  */
 Html5.supportsNativeVideoTracks = function() {
-  const supportsVideoTracks = !!Html5.TEST_VID.videoTracks;
-
-  return supportsVideoTracks;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.videoTracks);
 };
 
 /**
@@ -902,9 +909,7 @@ Html5.supportsNativeVideoTracks = function() {
  *        - False otherwise
  */
 Html5.supportsNativeAudioTracks = function() {
-  const supportsAudioTracks = !!Html5.TEST_VID.audioTracks;
-
-  return supportsAudioTracks;
+  return !!(Html5.TEST_VID && Html5.TEST_VID.audioTracks);
 };
 
 /**
@@ -1020,31 +1025,23 @@ Html5.prototype.featuresNativeVideoTracks = Html5.supportsNativeVideoTracks();
 Html5.prototype.featuresNativeAudioTracks = Html5.supportsNativeAudioTracks();
 
 // HTML5 Feature detection and Device Fixes --------------------------------- //
-let canPlayType;
+const canPlayType = Html5.TEST_VID && Html5.TEST_VID.constructor.prototype.canPlayType;
 const mpegurlRE = /^application\/(?:x-|vnd\.apple\.)mpegurl/i;
 const mp4RE = /^video\/mp4/i;
 
 Html5.patchCanPlayType = function() {
+
   // Android 4.0 and above can play HLS to some extent but it reports being unable to do so
   if (browser.ANDROID_VERSION >= 4.0 && !browser.IS_FIREFOX) {
-    if (!canPlayType) {
-      canPlayType = Html5.TEST_VID.constructor.prototype.canPlayType;
-    }
-
     Html5.TEST_VID.constructor.prototype.canPlayType = function(type) {
       if (type && mpegurlRE.test(type)) {
         return 'maybe';
       }
       return canPlayType.call(this, type);
     };
-  }
 
   // Override Android 2.2 and less canPlayType method which is broken
-  if (browser.IS_OLD_ANDROID) {
-    if (!canPlayType) {
-      canPlayType = Html5.TEST_VID.constructor.prototype.canPlayType;
-    }
-
+  } else if (browser.IS_OLD_ANDROID) {
     Html5.TEST_VID.constructor.prototype.canPlayType = function(type) {
       if (type && mp4RE.test(type)) {
         return 'maybe';
@@ -1058,7 +1055,6 @@ Html5.unpatchCanPlayType = function() {
   const r = Html5.TEST_VID.constructor.prototype.canPlayType;
 
   Html5.TEST_VID.constructor.prototype.canPlayType = canPlayType;
-  canPlayType = null;
   return r;
 };
 
@@ -1132,7 +1128,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `paused` from the media element. `paused` indicates whether the media element
    * is currently paused or not.
    *
-   * @method Html5.prototype.paused
+   * @method Html5#paused
    * @return {boolean}
    *         The value of `paused` from the media element.
    *
@@ -1144,7 +1140,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `currentTime` from the media element. `currentTime` indicates
    * the current second that the media is at in playback.
    *
-   * @method Html5.prototype.currentTime
+   * @method Html5#currentTime
    * @return {number}
    *         The value of `currentTime` from the media element.
    *
@@ -1157,7 +1153,7 @@ Html5.resetMediaElement = function(el) {
    * object that represents the parts of the media that are already downloaded and
    * available for playback.
    *
-   * @method Html5.prototype.buffered
+   * @method Html5#buffered
    * @return {TimeRange}
    *         The value of `buffered` from the media element.
    *
@@ -1170,7 +1166,7 @@ Html5.resetMediaElement = function(el) {
    * the current playback volume of audio for a media. `volume` will be a value from 0
    * (silent) to 1 (loudest and default).
    *
-   * @method Html5.prototype.volume
+   * @method Html5#volume
    * @return {number}
    *         The value of `volume` from the media element. Value will be between 0-1.
    *
@@ -1183,7 +1179,7 @@ Html5.resetMediaElement = function(el) {
    * that the volume for the media should be set to silent. This does not actually change
    * the `volume` attribute.
    *
-   * @method Html5.prototype.muted
+   * @method Html5#muted
    * @return {boolean}
    *         - True if the value of `volume` should be ignored and the audio set to silent.
    *         - False if the value of `volume` should be used.
@@ -1196,7 +1192,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `poster` from the media element. `poster` indicates
    * that the url of an image file that can/will be shown when no media data is available.
    *
-   * @method Html5.prototype.poster
+   * @method Html5#poster
    * @return {string}
    *         The value of `poster` from the media element. Value will be a url to an
    *         image.
@@ -1215,7 +1211,7 @@ Html5.resetMediaElement = function(el) {
    * - auto: allow the media and metadata for the media to be downloaded before
    *    interaction
    *
-   * @method Html5.prototype.preload
+   * @method Html5#preload
    * @return {string}
    *         The value of `preload` from the media element. Will be 'none', 'metadata',
    *         or 'auto'.
@@ -1228,7 +1224,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `autoplay` from the media element. `autoplay` indicates
    * that the media should start to play as soon as the page is ready.
    *
-   * @method Html5.prototype.autoplay
+   * @method Html5#autoplay
    * @return {boolean}
    *         - The value of `autoplay` from the media element.
    *         - True indicates that the media should start as soon as the page loads.
@@ -1242,7 +1238,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `controls` from the media element. `controls` indicates
    * whether the native media controls should be shown or hidden.
    *
-   * @method Html5.prototype.controls
+   * @method Html5#controls
    * @return {boolean}
    *         - The value of `controls` from the media element.
    *         - True indicates that native controls should be showing.
@@ -1257,7 +1253,7 @@ Html5.resetMediaElement = function(el) {
    * that the media should return to the start of the media and continue playing once
    * it reaches the end.
    *
-   * @method Html5.prototype.loop
+   * @method Html5#loop
    * @return {boolean}
    *         - The value of `loop` from the media element.
    *         - True indicates that playback should seek back to start once
@@ -1274,7 +1270,7 @@ Html5.resetMediaElement = function(el) {
    * MediaError that may have occured during playback. If error returns null there is no
    * current error.
    *
-   * @method Html5.prototype.error
+   * @method Html5#error
    * @return {MediaError|null}
    *         The value of `error` from the media element. Will be `MediaError` if there
    *         is a current error and null otherwise.
@@ -1287,7 +1283,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `seeking` from the media element. `seeking` indicates whether the
    * media is currently seeking to a new position or not.
    *
-   * @method Html5.prototype.seeking
+   * @method Html5#seeking
    * @return {boolean}
    *         - The value of `seeking` from the media element.
    *         - True indicates that the media is currently seeking to a new position.
@@ -1301,7 +1297,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `seekable` from the media element. `seekable` returns a
    * `TimeRange` object indicating ranges of time that can currently be `seeked` to.
    *
-   * @method Html5.prototype.seekable
+   * @method Html5#seekable
    * @return {TimeRange}
    *         The value of `seekable` from the media element. A `TimeRange` object
    *         indicating the current ranges of time that can be seeked to.
@@ -1314,7 +1310,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `ended` from the media element. `ended` indicates whether
    * the media has reached the end or not.
    *
-   * @method Html5.prototype.ended
+   * @method Html5#ended
    * @return {boolean}
    *         - The value of `ended` from the media element.
    *         - True indicates that the media has ended.
@@ -1330,7 +1326,7 @@ Html5.resetMediaElement = function(el) {
    * media. `muted` and `defaultMuted` can have different values. `muted` indicates the
    * current state.
    *
-   * @method Html5.prototype.defaultMuted
+   * @method Html5#defaultMuted
    * @return {boolean}
    *         - The value of `defaultMuted` from the media element.
    *         - True indicates that the media should start muted.
@@ -1346,7 +1342,7 @@ Html5.resetMediaElement = function(el) {
    *   - if playbackRate is set to 2, media will play twice as fast.
    *   - if playbackRate is set to 0.5, media will play half as fast.
    *
-   * @method Html5.prototype.playbackRate
+   * @method Html5#playbackRate
    * @return {number}
    *         The value of `playbackRate` from the media element. A number indicating
    *         the current playback speed of the media, where 1 is normal speed.
@@ -1359,7 +1355,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `played` from the media element. `played` returns a `TimeRange`
    * object representing points in the media timeline that have been played.
    *
-   * @method Html5.prototype.played
+   * @method Html5#played
    * @return {TimeRange}
    *         The value of `played` from the media element. A `TimeRange` object indicating
    *         the ranges of time that have been played.
@@ -1376,7 +1372,7 @@ Html5.resetMediaElement = function(el) {
    * - 2: NETWORK_LOADING
    * - 3: NETWORK_NO_SOURCE
    *
-   * @method Html5.prototype.networkState
+   * @method Html5#networkState
    * @return {number}
    *         The value of `networkState` from the media element. This will be a number
    *         from the list in the description.
@@ -1395,7 +1391,7 @@ Html5.resetMediaElement = function(el) {
    * - 3: HAVE_FUTURE_DATA
    * - 4: HAVE_ENOUGH_DATA
    *
-   * @method Html5.prototype.readyState
+   * @method Html5#readyState
    * @return {number}
    *         The value of `readyState` from the media element. This will be a number
    *         from the list in the description.
@@ -1408,7 +1404,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `videoWidth` from the video element. `videoWidth` indicates
    * the current width of the video in css pixels.
    *
-   * @method Html5.prototype.videoWidth
+   * @method Html5#videoWidth
    * @return {number}
    *         The value of `videoWidth` from the video element. This will be a number
    *         in css pixels.
@@ -1421,7 +1417,7 @@ Html5.resetMediaElement = function(el) {
    * Get the value of `videoHeight` from the video element. `videoHeigth` indicates
    * the current height of the video in css pixels.
    *
-   * @method Html5.prototype.videoHeight
+   * @method Html5#videoHeight
    * @return {number}
    *         The value of `videoHeight` from the video element. This will be a number
    *         in css pixels.
@@ -1443,7 +1439,7 @@ Html5.resetMediaElement = function(el) {
    * audio level as a percentage in decimal form. This means that 1 is 100%, 0.5 is 50%, and
    * so on.
    *
-   * @method Html5.prototype.setVolume
+   * @method Html5#setVolume
    * @param {number} percentAsDecimal
    *        The volume percent as a decimal. Valid range is from 0-1.
    *
@@ -1455,7 +1451,7 @@ Html5.resetMediaElement = function(el) {
    * Set the value of `muted` on the media element. `muted` indicates the current
    * audio level should be silent.
    *
-   * @method Html5.prototype.setMuted
+   * @method Html5#setMuted
    * @param {boolean} muted
    *        - True if the audio should be set to silent
    *        - False otherwise
@@ -1468,7 +1464,7 @@ Html5.resetMediaElement = function(el) {
    * Set the value of `src` on the media element. `src` indicates the current
    * {@link Tech~SourceObject} for the media.
    *
-   * @method Html5.prototype.setSrc
+   * @method Html5#setSrc
    * @param {Tech~SourceObject} src
    *        The source object to set as the current source.
    *
@@ -1480,7 +1476,7 @@ Html5.resetMediaElement = function(el) {
    * Set the value of `poster` on the media element. `poster` is the url to
    * an image file that can/will be shown when no media data is available.
    *
-   * @method Html5.prototype.setPoster
+   * @method Html5#setPoster
    * @param {string} poster
    *        The url to an image that should be used as the `poster` for the media
    *        element.
@@ -1499,7 +1495,7 @@ Html5.resetMediaElement = function(el) {
    * - auto: allow the media and metadata for the media to be downloaded before
    *    interaction
    *
-   * @method Html5.prototype.setPreload
+   * @method Html5#setPreload
    * @param {string} preload
    *         The value of `preload` to set on the media element. Must be 'none', 'metadata',
    *         or 'auto'.
@@ -1512,7 +1508,7 @@ Html5.resetMediaElement = function(el) {
    * Set the value of `autoplay` on the media element. `autoplay` indicates
    * that the media should start to play as soon as the page is ready.
    *
-   * @method Html5.prototype.setAutoplay
+   * @method Html5#setAutoplay
    * @param {boolean} autoplay
    *         - True indicates that the media should start as soon as the page loads.
    *         - False indicates that the media should not start as soon as the page loads.
@@ -1526,7 +1522,7 @@ Html5.resetMediaElement = function(el) {
    * that the media should return to the start of the media and continue playing once
    * it reaches the end.
    *
-   * @method Html5.prototype.setLoop
+   * @method Html5#setLoop
    * @param {boolean} loop
    *         - True indicates that playback should seek back to start once
    *           the end of a media is reached.
@@ -1543,7 +1539,7 @@ Html5.resetMediaElement = function(el) {
    *   - if playbackRate is set to 2, media will play twice as fast.
    *   - if playbackRate is set to 0.5, media will play half as fast.
    *
-   * @method Html5.prototype.setPlaybackRate
+   * @method Html5#setPlaybackRate
    * @return {number}
    *         The value of `playbackRate` from the media element. A number indicating
    *         the current playback speed of the media, where 1 is normal speed.
@@ -1563,7 +1559,7 @@ Html5.resetMediaElement = function(el) {
    * A wrapper around the media elements `pause` function. This will call the `HTML5`
    * media elements `pause` function.
    *
-   * @method Html5.prototype.pause
+   * @method Html5#pause
    * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-media-pause}
    */
   'pause',
@@ -1572,7 +1568,7 @@ Html5.resetMediaElement = function(el) {
    * A wrapper around the media elements `load` function. This will call the `HTML5`s
    * media element `load` function.
    *
-   * @method Html5.prototype.load
+   * @method Html5#load
    * @see [Spec]{@link https://www.w3.org/TR/html5/embedded-content-0.html#dom-media-load}
    */
   'load'

@@ -1,45 +1,62 @@
-/*! Selectric AddNew ϟ v0.1.0 (2014-01-14) - git.io/tjl9sQ - Copyright (c) 2015 David Shen (git.io/mhQmLQ) - Dual licensed: MIT/GPL */
-;(function($) {
+/*! Selectric AddNew ϟ v0.2.0 (2017-01-11) - git.io/tjl9sQ - Copyright (c) 2017 David Shen (git.io/mhQmLQ) - MIT License */
+(function(factory) {
+  /* global define */
+  if ( typeof define === 'function' && define.amd ) {
+    define(['jquery'], factory);
+  } else if ( typeof module === 'object' && module.exports ) {
+    // Node/CommonJS
+    module.exports = function( root, jQuery ) {
+      if ( jQuery === undefined ) {
+        if ( typeof window !== 'undefined' ) {
+          jQuery = require('jquery');
+        } else {
+          jQuery = require('jquery')(root);
+        }
+      }
+      factory(jQuery);
+      return jQuery;
+    };
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function($) {
   'use strict';
 
-  $(function() {
-    if (!$.fn.selectric) {
-      $.error('Selectric not initialized');
-    }
+  if ( !$.fn.selectric ) {
+    $.error('Selectric not initialized');
+  }
 
-    var hooks = $.fn.selectric.hooks;
-
-    hooks.add('BeforeInit', 'addNew', function(element, data) {
-      data.options = $.extend({
+  $.fn.selectricAddNew = function(opts) {
+    return this.each(function() {
+      var $this = $(this);
+      var data = $this.data('selectric');
+      var options = $.extend({
         createNewAutoSelect: true,
         createNewMarkup: '<input type="text" /><button>Create</button>',
-        allowCreateNew: false,
+        allowCreateNew: true,
         createNewCallback: $.noop,
-        createNewError: function(){
-          alert('Title required.');
+        createNewError: function() {
+          $.error('Title required.');
         }
-      }, data.options);
-    });
+      }, opts);
+      var $original = data.$element;
+      var $itemsScroll = data.elements.itemsScroll;
+      var $createNew = $('<div/>', { 'class': 'create-new', 'html': options.createNewMarkup });
 
-    hooks.add('Init', 'addNew', function(element, data) {
-      var $original = $(element),
-          $wrapper = $original.closest('.' + data.classes.wrapper),
-          $itemsScroll = $wrapper.find('.' + data.classes.scroll),
-          $createNew = $('<div/>', { 'class': 'createNew', 'html': data.options.createNewMarkup });
-
-      if ( data.options.allowCreateNew ){
+      if ( options.allowCreateNew ) {
         $itemsScroll.prepend($createNew);
 
-        var createNewInput = $createNew.find('input[type=text]'),
-            createNewButton = $createNew.find('button');
+        var createNewInput = $createNew.find('input[type=text]');
+        var createNewButton = $createNew.find('button');
 
-        createNewInput.add(createNewButton).on('click', function(e){
+        createNewInput.add(createNewButton).on('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
         });
 
-        createNewButton.on('click', function(e){
-          if ( createNewInput.val() ){
+        createNewButton.on('click', function() {
+          if ( createNewInput.val() ) {
             var newValue = createNewInput.val();
 
             $original.append($('<option>', {
@@ -47,21 +64,21 @@
               text : newValue
             }));
 
-            if ( data.options.createNewAutoSelect ){
+            if ( options.createNewAutoSelect ) {
               $original.prop('selectedIndex', $original.children().length - 1);
             }
 
             data.refresh();
             data.open();
 
-            data.options.createNewCallback.call(element, newValue);
+            options.createNewCallback.call(data.element, newValue);
 
             createNewInput.add(createNewButton).off('click');
           } else {
-            data.options.createNewError.call(element);
+            options.createNewError.call(data.element);
           }
         });
       }
     });
-  });
-}(jQuery));
+  };
+}));

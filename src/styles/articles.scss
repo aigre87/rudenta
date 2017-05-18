@@ -110,6 +110,9 @@ body.articles{
 						border-bottom: 1px solid map-get($colors, linkUnderH);
 						padding-bottom: 2px;
 					}
+					&.active{
+						color: map-get($colors, pink);
+					}
 					&:hover{
 						color: #fff;
 						background: map-get($colors, pink);

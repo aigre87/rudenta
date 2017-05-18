@@ -104,8 +104,8 @@ class SeekBar extends Slider {
   /**
    * Get percentage of video played
    *
-
-   * @return {Number} Percentage played
+   * @return {number}
+   *         The percentage played
    */
   getPercent() {
     const percent = this.player_.currentTime() / this.player_.duration();
@@ -122,12 +122,12 @@ class SeekBar extends Slider {
    * @listens mousedown
    */
   handleMouseDown(event) {
-    super.handleMouseDown(event);
-
     this.player_.scrubbing(true);
 
     this.videoWasPlaying = !this.player_.paused();
     this.player_.pause();
+
+    super.handleMouseDown(event);
   }
 
   /**

@@ -70,6 +70,7 @@ gulp.task('js:build', function () {
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
           pass: 'Ez3}&JC+lDJX',
+          timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/js/'
         }))
         .pipe(gutil.noop());
@@ -86,9 +87,9 @@ gulp.task('libs:build', function() {
         'src/libs/smoothscroll-for-websites/SmoothScroll.js',
         'src/libs/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         'src/libs/shufflejs/dist/shuffle.min.js',
-        //'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
-        //'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
-        //'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
+        'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
+        'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
+        'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
         'src/libs/svg4everybody/dist/svg4everybody.min.js',
         'src/libs/hammerjs/hammer.min.js',
         'src/libs/all.js',
@@ -107,6 +108,7 @@ gulp.task('libs:build', function() {
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
           pass: 'Ez3}&JC+lDJX',
+          timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/libs/'
         }))
         .pipe(gutil.noop());
@@ -133,6 +135,7 @@ gulp.task('image:build', function () {
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
           pass: 'Ez3}&JC+lDJX',
+          timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/images/'
         }))
         .pipe(gutil.noop());
@@ -143,7 +146,6 @@ gulp.task('styles:build', function () {
     gulp.src(path.src.styles)               // Выберем наш .sass|scss
         .pipe(plumber())
         .pipe(sourcemaps.init())            // То же самое что и с js
-        .pipe(sourcemaps.write())           // Пропишем карты
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
@@ -154,8 +156,10 @@ gulp.task('styles:build', function () {
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
           pass: 'Ez3}&JC+lDJX',
+          timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/css/'
         }))
+        .pipe(sourcemaps.write())           // Пропишем карты
         .pipe(gutil.noop());
 });
 
@@ -199,6 +203,7 @@ gulp.task('svgSprite:build', function () {
             host: 'p10298.cpanel.relevate.ru',
             user: 'p10298',
             pass: 'Ez3}&JC+lDJX',
+            timeout: 50000,
             remotePath: '/home/p10298/www/local/templates/rudenta/images/'
         }));
 });
@@ -223,6 +228,7 @@ gulp.task('sprite:build', function() {
         host: 'p10298.cpanel.relevate.ru',
         user: 'p10298',
         pass: 'Ez3}&JC+lDJX',
+        timeout: 50000,
         remotePath: '/home/p10298/www/local/templates/rudenta/images/'
     }))
     spriteData.img.pipe(gutil.noop());

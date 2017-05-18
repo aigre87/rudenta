@@ -18,9 +18,10 @@ $this->setFrameMode(true);
 		<div class="position">&mdash; <?php echo $arResult['DISPLAY_PROPERTIES']['POSITION']['VALUE'];?></div>
 	</div>
 	<?if($arResult['PREVIEW_TEXT']):?>
-		<div class="quote">
-			<div class="quoteIW"><?php echo $arResult['PREVIEW_TEXT'];?></div>
-		</div>
+	<div class="quote">
+			<div class="quoteIW"></div>
+			<div class="quote-text"><?php echo $arResult['PREVIEW_TEXT'];?></div>
+	</div>
 	<?endif;?>
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<div class="imgW">
