@@ -22,6 +22,7 @@ foreach($arResult['ITEMS'] as $arItem){
     }
 }
 
+
 ksort($tmp_for_sort);
 foreach($tmp_for_sort as $sort => $arItem){
     foreach($arItem as $item){
@@ -44,6 +45,8 @@ foreach($arResult['ITEMS'] as $arItemKey => $arItemArr){
     }
 }
 
+
 $arResult['NAV'] = $nav;
 $arResult['CNT_RECALLS'] = Service::getRecallsCNT($arResult['SECTION']['PATH'][1]['ID']);
 $arResult['DOCTORS'] = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);
+$arResult['PRICE'] =  Price::GetPriceForService($arParams['PARENT_SECTION']);
