@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<h1 class="articleTitle"><?php echo $arResult['NAME']?></h1>
+<h1><?php echo $arResult['NAME']?></h1>
 <div class="articlesDetailPage">
 	<div class="topBlock clear">
 		<div class="w-2col lc">

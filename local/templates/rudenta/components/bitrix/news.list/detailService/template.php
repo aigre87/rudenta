@@ -12,6 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="clear"><a class="backButton" href="/services/">Все услуги</a></div>
 <div class="servicesDetailPage">
 	<div class="topBlock clear">
 		<div class="w-2col">
