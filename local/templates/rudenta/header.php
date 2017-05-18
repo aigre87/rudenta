@@ -89,9 +89,9 @@ else
 			<?php
 			$keywords = $APPLICATION->GetDirProperty("h1");
 			?>
-			<?if ( !$isHomePage && !defined("ERROR_404") && !empty($keywords) ): ?>
+			<?if ( !$isHomePage && !defined("ERROR_404") && $keywords == 'Y' ): ?>
 				<div class="pageTitle clear" >
-						<h1><?$APPLICATION->ShowTitle(false)?></h1>
+					<h1><?$APPLICATION->ShowTitle(false)?></h1>
 				</div>
 			<?endif;?>
 		<section id="content" class="content">
