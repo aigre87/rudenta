@@ -55,8 +55,16 @@ $this->setFrameMode(true);
 <?php
 $doc = (int)$_GET['doc'];
 if(!empty($doc))
-	$GLOBALS["filter_recalls"] = array('PROPERTY_DOCTOR.ID' => $doc);
+	$GLOBALS["filter_recalls"]['PROPERTY_DOCTOR.ID'] = $doc;
 
+if(!empty($_GET['grade'])){
+
+	if($_GET['grade'] == 'positive'){
+		$GLOBALS["filter_recalls"]['PROPERTY_RATING_VALUE'] = 5;
+	}elseif ($_GET['grade'] == 'negative'){
+		$GLOBALS["filter_recalls"]['PROPERTY_RATING_VALUE'] = array(4,3,2,1);
+	}
+}
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",

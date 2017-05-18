@@ -40,10 +40,13 @@ function filterDocAndUsl(){
         $usl = '';
     }
 
+    $grade = $_GET['grade'];
 
-    if(!empty($usl)){
-        echo "<div class='filter doctors'>";
+    /* === Врачи ===*/
+    echo "<div class='filter doctors'>";
+    if(!empty($usl) && empty($grade)){
 
+        echo "<a href='/recalls/?usl=$usl'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
@@ -52,9 +55,27 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $key['ID'] , "&usl=$usl\">" , $key['NAME'] , "</a>";
             }
         }
-        echo "</div>";
+    }elseif(empty($usl) && !empty($grade)){
+        echo "<a href='/recalls/?grade=$grade'>Все врачи</a>";
+        foreach($docs as $key){
+            echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
+            if($doc == $key['ID']){
+                echo "<a class='active' href=\"/recalls/?doc=" , $key['ID'] , "&grade=$grade\">" , $key['NAME'] , "</a>";
+            }else{
+                echo "<a href=\"/recalls/?doc=" , $key['ID'] , "&grade=$grade\">" , $key['NAME'] , "</a>";
+            }
+        }
+    }elseif(!empty($usl) && !empty($grade)){
+        echo "<a href='/recalls/?usl=$usl&grade=$grade'>Все врачи</a>";
+        foreach($docs as $key){
+            echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
+            if($doc == $key['ID']){
+                echo "<a class='active' href=\"/recalls/?doc=" , $key['ID'] , "&usl=$usl&grade=$grade\">" , $key['NAME'] , "</a>";
+            }else{
+                echo "<a href=\"/recalls/?doc=" , $key['ID'] , "&usl=$usl&grade=$grade\">" , $key['NAME'] , "</a>";
+            }
+        }
     }else{
-        echo "<div class='filter doctors'>";
         echo "<a href='/recalls/'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
@@ -64,11 +85,14 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $key['ID'] , "\">" , $key['NAME'] , "</a>";
             }
         }
-        echo "</div>";
     }
+    echo "</div>";
+    /*===End Врачи===*/
 
-    if(!empty($doc)){
-        echo "<div class='filter services'>";
+
+    /*===Услуги===*/
+    echo "<div class='filter services'>";
+    if(!empty($doc) && empty($grade)){
         echo "<a href='/recalls/?doc=$doc'>Все услуги</a>";
         foreach($servs as $serv_id => $serv_name){
             if($usl == $serv_id){
@@ -77,9 +101,25 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?doc=" , $doc , "&usl=$serv_id\">" , $serv_name , "</a>";
             }
         }
-        echo "</div>";
+    }elseif(empty($doc) && !empty($grade)){
+        echo "<a href='/recalls/?grade=$grade'>Все услуги</a>";
+        foreach($servs as $serv_id => $serv_name){
+            if($usl == $serv_id){
+                echo "<a class='active' href=\"/recalls/?usl=$serv_id&grade=$grade\">" , $serv_name , "</a>";
+            }else{
+                echo "<a href=\"/recalls/?usl=$serv_id&grade=$grade\">" , $serv_name , "</a>";
+            }
+        }
+    }elseif(!empty($doc) && !empty($grade)){
+        echo "<a href='/recalls/?doc=$doc&grade=$grade'>Все услуги</a>";
+        foreach($servs as $serv_id => $serv_name){
+            if($usl == $serv_id){
+                echo "<a class='active' href=\"/recalls/?doc=$doc&usl=$serv_id&grade=$grade\">" , $serv_name , "</a>";
+            }else{
+                echo "<a href=\"/recalls/?doc=$doc&usl=$serv_id&grade=$grade\">" , $serv_name , "</a>";
+            }
+        }
     }else{
-        echo "<div class='filter services'>";
         echo "<a href='/recalls/'>Все услуги</a>";
         foreach($servs as $serv_id => $serv_name){
             if($usl == $serv_id){
@@ -88,9 +128,113 @@ function filterDocAndUsl(){
                 echo "<a href=\"/recalls/?usl=" , $serv_id , "\">" , $serv_name , "</a>";
             }
         }
-        echo "</div>";
     }
+    echo "</div>";
+    /*===End Услуги===*/
 
+    /*===Отзывы===*/
+    echo "<div class='filter grades'>";
+    if(empty($grade)){
+
+        if(!empty($doc) && empty($usl)){
+            echo "<a class='active' href=\"/recalls/?doc=", $doc , "\">Все отзывы</a>";
+        }elseif(empty($doc) && !empty($usl)){
+            echo "<a class='active' href=\"/recalls/?usl=", $usl , "\">Все отзывы</a>";
+        }elseif(!empty($doc) && !empty($usl)){
+            echo "<a class='active' href=\"/recalls/?doc=", $doc , "&usl=" ,$usl, "\">Все отзывы</a>";
+        }else{
+            echo "<a class='active' href='/recalls/'>Все отзывы</a>";
+        }
+
+        if(!empty($doc) && empty($usl)) {
+            echo "<a href=\"/recalls/?doc=", $doc, "&grade=positive\">Положительные</a>";
+        }elseif(empty($doc) && !empty($usl)){
+            echo "<a href=\"/recalls/?usl=", $usl, "&grade=positive\">Положительные</a>";
+        }elseif(!empty($doc) && !empty($usl)){
+            echo "<a href=\"/recalls/?doc=$doc&usl=$usl&grade=positive\">Положительные</a>";
+        }else{
+            echo "<a href='/recalls/?grade=positive'>Положительные</a>";
+        }
+
+        if(!empty($doc) && empty($usl)) {
+            echo "<a href=\"/recalls/?doc=", $doc, "&grade=negative\">Отрицательные</a>";
+        }elseif(empty($doc) && !empty($usl)){
+            echo "<a href=\"/recalls/?usl=", $usl, "&grade=negative\">Отрицательные</a>";
+        }elseif(!empty($doc) && !empty($usl)){
+            echo "<a href=\"/recalls/?doc=$doc&usl=$usl&grade=negative\">Отрицательные</a>";
+        }else{
+            echo "<a href='/recalls/?grade=negative'>Отрицательные</a>";
+        }
+
+    }else{
+
+        if($grade == 'positive'){
+
+            if(!empty($doc) && empty($usl)){
+                echo "<a href=\"/recalls/?doc=", $doc , "\">Все отзывы</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?usl=", $usl , "\">Все отзывы</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?doc=", $doc , "&usl=" ,$usl, "\">Все отзывы</a>";
+            }else{
+                echo "<a href='/recalls/'>Все отзывы</a>";
+            }
+
+            if(!empty($doc) && empty($usl)){
+                echo "<a class='active' href=\"/recalls/?doc=", $doc, "&grade=positive\">Положительные</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a class='active' href=\"/recalls/?usl=", $usl, "&grade=positive\">Положительные</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a class='active' href=\"/recalls/?doc=$doc&usl=$usl&grade=positive\">Положительные</a>";
+            }else{
+                echo "<a class='active' href='/recalls/?grade=positive'>Положительные</a>";
+            }
+
+            if(!empty($doc) && empty($usl)) {
+                echo "<a href=\"/recalls/?doc=", $doc, "&grade=negative\">Отрицательные</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?usl=", $usl, "&grade=negative\">Отрицательные</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?doc=$doc&usl=$usl&grade=negative\">Отрицательные</a>";
+            }else{
+                echo "<a href='/recalls/?grade=negative'>Отрицательные</a>";
+            }
+
+        }elseif($grade == 'negative') {
+
+            if(!empty($doc) && empty($usl)){
+                echo "<a href=\"/recalls/?doc=", $doc , "\">Все отзывы</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?usl=", $usl , "\">Все отзывы</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?doc=", $doc , "&usl=" ,$usl, "\">Все отзывы</a>";
+            }else{
+                echo "<a href='/recalls/'>Все отзывы</a>";
+            }
+
+            if(!empty($doc) && empty($usl)){
+                echo "<a href=\"/recalls/?doc=", $doc, "&grade=positive\">Положительные</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?usl=", $usl, "&grade=positive\">Положительные</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a href=\"/recalls/?doc=$doc&usl=$usl&grade=positive\">Положительные</a>";
+            }else{
+                echo "<a href='/recalls/?grade=positive'>Положительные</a>";
+            }
+
+            if(!empty($doc) && empty($usl)) {
+                echo "<a class='active' href=\"/recalls/?doc=", $doc, "&grade=negative\">Отрицательные</a>";
+            }elseif(empty($doc) && !empty($usl)){
+                echo "<a class='active' href=\"/recalls/?usl=", $usl, "&grade=negative\">Отрицательные</a>";
+            }elseif(!empty($doc) && !empty($usl)){
+                echo "<a class='active' href=\"/recalls/?doc=$doc&usl=$usl&grade=negative\">Отрицательные</a>";
+            }else {
+                echo "<a class='active' href='/recalls/?grade=negative'>Отрицательные</a>";
+            }
+        }
+    }
+    echo "</div>";
+    /*===End отзывы===*/
 }
 
 function filterArticles(){
