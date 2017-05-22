@@ -11,12 +11,21 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+$i = 0;
 ?>
 <div class="unlocal-recalls">
 	<? foreach($arResult['ITEMS'] as $arItem): ?>
-		<a href="<?=$arItem['CODE']?>" target="_blank" class="unlocal-recalls-item">
-			<img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>">
-			<?=$arItem['NAME']?>
-		</a>
+		<?if ($i == 0):?>
+			<div class="unlocal-recalls-4">
+		<? endif;?>
+			<a href="<?=$arItem['CODE']?>" target="_blank" class="unlocal-recalls-item">
+				<img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>">
+				<?=$arItem['NAME']?>
+			</a>
+		<? $i++ ;?>
+		<? if($i == 4):?>
+				</div>
+				<?$i = 0;?>
+		<? endif;?>
 	<? endforeach; ?>
 </div>
