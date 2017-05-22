@@ -12,6 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="clear"><a class="backButton" href="/services/">Все услуги</a></div>
 <div class="servicesDetailPage">
 	<div class="topBlock clear">
 		<div class="w-2col">
@@ -82,6 +83,11 @@ $this->setFrameMode(true);
 							</ul>
 						</li>
 					<?endforeach;?>
+					<? if($arResult['PRICE']): ?>
+						<li>
+							<a href="#" data-link="prices">Цены</a>
+						</li>
+					<? endif; ?>
 					<li>
 						<a href="#" data-link="articles">Советы пациентам</a>
 					</li>
@@ -100,6 +106,24 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</div>
+	<? if($arResult['PRICE']): ?>
+		<div data-ar="prices">
+			<h3>Цены</h3>
+			<table>
+				<? foreach($arResult['PRICE'] as $price):?>
+					<tr>
+						<td><?=$price['NAME']?></td>
+						<? if(!empty($price['PROPERTY_PRICE_VALUE'])): ?>
+							<td><?=number_format($price['PROPERTY_PRICE_VALUE'], 0, ',', ' ')?> руб</td>
+						<? else: ?>
+							<td>Бесплатно</td>
+						<? endif;?>
+						<td><?=$price['PREVIEW_TEXT']?></td>
+					</tr>
+				<? endforeach;?>
+			</table>
+		</div>
+	<? endif;?>
 	<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
 	<?if(!empty($articles)):?>
 		<div data-ar="articles" class="articles section">

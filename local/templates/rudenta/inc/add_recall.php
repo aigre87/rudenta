@@ -22,11 +22,11 @@ $services = Service::getAllServices();
             <div class="row">
                 <div class="fieldName">Оценка</div>
                 <select name="point">
-                    <option value="1">5 Баллов</option>
-                    <option value="2">4 Балла</option>
-                    <option value="3">3 Балла</option>
-                    <option value="4">2 Балла</option>
-                    <option value="5">1 Балл</option>
+                    <option value="15">5 Баллов</option>
+                    <option value="19">4 Балла</option>
+                    <option value="16">3 Балла</option>
+                    <option value="17">2 Балла</option>
+                    <option value="18">1 Балл</option>
                 </select>
             </div>
             <div class="row">
