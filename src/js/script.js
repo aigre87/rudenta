@@ -798,7 +798,7 @@ function doctorsListInit(){
 function recallsListInit(){
     if( $(".recalls-list-page").length == 0 ){ return false; }
 
-    //createSlider( $(".recalls-list-page .recalls-list"), $(".recalls-list-page .recalls-list .recall-item") );
+    createSlider( $(".recalls-list-page .recalls-list"), $(".recalls-list-page .recalls-list .recall-item") );
     $(".filterHidden .filter").each(function(){
         var $this = $(this),
             classList = $(this).attr("class").split(' ').join(" "),

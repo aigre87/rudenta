@@ -49,18 +49,6 @@ $this->setFrameMode(true);
 					<?endif;?>
 				</div>
 			<?endforeach;?>
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:main.include",
-				".default",
-				array(
-					"AREA_FILE_SHOW" => "file",
-					"AREA_FILE_SUFFIX" => "inc",
-					"EDIT_TEMPLATE" => "",
-					"COMPONENT_TEMPLATE" => ".default",
-					"PATH" => "/local/templates/rudenta/inc/record.php"
-				),
-				false
-			);?>
 		</div>
 		<div class="w-1col">
 			<div class="nav">
@@ -106,30 +94,65 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</div>
-	<? if($arResult['PRICE']): ?>
-		<div data-ar="prices" class="prices section">
-			<h2>Цены</h2>
-			<div class="items">
-				<? foreach($arResult['PRICE'] as $price):?>
-					<div class="item">
-						<div class="tbl">
-							<div class="nameCol"><?=$price['NAME']?></div>
-							<? if(!empty($price['PROPERTY_PRICE_VALUE'])): ?>
-								<div class="priceCol"><?=number_format($price['PROPERTY_PRICE_VALUE'], 0, ',', ' ')?> руб</div>
-							<? else: ?>
-								<div class="priceCol">Бесплатно</div>
-							<? endif;?>
-						</div>
-						<div class="text"><?=$price['PREVIEW_TEXT']?></div>
+	<div class="adaptivBlock clear">
+		<? if($arResult['PRICE']): ?>
+			<div class="w-2col">
+				<div data-ar="prices" class="prices section">
+					<h3>Цены</h3>
+					<div class="items">
+						<? foreach($arResult['PRICE'] as $price):?>
+							<div class="item">
+								<div class="tbl">
+									<div class="nameCol"><div class="nameBlock"><?=$price['NAME']?></div></div>
+									<? if(!empty($price['PROPERTY_PRICE_VALUE'])): ?>
+										<div class="priceCol"><div class="priceBlock"><?=number_format($price['PROPERTY_PRICE_VALUE'], 0, ',', ' ')?> руб.</div></div>
+									<? else: ?>
+										<div class="priceCol"><div class="priceBlock">Бесплатно</div></div>
+									<? endif;?>
+								</div>
+								<div class="text"><?=$price['PREVIEW_TEXT']?></div>
+							</div>
+						<? endforeach;?>
 					</div>
-				<? endforeach;?>
+				</div>
 			</div>
-		</div>
-	<? endif;?>
+			<div class="w-1col">
+				<?$APPLICATION->IncludeComponent(
+					"bitrix:main.include",
+					".default",
+					array(
+						"AREA_FILE_SHOW" => "file",
+						"AREA_FILE_SUFFIX" => "inc",
+						"EDIT_TEMPLATE" => "",
+						"COMPONENT_TEMPLATE" => ".default",
+						"PATH" => "/local/templates/rudenta/inc/record.php"
+					),
+					false
+				);?>
+			</div>
+		<?else:?>
+			<div class="w-2col">
+				<?$APPLICATION->IncludeComponent(
+					"bitrix:main.include",
+					".default",
+					array(
+						"AREA_FILE_SHOW" => "file",
+						"AREA_FILE_SUFFIX" => "inc",
+						"EDIT_TEMPLATE" => "",
+						"COMPONENT_TEMPLATE" => ".default",
+						"PATH" => "/local/templates/rudenta/inc/record.php"
+					),
+					false
+				);?>
+			</div>
+			<div class="w-1col">&nbsp;</div>
+		<? endif;?>
+	</div>
+	
 	<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
 	<?if(!empty($articles)):?>
 		<div data-ar="articles" class="articles section">
-			<h2 class="lBlue">Советы</h2>
+			<h2 class="bigH2">Советы</h2>
 			<div class="docNoteBlock clear">
 				<?if(!empty($articles[0])):?>
 					<a class="w-1col" href="/articles/<?=$articles[0]['ID']?>/"><?=$articles[0]['NAME']?></a>
@@ -148,7 +171,7 @@ $this->setFrameMode(true);
 	<?endif;?>
 	<?if(!empty($arResult['DOCTORS'])):?>
 		<div data-ar="doctors" class="doctors section">
-			<h2 class="lBlue">Врачи</h2>
+			<h2 class="bigH2">Врачи</h2>
 			<div id="doctors-list">
 			<?foreach($arResult['DOCTORS'] as $doctor):?>
 				<?php
@@ -179,7 +202,7 @@ $this->setFrameMode(true);
 	<?endif;?>
 	<?if($arResult['CNT_RECALLS'] > 0):?>
 	<div class="recalls section" data-ar="recalls">
-		<h2 class="lBlue">Отзывы</h2>
+		<h2 class="bigH2">Отзывы</h2>
 		<div class="clear">
 			<div class="w-2col">
 				<?$APPLICATION->IncludeComponent(

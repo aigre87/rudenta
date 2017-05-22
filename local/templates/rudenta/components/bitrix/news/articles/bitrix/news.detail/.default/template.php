@@ -29,18 +29,6 @@ $this->setFrameMode(true);
 				<script src="//yastatic.net/share2/share.js"></script>
 				<div class="ya-share2" data-services="vkontakte,odnoklassniki,facebook,twitter" data-counter="" data-title="<?=$arResult["NAME"]?>" data-description="<?=$arResult['PREVIEW_TEXT']?>"></div>
 			</div>
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:main.include",
-				".default",
-				array(
-					"AREA_FILE_SHOW" => "file",
-					"AREA_FILE_SUFFIX" => "inc",
-					"EDIT_TEMPLATE" => "",
-					"COMPONENT_TEMPLATE" => ".default",
-					"PATH" => "/local/templates/rudenta/inc/record.php"
-				),
-				false
-			);?>
 		</div>
 		<div class="w-1col rc">
 			<?php
@@ -57,20 +45,31 @@ $this->setFrameMode(true);
 			<div class="printVersion">Версия дял печати</div>
 			<a class="printButton">Распечатать</a>
 			<a class="disablePrintVersion">Обычный просмотр</a>
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:main.include",
+				".default",
+				array(
+					"AREA_FILE_SHOW" => "file",
+					"AREA_FILE_SUFFIX" => "inc",
+					"EDIT_TEMPLATE" => "",
+					"COMPONENT_TEMPLATE" => ".default",
+					"PATH" => "/local/templates/rudenta/inc/record.php"
+				),
+				false
+			);?>
+			<?php
+			$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
+			?>
+			<?if(!empty($random_art)):?>
+				<div class="articles section">
+					<h3>Другие советы по теме</h3>
+					<div class="docNoteBlock clear">
+						<?foreach ($random_art as $usl):?>
+							<a href="/articles/<?=$usl['ID']?>/"><?=$usl['NAME']?></a>
+						<?endforeach;?>
+					</div>
+				</div>
+			<?endif;?>
 		</div>
 	</div>
-
-	<?php
-	$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
-	?>
-	<?if(!empty($random_art)):?>
-		<div class="articles section">
-			<h3>Другие советы по теме</h3>
-			<div class="docNoteBlock clear">
-				<?foreach ($random_art as $usl):?>
-					<a class="w-1col" href="/articles/<?=$usl['ID']?>/"><?=$usl['NAME']?></a>
-				<?endforeach;?>
-			</div>
-		</div>
-	<?endif;?>
 </div>

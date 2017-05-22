@@ -161,6 +161,10 @@ body.articles{
 
 		}
 	}
+	.free-record{
+		background: map-get($colors, ulBlue);
+		box-shadow: 0px 11px 33px -7px rgba( map-get($colors, ulBlue) , 0.7);
+	}
 	.doctor{
 		position: relative;
 		font-size: 14px;

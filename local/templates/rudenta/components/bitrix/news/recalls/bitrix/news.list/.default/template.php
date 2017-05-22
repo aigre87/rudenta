@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 ?>
 <div class="recalls-list">
-	<h2>
+	<h2 class="count">
 		<?=Recalls::getRecallsCNT();?>
 	</h2>
 	<?foreach($arResult["ITEMS"] as $arItem):?>

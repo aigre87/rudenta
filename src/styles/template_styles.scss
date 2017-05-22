@@ -351,6 +351,10 @@ sup{
 .lBlue{
   color : map-get($colors, lBlue);
 }
+#content h2.bigH2{
+  font-size: 50px;
+  margin-bottom: 14px;
+}
 
 header{
   width: 1180px;
@@ -1822,6 +1826,13 @@ select{
     font-size: 12px;
     line-height: 16px;
     color: map-get($colors, desc);
+  }
+}
+
+
+#content .w-1col .docNoteBlock{
+  a{
+    margin-bottom: 10px;
   }
 }
 #content .docNoteBlock{
