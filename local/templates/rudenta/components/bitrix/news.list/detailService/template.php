@@ -76,9 +76,11 @@ $this->setFrameMode(true);
 							<a href="#" data-link="prices">Цены</a>
 						</li>
 					<? endif; ?>
-					<li>
-						<a href="#" data-link="articles">Советы пациентам</a>
-					</li>
+					<? if($arResult['ARTICLES'] ): ?>
+						<li>
+							<a href="#" data-link="articles">Советы пациентам</a>
+						</li>
+					<? endif; ?>
 					<li>
 						<a href="#" data-link="doctors">Врачи</a>
 					</li>
@@ -148,22 +150,21 @@ $this->setFrameMode(true);
 			<div class="w-1col">&nbsp;</div>
 		<? endif;?>
 	</div>
-	
-	<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
-	<?if(!empty($articles)):?>
+
+	<?if(!empty($arResult['ARTICLES'])):?>
 		<div data-ar="articles" class="articles section">
 			<h2 class="bigH2">Советы</h2>
 			<div class="docNoteBlock clear">
-				<?if(!empty($articles[0])):?>
-					<a class="w-1col" href="/articles/<?=$articles[0]['ID']?>/"><?=$articles[0]['NAME']?></a>
+				<?if(!empty($arResult['ARTICLES'][0])):?>
+					<a class="w-1col" href="/articles/<?=$arResult['ARTICLES'][0]['ID']?>/"><?=$arResult['ARTICLES'][0]['NAME']?></a>
 				<?endif;?>
-				<?if(!empty($articles[1])):?>
-					<a class="w-1col" href="/articles/<?=$articles[1]['ID']?>/"><?=$articles[1]['NAME']?></a>
+				<?if(!empty($arResult['ARTICLES'][1])):?>
+					<a class="w-1col" href="/articles/<?=$arResult['ARTICLES'][1]['ID']?>/"><?=$arResult['ARTICLES'][1]['NAME']?></a>
 				<?endif;?>
-				<?if(!empty($articles[2]) && count($articles) == 3):?>
+				<?if(!empty($arResult['ARTICLES'][2]) && count($arResult['ARTICLES']) == 3):?>
 					<a class="w-1col" href="/articles/">Все советы</a>
 				<?endif;?>
-				<?if(count($articles) < 3):?>
+				<?if(count($arResult['ARTICLES']) < 3):?>
 					<a class="w-1col" href="/articles/">Все советы</a>
 				<?endif;?>
 			</div>

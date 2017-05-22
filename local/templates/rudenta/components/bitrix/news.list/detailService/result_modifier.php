@@ -50,3 +50,5 @@ $arResult['NAV'] = $nav;
 $arResult['CNT_RECALLS'] = Service::getRecallsCNT($arResult['SECTION']['PATH'][1]['ID']);
 $arResult['DOCTORS'] = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);
 $arResult['PRICE'] =  Price::GetPriceForService($arParams['PARENT_SECTION']);
+$arResult['ARTICLES'] =  Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "");
+
