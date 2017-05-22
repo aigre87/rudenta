@@ -796,6 +796,9 @@ function doctorsListInit(){
 }
 
 function recallsListInit(){
+    if( $(".recalls-list-page").length == 0 ){ return false; }
+
+    //createSlider( $(".recalls-list-page .recalls-list"), $(".recalls-list-page .recalls-list .recall-item") );
     $(".filterHidden .filter").each(function(){
         var $this = $(this),
             classList = $(this).attr("class").split(' ').join(" "),
@@ -911,7 +914,9 @@ function docNoteBlock_maxHeight(){
     });
     $b.css({"height": maxH});
 }
-
+function articlesList(){
+    createSlider( $(".articles-listPage .articles-list"), $(".articles-listPage .articles-list .item") );
+}
 function articlesDetail(){
     if( $(".articlesDetailPage").length == 0 ){ return false; }
     function printPage(){
@@ -1150,6 +1155,7 @@ $(document).ready(function(){
     servicesDetail();
 /*servicesDetail END*/
 /*articles*/
+    articlesList();
     articlesDetail();
 /*END articles*/
 /*GLOBAL*/

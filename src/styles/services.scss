@@ -249,6 +249,54 @@ $bg6: map-get($colors, pink);
 	}
 }
 #mainWrapper #content .servicesDetailPage{
+	.section.prices{
+		margin-top: 59px;
+		border: 2px dashed map-get($colors, pink);
+		border-radius: 10px;
+		h2{
+			margin-bottom: 16px;
+		}
+		.items { 
+
+			.item { 
+
+				.top { 
+					display: table;
+					position: relative;
+					.name { 
+						display: table-cell;
+						vertical-align: top;
+					  font-size: 16px;
+					  font-weight: bold;
+					  line-height: 1.25;
+					  &:before{
+					  	display: block;
+					  	position: absolute;
+					  	left: 0;
+					  	bottom: 0;
+					  	width: 100%;
+					  	border-bottom: 1ps dotted #999999;
+					  	content: '';
+					  }
+					}
+
+					.price { 
+						display: table-cell;
+						vertical-align: bottom;
+						font-size: 16px;
+						font-style: italic;
+						line-height: 1.25;
+						text-align: right;
+					}
+				}
+				.text { 
+					font-size: 14px;
+					line-height: 1.25;
+					color: #666666;
+				}
+			}
+		}/*end items*/
+	}
 	.section.articles{
 		margin-top: 59px;
 		h2{

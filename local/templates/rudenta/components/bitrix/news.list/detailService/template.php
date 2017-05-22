@@ -107,21 +107,23 @@ $this->setFrameMode(true);
 		</div>
 	</div>
 	<? if($arResult['PRICE']): ?>
-		<div data-ar="prices">
-			<h3>Цены</h3>
-			<table>
+		<div data-ar="prices" class="prices section">
+			<h2>Цены</h2>
+			<div class="items">
 				<? foreach($arResult['PRICE'] as $price):?>
-					<tr>
-						<td><?=$price['NAME']?></td>
-						<? if(!empty($price['PROPERTY_PRICE_VALUE'])): ?>
-							<td><?=number_format($price['PROPERTY_PRICE_VALUE'], 0, ',', ' ')?> руб</td>
-						<? else: ?>
-							<td>Бесплатно</td>
-						<? endif;?>
-						<td><?=$price['PREVIEW_TEXT']?></td>
-					</tr>
+					<div class="item">
+						<div class="tbl">
+							<div class="nameCol"><?=$price['NAME']?></div>
+							<? if(!empty($price['PROPERTY_PRICE_VALUE'])): ?>
+								<div class="priceCol"><?=number_format($price['PROPERTY_PRICE_VALUE'], 0, ',', ' ')?> руб</div>
+							<? else: ?>
+								<div class="priceCol">Бесплатно</div>
+							<? endif;?>
+						</div>
+						<div class="text"><?=$price['PREVIEW_TEXT']?></div>
+					</div>
 				<? endforeach;?>
-			</table>
+			</div>
 		</div>
 	<? endif;?>
 	<?php $articles = Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "")?>
