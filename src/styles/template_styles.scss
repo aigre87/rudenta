@@ -368,22 +368,22 @@ header{
   #headerLogo{
     position: absolute;
     left: -1px;
-    top: 43px;
+    top: 46px;
     img{
       display: block;
     }
   }
 
   #headerMenu{
-    margin-left: 399px;
-    padding-top: 10px;
+    margin-left: 419px;
+    padding-top: 11px;
     width: 460px;
     ul{
       li{
         box-sizing: border-box;
         display: inline-block;
         white-space: nowrap;
-        min-width: 200px;
+        min-width: 151px;
         padding-right: 15px;
         margin-bottom: 10px;
         a{
@@ -420,21 +420,21 @@ header{
           }
         }
         &:nth-child(2) a{
-          color: map-get($colors, green);
-          span{
-            border-bottom-color: map-get($colors, green);
-          }
-          &.selected{
-            background: map-get($colors, green);
-          }
-        }
-        &:nth-child(3) a{
           color: map-get($colors, lBlue);
           span{
             border-bottom-color: map-get($colors, lBlue);
           }
           &.selected{
             background: map-get($colors, lBlue);
+          }
+        }
+        &:nth-child(3) a{
+          color: map-get($colors, purple);
+          span{
+            border-bottom-color: map-get($colors, purple);
+          }
+          &.selected{
+            background: map-get($colors, purple);
           }
         }
         &:nth-child(4) a{
@@ -444,6 +444,24 @@ header{
           }
           &.selected{
             background: map-get($colors, pink);
+          }
+        }
+        &:nth-child(5) a{
+          color: map-get($colors, green);
+          span{
+            border-bottom-color: map-get($colors, green);
+          }
+          &.selected{
+            background: map-get($colors, green);
+          }
+        }
+        &:nth-child(6) a{
+          color: map-get($colors, yellow);
+          span{
+            border-bottom-color: map-get($colors, yellow);
+          }
+          &.selected{
+            background: map-get($colors, yellow);
           }
         }
       }

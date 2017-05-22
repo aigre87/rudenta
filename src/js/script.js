@@ -140,7 +140,7 @@ function setFooterPadding(){
 function optionSelect($element){
     if( myGlobalisMobileDevice ){ return false; }
     var $s = $element.find("select");
-    $('select').selectric({
+    $('select:not(.recallsFilter)').selectric({
         disableOnMobile: false
     });
     var $ss = $s.closest(".selectric-wrapper").find(".selectric-scroll")
@@ -800,7 +800,7 @@ function recallsListInit(){
         var $this = $(this),
             classList = $(this).attr("class").split(' ').join(" "),
             clearclassList = classList.replace('filter','').replace(' ',''),
-            mySelect = "<select class='"+clearclassList+"'>";
+            mySelect = "<select class='recallsFilter "+clearclassList+"'>";
             //console.log(clearclassList);
 
             $this.find("a").each(function(){

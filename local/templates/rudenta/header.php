@@ -61,7 +61,7 @@ else
 	<div id="mainWrapper">
 
 		<header class="clear">
-			<a href="/" id="headerLogo"><img src="<?=SITE_TEMPLATE_PATH?>/images/mainSiteLogo.png" alt="logo"></a>
+			<a href="/" id="headerLogo"><img src="<?=SITE_TEMPLATE_PATH?>/images/mainSiteLogo_v2.png" alt="logo"></a>
 			<menu id="headerMenu">
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:menu",
