@@ -695,7 +695,7 @@ function HPrecallsBlock(){
 
 function createSlider($block, $items){
     var itemsL = $items.length;
-    if( itemsL == 0 ){ return false; }
+    if( itemsL == 0 || itemsL <= 5 ){ return false; }
 
     $items.wrapAll("<div class='defaultSlider'></div>");
     var slideL = 0;
@@ -808,10 +808,27 @@ function recallsListInit(){
 
             $this.find("a").each(function(){
                 var $thisa = $(this);
-                if( $thisa.hasClass("active") ){
-                    mySelect+="<option selected='selected'>"+$thisa.text()+"</option>";
+                    $thisImg = $thisa.prev("img");
+                if( $thisImg.length > 0 ){
+                    var imgSrc;
+
+                    if( $thisImg.attr('src').trim().length > 0 ){
+                        imgSrc = $thisImg.attr('src');
+                    }else{
+                        imgSrc = '/local/templates/rudenta/images/filterPerson.png';
+                    }
+
+                    if( $thisa.hasClass("active") ){
+                        mySelect+="<option class='withImg' data-img='"+imgSrc+"' selected='selected'>"+$thisa.text()+"</option>";
+                    }else{
+                        mySelect+="<option class='withImg' data-img='"+imgSrc+"'>"+$thisa.text()+"</option>";
+                    }
                 }else{
-                    mySelect+="<option>"+$thisa.text()+"</option>";
+                    if( $thisa.hasClass("active") ){
+                        mySelect+="<option class='all' selected='selected'>"+$thisa.text()+"</option>";
+                    }else{
+                        mySelect+="<option class='all'>"+$thisa.text()+"</option>";
+                    }
                 }
             });
         mySelect+="</select>";
@@ -825,13 +842,65 @@ function recallsListInit(){
                 window.location.href = linkHref;
             });
         }else{
-            var selectric = $('select.'+clearclassList+'').selectric();
-            selectric.on("selectric-change", function(event, element, selectric){
-                var index = $(element).find("option:selected").index();
-                linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
-                window.location.href = linkHref;
-            });
+            if( clearclassList.indexOf("doctors") > -1 ){
+                var selectric = $('select.'+clearclassList+'').selectric({
+                  optionsItemBuilder: function(itemData, element, index) {
+
+                    if( itemData.element[0].hasAttribute("data-img") ){
+                        return '<span class="imgW"><img src="'+itemData.element[0].getAttribute("data-img")+'"></span><span class="text">'+ itemData.text+'</span>';
+                    }else{
+                        return itemData.text;
+                    }
+                  }
+                });
+                selectric.on("selectric-change", function(event, element, selectric){
+                    var index = $(element).find("option:selected").index();
+                    linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
+                    window.location.href = linkHref;
+                });
+            }else{
+                var selectric = $('select.'+clearclassList+'').selectric();
+                selectric.on("selectric-change", function(event, element, selectric){
+                    var index = $(element).find("option:selected").index();
+                    linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
+                    window.location.href = linkHref;
+                });
+            }
         }
+    });
+
+    /*unlocal-recalls*/
+    TweenMax.set($(".unlocal-recalls .unlocal-recalls-4.start"), {opacity: 1});
+    var $buttonShowMore = $(".unlocal-recalls .buttonMore");
+    var tl = new TimelineMax({paused : true});
+
+    tl.to($buttonShowMore.find(".icon"), 1.6, {rotation: 360, repeat:-1, repeatDalay: 1, ease: Power0.easeNone});
+    
+    $buttonShowMore.on("mouseenter", function(){
+        tl.play();
+    });
+    $buttonShowMore.on("mouseleave", function(){
+        tl.pause();
+    });
+    
+    $buttonShowMore.on("click", function(){
+        var $slides = $(".unlocal-recalls .unlocal-recalls-4"),
+            slidesL = $slides.length,
+            curIndex = $slides.filter(".active, .start").index(),
+            nextCur;
+
+        if(curIndex !== slidesL-1){
+          nextCur = curIndex+1;
+        }else{
+          nextCur = 0;
+        }
+        var $curS = $slides.eq(curIndex),
+            $nextS = $slides.eq(nextCur);
+
+        $curS.removeClass("active start");
+        $nextS.addClass("active");
+        TweenMax.to( $curS , 0.3 , { opacity: 0  });
+        TweenMax.to( $nextS , 0.3 , { opacity: 1  });
     });
 
     /*FORM writeRewiev*/

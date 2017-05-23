@@ -46,7 +46,7 @@ function filterDocAndUsl(){
     echo "<div class='filter doctors'>";
     if(!empty($usl) && empty($grade)){
 
-        echo "<a href='/recalls/?usl=$usl'>Все врачи</a>";
+        echo "<a href='/recalls/?usl=$usl' class='all'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
@@ -56,7 +56,7 @@ function filterDocAndUsl(){
             }
         }
     }elseif(empty($usl) && !empty($grade)){
-        echo "<a href='/recalls/?grade=$grade'>Все врачи</a>";
+        echo "<a href='/recalls/?grade=$grade' class='all'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
@@ -66,7 +66,7 @@ function filterDocAndUsl(){
             }
         }
     }elseif(!empty($usl) && !empty($grade)){
-        echo "<a href='/recalls/?usl=$usl&grade=$grade'>Все врачи</a>";
+        echo "<a href='/recalls/?usl=$usl&grade=$grade' class='all'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){
@@ -76,7 +76,7 @@ function filterDocAndUsl(){
             }
         }
     }else{
-        echo "<a href='/recalls/'>Все врачи</a>";
+        echo "<a href='/recalls/' class='all'>Все врачи</a>";
         foreach($docs as $key){
             echo '<img src="' . $key["PREVIEW_PICTURE"]["src"] . '">';
             if($doc == $key['ID']){

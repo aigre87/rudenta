@@ -55,6 +55,9 @@ $strTitle = "";
 		{
 			if($arSection['DEPTH_LEVEL'] == 1){
 				$link = '<div class="serviceTitle">'.$arSection["NAME"].'</div>';
+				if($arSection['ID'] == 36 || $arSection['ID'] == 5 || $arSection['ID'] == 6){
+					$link = "<a class='serviceItem' href=".$arSection["SECTION_PAGE_URL"]."><span class='serviceName'>".$arSection['NAME'].'</span></a>';
+				}
 			}else{
 				$min_price = Service::getMinPrice($arSection['ID']);
 				if(!empty($min_price)){

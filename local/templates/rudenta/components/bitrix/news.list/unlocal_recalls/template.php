@@ -12,20 +12,43 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 $i = 0;
+$all = 0;
+$cnt = count($arResult['ITEMS']);
 ?>
 <div class="unlocal-recalls">
-	<? foreach($arResult['ITEMS'] as $arItem): ?>
-		<?if ($i == 0):?>
-			<div class="unlocal-recalls-4">
-		<? endif;?>
-			<a href="<?=$arItem['CODE']?>" target="_blank" class="unlocal-recalls-item">
-				<img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>">
-				<?=$arItem['NAME']?>
-			</a>
-		<? $i++ ;?>
-		<? if($i == 4):?>
+	<h3 class="title">Отзывы о клинике РуДента на сторонних порталах</h3>
+	<div class="items">
+		<? foreach($arResult['ITEMS'] as $key => $arItem): ?>
+			<?if ($i % 4 == 0):?>
+				<?if($all == 0):?>
+					<div class="unlocal-recalls-4 start">
+				<? else:?>	
+					<div class="unlocal-recalls-4">
+				<? endif;?>	
+			<? endif;?>
+			<div class="col">
+				<a href="<?=$arItem['CODE']?>" target="_blank" class="unlocal-recalls-item">
+					<span class="imgW"><img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>"></span>
+					<span class="name"><?=$arItem['NAME']?></span>
+				</a>
+			</div>
+			<? 
+				$i++ ;
+				$all++;
+			?>
+
+			<? if( ($i % 4 == 0 && $i != 0 && $i != 1) || $i == $cnt):?>
 				</div>
-				<?$i = 0;?>
-		<? endif;?>
-	<? endforeach; ?>
+			<? endif;?>
+		<? endforeach; ?>
+	</div>
+	<?if ($all > 4):?>
+		<div class="buttonMore">
+			<svg class="icon">
+			    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-refresh"></use>
+			</svg>
+			<div class="text">Еще</div>
+		</div>
+	<? endif;?>
 </div>
+

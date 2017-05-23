@@ -82,7 +82,134 @@
 	}
 }
 
-.recalls-list{
+#content .unlocal-recalls{
+	margin-bottom: 17px;
+	&:after{
+		content: '';
+		display: table;
+		clear: both;
+	}
+	.title{
+		margin-top: -3px;
+    margin-bottom: 13px;
+	}
+	.items{
+		position: relative;
+		width: calc(100% - 120px);
+		margin-left: -5px;
+		margin-right: -5px;
+		float: left;
+		height: 90px;
+		&:after{
+			content: '';
+			display: table;
+			clear: both;
+		}
+	}
+	.unlocal-recalls-4{
+		z-index: 	0;
+		position: absolute;
+		opacity: 0;
+		left: 0;
+		width: 100%;
+		top: 0;
+		&:after{
+			content: '';
+			display: table;
+			clear: both;
+		}
+		&.start{
+			z-index: 1;
+		}
+		&.active{
+			z-index: 1;
+		}
+	}
+	.col{
+		width: 25%;
+		float: left;
+		box-sizing: border-box;
+		padding: 0 5px;
+	}
+	.unlocal-recalls-item{
+		display: block;
+		width: 100%;
+		border-radius: 8px;
+    border: 2px solid #eaeaea;
+    box-sizing: border-box;
+    height: 90px;
+    padding: 5px 10px;
+    .imgW{
+    	height: 56px;
+    	width: 100%;
+    	position: relative;
+    	display: block;
+    	img{
+    		display: block;
+				max-width: 100%;
+				max-height: 100%;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translateX(-50%) translateY(-50%);
+    	}
+    }
+    .name{
+    	margin-top: 4px;
+    	text-align: center;
+    	display: block;
+			font-size: 12px;
+			line-height: 12px;
+			color: #737373;
+			transition: all 0.2s ease-in-out;
+    }
+    &:hover{
+    	.name{
+    		color: map-get($colors, pink);
+    	}
+    }
+	}
+	.buttonMore{
+		height: 90px;
+		float: right;
+		cursor: pointer;
+		width: 120px;
+		margin-left: 10px;
+		border-radius: 8px;
+		background: map-get($colors, ulBlue);
+		transition: all 0.2s ease-in-out;
+		.icon{
+			fill: map-get($colors, lBlue);
+			width: 30px;
+			height: 28px;
+			margin: 20px auto 0;
+			display: block;
+			transform-origin: 50% 50%;
+		}
+		.text{
+			margin-top: 18px;
+			text-align: center;
+			transition: all 0.2s ease-in-out;
+			font-size: 12px;
+			color: map-get($colors, lBlue);
+		}
+		&:hover{
+			background: rgba( map-get($colors, pink), 0.1 );
+			.icon{
+				fill: map-get($colors, pink);
+			}
+			.text{
+				color: map-get($colors, pink);
+			}
+		}
+	}
+}
+
+#content .recalls-list{
+	.count{
+    font-size: 30px;
+    margin-bottom: 3px;
+	}
 	.recall-item{
 		position: relative;
 		border: 2px solid #eaeaea;
@@ -90,7 +217,7 @@
 		padding: 27px 28px 31px;
 		margin-top: 20px;
 		&:first-child{
-			margin-top: 8px;
+			margin-top: 0px;
 		}
 		.row1{
 			font-size: 16px;

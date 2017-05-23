@@ -70,10 +70,12 @@
 }
 $bg1: map-get($colors, pink);
 $bg2: map-get($colors, green);
-$bg3: map-get($colors, lBlue);
+$bg3: map-get($colors, purple);
 $bg4: map-get($colors, yellow);
 $bg5: map-get($colors, dBlue);
 $bg6: map-get($colors, pink);
+$bg7: map-get($colors, lBlue);
+
 
 #mainWrapper #content>div>.w-2col>.serviceBlock>.service{
 	margin-top: 35px;
@@ -85,7 +87,7 @@ $bg6: map-get($colors, pink);
 			color: $bg1;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, pink) , 45% );
+			background: lighten( $bg1 , 45% );
 			&:hover{
 				background: $bg1;
 				box-shadow: 0px 11px 33px -7px rgba( $bg1 , 0.75);
@@ -97,7 +99,7 @@ $bg6: map-get($colors, pink);
 			color: $bg2;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, green) , 45% );
+			background: lighten( $bg2 , 45% );
 			&:hover{
 				background: $bg2;
 				box-shadow: 0px 11px 33px -7px rgba( $bg2 , 0.75);
@@ -109,7 +111,7 @@ $bg6: map-get($colors, pink);
 			color: $bg3;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, lBlue) , 45% );
+			background: lighten( $bg3 , 45% );
 			&:hover{
 				background: $bg3;
 				box-shadow: 0px 11px 33px -7px rgba( $bg3 , 0.75);
@@ -121,7 +123,7 @@ $bg6: map-get($colors, pink);
 			color: $bg4;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, yellow) , 45% );
+			background: lighten( $bg4 , 45% );
 			&:hover{
 				background: $bg4;
 				box-shadow: 0px 11px 33px -7px rgba( $bg4 , 0.75);
@@ -133,7 +135,7 @@ $bg6: map-get($colors, pink);
 			color: $bg5;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, dBlue) , 45% );
+			background: lighten( $bg5 , 45% );
 			&:hover{
 				background: $bg5;
 				box-shadow: 0px 11px 33px -7px rgba( $bg5 , 0.75);
@@ -145,10 +147,22 @@ $bg6: map-get($colors, pink);
 			color: $bg1;
 		}
 		.serviceItem{
-			background: lighten( map-get($colors, pink) , 45% );
+			background: lighten( $bg6 , 45% );
 			&:hover{
-				background: $bg1;
-				box-shadow: 0px 11px 33px -7px rgba( $bg1 , 0.75);
+				background: $bg6;
+				box-shadow: 0px 11px 33px -7px rgba( $bg6 , 0.75);
+			}
+		}
+	}
+	&:nth-child(7){
+		.serviceTitle{
+			color: $bg1;
+		}
+		.serviceItem{
+			background: lighten( $bg7 , 45% );
+			&:hover{
+				background: $bg7;
+				box-shadow: 0px 11px 33px -7px rgba( $bg7 , 0.75);
 			}
 		}
 	}
