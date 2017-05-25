@@ -1,6 +1,8 @@
 <?php
 foreach($arResult['ITEMS'] as $arItem){
-    $arTems[Service::getName($arItem['PROPERTIES']['SERVICE']['VALUE'])][] = $arItem['PROPERTIES']['SERVICE']['VALUE'];
+    if(!empty($arItem['PROPERTIES']['SERVICE']['VALUE'])){
+        $arTems[Service::getName($arItem['PROPERTIES']['SERVICE']['VALUE'])][] = $arItem['PROPERTIES']['SERVICE']['VALUE'];
+    }
 }
 $tmp = [];
 $all_cnt = 0;
