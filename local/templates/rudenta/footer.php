@@ -16,11 +16,11 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 					</div>
 					<div class="item">
 						<div class="title">Время работы</div>
-						<div class="desc">9:00 -21:00(без выходных)</div>
+						<div class="desc">9:00 - 21:00 ежедневно</div>
 					</div>
 					<div class="item phone">
 						<div class="title">Многоканальный телефон</div>
-						<div class="desc"><a href="tel:+74956468191"><b>+8(495)104-77-87</b></a></div>
+						<div class="desc"><a href="tel:+74956468191"><b>+ 7 (495) 104-77-87</b></a></div>
 					</div>
 					<div class="item">
 						<div class="title">Электронная почта</div>
@@ -66,19 +66,19 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 						</div>
 					</div>
 					<div class="socialLinks">
-						<a href="#" class="vk">
+						<a href="https://vk.com/rudenta_clinic" class="vk">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-vkontakte-white"></use>
 							</svg>
 							Вконтакте
 						</a>
-						<a href="#" class="fb">
+						<a href="https://www.facebook.com/clinicrudenta/" class="fb">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-facebook-white"></use>
 							</svg>
 							Фейсбук
 						</a>
-						<a href="#" class="ig">
+						<a href="https://www.instagram.com/rudenta_kids/" class="ig">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-instagram-white"></use>
 							</svg>

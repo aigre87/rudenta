@@ -4,7 +4,7 @@
                 опытом работы и использующие самые современные технологии.</p>
 </div>
 <div class="icons">
-    <a class="tech">
+    <a href="/tehnology/" class="tech">
         <span class="text">Применяемые<br />технологии</span>
     </a>
     <a class="license">

@@ -31,13 +31,22 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 		<div class="w-1col rc">
-			<?php
-				$doc_array = Doctors::getInfo($arResult['DISPLAY_PROPERTIES']['DOCTOR']['VALUE'],40, 40);
-			?>
 			<div class="doctor">
-				<div class="imgW"><img src="<?=$doc_array['PREVIEW_PICTURE']?>"></div>
-				<div class="name"><?=$doc_array['NAME']?></div>
-				<div class="position"><?=$doc_array['POSITION']?></div>
+				<div class="imgW"><img src="<?=$arResult['DOCTOR']['PREVIEW_PICTURE']?>"></div>
+				<div class="name"><?=$arResult['DOCTOR']['NAME']?></div>
+				<div class="position"><?=$arResult['DOCTOR']['POSITION']?></div>
+				<? if(!empty($arResult['DOCTOR']['EXPERIENCE'])): ?>
+					<div class="experience"><?=$arResult['DOCTOR']['EXPERIENCE']?> опыта</div>
+				<? endif; ?>
+				<? if(!empty($arResult['DOCTOR']['AWARDS_CNT'])): ?>
+					<div class="awards"><?=$arResult['DOCTOR']['AWARDS_CNT']?> наград и сертификатов</div>
+				<? endif; ?>
+				<? if(!empty($arResult['DOCTOR']['RECALLS_CNT'])): ?>
+					<div class="recalls"><?=recalls($arResult['DOCTOR']['RECALLS_CNT'])?></div>
+				<? endif; ?>
+				<? if(!empty($arResult['DOCTOR']['ARTICLES_CNT'])): ?>
+					<div class="articles"><?=recalls($arResult['DOCTOR']['ARTICLES_CNT'])?></div>
+				<? endif; ?>
 			</div>
 			<div class="date">
 				Опубликованно <?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>

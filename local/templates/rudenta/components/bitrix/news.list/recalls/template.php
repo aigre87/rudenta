@@ -36,7 +36,7 @@ $this->setFrameMode(true);
 	</div>
 	<div class="nav">
 		<div class="shownext">Eщё отзыв</div>
-		<a class="allRecalls" href="/recalls/"><span>Все отзывы &rarr;</span></a>
+		<a class="allRecalls" href="/reviews/"><span>Все отзывы &rarr;</span></a>
 	</div>
 </div>
 </div>

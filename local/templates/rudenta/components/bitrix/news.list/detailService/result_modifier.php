@@ -47,8 +47,28 @@ foreach($arResult['ITEMS'] as $arItemKey => $arItemArr){
 
 
 $arResult['NAV'] = $nav;
-$arResult['CNT_RECALLS'] = Service::getRecallsCNT($arResult['SECTION']['PATH'][1]['ID']);
-$arResult['DOCTORS'] = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);
+
 $arResult['PRICE'] =  Price::GetPriceForService($arParams['PARENT_SECTION']);
 $arResult['ARTICLES'] =  Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "");
 
+$section_id = (int)$_REQUEST['SECTION_ID'];
+$arResult['CNT_RECALLS'] = Service::getRecallsCNT($section_id);
+
+
+$doctors = Doctors::getDocrotsUID($arResult['SECTION']['PATH'][1]['ID']);
+
+foreach($doctors as $doctor_key => $doctor){
+
+    $resizeImg = CFile::GetFileArray($doctor['PREVIEW_PICTURE']);
+
+    $resizeImg = CFile::ResizeImageGet(
+        $resizeImg,
+        array('width'=> 200, 'height'=>600),
+        BX_RESIZE_IMAGE_PROPORTIONAL,
+        true
+    );
+
+    $doctors[$doctor_key]['PREVIEW_PICTURE'] = $resizeImg;
+}
+
+$arResult['DOCTORS'] = $doctors;
