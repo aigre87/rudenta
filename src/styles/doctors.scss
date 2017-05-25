@@ -30,6 +30,7 @@
 		}
 	}
 	.doctor{
+		display: block;
 		background: #ffc7cd;
 		position: relative;
 		border-bottom: none;
@@ -167,6 +168,71 @@
 			}
 		}
 		&:nth-child(8), &:nth-child(8n+8){
+			background-color: $bg8 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg8 , 15%), 0.7);
+			}
+		}
+	}
+}
+#content #doctors-list.owl-carousel{
+	.owl-item{
+		$bg1  : #FFC7CD;
+		$bg2  : #DAFFF2;
+		$bg3  : #FFDDFF;
+		$bg4  : #BCF1FF;
+		$bg5  : #E5EEF4;
+		$bg6  : #FFFECB;
+		$bg7  : #DCDEFF;
+		$bg8 : #FFDDC7;
+		.item{
+			margin: 0;
+			margin-top: 25px;
+			margin-bottom: 30px;
+		}
+		&:nth-child(1) .item, &:nth-child(1n+8) .item{
+			background-color: $bg1 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg1 , 15%), 0.7);
+			}
+		}
+		&:nth-child(2) .item, &:nth-child(2n+8) .item{
+			background-color: $bg2 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg2 , 15%), 0.7);
+			}
+		}
+		&:nth-child(3) .item, &:nth-child(3n+8) .item{
+			background-color: $bg3 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg3 , 15%), 0.7);
+			}
+		}
+		&:nth-child(4) .item, &:nth-child(4n+8) .item{
+			background-color: $bg4 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg4 , 15%), 0.7);
+			}
+		}
+		&:nth-child(5) .item, &:nth-child(5n+8) .item{
+			background-color: $bg5 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg5 , 15%), 0.7);
+			}
+		}
+		&:nth-child(6) .item, &:nth-child(6n+8) .item{
+			background-color: $bg6 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg6 , 15%), 0.7);
+			}
+		}
+		&:nth-child(7) .item, &:nth-child(7n+8) .item{
+			background-color: $bg7 ;
+			&:hover{
+				box-shadow: 0px 30px 35px -19px rgba( darken($bg7 , 15%), 0.7);
+			}
+		}
+		&:nth-child(8) .item, &:nth-child(8n+8) .item{
 			background-color: $bg8 ;
 			&:hover{
 				box-shadow: 0px 30px 35px -19px rgba( darken($bg8 , 15%), 0.7);

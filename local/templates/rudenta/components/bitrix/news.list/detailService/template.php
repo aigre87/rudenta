@@ -172,10 +172,23 @@ $this->setFrameMode(true);
 	<?endif;?>
 	<?if(!empty($arResult['DOCTORS'])):?>
 		<div data-ar="doctors" class="doctors section">
-			<h2 class="bigH2">Врачи</h2>
-			<div id="doctors-list">
+			<h2 class="bigH2">Врачи
+			<div class="arrowsB">
+				<div class="arrow left">
+					<svg class="icon">
+					    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-left"></use>
+					</svg>
+				</div>
+				<div class="arrow right">
+					<svg class="icon">
+					    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-right"></use>
+					</svg>
+				</div>
+			</div>
+			</h2>
+			<div id="doctors-list" class="owl-carousel">
 			<?foreach($arResult['DOCTORS'] as $doctor):?>
-				<a class="item doctor w-1col" href="/doctors/<?=$doctor['ID']?>/">
+				<a class="item doctor" href="/doctors/<?=$doctor['ID']?>/">
 					<span class="imgW">
 						<img
 							class="preview_picture"

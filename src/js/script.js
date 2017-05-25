@@ -773,25 +773,26 @@ function doctorDetail(){
 }
 
 function doctorsListInit(){
-    if( !$("#doctors-list").length > 0 ){ return false;}
-    var $items = $("#doctors-list .item"),
-    itemsL = $items.length;
-    for(var i = 0; i <= itemsL; i+=3) {
-        var $item1 = $items.eq(i),
-            $item2 = $items.eq(i+1),
-            $item3 = $items.eq(i+2),
-            maxRowH = [];
+    if( $("#doctors-list:not(.owl-carousel)").length > 0 ){ 
+        var $items = $("#doctors-list .item"),
+        itemsL = $items.length;
+        for(var i = 0; i <= itemsL; i+=3) {
+            var $item1 = $items.eq(i),
+                $item2 = $items.eq(i+1),
+                $item3 = $items.eq(i+2),
+                maxRowH = [];
 
-        if( $item1.length > 0 ){ maxRowH.push($item1.outerHeight()); }
-        if( $item2.length > 0 ){ maxRowH.push($item2.outerHeight()); }
-        if( $item3.length > 0 ){ maxRowH.push($item3.outerHeight()); }
-        var maxH = maxRowH.max();
-        //console.log(maxH);
-        $item1
-        .add($item2)
-        .add($item3)
-            .css({height : maxH})
-            //.wrapAll("<div class='row clear'>");
+            if( $item1.length > 0 ){ maxRowH.push($item1.outerHeight()); }
+            if( $item2.length > 0 ){ maxRowH.push($item2.outerHeight()); }
+            if( $item3.length > 0 ){ maxRowH.push($item3.outerHeight()); }
+            var maxH = maxRowH.max();
+            //console.log(maxH);
+            $item1
+            .add($item2)
+            .add($item3)
+                .css({height : maxH})
+                //.wrapAll("<div class='row clear'>");
+        }
     }
 }
 
@@ -973,64 +974,74 @@ function servicesDetail(){
         }
     });
     if( $("#doctors-list .item").length > 0 ){
-        
-    }
+        function servDoctorsListBLock(){
+          var owl = $("#doctors-list"),
+              $LA = $(".doctors.section .arrow.left"),
+              $RA = $(".doctors.section .arrow.right");
+          if( owl.length == 0 ){return false;}
 
-    function recentlyWatchedBLock(){
-      var owl = $(".recentlyWatchedBLock_v5 .items"),
-          $LA = $(".recentlyWatchedBLock_v5 .arrow.left"),
-          $RA = $(".recentlyWatchedBLock_v5 .arrow.right");
-      if( owl.length == 0 ){return false;}
+          function checkArrowsState(ev){
+              var index = ev.item.index,
+                  count = ev.item.count,
+                  size = ev.page.size;
 
-      function checkArrowsState(ev){
-          var index = ev.item.index,
-              count = ev.item.count,
-              size = ev.page.size;
+              if( index == 0 ){
+                  $LA.addClass("disabled");
+              }else{
+                  $LA.removeClass("disabled");
+              }
+              if( index+size == count ){
+                  $RA.addClass("disabled");
+              }else{
+                  $RA.removeClass("disabled");
+              }
+          }
+          owl.on('initialized.owl.carousel', function(event) {
+                checkArrowsState(event);
+                var $items = $("#doctors-list .item"),
+                itemsL = $items.length,
+                maxRowH = [];
+                for(var i = 0; i < itemsL; i++) {
+                    maxRowH.push($items.eq(i).outerHeight());
+                }
 
-          if( index == 0 ){
-              $LA.addClass("disabled");
-          }else{
-              $LA.removeClass("disabled");
-          }
-          if( index+size == count ){
-              $RA.addClass("disabled");
-          }else{
-              $RA.removeClass("disabled");
-          }
-      }
-      owl.on('initialized.owl.carousel', function(event) {
-          checkArrowsState(event);
-      });
-      owl.owlCarousel({
-        loop:false,
-        items: 3,
-        navRewind:false,
-        margin: 20,
-        nav: true,
-        navText: [
-          "<i class='fa fa-caret-left'></i>",
-          "<i class='fa fa-caret-right'></i>"
-        ],
-        autoplay: false,
-        autoplayHoverPause: false,
-        responsive: {
-          0: {
-            items: 2
-          },
-          800: {
-            items: 3
-          }
+                var maxH = maxRowH.max();
+                console.log(maxRowH);
+                console.log(maxH);
+                $items.css({height : maxH})
+          });
+          owl.owlCarousel({
+            loop:false,
+            items: 3,
+            navRewind:false,
+            margin: 20,
+            nav: true,
+            navText: [
+              "<i class='fa fa-caret-left'></i>",
+              "<i class='fa fa-caret-right'></i>"
+            ],
+            autoplay: false,
+            autoplayHoverPause: false,
+            responsive: {
+              0: {
+                items: 2
+              },
+              800: {
+                items: 3
+              }
+            }
+          });
+          owl.on('changed.owl.carousel', function(event) {
+              checkArrowsState(event);
+          });
+          $RA.click(function() {
+              owl.trigger('next.owl.carousel');
+          });
+          $LA.click(function() {
+              owl.trigger('prev.owl.carousel');
+          });
         }
-      });
-      owl.on('changed.owl.carousel', function(event) {
-          checkArrowsState(event);
-      });
-      $RA.click(function() {
-          owl.trigger('next.owl.carousel');
-      });
-      $LA.click(function() {
-          owl.trigger('prev.owl.carousel');
-      });
+        servDoctorsListBLock();
     }
 }
 function docNoteBlock_maxHeight(){

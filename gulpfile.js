@@ -97,6 +97,7 @@ gulp.task('libs:build', function() {
         'src/libs/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
+        'src/libs/owl.carousel/dist/owl.carousel.min.js',
         //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
         ])
         .pipe(plumber())
