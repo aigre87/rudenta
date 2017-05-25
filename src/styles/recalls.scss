@@ -178,6 +178,7 @@
 		border-radius: 8px;
 		background: map-get($colors, ulBlue);
 		transition: all 0.2s ease-in-out;
+		user-select: none;
 		.icon{
 			fill: map-get($colors, lBlue);
 			width: 30px;

@@ -972,6 +972,66 @@ function servicesDetail(){
             TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
         }
     });
+    if( $("#doctors-list .item").length > 0 ){
+        
+    }
+
+    function recentlyWatchedBLock(){
+      var owl = $(".recentlyWatchedBLock_v5 .items"),
+          $LA = $(".recentlyWatchedBLock_v5 .arrow.left"),
+          $RA = $(".recentlyWatchedBLock_v5 .arrow.right");
+      if( owl.length == 0 ){return false;}
+
+      function checkArrowsState(ev){
+          var index = ev.item.index,
+              count = ev.item.count,
+              size = ev.page.size;
+
+          if( index == 0 ){
+              $LA.addClass("disabled");
+          }else{
+              $LA.removeClass("disabled");
+          }
+          if( index+size == count ){
+              $RA.addClass("disabled");
+          }else{
+              $RA.removeClass("disabled");
+          }
+      }
+      owl.on('initialized.owl.carousel', function(event) {
+          checkArrowsState(event);
+      });
+      owl.owlCarousel({
+        loop:false,
+        items: 3,
+        navRewind:false,
+        margin: 20,
+        nav: true,
+        navText: [
+          "<i class='fa fa-caret-left'></i>",
+          "<i class='fa fa-caret-right'></i>"
+        ],
+        autoplay: false,
+        autoplayHoverPause: false,
+        responsive: {
+          0: {
+            items: 2
+          },
+          800: {
+            items: 3
+          }
+        }
+      });
+      owl.on('changed.owl.carousel', function(event) {
+          checkArrowsState(event);
+      });
+      $RA.click(function() {
+          owl.trigger('next.owl.carousel');
+      });
+      $LA.click(function() {
+          owl.trigger('prev.owl.carousel');
+      });
+    }
 }
 function docNoteBlock_maxHeight(){
     var maxH = 0;
@@ -987,7 +1047,7 @@ function articlesList(){
     createSlider( $(".articles-listPage .articles-list"), $(".articles-listPage .articles-list .item") );
 }
 function articlesDetail(){
-    if( $(".articlesDetailPage").length == 0 ){ return false; }
+    if( $(".articlesDetailPage").length == 0 && $(".tehnologyDetailPage").length == 0 ){ return false; }
     function printPage(){
         $(".printVersion").on("click", function(e){
             e.preventDefault();

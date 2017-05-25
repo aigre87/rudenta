@@ -175,15 +175,12 @@ $this->setFrameMode(true);
 			<h2 class="bigH2">Врачи</h2>
 			<div id="doctors-list">
 			<?foreach($arResult['DOCTORS'] as $doctor):?>
-				<?php
-				$path_to_img = CFile::GetPath($doctor["PREVIEW_PICTURE"]);
-				?>
 				<a class="item doctor w-1col" href="/doctors/<?=$doctor['ID']?>/">
 					<span class="imgW">
 						<img
 							class="preview_picture"
 							border="0"
-							src="<?=$path_to_img?>"
+							src="<?=$doctor['PREVIEW_PICTURE']['src']?>"
 						/>
 					</span>
 					<span class="text">
