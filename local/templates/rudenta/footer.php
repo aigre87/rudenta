@@ -96,9 +96,9 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 				<div class="siteMap">
 					Карта сайта
 				</div>
-				<div class="adultDepartment">
-					Взрослое отделение стоматологии «РуДента»
-				</div>
+				<a class="adultDepartment">
+					<a target="_blank" class="adultDepartment" href="https://rudenta.ru">Взрослое отделение стоматологии «РуДента»</a>
+				</a>
 			</div>
 			</div>
 		</footer>
