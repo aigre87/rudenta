@@ -525,9 +525,6 @@ footer{
   bottom: 0;
   left: 0;
   width: 100%;
-  a{
-    color: #fff;
-  }
   .contactsBlock{
     position: relative;
     z-index: 1;
@@ -824,6 +821,9 @@ footer{
     padding-bottom: 37px;
     position: relative;
     height: 60px;
+    a{
+      color: #fff;
+    }
     .copyright{
       float: left;
       width: 500px;
