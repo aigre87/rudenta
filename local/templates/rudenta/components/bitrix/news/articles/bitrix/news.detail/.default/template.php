@@ -31,27 +31,34 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 		<div class="w-1col rc">
-			<div class="doctor">
-				<div class="imgW"><img src="<?=$arResult['DOCTOR']['PREVIEW_PICTURE']?>"></div>
-				<div class="name"><?=$arResult['DOCTOR']['NAME']?></div>
-				<div class="position"><?=$arResult['DOCTOR']['POSITION']?></div>
-				<? if(!empty($arResult['DOCTOR']['EXPERIENCE'])): ?>
-					<div class="experience"><?=$arResult['DOCTOR']['EXPERIENCE']?> опыта</div>
-				<? endif; ?>
-				<? if(!empty($arResult['DOCTOR']['AWARDS_CNT'])): ?>
-					<div class="awards"><?=$arResult['DOCTOR']['AWARDS_CNT']?> наград и сертификатов</div>
-				<? endif; ?>
-				<? if(!empty($arResult['DOCTOR']['RECALLS_CNT'])): ?>
-					<div class="recalls"><?=recalls($arResult['DOCTOR']['RECALLS_CNT'])?></div>
-				<? endif; ?>
-				<? if(!empty($arResult['DOCTOR']['ARTICLES_CNT'])): ?>
-					<div class="articles"><?=recalls($arResult['DOCTOR']['ARTICLES_CNT'])?></div>
-				<? endif; ?>
-			</div>
+			<a href="/doctors/<?=$arResult['DOCTOR']['ID']?>/" class="doctor">
+				<span class="imgW"><img class="preview_picture" border="0" src="<?=$arResult['DOCTOR']['PREVIEW_PICTURE']?>"></span>
+				<span class="text">
+					<span class="name"><?=$arResult['DOCTOR']['NAME']?></span>
+					<span class="position"><?=$arResult['DOCTOR']['POSITION']?></span>
+					<? if(!empty($arResult['DOCTOR']['EXPERIENCE'])): ?>
+						<span class="experience"><?=$arResult['DOCTOR']['EXPERIENCE']?> опыта</span>
+					<? endif; ?>
+					<? if(!empty($arResult['DOCTOR']['AWARDS_CNT'])): ?>
+						<span class="awards"><?=$arResult['DOCTOR']['AWARDS_CNT']?> наград и сертификатов</span>
+					<? endif; ?>
+					<? if(!empty($arResult['DOCTOR']['RECALLS_CNT'])): ?>
+						<span class="recalls"><?=recalls($arResult['DOCTOR']['RECALLS_CNT'])?></span>
+					<? endif; ?>
+					<? if(!empty($arResult['DOCTOR']['ARTICLES_CNT'])): ?>
+						<span class="articles"><?=recalls($arResult['DOCTOR']['ARTICLES_CNT'])?></span>
+					<? endif; ?>
+				</span>
+			</a>
 			<div class="date">
 				Опубликованно <?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>
 			</div>
-			<div class="printVersion">Версия дял печати</div>
+			<div class="printVersion">
+				<svg class="icon">
+				    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-print"></use>
+				</svg>
+				Версия дял печати
+			</div>
 			<a class="printButton">Распечатать</a>
 			<a class="disablePrintVersion">Обычный просмотр</a>
 			<?$APPLICATION->IncludeComponent(

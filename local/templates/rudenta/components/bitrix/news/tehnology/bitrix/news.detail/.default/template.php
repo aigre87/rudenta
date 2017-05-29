@@ -43,7 +43,12 @@ $this->setFrameMode(true);
 				</div>
 			</div>
 
-			<div class="printVersion">Версия для печати</div>
+			<div class="printVersion">
+				<svg class="icon">
+				    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-print"></use>
+				</svg>
+				Версия для печати
+			</div>
 			<a class="printButton">Распечатать</a>
 			<a class="disablePrintVersion">Обычный просмотр</a>
 			<?$APPLICATION->IncludeComponent(

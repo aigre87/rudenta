@@ -167,37 +167,90 @@ body.articles{
 		box-shadow: 0px 11px 33px -7px rgba( map-get($colors, ulBlue) , 0.7);
 	}
 	.doctor{
+		display: block;
+		background: #ffc7cd;
 		position: relative;
-		font-size: 14px;
-		line-height: 20px;
-		padding-left: 46px;
-		.imgW{
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 40px;
-			height: 40px;
-			border-radius: 100%;
-			overflow: hidden;
-			background: map-get($colors, ulBlue);
-			img{
-				position: absolute;
-				margin: auto;
-				max-width: 40px;
-				max-height: 40px;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				display: block;
+		border-bottom: none;
+		color: map-get($colors, text);
+		border-radius: 13px;
+		transition: all 0.2s ease-in-out;
+		box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+		min-height: 200px;
+		// &:after{
+		// 	opacity: 0;
+		// 	content: '';
+		// 	position: absolute;
+	 //    left: 19px;
+  //   	bottom: 15px;
+		// 	@include sprite($s-mIcoWhite_arrowRight);
+		// 	z-index: 1;
+		// 	transition: all 0.2s ease-in-out;
+		// }
+		&:hover{
+			border-bottom: none;
+			box-shadow: 0px 30px 35px -19px rgba( darken(#ffc7cd , 15%), 0.7);
+			&:after{
+				opacity: 1;
 			}
 		}
-		.name{
-			
+		.imgW{
+	    display: block;
+	    position: absolute;
+	    bottom: 0;
+	    right: 0;
+	    -webkit-border-radius: 0 0 13px;
+	    border-radius: 0 0 13px;
+	    overflow: hidden;
+	    height: 115%;
+	    width: 200px;
+			img{
+		    width: 100%;
+		    height: auto;
+		    position: relative;
+		    display: block;
+			}
 		}
-		.position{
-			color: map-get($colors, desc);
-			font-style: italic;
+		.text{
+	    padding-right: 169px;
+	    padding-top: 19px;
+	    padding-left: 20px;
+	    padding-bottom: 14px;
+	    box-sizing: border-box;
+	    display: block;
+	    width: 100%;
+	    font-size: 14px;
+	    line-height: 20px;
+	    color: map-get($colors, text);
+	    position: relative;
+	    z-index: 1;
+	    >span{
+	    	display: block;
+	    	color: map-get($colors, text);
+	    	text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+	    }
+			.name{
+				font-size: 18px;
+				line-height: 19px;
+				font-weight: bold;
+				margin-bottom: 6px;
+			}
+			.position{
+				color: map-get($colors, desc);
+				font-style: italic;
+				margin-bottom: 15px;
+			}
+			.experience{
+
+			}
+			.awards{
+
+			}
+			.recalls{
+
+			}
+			.articles{
+
+			}
 		}
 	}
 	.date{
@@ -229,15 +282,21 @@ body.articles{
 		margin-top: 15px;
 		cursor: pointer;
 		transition: all 0.12s ease;
-		&:before{
-			content: '';
+		.icon{
 			position: absolute;
 	    left: 10px;
 	    top: 13px;
-			@include sprite($s-mIcoBlack_printer);
+	    width: 24px;
+	    height: 24px;
+	    fill: #000;
+	    transition: all 0.12s ease;
 		}
 		&:hover{
+			background: rgba( map-get($colors, pink), 0.1 );
 			color: map-get($colors, pink);
+			.icon{
+				fill: map-get($colors, pink);
+			}
 		}
 	}
 	.printButton{

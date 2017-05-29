@@ -926,6 +926,20 @@ function recallsListInit(){
     });
 }
 
+function servicesList(){
+    if( $(".servicesList").length === 0 ){ return false; }
+    var pageHash = window.location.hash.replace("#", "");
+    if( pageHash.length === 0 ){ return false; }
+
+    $(".service").each(function(){
+        var $this = $(this);
+        var thisIdArray = $this.attr("id").split("_");
+        if( thisIdArray[thisIdArray.length-1]  === pageHash ){
+            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: $this.offset().top });
+        }
+    });
+}
+
 function servicesDetail(){
     if( !$("body.services-detail").length > 0 ){ return false; }
     createSlider( $(".servicesDetailPage .recalls-list"), $(".servicesDetailPage .recalls-list .recall-item") );
@@ -1291,6 +1305,9 @@ $(document).ready(function(){
 /*teh*/
     tehnologypage();
 /*teh end*/
+/*servicesList*/
+    servicesList();
+/*end servicesList*/
 /*servicesDetail*/
     servicesDetail();
 /*servicesDetail END*/
