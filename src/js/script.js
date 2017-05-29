@@ -928,16 +928,24 @@ function recallsListInit(){
 
 function servicesList(){
     if( $(".servicesList").length === 0 ){ return false; }
-    var pageHash = window.location.hash.replace("#", "");
-    if( pageHash.length === 0 ){ return false; }
 
-    $(".service").each(function(){
-        var $this = $(this);
-        var thisIdArray = $this.attr("id").split("_");
-        if( thisIdArray[thisIdArray.length-1]  === pageHash ){
-            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: $this.offset().top });
-        }
+    function goScroll(){
+        var pageHash = window.location.hash.replace("#", "");
+        if( pageHash.length === 0 ){ return false; }
+
+        $(".service").each(function(){
+            var $this = $(this);
+            var thisIdArray = $this.attr("id").split("_");
+            if( thisIdArray[thisIdArray.length-1]  === pageHash ){
+                TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: $this.offset().top });
+            }
+        });
+    }
+    goScroll();
+    $(window).on('hashchange', function() {
+      goScroll();
     });
+
 }
 
 function servicesDetail(){
