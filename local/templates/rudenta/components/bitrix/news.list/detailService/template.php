@@ -102,6 +102,9 @@ $this->setFrameMode(true);
 				<div data-ar="prices" class="prices section">
 					<h3>Цены</h3>
 					<div class="items">
+						<div class="item">
+							<?=$arResult['PRICE_DESCRIPTION']?>
+						</div>
 						<? foreach($arResult['PRICE'] as $price):?>
 							<div class="item">
 								<div class="tbl">
