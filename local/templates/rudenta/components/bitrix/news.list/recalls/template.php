@@ -35,7 +35,12 @@ $this->setFrameMode(true);
 		<?endforeach;?>
 	</div>
 	<div class="nav">
-		<div class="shownext">Eщё отзыв</div>
+		<div class="shownext">
+		<svg class="icon">
+		    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-refresh"></use>
+		</svg>
+		Eщё отзыв
+		</div>
 		<a class="allRecalls" href="/reviews/"><span>Все отзывы &rarr;</span></a>
 	</div>
 </div>

@@ -401,8 +401,12 @@
 		}
 	}
 	.zoom-gallery{
-    column-count: 4;
-    column-gap: 0;
+		-moz-column-count: 2; /* Для Firefox */
+    -webkit-column-count: 2; /* Для Safari и Chrome */
+    column-count: 2;
+		-webkit-column-gap: 0px;
+   -moz-column-gap: 0px;
+    column-gap: 0px;
 	  a{
 	    display: inline-block;
 	    vertical-align: top;

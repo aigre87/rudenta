@@ -193,7 +193,7 @@ function HPmainSlider(){
         aniDist = 500;
 
     function initSlider(){
-        TweenMax.set($('body'), {perspective:500});
+        TweenMax.set($('#hp_slider'), {perspective:500});
         cur = ($slides.filter(".current").length>0 ? $slides.filter(".current").index() : 0 );
         if( cur === 0 ){
           nextCurIndex = cur+1;
@@ -687,6 +687,19 @@ function HPrecallsBlock(){
         };
 
         var $ra = $block.find(".shownext");
+
+        var $raIcon = $ra.find(".icon");
+        var tl = new TimelineMax({paused : true});
+
+        tl.to($raIcon, 1.6, {rotation: 360, repeat:-1, repeatDalay: 1, ease: Power0.easeNone});
+        
+        $ra.on("mouseenter", function(){
+            tl.play();
+        });
+        $ra.on("mouseout", function(){
+            tl.pause();
+        });
+
         $ra.on("click", function(){
             slide("right");
         });
@@ -1012,7 +1025,7 @@ function servicesDetail(){
               }else{
                   $LA.removeClass("disabled");
               }
-              if( index+size == count ){
+              if( index+size == count || count <= 3 ){
                   $RA.addClass("disabled");
               }else{
                   $RA.removeClass("disabled");
@@ -1028,8 +1041,8 @@ function servicesDetail(){
                 }
 
                 var maxH = maxRowH.max();
-                console.log(maxRowH);
-                console.log(maxH);
+                // console.log(maxRowH);
+                // console.log(maxH);
                 $items.css({height : maxH})
           });
           owl.owlCarousel({
@@ -1125,7 +1138,7 @@ function tehnologypage(){
     var Demo = function (element) {
       //this.shapes = toArray(document.querySelectorAll('.linksBlock button'));
       this.category = toArray( $('.linksBlock .button:not(.reset)') );
-      console.log(this.category);
+      //console.log(this.category);
       this.shuffle = new Shuffle(element, {
         itemSelector: '#itemsRow .item',
         sizer: null,

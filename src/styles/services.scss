@@ -297,10 +297,11 @@ $bg7: map-get($colors, lBlue);
 					.nameCol { 
 						display: table-cell;
 						vertical-align: top;
+						padding-right: 20px;
 					  .nameBlock{
 					  	position: relative;
 					  	z-index: 1;
-					  	display: inline-block;
+					  	display: inline;
 					  	background: #fff;
 							font-size: 16px;
 							font-weight: bold;
@@ -313,6 +314,7 @@ $bg7: map-get($colors, lBlue);
 						vertical-align: bottom;
 						text-align: right;
 						.priceBlock{
+							white-space: nowrap;
 							padding-left: 5px;
 							position: relative;
 							z-index: 1;
@@ -330,6 +332,9 @@ $bg7: map-get($colors, lBlue);
 					font-size: 14px;
 					line-height: 20px;
 					color: #666666;
+					p:last-child{
+						margin-bottom: 0;
+					}
 				}
 			}
 		}/*end items*/
