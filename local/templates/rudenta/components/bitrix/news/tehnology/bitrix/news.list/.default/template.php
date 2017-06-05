@@ -17,6 +17,7 @@ $this->setFrameMode(true);
 	<div id="items" class="items w-2col">
 		<div id="itemsRow">
 			<?foreach($arResult["ITEMS"] as $arItem):?>
+				<?var_dump($arItem['PROPERTIES']['SERVICE']['VALUE'])?>
 				<a href="<?=$arItem['DETAIL_PAGE_URL']?>" data-cat="<?=$arItem['PROPERTIES']['SERVICE']['VALUE']?>" class="item">
 					<div class="imgW" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['SRC']?>);"></div>
 					<div class="name"><?=$arItem['NAME']?></div>

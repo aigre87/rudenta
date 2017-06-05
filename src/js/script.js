@@ -1272,7 +1272,20 @@ function tehnologypage(){
       //var shapes = this.filters.shapes;
       var category = this.filters.category;
       //var shape = element.getAttribute('data-shape');
-      var cat = element.getAttribute('data-cat');
+
+    var cat = element.getAttribute('data-cat');
+    var catArray = cat.split(" ");
+    var catArrayLength = catArray.length;
+
+    var flag = false;
+    for( var i=0; i < catArrayLength; i++ ){
+      if (category.length > 0 && arrayIncludes(category, catArray[i])) {
+        flag = true;
+      }
+    }
+    if( !flag ){
+       return false; 
+    }
 
       // If there are active shape filters and this shape is not in that array.
       // if (shapes.length > 0 && !arrayIncludes(shapes, shape)) {
@@ -1280,9 +1293,9 @@ function tehnologypage(){
       // }
 
       // If there are active color filters and this color is not in that array.
-      if (category.length > 0 && !arrayIncludes(category, cat)) {
-        return false;
-      }
+      // if (category.length > 0 && !arrayIncludes(category, cat)) {
+      //   return false;
+      // }
 
       return true;
     };
