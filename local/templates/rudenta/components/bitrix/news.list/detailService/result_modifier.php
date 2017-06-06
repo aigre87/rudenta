@@ -53,7 +53,7 @@ $arResult['PRICE'] =  $price['PRICE'];
 $arResult['PRICE_DESCRIPTION'] = $price['DESCRIPTION'];
 
 
-$arResult['ARTICLES'] =  Articles::getRandom($arResult['SECTION']['PATH'][1]['ID'], "");
+$arResult['ARTICLES'] =  Articles::getRandom((int)$_REQUEST['SECTION_ID'], "");
 
 $section_id = (int)$_REQUEST['SECTION_ID'];
 $arResult['CNT_RECALLS'] = Service::getRecallsCNT($section_id);
@@ -73,5 +73,27 @@ foreach($doctors as $doctor_key => $doctor){
 
     $doctors[$doctor_key]['PREVIEW_PICTURE'] = $resizeImg;
 }
-
 $arResult['DOCTORS'] = $doctors;
+
+$tehnology = Service::getTehnology((int)$_REQUEST['SECTION_ID']);
+
+if($tehnology != false){
+    foreach($tehnology as $tehno_key => $tehno){
+        $resizeImg = CFile::GetFileArray($tehno['PREVIEW_PICTURE']);
+
+        $resizeImg = CFile::ResizeImageGet(
+            $resizeImg,
+            array('width'=> 200, 'height'=>600),
+            BX_RESIZE_IMAGE_PROPORTIONAL,
+            true
+        );
+
+        $tehnology[$tehno_key]['PREVIEW_PICTURE'] = $resizeImg;
+    }
+
+    $arResult['TEHNOLOGY'] = $tehnology;
+}else{
+    $arResult['TEHNOLOGY'] = null;
+}
+
+

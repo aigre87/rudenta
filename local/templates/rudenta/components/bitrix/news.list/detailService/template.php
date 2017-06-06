@@ -89,9 +89,11 @@ $this->setFrameMode(true);
 							<a href="#" data-link="recalls">Отзывы</a>
 						</li>
 					<?endif;?>
-					<li>
-						<a href="#" data-link="techno">Технологии</a>
-					</li>
+					<? if(!empty($arResult['TEHNOLOGY'])): ?>
+						<li>
+							<a href="#" data-link="tehnology">Технологии</a>
+						</li>
+					<? endif; ?>
 				</ul>
 			</div>
 		</div>
@@ -291,6 +293,7 @@ $this->setFrameMode(true);
 					)
 				);?>
 			</div>
+
 			<div class="w-1col">
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:main.include",
@@ -306,5 +309,18 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</div>
+	<? if(!empty($arResult['TEHNOLOGY'])): ?>
+		<h2>Технологии</h2>
+		<div class="recalls tehnology" data-ar="tehnology">
+			<? foreach($arResult['TEHNOLOGY'] as $arTehno): ?>
+				<div class="tehno-item">
+					<a href="/tehnology/<?=$arTehno['ID']?>/">
+						<div class="tehno-item-img"><img src="<?=$arTehno['PREVIEW_PICTURE']['src']?>"></div>
+						<div class="tehno-item-name"><?=$arTehno['NAME']?></div>
+					</a>
+				</div>
+			<? endforeach;?>
+		</div>
+	<? endif;?>
 	<?endif;?>
 </div>
