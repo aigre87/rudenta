@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Услуги");
 	<div class="w-2col">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.section.list", 
-			"tree", 
+			"services",
 			array(
 				"VIEW_MODE" => "TEXT",
 				"SHOW_PARENT_NAME" => "Y",
@@ -16,7 +16,7 @@ $APPLICATION->SetTitle("Услуги");
 				"SECTION_CODE" => "",
 				"SECTION_URL" => "",
 				"COUNT_ELEMENTS" => "N",
-				"TOP_DEPTH" => "2",
+				"TOP_DEPTH" => "1",
 				"SECTION_FIELDS" => array(
 					0 => "NAME",
 					1 => "",
@@ -43,7 +43,7 @@ $APPLICATION->SetTitle("Услуги");
 			<div class="name">Скачать полный прайс-лист услуг</div>
 			<div class="desc">XLS, 124 Кб</div>
 		</a>
-		<a href="#" class="salesItem">
+		<a href="/sales/" class="salesItem">
 			<svg class="icon">
 		    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-sale"></use>
 			</svg>
