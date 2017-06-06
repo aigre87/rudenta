@@ -103,7 +103,7 @@ $this->setFrameMode(true);
 					<h3>Цены</h3>
 					<div class="items">
 						<div class="item">
-							<?=$arResult['PRICE_DESCRIPTION']?>
+							<div class="text"><?=$arResult['PRICE_DESCRIPTION']?></div>
 						</div>
 						<? foreach($arResult['PRICE'] as $price):?>
 							<div class="item">
