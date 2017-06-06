@@ -15,15 +15,15 @@ $this->setFrameMode(true);
 <div class='serviceBlock'>
 	<? foreach ($arResult['SECTIONS'] as $arSection): ?>
 		<? if (Service::isLink($arSection['ID'])): ?>
-			<div class="service">
+			<div class="service" id="<?=$this->GetEditAreaId($arSection['ID']);?>">
 				<a href="/services/detail/<?=$arSection['ID']?>/" class="serviceItem"><span class='serviceName'><?=$arSection['NAME']?></span></a>
 			</div>
 		<? else: ?>
-			<div class="service">
+			<div class="service" id="<?=$this->GetEditAreaId($arSection['ID']);?>">
 				<div class="serviceTitle"><?=$arSection['NAME']?></div>
 				<div class="serviceBlock">
 					<? foreach($arSection['CHILDREN'] as $children_section): ?>
-						<div class="service">
+						<div class="service" id="<?=$this->GetEditAreaId($children_section['ID']);?>">
 							<a href="/services/detail/<?=$children_section['ID']?>/" class="serviceItem"><span class='serviceName'><?=$children_section['NAME']?></span></a>
 						</div>
 					<? endforeach; ?>
