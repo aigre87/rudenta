@@ -309,6 +309,7 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</div>
+	<?endif;?>
 	<? if(!empty($arResult['TEHNOLOGY'])): ?>
 		<h2>Технологии</h2>
 		<div class="recalls tehnology" data-ar="tehnology">
@@ -322,5 +323,4 @@ $this->setFrameMode(true);
 			<? endforeach;?>
 		</div>
 	<? endif;?>
-	<?endif;?>
 </div>
