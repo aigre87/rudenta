@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Скидки и акции");
 ?>
-<div>Клинка "RuDenta" - уникальный диагностический комлпес в самом центре города москвы</div>
 <?$APPLICATION->IncludeComponent(
     "bitrix:news.list",
     "sales",

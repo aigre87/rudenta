@@ -1,0 +1,171 @@
+@import "other/sprite";
+@import "other/mixins";
+
+.salesListPage { 
+
+	.pageAnons { 
+
+	}
+
+	.salesItems { 
+		margin-top: 44px;
+		&:after{
+			display: table;
+			clear: both;
+			content: '';
+		}
+		.item { 
+			border: 1px solid #e2e2e2;
+			border-radius: 4px;
+			box-sizing: border-box;
+			transition: all 0.12s ease-in-out;
+			background: #ffffff;
+			box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+			width: calc( 33.33333% - 10px );
+			height: 180px;
+			transition: all 0.12s ease-in-out;
+			float: left;
+			margin-bottom: 20px;
+			position: relative;
+			cursor: pointer;
+			padding: 19px;
+			&:nth-child(2),&:nth-child(2n+3),&:nth-child(3),&:nth-child(3n+3){
+				margin-left: 15px;
+			}
+			.percent { 
+				font-size: 70px;
+				line-height: 75px;
+				color: map-get($colors, pink);
+				transition: all 0.12s ease-in-out;
+			}
+
+			.name {
+				font-weight: bold;
+				position: absolute;
+				width: calc( 100% - 40px );
+				left: 20px;
+				bottom: 24px;
+				font-size: 30px;
+				line-height: 30px;
+				max-height: 60px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: map-get($colors, text);
+				transition: all 0.12s ease-in-out;
+			}
+
+			.detailText { 
+				display: none;
+			}
+			&.active, &:hover{
+				z-index: 1;
+			 	background-color: map-get($colors, pink);
+			 	border: 1px solid map-get($colors, pink);
+		 		box-shadow: 0px 30px 55px -20px rgba( map-get($colors, pink) , 0.6);
+		 		.percent{
+		 			color: #fff;
+		 		}
+		 		.name{
+					color: #fff;
+		 		}
+			}
+		}
+	}
+
+
+	.recordForm { 
+		display: none;
+	}
+}
+.salesPopup{
+	.defaultPopupContent{
+		padding: 0;
+	  margin: 40px auto;
+	  width: 670px;
+	  background: #fff;
+	  box-sizing: border-box;
+	  border: 1px solid #d8d8d8;
+	  border-radius: 5px;
+	  overflow: hidden;
+	}
+	.detailText{
+		padding: 30px 44px 25px 20px;
+	}
+
+	.free-record{
+	  background: #f8f369;
+	  box-shadow: 0px 11px 33px -7px rgba( #f8f369 , 0.7);
+	  border-radius: 5px;
+	  margin-top: 31px;
+	  padding: 32px 30px 36px;
+	  box-sizing: border-box;
+	  .title{
+	    font-size: 24px;
+	    line-height: 28px;
+	    font-style: italic;
+	    font-weight: 700;
+	    padding-left: 1px;
+	    margin-bottom: 18px;
+	  }
+	  .error{
+	    margin-bottom: 5px;
+	    color: map-get($colors, pink);
+	  }
+	  input[type='text']{
+	    font-size: 16px;
+	    line-height: 20px;
+	    color: map-get($colors, text);
+	    background: #fff;
+	    border: none;
+	    border-radius: 5px;
+	    padding: 0 20px;
+	    height: 50px;
+	    line-height: 48px;
+	    width: 100%;
+	    margin-bottom: 10px;
+	  }
+	  .free-record-button{
+	    border-radius: 6px;
+	    margin-top: 10px;
+	    text-align: center;
+	    font-size: 16px;
+	    line-height: 48px;
+	    height: 50px;
+	    padding: 0 20px;
+	    letter-spacing: -0.5px;
+	    font-weight: 700;
+	  }
+	  .free-record-text{
+	    font-size: 14px;
+	    line-height: 20px;
+	    font-style: italic;
+	    margin-top: 15px;
+	    display: inline-block;
+	    margin-left: 11px;
+	  }
+	}
+	.free-record{
+	  margin-top: 0;
+	  padding: 25px 19px 32px;
+	  .title{
+	    display: none;
+	    br{
+	      display: none;
+	    }
+	  }
+	  input{
+	    display: inline-block;
+	    vertical-align: top;
+	    margin-top: 0;
+	    &[type="text"]{
+	      width: 290px;
+	      &.number{
+	      	margin-left: 6px;
+	      }
+	    }
+	    &[name="form_text_1"]{
+	      margin-left: 0;
+	    }
+	  }
+	}
+}

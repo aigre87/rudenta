@@ -639,8 +639,7 @@ footer{
       a{
         color: #fff;
         &:hover{
-          border-bottom: 1px solid #fff;
-          padding-bottom: 1px;
+          color: map-get($colors, pink);
         }
       }
       &:first-child{
@@ -1672,7 +1671,8 @@ select{
     margin-bottom: 18px;
   }
   .error{
-    
+    margin-bottom: 5px;
+    color: map-get($colors, pink);
   }
   input[type='text']{
     font-size: 16px;
@@ -1699,6 +1699,7 @@ select{
     font-weight: 700;
   }
   .free-record-text{
+    display: none;
     font-size: 14px;
     line-height: 20px;
     font-style: italic;

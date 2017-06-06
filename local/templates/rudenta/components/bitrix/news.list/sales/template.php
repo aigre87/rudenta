@@ -12,20 +12,23 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="sales">
-	<? foreach($arResult['ITEMS'] as $arItem): ?>
-		<div class="sale-item">
-			<? if(!empty($arItem['DISPLAY_PROPERTIES']['SALE']['VALUE'])): ?>
-				<div class="sale-item-percent">- <?=$arItem['DISPLAY_PROPERTIES']['SALE']['VALUE']?> %</div>
-			<? endif; ?>
-			<div class="sale-item-name"><?=$arItem['NAME']?></div>
+<div class="salesListPage">
+	<div class="pageAnons">Клинка "RuDenta" - уникальный диагностический комлпес в самом центре города москвы</div>
+	<div class="salesItems">
+		<? foreach($arResult['ITEMS'] as $arItem): ?>
+			<div class="item">
+				<? if(!empty($arItem['DISPLAY_PROPERTIES']['SALE']['VALUE'])): ?>
+					<div class="percent">- <?=$arItem['DISPLAY_PROPERTIES']['SALE']['VALUE']?> %</div>
+				<? endif; ?>
+				<div class="name"><?=$arItem['NAME']?></div>
 
-			<div class="sale-item-hide">
-				<div class="sale-item-hide-text"><?=$arItem['PREVIEW_TEXT']?></div>
+				<div class="detailText">
+					<?=$arItem['PREVIEW_TEXT']?>
+				</div>
 			</div>
-		</div>
-	<? endforeach; ?>
-	<div class="sale-hide-record">
+		<? endforeach; ?>
+	</div>
+	<div class="recordForm">
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:main.include",
 			".default",

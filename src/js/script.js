@@ -341,6 +341,8 @@ function pagenationHelper(){
                     curIndex = $curSlide.index(),
                     nextCurIndex = $(this).val()-1;
 
+                if( curIndex === nextCurIndex ){ return false; }
+
                 $slides.removeClass("current");
                 $slides.eq(nextCurIndex).addClass("current");
                 $pag.find(".centerTextBlock .cur .page").text(nextCurIndex+1);
@@ -358,6 +360,7 @@ function pagenationHelper(){
                 $(".pagenation.active").removeClass("active");
                 $slider.css({ "height" : $slides.eq(nextCurIndex).outerHeight() });
                 TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
+                window.location.hash = "sl_page"+(nextCurIndex+1);
             }else{
                 $(this).blur();
                 var currentLocation = window.location.pathname;
@@ -738,11 +741,18 @@ function createSlider($block, $items){
         slidesL = $slides.length,
         $nextBut = $pag.find(".next"),
         $prevBut = $pag.find(".prev");
-
-    $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
-    setTimeout(function(){
+    if( window.location.hash.indexOf("sl_page") === -1 ){
         $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
-    }, 200);
+        setTimeout(function(){
+            $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
+        }, 200);
+    }else{
+        var initIndex = parseInt( window.location.hash.replace("#sl_page", "") - 1 );
+        $slides.removeClass("current");
+        $slides.eq(initIndex).addClass("current");
+        $pag.find(".centerTextBlock .cur .page").text(initIndex+1);
+        $slider.css({ "height" : $slides.eq(initIndex).outerHeight() });
+    }
 
     $nextBut.on("click", function(){
         if( $nextBut.hasClass("disabled") ){return false;}
@@ -760,6 +770,7 @@ function createSlider($block, $items){
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
         TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
+        window.location.hash = "sl_page"+(nextIndex+1);
     });
     $prevBut.on("click", function(){
         if( $prevBut.hasClass("disabled") ){return false;}
@@ -777,6 +788,7 @@ function createSlider($block, $items){
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
         TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
+        window.location.hash = "sl_page"+(nextIndex+1);
     });
 }
 
@@ -1311,6 +1323,35 @@ function tehnologypage(){
     });
 }
 
+function salesList(){
+    var $items = $(".salesItems .item"),
+        $form = $(".recordForm");
+
+    $items.on("click", function(){
+        var $this = $(this),
+            $thisDetail = $this.find(".detailText");
+        $this.addClass("active");
+        $.magnificPopup.open({
+            items: {
+                src: "<div class='defaultPopupContent mfp-with-anim'>"+$thisDetail[0].outerHTML+$form.html()+"</div>",
+                type: 'inline'
+            },
+            removalDelay: 500, //delay removal by X to allow out-animation
+            closeBtnInside: true,
+            mainClass: 'mfp-with-zoom',
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.mainClass = "mfp-zoom-in defaultPopup salesPopup";
+                },
+                beforeClose: function() {
+                    $this.removeClass("active");
+                },
+            },
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+        });
+    });
+}
+
 $(document).ready(function(){
     svg4everybody({});
 /*recalls*/
@@ -1349,6 +1390,9 @@ $(document).ready(function(){
     articlesList();
     articlesDetail();
 /*END articles*/
+/*sales*/
+    salesList();
+/*end sales*/
 /*GLOBAL*/
     pagenationHelper();
 /*END GLOBAL*/
