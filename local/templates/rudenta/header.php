@@ -37,7 +37,6 @@ else
 	<head>
 		<?$APPLICATION->ShowHead();?>
 		<title><?$APPLICATION->ShowTitle(false)?></title>
-		<?CJSCore::Init();?>
 
     <meta name="keywords" content="<?$APPLICATION->ShowProperty("keywords");?>" />
     <meta name="description" content="<?$APPLICATION->ShowProperty("description");?>" />
@@ -48,8 +47,7 @@ else
 
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/fonts/fonts.css?v2">
 		<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/template_styles.min.css?v2">
-		<script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU&wizard=bitrix"></script>
-		<!--<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>-->
+		<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/libs/libs.min.js?v1"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/script.js?v2"></script>
     <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/main.min.js?v1"></script>
@@ -82,7 +80,7 @@ else
 				);?>
 			</menu>
 			<div id="headerContacts">
-				<div class="phone">+7 (495) 104<span>&bull;</span>77<span>&bull;</span>87</div>
+				<div class="phone">+8 (495) 104<span>&bull;</span>77<span>&bull;</span>87</div>
 				<div class="adress">Москва, пр. Берёзовой рощи, д. 8</div>
 				<div class="desc"><a target="_blank" href="http://rudenta.ru">Взрослое отделение</a> в соседнем здании</div>
 			</div>

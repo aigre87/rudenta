@@ -364,7 +364,7 @@ function pagenationHelper(){
             }else{
                 $(this).blur();
                 var currentLocation = window.location.pathname;
-                window.location.href = currentLocation+"?PAGEN_1="+$(this).val();    
+                window.location.href = currentLocation+"?PAGEN_1="+$(this).val();
             }
         }
     });
@@ -962,7 +962,7 @@ function servicesList(){
             var $this = $(this);
             var thisIdArray = $this.attr("id").split("_");
             if( thisIdArray[thisIdArray.length-1]  === pageHash ){
-                TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: $this.offset().top });
+                TweenLite.to(window, 0, { ease: Sine.easeInOut, scrollTo: $this.offset().top });
             }
         });
     }
@@ -976,50 +976,7 @@ function servicesList(){
 function servicesDetail(){
     if( !$("body.services-detail").length > 0 ){ return false; }
     createSlider( $(".servicesDetailPage .recalls-list"), $(".servicesDetailPage .recalls-list .recall-item") );
-    function menuScrollAnimation(){
-        var controller = new ScrollMagic.Controller({
-            globalSceneOptions: {
-                triggerHook: 'onLeave',
-            }
-        });
-        var $navBlock = $(".w-1col .nav"),
-            scrollDur = $(".w-2col").outerHeight() - $navBlock.outerHeight();
 
-        new ScrollMagic.Scene({triggerElement: $(".topBlock"), duration: scrollDur, offset: -30})
-        .setPin($navBlock)
-        //.addIndicators() // add indicators (requires plugin)
-        .addTo(controller);
-
-        $("*[data-ar]").each(function(i){
-            var $thisAr = $(this),
-                thisArAttr = $thisAr.attr("data-ar"),
-                $thisLink = $("*[data-link='"+thisArAttr+"']"),
-                $thisLinkLi = $("*[data-link='"+thisArAttr+"']").closest("li"),
-                curDur = null;
-
-                if( $("*[data-ar]:eq("+(i+1)+")").length > 0 ){
-                    curDur = $("*[data-ar]:eq("+(i+1)+")").offset().top - $thisAr.offset().top;
-                }
-                
-                new ScrollMagic.Scene({triggerElement: $thisAr, duration: curDur, offset: -30})
-                .setClassToggle( $thisLinkLi , "active") // add class toggle
-                //.addIndicators() // add indicators (requires plugin)
-                .addTo(controller);
-        });
-    }
-    menuScrollAnimation();
-
-    $("*[data-link]").on("click", function(e){
-        e.preventDefault();
-        var $link = $(this),
-            linkAttr = $link.attr("data-link"),
-            $ar = $("*[data-ar='"+linkAttr+"']");
-            
-        if ( $ar.length > 0 ){
-            var arSC = $ar.offset().top;
-            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
-        }
-    });
     if( $("#doctors-list .item").length > 0 ){
         function servDoctorsListBLock(){
           var owl = $("#doctors-list"),
@@ -1160,6 +1117,69 @@ function servicesDetail(){
           });
         }
         servTehnologyListBLock();
+    }
+
+    function menuScrollAnimation(){
+        var controller = new ScrollMagic.Controller({
+            globalSceneOptions: {
+                triggerHook: 'onLeave',
+            }
+        });
+        var $navBlock = $(".w-1col .nav"),
+            scrollDur = $(".w-2col").outerHeight() - $navBlock.outerHeight();
+
+        new ScrollMagic.Scene({triggerElement: $(".topBlock"), duration: scrollDur, offset: -30})
+        .setPin($navBlock)
+        //.addIndicators() // add indicators (requires plugin)
+        .addTo(controller);
+
+        $("*[data-ar]").each(function(i){
+            var $thisAr = $(this),
+                thisArAttr = $thisAr.attr("data-ar"),
+                $thisLink = $("*[data-link='"+thisArAttr+"']"),
+                $thisLinkLi = $("*[data-link='"+thisArAttr+"']").closest("li"),
+                curDur = null;
+
+                if( $("*[data-ar]:eq("+(i+1)+")").length > 0 ){
+                    curDur = $("*[data-ar]:eq("+(i+1)+")").offset().top - $thisAr.offset().top;
+                }
+                
+                new ScrollMagic.Scene({triggerElement: $thisAr, duration: curDur, offset: -30})
+                .setClassToggle( $thisLinkLi , "active") // add class toggle
+                //.addIndicators() // add indicators (requires plugin)
+
+                .addTo(controller)
+                .on("enter leave", function (e) {
+                    var $a = $(".ul-nav li.active a");
+                    if( $a.length > 0 ){
+                        window.location.hash = "active_secton_"+$a.attr("data-link");
+                    }else{
+                        window.location.hash = "active_secton";
+                    }
+                });
+        });
+    }
+    menuScrollAnimation();
+
+    $("*[data-link]").on("click", function(e){
+        e.preventDefault();
+        var $link = $(this),
+            linkAttr = $link.attr("data-link"),
+            $ar = $("*[data-ar='"+linkAttr+"']");
+            
+        if ( $ar.length > 0 ){
+            var arSC = $ar.offset().top;
+            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
+        }
+    });
+
+    /*init scroll offset*/
+    if( window.location.hash.indexOf("active_secton_") > -1 ){
+        var sectAttr = window.location.hash.replace("active_secton_", "").replace("#", ""),
+            $ar = $("*[data-ar='"+sectAttr+"']");
+        var arSC = $ar.offset().top;
+
+        TweenLite.to(window, 0, { ease: Sine.easeInOut, scrollTo: arSC});
     }
 }
 function docNoteBlock_maxHeight(){
@@ -1433,7 +1453,7 @@ $(document).ready(function(){
     customizeCheckbox( $("#content") );
     customizeRadiobox( $("#content") );
 	initBottomMenu();
-	//contactsmap();
+	contactsmap();
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
 /*END GLOBAL*/
