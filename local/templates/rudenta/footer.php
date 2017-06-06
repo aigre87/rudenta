@@ -60,7 +60,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 							</div>
 						</div>
 						<div class="rb">
-							Скидки и акции<br />
+							<a href="/sales/">Скидки и акции</a><br />
 							Лечение по страховке<br />
 							Рассрочка
 						</div>
