@@ -526,6 +526,8 @@ footer{
   left: 0;
   width: 100%;
   .contactsBlock{
+    will-change: transform;
+    perspective: 500px;
     position: relative;
     z-index: 1;
     width: 1180px;
@@ -543,14 +545,21 @@ footer{
       box-sizing: border-box;
       left: -2px;
       top: -7px;
+      #BX_YMAP_MAP_R8UPGQMhv2{
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0) scale(1.0, 1.0);
+      }
       #contactsMap{
+        will-change: transform;
         position: absolute;
         top: -20px;
         left: -30px;
         width: 830px;
         height: 540px;
         will-change: transform;
-        transform: rotate(2deg);
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0) rotate(2deg) scale(1.0, 1.0);
         background: #fff;
         border: 1px solid #000;
         box-sizing: border-box;
@@ -717,12 +726,31 @@ footer{
           position: relative;
           margin-top: 9px;
           margin-left: 41px;
-          &:before{
-            content: '';
-            position: absolute;
-            right: 26px;
-            top: 3px;
-            @include sprite($s-mIcoWhite_sale);
+          a{
+            color: #fff;
+            &:hover{
+              color: map-get($colors, pink);
+            }
+          }
+          .sales{
+            .text{
+              transition: fill 0.15s ease;
+            }
+            .icon{
+              display: inline-block;
+              vertical-align: top;
+              width: 30px;
+              height: 30px;
+              transition: fill 0.15s ease;
+              fill: #fff;
+              margin-top: 3px;
+              margin-left: 2px;
+            }
+            &:hover{
+              .icon{
+                fill: map-get($colors, pink);
+              }
+            }
           }
         }
       }

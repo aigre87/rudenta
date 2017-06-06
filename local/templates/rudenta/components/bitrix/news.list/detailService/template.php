@@ -311,16 +311,30 @@ $this->setFrameMode(true);
 	</div>
 	<?endif;?>
 	<? if(!empty($arResult['TEHNOLOGY'])): ?>
-		<h2>Технологии</h2>
-		<div class="recalls tehnology" data-ar="tehnology">
-			<? foreach($arResult['TEHNOLOGY'] as $arTehno): ?>
-				<div class="tehno-item">
-					<a href="/tehnology/<?=$arTehno['ID']?>/">
-						<div class="tehno-item-img"><img src="<?=$arTehno['PREVIEW_PICTURE']['src']?>"></div>
-						<div class="tehno-item-name"><?=$arTehno['NAME']?></div>
-					</a>
+		<div class="tehnology section" data-ar="tehnology">
+			<h2 class="bigH2">
+				Технологии
+				<div class="arrowsB">
+					<div class="arrow left">
+						<svg class="icon">
+						    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-left"></use>
+						</svg>
+					</div>
+					<div class="arrow right">
+						<svg class="icon">
+						    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-right"></use>
+						</svg>
+					</div>
 				</div>
+			</h2>
+			<div class="tehnology-list owl-carousel">
+			<? foreach($arResult['TEHNOLOGY'] as $arTehno): ?>
+				<a class="item" href="/tehnology/<?=$arTehno['ID']?>/">
+          <div class="imgW" style="background-image: url('<?=$arTehno['PREVIEW_PICTURE']['src']?>');"></div>
+          <div class="name"><?=$arTehno['NAME']?></div>
+				</a>
 			<? endforeach;?>
+			</div>
 		</div>
 	<? endif;?>
 </div>

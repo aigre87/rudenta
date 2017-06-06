@@ -7,7 +7,106 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		<footer>
  			<div class="contactsBlock clear">
 				<div class="contactsMapW w-2col">
-					<div id="contactsMap"></div>
+					<div id="contactsMap">
+   <script type="text/javascript">
+               function BX_SetPlacemarks_MAP_R8UPGQMhv2(map)
+               {
+                   if(typeof window["BX_YMapAddPlacemark"] != 'function')
+                   {
+                       /* If component's result was cached as html,
+                        * script.js will not been loaded next time.
+                        * let's do it manualy.
+                        */
+               
+                       (function(d, s, id)
+                       {
+                           var js, bx_ym = d.getElementsByTagName(s)[0];
+                           if (d.getElementById(id)) return;
+                           js = d.createElement(s); js.id = id;
+                           js.src = "/local/templates/rudenta/components/bitrix/map.yandex.view/.default/script.js";
+                           bx_ym.parentNode.insertBefore(js, bx_ym);
+                       }(document, 'script', 'bx-ya-map-js'));
+               
+                       var ymWaitIntervalId = setInterval( function(){
+                               if(typeof window["BX_YMapAddPlacemark"] == 'function')
+                               {
+                                   BX_SetPlacemarks_MAP_R8UPGQMhv2(map);
+                                   clearInterval(ymWaitIntervalId);
+                               }
+                           }, 300
+                       );
+               
+                       return;
+                   }
+               
+                   var arObjects = {PLACEMARKS:[],POLYLINES:[]};
+                               arObjects.PLACEMARKS[arObjects.PLACEMARKS.length] = BX_YMapAddPlacemark(map, {'LON':'37.519392304229','LAT':'55.787733395982','TEXT':'Детская стоматология РуДента  Kids','PRESET':'twirl#greenStretchyIcon'});
+                               arObjects.PLACEMARKS[arObjects.PLACEMARKS.length] = BX_YMapAddPlacemark(map, {'LON':'37.51986292801','LAT':'55.787140830477','TEXT':'Cтоматология РуДента','PRESET':'twirl#redStretchyIcon'});
+                           }
+            </script>
+            <div class="bx-yandex-view-layout">
+               <div class="bx-yandex-view-map">
+                  <script type="text/javascript">
+                     if (!window.GLOBAL_arMapObjects)
+                     	window.GLOBAL_arMapObjects = {};
+                     
+                     function init_MAP_R8UPGQMhv2()
+                     {
+                     	if (!window.ymaps)
+                     		return;
+                     
+                     	if(typeof window.GLOBAL_arMapObjects['MAP_R8UPGQMhv2'] !== "undefined")
+                     		return;
+                     
+                     	var node = BX("BX_YMAP_MAP_R8UPGQMhv2");
+                     	node.innerHTML = '';
+                     
+                     	var map = window.GLOBAL_arMapObjects['MAP_R8UPGQMhv2'] = new ymaps.Map(node, {
+                     		center: [55.787570792988, 37.518470300026],
+                     		zoom: 16,
+                     		type: 'yandex#map'
+                     	});
+                     
+                     	if (map.behaviors.isEnabled("scrollZoom"))
+                     		map.behaviors.disable("scrollZoom");
+                     	map.behaviors.enable("dblClickZoom");
+                     	map.behaviors.enable("drag");
+                     	if (map.behaviors.isEnabled("rightMouseButtonMagnifier"))
+                     		map.behaviors.disable("rightMouseButtonMagnifier");
+                     	map.controls.add('zoomControl', {left: 40, top: 50});
+                     	map.controls.add('miniMap', {left: 50, bottom: 40});
+                     	map.controls.add('typeSelector', {right: 50, top: 30});
+                     	if (window.BX_SetPlacemarks_MAP_R8UPGQMhv2)
+                     	{
+                     		window.BX_SetPlacemarks_MAP_R8UPGQMhv2(map);
+                     	}
+                     }
+                     BX.ready(function() {
+	                     (function bx_ymaps_waiter(){
+	                     	if(typeof ymaps !== 'undefined')
+	                     		ymaps.ready(init_MAP_R8UPGQMhv2);
+	                     	else
+	                     		setTimeout(bx_ymaps_waiter, 100);
+	                     })();
+											});
+
+                     
+                     
+                     /* if map inits in hidden block (display:none)
+                     *  after the block showed
+                     *  for properly showing map this function must be called
+                     */
+                     function BXMapYandexAfterShow(mapId)
+                     {
+                     	if(window.GLOBAL_arMapObjects[mapId] !== undefined)
+                     		window.GLOBAL_arMapObjects[mapId].container.fitToViewport();
+                     }
+                     
+                  </script>
+                  <div id="BX_YMAP_MAP_R8UPGQMhv2" class="bx-yandex-map" style="height: 540px; width: 830px;">загрузка карты...</div>
+               </div>
+            </div>
+					</div>
 				</div>
 				<div class="contactsText w-1col">
 					<div class="item">
@@ -60,9 +159,14 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 							</div>
 						</div>
 						<div class="rb">
-							<a href="/sales/">Скидки и акции</a><br />
-							Лечение по страховке<br />
-							Рассрочка
+							<a class="sales" href="/sales/">
+								<span class="text">Скидки и акции</span>
+								<svg class="icon">
+								    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-sale"></use>
+								</svg>
+							</a><br />
+							<span>Лечение по страховке</span><br />
+							<span>Рассрочка</span>
 						</div>
 					</div>
 					<div class="socialLinks">

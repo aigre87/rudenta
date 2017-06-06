@@ -955,8 +955,8 @@ function servicesList(){
     if( $(".servicesList").length === 0 ){ return false; }
 
     function goScroll(){
+        if( window.location.hash.length === 0 ){ return false; }
         var pageHash = window.location.hash.replace("#", "");
-        if( pageHash.length === 0 ){ return false; }
 
         $(".service").each(function(){
             var $this = $(this);
@@ -1089,6 +1089,77 @@ function servicesDetail(){
           });
         }
         servDoctorsListBLock();
+    }
+
+    if( $(".tehnology-list .item").length > 0 ){
+        function servTehnologyListBLock(){
+          var owl = $(".tehnology-list"),
+              $LA = $(".tehnology.section .arrow.left"),
+              $RA = $(".tehnology.section .arrow.right");
+          if( owl.length == 0 ){return false;}
+
+          function checkArrowsState(ev){
+              var index = ev.item.index,
+                  count = ev.item.count,
+                  size = ev.page.size;
+
+              if( index == 0 ){
+                  $LA.addClass("disabled");
+              }else{
+                  $LA.removeClass("disabled");
+              }
+              if( index+size == count || count <= 3 ){
+                  $RA.addClass("disabled");
+              }else{
+                  $RA.removeClass("disabled");
+              }
+          }
+          owl.on('initialized.owl.carousel', function(event) {
+                checkArrowsState(event);
+                var $items = $(".tehnology-list .item"),
+                itemsL = $items.length,
+                maxRowH = [];
+                for(var i = 0; i < itemsL; i++) {
+                    maxRowH.push($items.eq(i).outerHeight());
+                }
+
+                var maxH = maxRowH.max();
+                // console.log(maxRowH);
+                // console.log(maxH);
+                $items.css({height : maxH})
+          });
+          owl.owlCarousel({
+            loop:false,
+            items: 5,
+            navRewind:false,
+            margin: 10,
+            nav: true,
+            navText: [
+              "<i class='fa fa-caret-left'></i>",
+              "<i class='fa fa-caret-right'></i>"
+            ],
+            autoplay: false,
+            autoplayHoverPause: false,
+            responsive: {
+              0: {
+                items: 2
+              },
+              800: {
+                items: 5
+              }
+            }
+          });
+          owl.on('changed.owl.carousel', function(event) {
+              checkArrowsState(event);
+          });
+          $RA.click(function() {
+              owl.trigger('next.owl.carousel');
+          });
+          $LA.click(function() {
+              owl.trigger('prev.owl.carousel');
+          });
+        }
+        servTehnologyListBLock();
     }
 }
 function docNoteBlock_maxHeight(){
@@ -1362,7 +1433,7 @@ $(document).ready(function(){
     customizeCheckbox( $("#content") );
     customizeRadiobox( $("#content") );
 	initBottomMenu();
-	contactsmap();
+	//contactsmap();
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
 /*END GLOBAL*/
