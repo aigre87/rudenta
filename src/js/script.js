@@ -928,7 +928,9 @@ function recallsListInit(){
         TweenMax.to( $curS , 0.3 , { opacity: 0  });
         TweenMax.to( $nextS , 0.3 , { opacity: 1  });
     });
+}
 
+function writeRewievForm(){
     /*FORM writeRewiev*/
     $(".writeReviewBlock .defaultButton").on("click", function(e){
         e.preventDefault();
@@ -1456,6 +1458,7 @@ $(document).ready(function(){
 	contactsmap();
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
+    writeRewievForm();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();
