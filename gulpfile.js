@@ -189,17 +189,17 @@ gulp.task('svgSprite:build', function () {
             mode: {
                 symbol: {
                     sprite: "sprite.svg",
-                    render: {
-                        scss: {
-                            dest:'/src/styles/other/',
-                            template: path.src.svgSpriteTemplate
-                        }
-                    }
+                    // render: {
+                    //     scss: {
+                    //         dest:'/src/styles/other/',
+                    //         template: path.src.svgSpriteTemplate
+                    //     }
+                    // }
                 }
             }
         })) 
         .pipe(gulp.dest(path.build.images))
-        .pipe(gulp.dest("src/styles/other/"))
+        //.pipe(gulp.dest("src/styles/other/"))
         .pipe(sftp({
             host: 'p10298.cpanel.relevate.ru',
             user: 'p10298',
