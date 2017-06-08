@@ -518,7 +518,7 @@ function HPinitDoctorsBlock(){
               { rotation : 0, ease:Circ.easeIn })
                 .to( $overflow, 0.12, { "border-width" : 0, ease:Circ.easeIn })
                 .fromTo($link, 0.01, {zIndex: 0}, { zIndex: 3 })
-                .to( $link, 0.12, { width: "380px", height: $iw.outerHeight(), className:'+=complete', ease:Power0.easeNone });
+                .to( $link, 0.18, { width: "380px", boxShadow: "0px 28px 80px 0px rgba(56,67,70,0.5)", height: $iw.outerHeight(), className:'+=complete', ease:Power0.easeNone });
 
             $overflow.add($link).on("mouseenter",function(e){
                 tl.pause().play();
