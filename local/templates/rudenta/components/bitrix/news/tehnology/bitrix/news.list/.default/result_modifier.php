@@ -7,6 +7,16 @@ foreach($arResult['ITEMS'] as $item_key => $arItem){
             $arTems[Service::getName($arItem['PROPERTIES']['SERVICE']['VALUE'][$i])][] = $arItem['PROPERTIES']['SERVICE']['VALUE'][$i];
         }
     }
+
+    $resizeImg = CFile::GetFileArray($arItem['PREVIEW_PICTURE']['ID']);
+    $resizeImg = CFile::ResizeImageGet(
+        $resizeImg,
+        array('width'=> 200, 'height'=>400),
+        BX_RESIZE_IMAGE_PROPORTIONAL,
+        true
+    );
+
+    $arResult['ITEMS'][$item_key]['PREVIEW_PICTURE'] = $resizeImg;
 }
 
 $tmp = [];

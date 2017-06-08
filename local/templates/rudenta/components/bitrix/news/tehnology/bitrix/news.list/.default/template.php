@@ -18,7 +18,7 @@ $this->setFrameMode(true);
 		<div id="itemsRow">
 			<?foreach($arResult["ITEMS"] as $arItem):?>
 				<a href="<?=$arItem['DETAIL_PAGE_URL']?>" data-cat="<? for($i = 0;$i<count($arItem['PROPERTIES']['SERVICE']['VALUE']);$i++): ?><?=$arItem['PROPERTIES']['SERVICE']['VALUE'][$i]." "?><? endfor;?>" class="item">
-					<div class="imgW" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['SRC']?>);"></div>
+					<div class="imgW" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['src']?>);"></div>
 					<div class="name"><?=$arItem['NAME']?></div>
 				</a>
 			<?endforeach;?>

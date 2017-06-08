@@ -2,6 +2,11 @@
 $tmp = array();
 $tmp_for_sort = array();
 $nav = array();
+
+$res = CIBlockSection::GetByID((int)$_REQUEST['SECTION_ID']);
+$arResult['SECTION_NAME'] = $res->Fetch()['NAME'];
+$APPLICATION->SetTitle($arResult['SECTION_NAME']);
+
 // сортировка по разделам
 foreach($arResult['ITEMS'] as $arItem){
     $db_list = CIBlockSection::GetList(
@@ -76,6 +81,7 @@ foreach($doctors as $doctor_key => $doctor){
 $arResult['DOCTORS'] = $doctors;
 
 $tehnology = Service::getTehnology((int)$_REQUEST['SECTION_ID']);
+
 
 if($tehnology != false){
     foreach($tehnology as $tehno_key => $tehno){

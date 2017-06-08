@@ -80,7 +80,7 @@ else
 				);?>
 			</menu>
 			<div id="headerContacts">
-				<div class="phone">+8 (495) 104<span>&bull;</span>77<span>&bull;</span>87</div>
+				<div class="phone">+7 (495) 104<span>&bull;</span>77<span>&bull;</span>87</div>
 				<div class="adress">Москва, пр. Берёзовой рощи, д. 8</div>
 				<div class="desc"><a target="_blank" href="http://rudenta.ru">Взрослое отделение</a> в соседнем здании</div>
 			</div>

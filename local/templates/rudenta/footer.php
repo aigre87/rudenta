@@ -66,8 +66,8 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 								    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-sale"></use>
 								</svg>
 							</a><br />
-							<span>Лечение по страховке</span><br />
-							<span>Рассрочка</span>
+							<a href="/insurance/"><span>Лечение по страховке</span></a><br />
+							<a href="/installment/"><span>Рассрочка</span></a>
 						</div>
 					</div>
 					<div class="socialLinks">

@@ -11,7 +11,7 @@
         <span class="text">Лицензия РуДента Кидс</span>
         <span class="desc">PDF &bull; 582 Кб</span>
     </a>
-    <a class="vacancies">
+    <a href="/vacancy/" class="vacancies">
         <span class="text">Вакансии</span>
     </a>
 </div>
