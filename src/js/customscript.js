@@ -75,6 +75,93 @@ function getRandom(min, max) {
   return min + Math.random() * (max - min);
 }
 
+function removeHash(string){
+    if( window.location.hash.indexOf(string) === -1 ){ return false; }
+    if( window.location.hash.indexOf("&") === -1 ){
+        window.location.hash = "-";
+    }else{
+        var hashArr = window.location.hash.split("&"),
+            hashArrL = hashArr.length;
+        for( var i=0; i < hashArrL; i++){
+            if( hashArr[i].indexOf(string) > -1 ){
+                hashArr.splice(i, 1);
+                if( i === 0 ){
+                    hashArr[0] = "#" + hashArr[0];
+                }
+                if( hashArr.length > 1 ){
+                    window.location.hash = hashArr.join("&");
+                }else{
+                    window.location.hash = hashArr[0];
+                }
+                return;
+            }
+        }
+    }
+}
+function addhashValue(string, value){
+    //нет хеша
+    if( window.location.hash.length == 0 ){
+        window.location.hash = string+value;
+    //есть хеш
+    }else{
+        //один хеш
+        if( window.location.hash.indexOf("&") === -1 ){
+            //нет такого типа хеша
+            if( window.location.hash.indexOf(string) === -1 ){
+                window.location.hash += ("&"+string+value);
+            //есть такой тип хеша
+            }else{
+                window.location.hash = string+value;
+            }
+        //множественный хеш
+        }else{
+            var hashArr = window.location.hash.split("&"),
+                hashArrL = hashArr.length;
+
+            var entry = false;
+            for( var i=0; i< hashArrL; i++){
+                if( hashArr[i].indexOf(string) > -1 ){
+                    entry = true;
+                    if( i === 0 ){
+                        hashArr[i] = "#"+string+value;
+                    }else{
+                        hashArr[i] = string+value;
+                    }
+                }
+            }
+            if( !entry ){
+                window.location.hash += ("&"+string+value);
+            }else{
+                window.location.hash = hashArr.join("&");
+            }
+        }
+    }
+}
+function getHashValue(string){
+    var hashValue = false;
+    //один хеш
+    if( window.location.hash.indexOf("&") === -1 ){
+        hashValue = window.location.hash.replace("#"+string+"", "");
+    //множественный хеш
+    }else{
+        var hashArr = window.location.hash.split("&"),
+            hashArrL = hashArr.length;
+
+        for( var i = 0; i < hashArrL; i++ ){
+            if( hashArr[i].indexOf(string) > -1 ){
+                var finalArr = hashArr[i].split("_"),
+                    finalArrL = finalArr.length;
+                hashValue = finalArr[finalArrL-1];
+            }
+        }
+    }
+    if( hashValue ){
+        return hashValue;
+    }else{
+        console.log("нету такого хеша");
+    }
+}
+
 
 // Define variable colors    
 function setRandomGradient($items, colorsArray){
@@ -360,7 +447,7 @@ function pagenationHelper(){
                 $(".pagenation.active").removeClass("active");
                 $slider.css({ "height" : $slides.eq(nextCurIndex).outerHeight() });
                 TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
-                window.location.hash = "sl_page"+(nextCurIndex+1);
+                window.location.hash = "sl_page_"+(nextCurIndex+1);
             }else{
                 $(this).blur();
                 var currentLocation = window.location.pathname;
@@ -431,7 +518,7 @@ function HPinitDoctorsBlock(){
               { rotation : 0, ease:Circ.easeIn })
                 .to( $overflow, 0.12, { "border-width" : 0, ease:Circ.easeIn })
                 .fromTo($link, 0.01, {zIndex: 0}, { zIndex: 3 })
-                .to( $link, 0.12, { width: "380px", height: $iw.outerHeight(), className:'+=complete', ease:Power0.easeNone });
+                .to( $link, 0.17, { width: "380px", boxShadow: "0px 28px 80px 0px rgba(56,67,70,0.5)", height: $iw.outerHeight(), className:'+=complete', ease:Power0.easeNone });
 
             $overflow.add($link).on("mouseenter",function(e){
                 tl.pause().play();
@@ -453,7 +540,7 @@ function contactsmap(){
     ymaps.ready(init);
     function init () {
         var myMap = new ymaps.Map("contactsMap", {
-                center: [55.787811, 37.519467],
+                center: [55.787718, 37.516960],
                 zoom: 16,
                 controls: []
             }, {
@@ -537,14 +624,65 @@ function contactsmap(){
             strokeStyle: '1 0'
         });
 
-        myMap.geoObjects.add(new ymaps.Placemark([55.787811, 37.519467], {
-                balloonContent: 'цвет <strong>голубой</strong>',
-                iconCaption: 'проезд Березовой Рощи, 8'
-            }, {
-                preset: 'islands#blueCircleDotIconWithCaption',
-                iconCaptionMaxWidth: '200'
-        }));
+
+        var childmark = new ymaps.GeoObject({
+            // Описание геометрии.
+            geometry: {
+                type: "Point",
+                coordinates: [55.787793, 37.519344]
+            },
+            // Свойства.
+            properties: {
+                // Контент метки.
+                iconContent: 'Детская стоматология РуДента Kids',
+            }
+        }, {
+            // Опции.
+            // Иконка метки будет растягиваться под размер ее содержимого.
+            preset: 'islands#darkGreenStretchyIcon',
+            // Метку можно перемещать.
+            draggable: false
+        });
+
+        var parrentmark = new ymaps.GeoObject({
+            // Описание геометрии.
+            geometry: {
+                type: "Point",
+                coordinates: [55.787134, 37.519773]
+            },
+            // Свойства.
+            properties: {
+                // Контент метки.
+                iconContent: 'Cтоматология РуДента',
+            }
+        }, {
+            // Опции.
+            // Иконка метки будет растягиваться под размер ее содержимого.
+            preset: 'islands#redStretchyIcon',
+            // Метку можно перемещать.
+            draggable: false
+        });
+
+        // myMap.geoObjects.add(new ymaps.Placemark([55.787793, 37.519344], {
+        //         //balloonContent: 'цвет <strong>голубой</strong>',
+        //         //iconCaption: 'проезд Березовой Рощи, 8'
+        //         properties: {
+        //             iconContent: 'Детская стоматология РуДента Kids',
+        //         }
+        //     }, {
+        //         preset: 'islands#darkGreenStretchyIcon',
+        // }));
+
+        // myMap.geoObjects.add(new ymaps.Placemark([55.787134, 37.519773], {
+        //         properties: {
+        //             iconContent: 'Cтоматология РуДента',
+        //         }
+        //     }, {
+        //         preset: 'islands#redStretchyIcon',
+        // }));
         myMap.geoObjects
+            .add(childmark)
+            .add(parrentmark)
             .add(polyline);
 
         myMap.controls.add(zoomControl, {
@@ -741,13 +879,13 @@ function createSlider($block, $items){
         slidesL = $slides.length,
         $nextBut = $pag.find(".next"),
         $prevBut = $pag.find(".prev");
-    if( window.location.hash.indexOf("sl_page") === -1 ){
+    if( window.location.hash.indexOf("sl_page_") === -1 ){
         $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
         setTimeout(function(){
             $slider.css({ "height" : $slider.find(".slide.current").outerHeight() });
         }, 200);
     }else{
-        var initIndex = parseInt( window.location.hash.replace("#sl_page", "") - 1 );
+        var initIndex  = getHashValue("sl_page_")-1;
         $slides.removeClass("current");
         $slides.eq(initIndex).addClass("current");
         $pag.find(".centerTextBlock .cur .page").text(initIndex+1);
@@ -770,7 +908,7 @@ function createSlider($block, $items){
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
         TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
-        window.location.hash = "sl_page"+(nextIndex+1);
+        addhashValue("sl_page_", nextIndex+1);
     });
     $prevBut.on("click", function(){
         if( $prevBut.hasClass("disabled") ){return false;}
@@ -788,7 +926,7 @@ function createSlider($block, $items){
         $pag.find(".centerTextBlock .cur .page").text(nextIndex+1);
         $slider.css({ "height" : $slides.eq(nextIndex).outerHeight() });
         TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: $slider.offset().top-80});
-        window.location.hash = "sl_page"+(nextIndex+1);
+        addhashValue("sl_page_", nextIndex+1);
     });
 }
 
@@ -1154,9 +1292,9 @@ function servicesDetail(){
                 .on("enter leave", function (e) {
                     var $a = $(".ul-nav li.active a");
                     if( $a.length > 0 ){
-                        window.location.hash = "active_secton_"+$a.attr("data-link");
+                        addhashValue("active_secton_", $a.attr("data-link") );
                     }else{
-                        window.location.hash = "active_secton";
+                        removeHash("active_secton_");
                     }
                 });
         });
@@ -1177,9 +1315,11 @@ function servicesDetail(){
 
     /*init scroll offset*/
     if( window.location.hash.indexOf("active_secton_") > -1 ){
-        var sectAttr = window.location.hash.replace("active_secton_", "").replace("#", ""),
+        console.log("scroll!");
+        var sectAttr = getHashValue("active_secton_"),
             $ar = $("*[data-ar='"+sectAttr+"']");
         var arSC = $ar.offset().top;
+        console.log("sectAttr="+sectAttr);
 
         TweenLite.to(window, 0, { ease: Sine.easeInOut, scrollTo: arSC});
     }
