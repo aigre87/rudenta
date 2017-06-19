@@ -81,9 +81,11 @@ $this->setFrameMode(true);
 							<a href="#" data-link="articles">Советы пациентам</a>
 						</li>
 					<? endif; ?>
+					<? if($arResult['DOCTORS']): ?>
 					<li>
 						<a href="#" data-link="doctors">Врачи</a>
 					</li>
+					<? endif; ?>
 					<?if($arResult['CNT_RECALLS'] > 0):?>
 						<li>
 							<a href="#" data-link="recalls">Отзывы</a>
