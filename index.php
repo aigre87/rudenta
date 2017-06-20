@@ -149,7 +149,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
 		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_BOTTOM_PAGER" => "N",
 		"DISPLAY_DATE" => "N",
 		"DISPLAY_NAME" => "Y",
 		"DISPLAY_PICTURE" => "Y",
