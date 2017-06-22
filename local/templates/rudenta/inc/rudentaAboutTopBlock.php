@@ -1,5 +1,5 @@
-<div class="rudentaAboutTopBlock">
-    <div class="lc">
+<div class="rudentaAboutTopBlock clear">
+    <div class="lc w-2col">
         <p>Клиника «Рудента kids» — это принципиально новый вид оказания стоматологической помощи детям, основанный на крайне бережном отношении, как к самой личности ребенка, так и к его формирующейся зубо-челюстной системе. </p>
         <p>Этот принцип мы проносим от первого знакомства с малышом, мягкой его адаптации к условиям клиники через весь комплекс лечебных мероприятий. </p>
         <h3>Специализация клиники</h3>
@@ -17,7 +17,7 @@
         <p>Удобство и комфорт для каждого ребенка лежат в основе всей нашей работы. 
         В «Рудента kids» мы воплотили самые заветные детские мечты!</p>
     </div>
-    <div class="rc">
+    <div class="rc w-1col">
         <div class="videoBlock">
             <div class="img">
                 <div class="videoPlayButton" data-dep="hp">
@@ -50,7 +50,7 @@
                 "AREA_FILE_SUFFIX" => "inc",
                 "COMPONENT_TEMPLATE" => ".default",
                 "EDIT_TEMPLATE" => "",
-                "PATH" => "/local/templates/rudenta/inc/rudentaAboutTopBlock.php"
+                "PATH" => "/local/templates/rudenta/inc/record.php"
             )
         );?>
     </div>

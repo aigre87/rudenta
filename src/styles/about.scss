@@ -1,5 +1,43 @@
 @import "other/sprite";
 @import "other/mixins";
+#content .aboutPage .rudentaAboutTopBlock{
+	margin-bottom: 50px;
+	.videoBlock{
+		will-change: transform;
+    height: 190px;
+    width: 333px;
+    position: relative;
+    overflow: hidden;
+    -webkit-box-shadow: 0 38px 80px -10px rgba(73,98,99,0.6);
+    -moz-box-shadow: 0 38px 80px -10px rgba(73,98,99,0.6);
+    box-shadow: 0 38px 80px -10px rgba(73,98,99,0.6);
+    transform: rotate(3deg);
+    border: 5px solid #f5f5f5;
+    box-sizing: border-box;
+    background: #f5f5f5;
+    margin-bottom: 50px;
+		.img{
+      position: absolute;
+      top: -15px;
+      left: -15px;
+	    height: 210px;
+	    width: 353px;
+      will-change: transform;
+      transform: rotate(-3deg);
+      background: #fff url(../images/hpVideoRow_videoPoster.png) no-repeat 0 0;
+      background-size: cover;
+      border: 1px solid #000;
+      box-sizing: border-box;
+		}
+	}
+
+ .m123wrapper{
+		h2, &>.text{
+			display: none;
+		}
+	}	
+}
+
 #content .aboutPage #hp_slider{
 	margin-bottom: 60px;
 }
@@ -87,8 +125,5 @@
 			line-height: 28px;
 			margin-bottom: 14px;
 		}
-	}
-	.videoPopup{
-		display: none;
 	}
 }

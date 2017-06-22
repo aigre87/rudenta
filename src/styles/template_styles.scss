@@ -2346,3 +2346,10 @@ blockquote.blueLeft{
     }
   }
 }
+
+.videoPopup {
+  display: none;
+}
+.mfp-content .videoPopup {
+  display: block;
+}
