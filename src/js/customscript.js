@@ -695,55 +695,62 @@ function contactsmap(){
 
     }
 }
-function hpVideoRow(){
-    var myPlayer;
+function videoPlay(){
     function customVideoPlayer(){
-    if( !$('#companyVideo').length > 0 ){ return false;}
+    if( $('.video-js').length == 0 ){ return false;}
         var options = {
             "controls": true,
             "autoplay": false,
             "preload": "auto",
             "fluid": true,
         }
-        videojs(document.getElementById('companyVideo'), options, function() {
+        $("video.video-js").each(function(){
+            var $this = $(this);
+            var dataDep = $(this).attr("data-dep");
+            videojs( $this[0], options, function() {
 
-        }).ready(function(event){
-            myPlayer = this;
-            var previousTime = 0;
-            var currentTime = 0;
-            myPlayer.on('timeupdate', function() {
-                previousTime = currentTime;
-                currentTime = myPlayer.currentTime();
-            });
-            myPlayer.on('seeking', function() {
-                // setTimeout(function(){
-                //     myPlayer.controlBar.progressControl.seekBar.update();
-                // }, 100)
+            }).ready(function(event){
+                var myPlayer = this;
+                var previousTime = 0;
+                var currentTime = 0;
+                myPlayer.on('timeupdate', function() {
+                    previousTime = currentTime;
+                    currentTime = myPlayer.currentTime();
+                });
+                myPlayer.on('seeking', function() {
+                    // setTimeout(function(){
+                    //     myPlayer.controlBar.progressControl.seekBar.update();
+                    // }, 100)
+                });
+
+                function showVideo(){
+                    var videoEl = $(".videoPopup[data-dep='"+dataDep+"']");
+                    $.magnificPopup.open({
+                        items: {
+                            src: videoEl,
+                            type: 'inline'
+                        },
+                        removalDelay: 500, //delay removal by X to allow out-animation
+                        closeBtnInside: true,
+                        callbacks: {
+                            beforeOpen: function() {
+                                this.st.mainClass = "mfp-zoom-in";
+                            }
+                        },
+                        midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+                    });
+                }
+                $(".videoPlayButton[data-dep='"+dataDep+"']").on("click", function(){
+                    showVideo();
+                    myPlayer.play();
+                });
             });
         });
+
+
+
     }
     customVideoPlayer();
-    function showVideo(){
-        var videoEl = $(".videoPopup");
-        $.magnificPopup.open({
-            items: {
-                src: videoEl,
-                type: 'inline'
-            },
-            removalDelay: 500, //delay removal by X to allow out-animation
-            closeBtnInside: true,
-            callbacks: {
-                beforeOpen: function() {
-                    this.st.mainClass = "mfp-zoom-in";
-                }
-            },
-            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-        });
-    }
-    $(".hpVideoRow .videoPlayButton").on("click", function(){
-        showVideo();
-        myPlayer.play();
-    });
 }
 function zoomGalleryPopup(){
     if( !$('.zoom-gallery').length > 0 ){ return false; }
@@ -777,10 +784,10 @@ function detailDoctorInit(){
     var cl = classes[Math.floor(Math.random()*classes.length)];
     $(".doctor-detail .topBlock").addClass(cl);
 }
-function HPrecallsBlock(){
-    if( !$(".homepage .recallsBlock .item").length > 0 ){ return false;}
+function recallsBlockSlider(){
+    if( !$(".recallsBlockSlider .item").length > 0 ){ return false;}
 
-    var $block = $(".homepage .recallsBlock"),
+    var $block = $(".recallsBlockSlider"),
         $itemsW = $block.find(".items"),
         $slides = $block.find(".item"),
         slidesCount = $slides.length,
@@ -1599,12 +1606,12 @@ $(document).ready(function(){
     zoomGalleryPopup();
     docNoteBlock_maxHeight();
     writeRewievForm();
+    videoPlay();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();
     HPinitSovetiBlock();
-    HPrecallsBlock();
-    hpVideoRow();
+    recallsBlockSlider();
     HPmainSlider();
 /*END homepage*/
 /*doctor*/

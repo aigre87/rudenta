@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="recallsBlock">
+<div class="recallsBlockSlider">
 <div class="recallsBlockIW">
 	<h2>
 		Клиенты о нас
