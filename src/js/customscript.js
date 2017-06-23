@@ -713,6 +713,7 @@ function videoPlay(){
                 var myPlayer = this;
                 var previousTime = 0;
                 var currentTime = 0;
+                myPlayer.volume(0.5);
                 myPlayer.on('timeupdate', function() {
                     previousTime = currentTime;
                     currentTime = myPlayer.currentTime();

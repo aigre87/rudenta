@@ -15,9 +15,9 @@
 			<p>Также, стоматология РуДента является клинической базой швейцарской компании Thommen Medical по обучению имплантологов.</p>
 		</div>
 		<div class="videoPopup mfp-with-anim" data-dep="about">
-	    <video id="aboutVideo" data-dep="about" class="video-js"  poster="https://i.ytimg.com/vi/a6rc_0LujbQ/maxresdefault.jpg">
-	        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-	        <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+	    <video id="aboutVideo" data-dep="about" class="video-js"  poster="/local/templates/rudenta/images/videoPlaceholderAboutPage.png">
+	        <source src="/upload/video/themevideo/vse_o_lechenii_zubov_pod_narkozom.mp4" type="video/mp4">
+	        <source src="/upload/video/themevideo/vse_o_lechenii_zubov_pod_narkozom.webm" type="video/webm">
 	    </video>
 		</div>
 </div>
