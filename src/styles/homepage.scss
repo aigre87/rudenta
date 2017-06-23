@@ -1,46 +1,6 @@
 @import "other/sprite";
 @import "other/mixins";
 .homepage #content{
-	.hpBestInRus{
-		text-align: center;
-		border: 2px dashed #f2b105;
-		border-radius: 10px;
-    padding: 46px 0 49px;
-		.title{
-			font-size: 50px;
-			line-height: 50px;
-			color: #f2b105;
-			font-weight: 700;
-			position: relative;
-			display: inline-block;
-			margin-bottom: 15px;
-			.icon{
-				width: 64px;
-				height: 64px;
-				position: absolute;
-				&.left{
-					left: -66px;
-    			top: -1px;
-					fill: map-get($colors, yellow);
-				}
-				&.right{
-			    right: -60px;
-			    top: -1px;
-					fill: map-get($colors, yellow);
-				}
-			}
-		}
-		.t{
-			font-size: 14px;
-			line-height: 20px;
-		}
-		.customIconsMenu{
-		  margin-top: 30px;
-		  width: 100%;
-		  padding: 0 20px;
-		}
-	
-	}
 	.blueBlockLinks{
 		margin-top: 44px;
 		.w-1d6col{

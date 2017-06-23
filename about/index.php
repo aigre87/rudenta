@@ -3,6 +3,22 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("О клинике «Рудента kids»");
 ?>
 <div class="aboutPage">
+    <div class="titleBlock">
+        <h1>Стоматология «РуДента»</h1>
+        <p>«РуДента» — это содружество врачей, объединенных общими методиками лечения,<br />направленными на комплексное решение задач и предоставление медицинских услуг<br />европейского уровня. На сегодняшний день у нас открыты 2 клиники — <br />взрослая и детская.</p>
+        <svg class="icon bear">
+            <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-bear"></use>
+        </svg>
+        <svg class="icon robot">
+            <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-robot"></use>
+        </svg>
+        <svg class="icon nlo">
+            <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-nlo"></use>
+        </svg>
+        <svg class="icon tooth2">
+            <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-tooth2"></use>
+        </svg>
+    </div>
     <?$APPLICATION->IncludeComponent(
         "bitrix:main.include",
         ".default",
@@ -47,7 +63,7 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
             "INCLUDE_SUBSECTIONS" => "N",
             "MESSAGE_404" => "",
-            "NEWS_COUNT" => "3",
+            "NEWS_COUNT" => "300",
             "PAGER_BASE_LINK_ENABLE" => "N",
             "PAGER_DESC_NUMBERING" => "N",
             "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -70,6 +86,22 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             "SORT_BY2" => "SORT",
             "SORT_ORDER1" => "DESC",
             "SORT_ORDER2" => "ASC"
+        )
+    );?>
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "child",
+        Array(
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "child",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "1",
+            "MENU_CACHE_GET_VARS" => array(""),
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "N",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "ROOT_MENU_TYPE" => "child",
+            "USE_EXT" => "N"
         )
     );?>
 

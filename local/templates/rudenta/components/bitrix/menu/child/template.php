@@ -1,6 +1,6 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?if (!empty($arResult)):?>
-	<div class="hpBestInRus">
+	<div class="bestInRusMenu">
 		<div class="title">
 			<svg class="icon left">
 			    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-wreath-left"></use>
