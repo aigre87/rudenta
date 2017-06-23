@@ -1592,6 +1592,37 @@ function salesList(){
     });
 }
 
+function changeIconFill($icon, timeMin,timeMax){
+    var time = getRandom(timeMin , timeMax);
+    var colors = [
+            "#822887",
+            "#ed107a",
+            "#005d97",
+            "#1bbee8",
+            "#7fb310",
+            "#e6b317"
+        ],
+    colorsL = colors.length;
+
+    flickerAnimate($icon);
+
+    function flickerAnimate(object) {
+        TweenMax.to(object, Math.random() * 0.5 + 0.5, {
+            fill: colors[Math.floor(Math.random() * (1 + (colorsL-1) - 0) + 0)],
+            delay: getRandom(timeMin , timeMax),
+            onComplete: flickerAnimate,
+            onCompleteParams: [object]
+        });
+    }
+}
+function pageAbout(){
+    if( $(".aboutPage").length == 0 ){return false;}
+    $(".aboutPage .titleBlock .icon").each(function(){
+        changeIconFill( $(this), 3, 4 );
+    });
+    
+}
+
 $(document).ready(function(){
     svg4everybody({});
 /*recalls*/
@@ -1614,6 +1645,9 @@ $(document).ready(function(){
     recallsBlockSlider();
     HPmainSlider();
 /*END homepage*/
+/*page About*/
+    pageAbout();
+/*END page About*/
 /*doctor*/
     detailDoctorInit();
     doctorDetail();

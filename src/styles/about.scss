@@ -16,6 +16,7 @@
 	.icon{
 		position: absolute;
 		display: block;
+		transition: all 0.5s ease;
 		&.bear{
 			fill: map-get($colors, lBlue);
 			width: 45px;
