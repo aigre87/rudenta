@@ -22,8 +22,10 @@ $this->setFrameMode(true);
 			<?php
 				if($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'm'){
 					$class = 'male';
-				}else{
+				}elseif($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'zh'){
 					$class = 'female';
+				}else{
+					$class = 'unisex';
 				}
 			?>
 			<div class="item <?=$class?>">
