@@ -170,14 +170,16 @@ $bg7: map-get($colors, lBlue);
 #content .servicesList .free-record{
 	margin-top: 40px;
 }
-#mainWrapper #content .servicesList .hpBestInRus{
-	margin-top: 46px;
+#mainWrapper #content .servicesList .bestInRusMenu{
+	padding: 0;
+	margin: 0;
+	border: none;
 	.title, .t{
 		display: none;
 	}
 	.items{
 		.item{
-			margin-top: 44px;
+	    margin-top: 44px;
 			display: block;
 			float: none;
 			width: 100%;
