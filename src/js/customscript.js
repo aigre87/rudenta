@@ -931,9 +931,6 @@ function recallsBlockSlider(){
         $ra.on("click", function(){
             slide("right");
         });
-        $(".recallsBlockIW h2").on("click", function(){
-            slide("left");
-        });
 }
 
 
