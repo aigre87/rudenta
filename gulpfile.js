@@ -61,9 +61,9 @@ gulp.task('js:build', function () {
     gulp.src([path.src.js])
         .pipe(plumber())
         .pipe(sourcemaps.init()) //Инициализируем sourcemap
-        .pipe(sourcemaps.write())
         .pipe(concat('main.min.js' , {newLine: ';'}))
         .pipe(uglify())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(plumber.stop())
         .pipe(sftp({
@@ -98,6 +98,7 @@ gulp.task('libs:build', function() {
         'src/libs/scrollmagic/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
         'src/libs/owl.carousel/dist/owl.carousel.min.js',
+        'src/libs/Snap.svg/dist/snap.svg-min.js',
         //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
         ])
         .pipe(plumber())

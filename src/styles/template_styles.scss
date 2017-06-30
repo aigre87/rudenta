@@ -2081,6 +2081,17 @@ blockquote.blueLeft{
       left: -4px;
       margin-bottom: 11px;
     }
+    #personSvg{
+      will-change: transform;
+      width: 144px;
+      height: 75%;
+      max-height: calc(100% + 130px);
+      content: '';
+      position: absolute;
+      transform: translateX(-50%);
+      top: 49px;
+      left: 90px;
+    }
     .items{
       margin-bottom: 30px;
       position: relative;
@@ -2105,17 +2116,17 @@ blockquote.blueLeft{
           margin-top: 6px;
         }
         &:before{
-          will-change: transform;
-          background: transparent url(../images/hp-recalls-girl.png) no-repeat center center;
-          background-size: contain;
-          width: 144px;
-          height: 311px;
-          max-height: calc(100% + 130px);
-          content: '';
-          position: absolute;
-          transform: translateX(-100%);
-          top: -40px;
-          left: -24px;
+          // will-change: transform;
+          // background: transparent url(../images/hp-recalls-girl.png) no-repeat center center;
+          // background-size: contain;
+          // width: 144px;
+          // height: 311px;
+          // max-height: calc(100% + 130px);
+          // content: '';
+          // position: absolute;
+          // transform: translateX(-100%);
+          // top: -40px;
+          // left: -24px;
         }
       }
     }

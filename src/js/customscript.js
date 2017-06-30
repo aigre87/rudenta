@@ -785,6 +785,7 @@ function detailDoctorInit(){
     var cl = classes[Math.floor(Math.random()*classes.length)];
     $(".doctor-detail .topBlock").addClass(cl);
 }
+
 function recallsBlockSlider(){
     if( !$(".recallsBlockSlider .item").length > 0 ){ return false;}
 
@@ -792,7 +793,16 @@ function recallsBlockSlider(){
         $itemsW = $block.find(".items"),
         $slides = $block.find(".item"),
         slidesCount = $slides.length,
-        cur;
+        cur,
+        curClass;
+
+        var object = $('.object');
+        var s = Snap('#personSvg');
+        var pathM = s.select('.pathM');
+        var pathB = s.select('.pathB');
+        var pathR = s.select('.pathR');
+        var pathL = s.select('.pathL');
+        var timerIN;
 
         if( $slides.filter(".current").length == 0 ){
             $slides.eq(0).addClass("current");
@@ -803,11 +813,28 @@ function recallsBlockSlider(){
         TweenMax.set( $itemsW, { height: $slides.eq(cur).outerHeight() });
         TweenMax.set( $slides.filter(".current"), { autoAlpha:1, "z-index": 2 });
 
+        if( $slides.filter(".current").hasClass("male") ){
+            curClass = "male";
+        }else if( $slides.filter(".current").hasClass("female") ){
+            curClass = "female";
+        }else{
+            curClass = "unisex";
+        }
+
         if( $slides.length == 0){ return false; }
 
         function slide(dir, index){
             cur = $slides.filter(".current").index();
-            var nextCur;
+            if( $slides.filter(".current").hasClass("male") ){
+                curClass = "male";
+            }else if( $slides.filter(".current").hasClass("female") ){
+                curClass = "female";
+            }else{
+                curClass = "unisex";
+            }
+
+            var nextCur,
+                nextCurClass;
             if((dir === "right") && (cur !== slidesCount-1)){
               nextCur = cur+1;
             }else if((dir === "right") && (cur === slidesCount-1)){
@@ -817,15 +844,67 @@ function recallsBlockSlider(){
             }else if((dir === "left") && (cur === 0)){
               nextCur = slidesCount-1;
             }else{
-            nextCur = index;
-            if(nextCur > cur){
-                var dir = "right";
-            }else if(nextCur < cur){
-                var dir = "left";
+                nextCur = index;
+                if(nextCur > cur){
+                    var dir = "right";
+                }else if(nextCur < cur){
+                    var dir = "left";
+                }else{
+                    return false;
+                }
+            }
+
+            if( $slides.eq(nextCur).hasClass("male") ){
+                nextCurClass = "male";
+            }else if( $slides.eq(nextCur).hasClass("female") ){
+                nextCurClass = "female";
             }else{
-                return false;
+                nextCurClass = "unisex";
             }
+
+
+            if( curClass != nextCurClass ){
+                // KUTE.to('.pathM', { path: personSvgJson[nextCurClass]["pathM"], attr: { fill: personSvgJson[nextCurClass]["color"] } }, {delay: 10, duration: 1000, morphIndex:550} ).start();
+                // KUTE.to('.pathB', { path: personSvgJson[nextCurClass]["pathB"], attr: { fill: personSvgJson[nextCurClass]["color"] } }, {delay: 20, duration: 1000, morphIndex:550} ).start();
+                // KUTE.to('.pathR', { path: personSvgJson[nextCurClass]["pathR"], attr: { fill: personSvgJson[nextCurClass]["color"] } }, {delay: 30, duration: 1000, morphIndex:550} ).start();
+                // KUTE.to('.pathL', { path: personSvgJson[nextCurClass]["pathL"], attr: { fill: personSvgJson[nextCurClass]["color"] } }, {delay: 40, duration: 1000, morphIndex:550} ).start();
+
+                //pathM.animate({ 'path' : personSvgJson[nextCurClass]["pathM"], fill:personSvgJson[nextCurClass]["color"] }, 10000, mina.bounce);
+                //pathB.animate({ 'path' : personSvgJson[nextCurClass]["pathB"], fill:personSvgJson[nextCurClass]["color"] }, 10000, mina.bounce);
+                //pathR.animate({ 'path' : personSvgJson[nextCurClass]["pathR"], fill:personSvgJson[nextCurClass]["color"] }, 10000, mina.bounce);
+                //pathL.animate({ 'path' : personSvgJson[nextCurClass]["pathL"], fill:personSvgJson[nextCurClass]["color"] }, 10000, mina.bounce);
+                pathM.stop();
+                clearTimeout(timerIN);
+                TweenMax.to( $('#personSvg'), 0.2, { 
+                    autoAlpha:0, 
+                    onComplete: function(){
+                        pathM.attr({'path' : personSvgJson[nextCurClass]["pathM"], fill:personSvgJson[nextCurClass]["color"] });
+                        pathB.attr({'path' : personSvgJson[nextCurClass]["pathB"], fill:personSvgJson[nextCurClass]["color"] });
+                        pathR.attr({'path' : personSvgJson[nextCurClass]["pathR"], fill:personSvgJson[nextCurClass]["color"] });
+                        pathL.attr({'path' : personSvgJson[nextCurClass]["pathL"], fill:personSvgJson[nextCurClass]["color"] });
+
+                        TweenMax.set($('#personSvg'), { autoAlpha:1 });
+                        var len = pathM.getTotalLength();
+
+                        pathM.attr({
+                            "path": personSvgJson[nextCurClass]["pathM"],
+                            "fill": "#fff",
+                            "stroke": personSvgJson[nextCurClass]["color"],
+                            "stroke-width": 2,
+                            "stroke-dasharray": len + " " + len,
+                            "stroke-dashoffset": len
+                        }).animate(
+                            {"stroke-dashoffset": 0},
+                            3000,
+                            mina.easeout
+                        );
+                        timerIN = setTimeout(function(){
+                            pathM.animate({ 'fill': personSvgJson[nextCurClass]["color"], "stroke-width": 0 }, 1000 , mina.easeinout);
+                        }, 2400);
+                    }
+                })
             }
+
 
             TweenMax.to( $slides.eq(cur), 0.4, { autoAlpha:0 , onComplete: function(){$slides.eq(cur).css({"z-index": 1})} });
             TweenMax.to( $slides.eq(nextCur), 0.4, { autoAlpha:1 , onComplete: function(){$slides.eq(nextCur).css({"z-index": 2})} });
@@ -851,6 +930,9 @@ function recallsBlockSlider(){
 
         $ra.on("click", function(){
             slide("right");
+        });
+        $(".recallsBlockIW h2").on("click", function(){
+            slide("left");
         });
 }
 
