@@ -13,7 +13,20 @@
 $this->setFrameMode(true);
 ?>
 <div class="salesListPage">
-	<div class="pageAnons">Клинка "RuDenta" - уникальный диагностический комлпес в самом центре города москвы</div>
+	<div class="pageAnons">
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			".default",
+			array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE" => "",
+				"COMPONENT_TEMPLATE" => ".default",
+				"PATH" => "/local/templates/rudenta/inc/sales_text.php"
+			),
+			false
+		);?>
+	</div>
 	<div class="salesItems">
 		<? foreach($arResult['ITEMS'] as $arItem): ?>
 			<div class="item">
