@@ -170,13 +170,14 @@ class Service{
             array("SORT"=>"ASC"),
             array("IBLOCK_ID" => 4,"DEPTH_LEVEL" => 2, "ACTIVE"=>"Y", "!UF_MAIN"=>false),
             false,
-            array(),
+            array('ID', 'NAME', "UF_TEXT_FOR_MAIN"),
             false
         );
 
         while($ar_result = $res->GetNext())
         {
-            $arFields[$ar_result['ID']] = $ar_result['NAME'];
+            $arFields[$ar_result['ID']]['NAME'] = $ar_result['NAME'];
+            $arFields[$ar_result['ID']]['TEXT_FOR_MAIN'] = $ar_result['UF_TEXT_FOR_MAIN'];
         }
 
         return $arFields;

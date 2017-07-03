@@ -98,10 +98,9 @@ if (0 < $arResult['SECTIONS_COUNT'])
 }
 
 $sections = Service::getServiceForMain();
-foreach($sections as $id => $name){
-    $min_price = Service::getMinPrice($id);
-    $result_sections[$id]['MIN_PRICE'] = $min_price;
-    $result_sections[$id]['NAME'] = $name;
+foreach($sections as $id => $arr){
+    $result_sections[$id]['NAME'] = $arr['NAME'];
+    $result_sections[$id]['TEXT_FOR_MAIN'] = $arr['TEXT_FOR_MAIN'];
 }
 
 $arResult['MAIN_SECTIONS'] = $result_sections;

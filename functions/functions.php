@@ -6,6 +6,13 @@ function arrPrint($arr){
     echo "</pre>";
 }
 
+function dd($arr){
+    echo "<pre>";
+    print_r($arr);
+    echo "</pre>";
+    die;
+}
+
 function recalls($cnt_recalls){
     $count = abs($cnt_recalls) % 100;
     $lcount = $count % 10;

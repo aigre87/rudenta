@@ -48,7 +48,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 	),
 	false
 );?>
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"slider",
 	Array(
@@ -104,7 +104,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC"
 	)
-);?>
+);*/?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:main.include",
     ".default",

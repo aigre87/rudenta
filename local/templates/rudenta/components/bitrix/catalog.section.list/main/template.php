@@ -13,14 +13,10 @@
 $this->setFrameMode(true);
 ?>
 <div class="blueBlockLinks clear">
-	<a href="#" class="w-1d6col col">
-		<span class="name">Первое посещение</span>
-		<span class="value">Бесплатно</span>
-	</a>
 	<?foreach($arResult['MAIN_SECTIONS'] as $section_id => $section_arr):?>
 		<a href="/services/detail/<?=$section_id?>/" class="w-1d6col col">
 			<span class="name"><?=$section_arr['NAME']?></span>
-			<span class="value"><?if(!empty($section_arr['MIN_PRICE'])):?>от <?=$section_arr['MIN_PRICE']?> Р<?endif;?></span>
+			<span class="value"><?=$section_arr['TEXT_FOR_MAIN']?></span>
 		</a>
 	<?endforeach;?>
 	<a href="/services/" class="w-1d6col col all">
