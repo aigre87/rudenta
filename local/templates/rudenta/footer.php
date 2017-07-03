@@ -121,7 +121,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 
 		if(!$shareDescription) {
 			$shareDescription = $APPLICATION->GetDirProperty("description");
-			if( empty($shareDescription) ) {
+			if( empty($shareDescription) || $shareDescription == "description" || $shareDescription == "Description" ) {
 				$shareDescription = "Rudenta детская стоматология";
 			}
 		}
