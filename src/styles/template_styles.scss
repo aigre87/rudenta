@@ -2206,6 +2206,7 @@ blockquote.blueLeft{
     will-change: transform;
     top: 0;
     left: 50%;
+    overflow: hidden;
     margin-left: -435px;
     max-width: 870px;
     max-height: 542px;
@@ -2269,13 +2270,22 @@ blockquote.blueLeft{
     top: 0;
     position: absolute;
     z-index: 5;
-    &:before{
+    &:before, &:after{
       content: '';
+      transition: all 0.15s ease;
       cursor: pointer;
       top: 41%;
       display: block;
       position: absolute;
       transform: translateY(-50%);
+    }
+    &:hover{
+      &:before{
+        opacity: 0;
+      }
+      &:after{
+        opacity: 1;
+      }
     }
   }
   .left-arrow{
@@ -2284,12 +2294,22 @@ blockquote.blueLeft{
       @include sprite($s-hp_mainSlider-arrowLeft);
       right: 37px;
     }
+    &:after{
+      @include sprite($s-hp_mainSlider-arrowLeftPink);
+      right: 37px;
+      opacity: 0;
+    }
   }
   .right-arrow{
     right: 0;
     &:before{
       @include sprite($s-hp_mainSlider-arrowRight);
       left: 37px;
+    }
+    &:after{
+      left: 37px;
+      opacity: 0;
+      @include sprite($s-hp_mainSlider-arrowRightPink);
     }
   }
 }

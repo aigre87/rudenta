@@ -275,6 +275,7 @@ function HPmainSlider(){
     var $block = $("#hp_slider"),
         $slides = $block.find(".slide"),
         slidesCount = $slides.length,
+        sliderInterval,
         cur,
         aniTime = 0.5,
         aniDist = 500;
@@ -371,11 +372,19 @@ function HPmainSlider(){
     var $la = $block.find(".left-arrow");
         $la.on("click", function(){
             slide("left");
+            clearInterval(sliderInterval);
+            if( !myGlobalisMobileDevice ){
+                myIntervalMainSlider();
+            }
         });
 
     var $ra = $block.find(".right-arrow");
         $ra.on("click", function(){
-          slide("right");
+            slide("right");
+            clearInterval(sliderInterval);
+            if( !myGlobalisMobileDevice ){
+                myIntervalMainSlider();
+            }
         });
 
     var hamSlider = new Hammer($block[0], {
@@ -383,9 +392,32 @@ function HPmainSlider(){
     });
     hamSlider.on('swipeleft', function(ev) {
         slide("right");
+        clearInterval(sliderInterval);
+        if( !myGlobalisMobileDevice ){
+            myIntervalMainSlider();
+        }
     });
     hamSlider.on('swiperight', function(ev) {
         slide("left");
+        clearInterval(sliderInterval);
+        if( !myGlobalisMobileDevice ){
+            myIntervalMainSlider();
+        }
+    });
+
+    function myIntervalMainSlider(){
+        sliderInterval = setInterval(function(){
+            slide("right");
+        }, 4500);
+    }
+    myIntervalMainSlider();
+
+    $block.on("mouseenter", function(){
+        clearInterval(sliderInterval);
+    });
+    $block.on("mouseleave", function(){
+        clearInterval(sliderInterval);
+        myIntervalMainSlider();
     });
 }
 function initBottomMenu(){
