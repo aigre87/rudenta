@@ -74,7 +74,7 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             "PARENT_SECTION" => "",
             "PARENT_SECTION_CODE" => "",
             "PREVIEW_TRUNCATE_LEN" => "",
-            "PROPERTY_CODE" => array(0=>"",1=>"",),
+            "PROPERTY_CODE" => array(0=>"TEXT_UNDER",1=>"",),
             "SET_BROWSER_TITLE" => "N",
             "SET_LAST_MODIFIED" => "N",
             "SET_META_DESCRIPTION" => "N",

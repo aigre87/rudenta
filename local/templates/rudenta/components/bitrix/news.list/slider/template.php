@@ -22,7 +22,7 @@ $this->setFrameMode(true);
 			<? if (!empty($arItem['PREVIEW_PICTURE'])): ?>
 				<div class="slide" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 					<div class="imgW"><img src="<?=$arItem['PREVIEW_PICTURE']['src']?>"></div>
-					<div class="desc"><?=$arItem['NAME']?></div>
+					<div class="desc"><?=$arItem['DISPLAY_PROPERTIES']['TEXT_UNDER']['VALUE']?></div>
 				</div>
 			<? endif;?>
 	<?endforeach;?>
