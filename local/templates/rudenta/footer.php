@@ -71,19 +71,19 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 						</div>
 					</div>
 					<div class="socialLinks">
-						<a href="https://vk.com/rudenta_clinic" class="vk">
+						<a href="https://vk.com/rudenta_clinic" target="_blank" class="vk">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-vkontakte-white"></use>
 							</svg>
 							Вконтакте
 						</a>
-						<a href="https://www.facebook.com/clinicrudenta/" class="fb">
+						<a href="https://www.facebook.com/clinicrudenta/" target="_blank" class="fb">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-facebook-white"></use>
 							</svg>
 							Фейсбук
 						</a>
-						<a href="https://www.instagram.com/rudenta_kids/" class="ig">
+						<a href="https://www.instagram.com/rudenta_kids/" target="_blank" class="ig">
 							<svg class="icon">
 							    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-instagram-white"></use>
 							</svg>
