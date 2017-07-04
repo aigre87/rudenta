@@ -3,7 +3,7 @@
 .homepage #content{
 	.blueBlockLinks{
 		margin-top: 44px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
 		font-size: 0;
     position: relative;
     text-align: justify;
@@ -22,6 +22,7 @@
 			display: block;
 	    box-sizing: border-box;
     	padding: 20px 20px 40px 20px;
+    	margin-bottom: 20px;
 			border-radius: 13px;
 			background: map-get($colors, lightBlueBlock);
 			position: relative;
