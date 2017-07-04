@@ -2206,7 +2206,6 @@ blockquote.blueLeft{
     will-change: transform;
     top: 0;
     left: 50%;
-    overflow: hidden;
     margin-left: -435px;
     max-width: 870px;
     max-height: 542px;
@@ -2218,6 +2217,8 @@ blockquote.blueLeft{
     -o-box-shadow: 10px 25px 80px 0px #7F8E8F;
     .imgW{
       overflow: hidden;
+      max-width: 860px;
+      max-height: 532px;
       position: relative;
       will-change: transform;
       -webkit-transform: translateZ(1px);
@@ -2318,7 +2319,13 @@ blockquote.blueLeft{
   white-space: pre-line;
   vertical-align: top;
   font-size: 0;
-  >a{
+  .item{
+    margin-bottom: 31px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  a{
     border-bottom: none;
     white-space: normal;
     display: inline-block;
@@ -2328,10 +2335,6 @@ blockquote.blueLeft{
     padding-left: 50px;
     position: relative;
     padding-top: 1px;
-    margin-bottom: 31px;
-    &:last-child{
-      margin-bottom: 0;
-    }
     &:hover{
       .text{
         border-bottom: none;

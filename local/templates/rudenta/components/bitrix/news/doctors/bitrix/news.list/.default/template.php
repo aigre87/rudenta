@@ -24,7 +24,28 @@ $this->setFrameMode(true);
 		$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 		$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 		?>
-	<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" <?/*style="background-color: <?php echo $arItem['PROPERTIES']['BACKGROUND']['VALUE_XML_ID']?>"*/?> class="item doctor w-1col" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+
+	<?
+		if( !empty($arItem['PROPERTIES']['BG_LIST']['VALUE']) && preg_match("/^#\w{6}$/", $arItem['PROPERTIES']['BG_LIST']['VALUE']) ){
+			$color = $arItem['PROPERTIES']['BG_LIST']['VALUE'];
+			$rgb = hex2rgb($color);
+			$hsl = rgbToHsl( $rgb[0], $rgb[1], $rgb[2] );
+			$hsl[2] = ($hsl[2] - 0.15 > 0) ? ($hsl[2] - 0.15) : 0;
+			$newrgb = hslToRgb($hsl[0], $hsl[1], $hsl[2]);
+			$newrgb_string = implode(",", $newrgb);
+		}
+	?>
+	<?if( !empty($arItem['PROPERTIES']['BG_LIST']['VALUE']) ):?>
+		<a
+		 style="box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0); background: <?=$color?>"
+		 onMouseOver='this.style.boxShadow="0px 30px 35px -19px rgba(<?=$newrgb_string?>, 0.7)"'
+		 onMouseOut='this.style.boxShadow="0px 0px 0px 0px rgba(255, 255, 255, 0)"'
+		 href="<?=$arItem["DETAIL_PAGE_URL"]?>"
+		 class="item doctor w-1col"
+		 id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+	<?else:?>
+		<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="item doctor w-1col" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+	<?endif?>
 		<span class="text">
 			<span class="name"><?php echo $arItem['NAME'];?></span>
 			<span class="position"><?php echo $arItem['DISPLAY_PROPERTIES']['POSITION']['DISPLAY_VALUE']?></span>

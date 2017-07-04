@@ -12,7 +12,12 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+
+<?if( !empty($arResult["PROPERTIES"]["BACKGROUND"]["VALUE_XML_ID"]) ):?>
+<div class="topBlock clear colorSet <?=$arResult["PROPERTIES"]["BACKGROUND"]["VALUE_XML_ID"]?>">
+<?else:?>
 <div class="topBlock clear">
+<?endif;?>
 	<div class="lc">
 		<div class="name"><?php echo $arResult['NAME'];?></div>
 		<div class="position">&mdash; <?php echo $arResult['DISPLAY_PROPERTIES']['POSITION']['VALUE'];?></div>

@@ -5,12 +5,14 @@
                 опытом работы и использующие самые современные технологии.</p>
 </div>
 <div class="icons m123">
-    <a href="/tehnology/" class="tech">
-        <svg class="icon">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-nlo"></use>
-        </svg>
-        <span class="text">Применяемые<br />технологии</span>
-    </a>
+    <div class="item">
+        <a href="/tehnology/" class="tech">
+            <svg class="icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-nlo"></use>
+            </svg>
+            <span class="text">Применяемые<br />технологии</span>
+        </a>
+    </div>
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.detail",
         "license",
@@ -62,11 +64,13 @@
             "USE_SHARE" => "N"
         )
     );?>
-    <a href="/vacancy/" class="vacancies">
-        <svg class="icon">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-beidj"></use>
-        </svg>
-        <span class="text">Вакансии</span>
-    </a>
+    <div class="item">
+        <a href="/vacancy/" class="vacancies">
+            <svg class="icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-beidj"></use>
+            </svg>
+            <span class="text">Вакансии</span>
+        </a>
+    </div>
 </div>
 </div>

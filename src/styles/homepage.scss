@@ -3,7 +3,21 @@
 .homepage #content{
 	.blueBlockLinks{
 		margin-top: 44px;
+    margin-bottom: 100px;
+		font-size: 0;
+    position: relative;
+    text-align: justify;
+    text-justify: newspaper;
+    zoom: 1;
+    text-align-last: justify;
+		&:after{
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+		}
 		.w-1d6col{
+			text-align: left;
+			text-align-last: left;
 			border-bottom: none;
 			display: block;
 	    box-sizing: border-box;
@@ -11,6 +25,9 @@
 			border-radius: 13px;
 			background: map-get($colors, lightBlueBlock);
 			position: relative;
+			display: inline-block;
+			vertical-align: top;
+			float: none;
 			.name{
 				display: block;
 				font-size: 18px;

@@ -117,13 +117,13 @@
 		}
 	}
 	.doctor{
-		$bg1  : #FFC7CD;
-		$bg2  : #DAFFF2;
-		$bg3  : #FFDDFF;
-		$bg4  : #BCF1FF;
-		$bg5  : #E5EEF4;
-		$bg6  : #FFFECB;
-		$bg7  : #DCDEFF;
+		$bg1 : #FFC7CD;
+		$bg2 : #DAFFF2;
+		$bg3 : #FFDDFF;
+		$bg4 : #BCF1FF;
+		$bg5 : #E5EEF4;
+		$bg6 : #FFFECB;
+		$bg7 : #DCDEFF;
 		$bg8 : #FFDDC7;
 		&:nth-child(1), &:nth-child(1n+8){
 			background-color: $bg1 ;
@@ -263,7 +263,7 @@
     	width: 0;
     	height: 100%;
     }
-		&.fio{
+		&.purple{
 		 	background-color: #9f58cd;
 		 	box-shadow: 0px 30px 55px -20px rgba( #9f58cd , 0.6);
 		}

@@ -714,8 +714,8 @@ function contactsmap(){
         // }));
         myMap.geoObjects
             .add(childmark)
-            .add(parrentmark)
-            .add(polyline);
+            .add(parrentmark);
+            //.add(polyline);
 
         myMap.controls.add(zoomControl, {
             float: 'none',
@@ -812,8 +812,8 @@ function zoomGalleryPopup(){
     });
 }
 function detailDoctorInit(){
-    if( !$(".doctor-detail .topBlock").length > 0 ){ return false; }
-    var classes = ["pink","dBlue","lBlue","green","yellow", "fio"];
+    if( !$(".doctor-detail .topBlock:not(.colorSet)").length > 0 ){ return false; }
+    var classes = ["pink","dBlue","lBlue","green","yellow", "purple"];
     var cl = classes[Math.floor(Math.random()*classes.length)];
     $(".doctor-detail .topBlock").addClass(cl);
 }
