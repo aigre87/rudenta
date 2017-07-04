@@ -29,8 +29,9 @@
 			position: relative;
 			cursor: pointer;
 			padding: 19px;
-			&:nth-child(2),&:nth-child(2n+3),&:nth-child(3),&:nth-child(3n+3){
-				margin-left: 15px;
+			margin-left: 15px;
+			&:nth-child(3n+1){
+				margin-left: 0px;
 			}
 			.percent { 
 				font-size: 70px;
@@ -92,6 +93,9 @@
 		padding: 30px 44px 25px 20px;
 		p{
 	    margin-bottom: 15px;
+	    &:last-child{
+	    	margin-bottom: 0;
+	    }
 		}
 	}
 
