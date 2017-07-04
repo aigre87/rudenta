@@ -17,6 +17,9 @@ class Recalls{
                 }
             }
 
+            if(!empty($_GET['usl']))
+                $arFilter['PROPERTY_SERVICE'] = $_GET['usl'];
+
             $res = CIBlockElement::GetList(
                 array(),
                 $arFilter,
