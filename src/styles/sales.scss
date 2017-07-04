@@ -93,6 +93,9 @@
 		padding: 30px 44px 25px 20px;
 		p{
 	    margin-bottom: 15px;
+	    &:last-child{
+	    	margin-bottom: 0;
+	    }
 		}
 	}
 
