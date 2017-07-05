@@ -11,7 +11,6 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-dd($arResult);
 ?>
 <video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
 	<source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.mp4" type="video/mp4">
