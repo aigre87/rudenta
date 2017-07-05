@@ -12,7 +12,16 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
-	<source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.mp4" type="video/mp4">
-	<source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.webm" type="video/webm">
-</video>
+<div class="videoBlock">
+	<div class="img">
+		<div class="videoPlayButton" data-dep="hp">
+			<div class="triangle"></div>
+		</div>
+	</div>
+	<div class="videoPopup mfp-with-anim" data-dep="hp">
+		<video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
+			<source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.mp4" type="video/mp4">
+			<source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.webm" type="video/webm">
+		</video>
+	</div>
+</div>

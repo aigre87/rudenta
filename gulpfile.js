@@ -92,13 +92,13 @@ gulp.task('libs:build', function() {
         'src/libs/jquery.inputmask/dist/inputmask/inputmask.numeric.extensions.js',
         'src/libs/svg4everybody/dist/svg4everybody.min.js',
         'src/libs/hammerjs/hammer.min.js',
-        'src/libs/all.js',
         'src/libs/video.js/dist/video.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js',
         'src/libs/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js',
         'src/libs/owl.carousel/dist/owl.carousel.min.js',
         'src/libs/Snap.svg/dist/snap.svg-min.js',
+        'src/libs/all.js'
         //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
         ])
         .pipe(plumber())
