@@ -4,8 +4,17 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
 ?>
 <div class="aboutPage">
     <div class="titleBlock">
-        <h1>Стоматология «РуДента»</h1>
-        <p>«РуДента» — это содружество врачей, объединенных общими методиками лечения,<br />направленными на комплексное решение задач и предоставление медицинских услуг<br />европейского уровня. На сегодняшний день у нас открыты 2 клиники — <br />взрослая и детская.</p>
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:main.include",
+            ".default",
+            Array(
+                "AREA_FILE_SHOW" => "file",
+                "AREA_FILE_SUFFIX" => "inc",
+                "COMPONENT_TEMPLATE" => ".default",
+                "EDIT_TEMPLATE" => "",
+                "PATH" => "/local/templates/rudenta/inc/about_preview_text.php"
+            )
+        );?>
         <svg class="icon bear">
             <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-bear"></use>
         </svg>
@@ -86,22 +95,6 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             "SORT_BY2" => "SORT",
             "SORT_ORDER1" => "DESC",
             "SORT_ORDER2" => "ASC"
-        )
-    );?>
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "child",
-        Array(
-            "ALLOW_MULTI_SELECT" => "N",
-            "CHILD_MENU_TYPE" => "child",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => array(""),
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "N",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "ROOT_MENU_TYPE" => "child",
-            "USE_EXT" => "N"
         )
     );?>
 
