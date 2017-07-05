@@ -12,7 +12,19 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="pageAnons">Клиника «RuDenta» — уникальный диагностическо-лечебный комплекс в самом центре города Москвы. Клиника тесно сотрудничает с ведущими научными учреждениями страны</div>
+<div class="pageAnons">
+	<?$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		".default",
+		Array(
+			"AREA_FILE_SHOW" => "file",
+			"AREA_FILE_SUFFIX" => "inc",
+			"COMPONENT_TEMPLATE" => ".default",
+			"EDIT_TEMPLATE" => "",
+			"PATH" => "/local/templates/rudenta/inc/tehnology_preview_text.php"
+		)
+	);?>
+</div>
 <div id="tehnologyBlock" class="clear">
 	<div id="items" class="items w-2col">
 		<div id="itemsRow">
