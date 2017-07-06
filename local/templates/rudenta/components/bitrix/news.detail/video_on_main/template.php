@@ -20,8 +20,8 @@ $this->setFrameMode(true);
 	</div>
 	<div class="videoPopup mfp-with-anim" data-dep="hp">
 		<video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
-			<source src="http://white.dev.mobipark.ru/upload/video/themevideo/RuDenta_Kids.mp4" type="video/mp4">
-			<source src="http://white.dev.mobipark.ru/upload/video/themevideo/RuDenta_Kids.webm" type="video/webm">
+			<source src="/upload/video/themevideo/RuDenta_Kids.mp4" type="video/mp4">
+			<source src="/upload/video/themevideo/RuDenta_Kids.webm" type="video/webm">
 		</video>
 	</div>
 </div>
