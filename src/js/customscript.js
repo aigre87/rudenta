@@ -736,12 +736,15 @@ function videoPlay(){
             "preload": "auto",
             "fluid": true,
         }
+        console.log("2");
         $("video.video-js").each(function(){
+            console.log("3");
             var $this = $(this);
             var dataDep = $(this).attr("data-dep");
             videojs( $this[0], options, function() {
 
             }).ready(function(event){
+                console.log("4");
                 var myPlayer = this;
                 var previousTime = 0;
                 var currentTime = 0;
@@ -780,6 +783,7 @@ function videoPlay(){
                     });
                 }
                 $(".videoPlayButton[data-dep='"+dataDep+"']").on("click", function(){
+                    console.log("1");
                     showVideo();
                 });
             });
