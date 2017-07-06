@@ -30,6 +30,7 @@
     "shufflejs": "^4.1.1",
     "owl.carousel": "^2.2.1",
     "Snap.svg": "^0.5.1",
-    "KUTE.js": "^1.6.2"
+    "KUTE.js": "^1.6.2",
+    "mediaelement": "^4.2.2"
   }
 }

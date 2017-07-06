@@ -768,6 +768,12 @@ function videoPlay(){
                         callbacks: {
                             beforeOpen: function() {
                                 this.st.mainClass = "mfp-zoom-in";
+                            },
+                            open: function() {
+                                myPlayer.play();
+                            },
+                            beforeClose: function() {
+                                myPlayer.pause();
                             }
                         },
                         midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
@@ -775,7 +781,6 @@ function videoPlay(){
                 }
                 $(".videoPlayButton[data-dep='"+dataDep+"']").on("click", function(){
                     showVideo();
-                    myPlayer.play();
                 });
             });
         });
