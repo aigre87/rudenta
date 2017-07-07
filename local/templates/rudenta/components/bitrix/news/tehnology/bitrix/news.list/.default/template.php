@@ -33,6 +33,10 @@ $this->setFrameMode(true);
 					<div class="imgW" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['src']?>);"></div>
 					<div class="name"><?=$arItem['NAME']?></div>
 				</a>
+				<div class="modal-detail-text">
+					<?=$arItem['NAME']?>
+					<?=$arItem['PREVIEW_TEXT']?>
+				</div>
 			<?endforeach;?>
 		</div>
 	</div>
