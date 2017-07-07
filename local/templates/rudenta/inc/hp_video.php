@@ -7,7 +7,7 @@
 					</div>
 				</div>
 				<div class="videoPopup mfp-with-anim" data-dep="hp">
-					<video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
+					<video id="companyVideo" class="video-js" data-dep="hp"  poster="/upload/img/videoPlch2.jpg">
 						<source src="/upload/video/themevideo/RuDenta_Kids.mp4" type="video/mp4">
 						<source src="/upload/video/themevideo/RuDenta_Kids.webm" type="video/webm">
 					</video>
