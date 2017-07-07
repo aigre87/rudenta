@@ -78,7 +78,7 @@ function getRandom(min, max) {
 function removeHash(string){
     if( window.location.hash.indexOf(string) === -1 ){ return false; }
     if( window.location.hash.indexOf("&") === -1 ){
-        window.location.hash = "-";
+        history.replaceState( undefined, undefined, "#");
     }else{
         var hashArr = window.location.hash.split("&"),
             hashArrL = hashArr.length;
@@ -89,9 +89,9 @@ function removeHash(string){
                     hashArr[0] = "#" + hashArr[0];
                 }
                 if( hashArr.length > 1 ){
-                    window.location.hash = hashArr.join("&");
+                    history.replaceState( undefined, undefined, hashArr.join("&"));
                 }else{
-                    window.location.hash = hashArr[0];
+                    history.replaceState( undefined, undefined, hashArr[0]);
                 }
                 return;
             }
@@ -101,17 +101,17 @@ function removeHash(string){
 function addhashValue(string, value){
     //нет хеша
     if( window.location.hash.length == 0 ){
-        window.location.hash = string+value;
+        history.replaceState( undefined, undefined, "#"+string+value);
     //есть хеш
     }else{
         //один хеш
         if( window.location.hash.indexOf("&") === -1 ){
             //нет такого типа хеша
             if( window.location.hash.indexOf(string) === -1 ){
-                window.location.hash += ("&"+string+value);
+                history.replaceState( undefined, undefined, window.location.hash +"&"+string+value);
             //есть такой тип хеша
             }else{
-                window.location.hash = string+value;
+                history.replaceState( undefined, undefined, "#"+string+value);
             }
         //множественный хеш
         }else{
@@ -130,9 +130,9 @@ function addhashValue(string, value){
                 }
             }
             if( !entry ){
-                window.location.hash += ("&"+string+value);
+                history.replaceState( undefined, undefined, window.location.hash+"&"+string+value);
             }else{
-                window.location.hash = hashArr.join("&");
+                history.replaceState( undefined, undefined, hashArr.join("&"));
             }
         }
     }
@@ -479,7 +479,7 @@ function pagenationHelper(){
                 $(".pagenation.active").removeClass("active");
                 $slider.css({ "height" : $slides.eq(nextCurIndex).outerHeight() });
                 TweenLite.to(window, 0.4, { ease: Sine.easeInOut, scrollTo: sliderOT});
-                window.location.hash = "sl_page_"+(nextCurIndex+1);
+                addhashValue("sl_page_", nextCurIndex+1);
             }else{
                 $(this).blur();
                 var currentLocation = window.location.pathname;
@@ -736,15 +736,12 @@ function videoPlay(){
             "preload": "auto",
             "fluid": true,
         }
-        console.log("2");
         $("video.video-js").each(function(){
-            console.log("3");
             var $this = $(this);
             var dataDep = $(this).attr("data-dep");
             videojs( $this[0], options, function() {
 
             }).ready(function(event){
-                console.log("4");
                 var myPlayer = this;
                 var previousTime = 0;
                 var currentTime = 0;
@@ -783,7 +780,6 @@ function videoPlay(){
                     });
                 }
                 $(".videoPlayButton[data-dep='"+dataDep+"']").on("click", function(){
-                    console.log("1");
                     showVideo();
                 });
             });
@@ -1443,11 +1439,9 @@ function servicesDetail(){
 
     /*init scroll offset*/
     if( window.location.hash.indexOf("active_secton_") > -1 ){
-        console.log("scroll!");
         var sectAttr = getHashValue("active_secton_"),
             $ar = $("*[data-ar='"+sectAttr+"']");
         var arSC = $ar.offset().top;
-        console.log("sectAttr="+sectAttr);
 
         TweenLite.to(window, 0, { ease: Sine.easeInOut, scrollTo: arSC});
     }
