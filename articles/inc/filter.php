@@ -5,7 +5,7 @@ $usl = (int)$_GET['usl'];
 <div class="topics">
 		<div class="title">Темы</div>
 		<div class="linksBlock">
-	    <a href="/articles"><span>Все темы (<?=$servs['ALL_CNT']?>)</span></a>
+	    <a <?if(empty($usl)):?> class="active" <?endif;?> href="/articles"><span>Все темы (<?=$servs['ALL_CNT']?>)</span></a>
 	    <?foreach($servs['SERVICE'] as $serv_id => $serv_info):?>
 	        <?if($usl == $serv_id):?>
 	            <a class="active" href="/articles/?usl=<?=$serv_id?>"><span><?=$serv_info['NAME']?> (<?=$serv_info['CNT']?>)</span></a>
