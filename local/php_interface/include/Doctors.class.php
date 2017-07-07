@@ -27,7 +27,8 @@ class Doctors{
                 "PROPERTY_POSITION",
                 "PREVIEW_PICTURE",
                 "PROPERTY_EXPERIENCE",
-                "PROPERTY_AWARDS"
+                "PROPERTY_AWARDS",
+                "PROPERTY_SERVICE"
             )
         );
 
@@ -55,6 +56,7 @@ class Doctors{
         $docArray['POSITION'] = $arFields[0]['PROPERTY_POSITION_VALUE'];
         $docArray['EXPERIENCE'] =  $arFields[0]['PROPERTY_EXPERIENCE_VALUE'];
         $docArray['AWARDS_CNT'] = count($arFields[0]['PROPERTY_AWARDS_VALUE']);
+        $docArray['SERVICES'] = $arFields[0]['PROPERTY_SERVICE_VALUE'];
         return $docArray;
     }
 
@@ -97,12 +99,20 @@ class Doctors{
 
     /**
      * Получить всех врачей
+     * update (монжо передать ID услуги что бы фильтр работал по врачам, предоставляющим эту услугу)
      * @return array
      */
-    public static function getAllDoc(){
+    public static function getAllDoc($usl_id = false){
+
+        $arFilter = array("IBLOCK_ID"=>1, "ACTIVE" => "Y");
+
+        if($usl_id != false){
+            $arFilter['PROPERTY_SERVICE'] = $usl_id;
+        }
+
         $res = CIBlockElement::GetList(
             array(),
-            array("IBLOCK_ID"=>1, "ACTIVE" => "Y"),
+            $arFilter,
             false,
             false,
             array("ID","NAME", "PREVIEW_PICTURE")
@@ -112,6 +122,7 @@ class Doctors{
         while($ob = $res->GetNextElement()) {
             $arFields[] = $ob->GetFields();
         }
+
 
         foreach($arFields as $doctor_key => $doctor_arr){
             $resizeImg = CFile::GetFileArray($doctor_arr['PREVIEW_PICTURE']);

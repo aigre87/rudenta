@@ -15,7 +15,7 @@ $this->setFrameMode(true);
 <div class="recallsBlockSlider">
 <div class="recallsBlockIW">
 	<h2>
-		Клиенты о нас
+		Отзывы / Похвала / Критика
 	</h2>
 		<? $i = 0; ?>
 		<?foreach($arResult['ITEMS'] as $arItem):?>

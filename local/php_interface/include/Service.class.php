@@ -18,10 +18,25 @@ class Service{
 
     }
 
-    public static function getAllServices(){
+    /**
+     * Возвращает все услуги. Если передать ID врача, вернет все услуги этого врача
+     * @param bool $doc_id
+     * @return mixed
+     */
+    public static function getAllServices($doc_id = false){
+
+        $arFilter = array("IBLOCK_ID" => 4,"DEPTH_LEVEL" => 2);
+
+        if($doc_id != false){
+
+            $arFilter['ID'] = Doctors::getInfo($doc_id)['SERVICES'];
+
+
+        }
+
         $res = CIBlockSection::GetList(
             array("SORT"=>"ASC"),
-            array("IBLOCK_ID" => 4,"DEPTH_LEVEL" => 2),
+            $arFilter,
             false,
             array(),
             false

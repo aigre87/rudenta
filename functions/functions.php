@@ -32,18 +32,22 @@ function articles($cnt_articles){
 }
 
 function filterDocAndUsl(){
-    $docs = Doctors::getAllDoc();
-    $servs = Service::getAllServices();
+
+
 
     if(!empty($_GET['doc'])){
         $doc = (int)$_GET['doc'];
+        $servs = Service::getAllServices($doc);
     }else{
+        $servs = Service::getAllServices();
         $doc = '';
     }
 
     if(!(empty($_GET['usl']))){
         $usl = (int)$_GET['usl'];
+        $docs = Doctors::getAllDoc($usl);
     }else{
+        $docs = Doctors::getAllDoc();
         $usl = '';
     }
 
