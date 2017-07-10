@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Вакансии");
                             "AREA_FILE_SUFFIX" => "inc",
                             "EDIT_TEMPLATE" => "",
                             "COMPONENT_TEMPLATE" => ".default",
-                            "PATH" => "/local/templates/rudenta/inc/vacancy.php"
+                            "PATH" => "/local/templates/rudenta/inc_editable/vacancy.php"
                         ),
                         false
                     );?>
@@ -35,18 +35,7 @@ $APPLICATION->SetTitle("Вакансии");
                 </div>
                 <a class="printButton">Распечатать</a>
                 <a class="disablePrintVersion">Обычный просмотр</a>
-                <?$APPLICATION->IncludeComponent(
-                    "bitrix:main.include",
-                    ".default",
-                    array(
-                        "AREA_FILE_SHOW" => "file",
-                        "AREA_FILE_SUFFIX" => "inc",
-                        "EDIT_TEMPLATE" => "",
-                        "COMPONENT_TEMPLATE" => ".default",
-                        "PATH" => "/local/templates/rudenta/inc/record.php"
-                    ),
-                    false
-                );?>
+                <?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
             </div>
         </div>
     </div>

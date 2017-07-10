@@ -21,7 +21,7 @@ $this->setFrameMode(true);
 			"AREA_FILE_SUFFIX" => "inc",
 			"COMPONENT_TEMPLATE" => ".default",
 			"EDIT_TEMPLATE" => "",
-			"PATH" => "/local/templates/rudenta/inc/tehnology_preview_text.php"
+			"PATH" => "/local/templates/rudenta/inc_editable/tehnology_preview_text.php"
 		)
 	);?>
 </div>

@@ -52,7 +52,7 @@ $APPLICATION->SetTitle("Rudenta Kids");
 <div class="hpVideoRow clear">
 		<div class="lc">
 			<div class="videoBlock">
-				<div class="img" style="background-image: url('/upload/img/videoPlch2.jpg');">
+				<div class="img">
 					<div class="videoPlayButton" data-dep="hp">
 						<div class="triangle"></div>
 					</div>

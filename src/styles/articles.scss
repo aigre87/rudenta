@@ -157,11 +157,6 @@ body.articles{
 			
 		}
 	}
-	.shareBlock{
-		.ya-share2{
-
-		}
-	}
 	.free-record{
 		background: map-get($colors, ulBlue);
 		box-shadow: 0px 11px 33px -7px rgba( map-get($colors, ulBlue) , 0.7);
@@ -307,6 +302,7 @@ body.articles{
 	}
 
 	.shareBlock{
+		margin-top: 25px;
 		.ya-share2__item{
 			padding-left: 0;
 			margin-right: 10px;

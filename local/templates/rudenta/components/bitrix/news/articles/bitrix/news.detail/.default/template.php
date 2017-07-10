@@ -61,18 +61,7 @@ $this->setFrameMode(true);
 			</div>
 			<a class="printButton">Распечатать</a>
 			<a class="disablePrintVersion">Обычный просмотр</a>
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:main.include",
-				".default",
-				array(
-					"AREA_FILE_SHOW" => "file",
-					"AREA_FILE_SUFFIX" => "inc",
-					"EDIT_TEMPLATE" => "",
-					"COMPONENT_TEMPLATE" => ".default",
-					"PATH" => "/local/templates/rudenta/inc/record.php"
-				),
-				false
-			);?>
+			<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 			<?php
 			$random_art = Articles::getRandom($arResult['DISPLAY_PROPERTIES']['SERVICE']['VALUE'], $arResult['ID']);
 			?>

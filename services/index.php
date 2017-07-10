@@ -93,18 +93,7 @@ $APPLICATION->SetTitle("Услуги");
 			</svg>
 			<div class="name">Скидки и акции</div>
 		</a>
-		<?$APPLICATION->IncludeComponent(
-			"bitrix:main.include",
-			".default",
-			array(
-				"AREA_FILE_SHOW" => "file",
-				"AREA_FILE_SUFFIX" => "inc",
-				"EDIT_TEMPLATE" => "",
-				"COMPONENT_TEMPLATE" => ".default",
-				"PATH" => "/local/templates/rudenta/inc/record.php"
-			),
-			false
-		);?>
+		<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:menu",
 			"child",

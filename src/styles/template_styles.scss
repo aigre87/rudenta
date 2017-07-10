@@ -2138,6 +2138,7 @@ blockquote.blueLeft{
     .nav{
       font-size: 0;
       .shownext{
+        z-index: 5;
         display: inline-block;
         vertical-align: top;
         border-radius: 5px;

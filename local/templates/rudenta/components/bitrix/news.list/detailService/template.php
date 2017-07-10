@@ -125,35 +125,9 @@ $this->setFrameMode(true);
 					</div>
 				</div>
 			</div>
-			<div class="w-1col">
-				<?$APPLICATION->IncludeComponent(
-					"bitrix:main.include",
-					".default",
-					array(
-						"AREA_FILE_SHOW" => "file",
-						"AREA_FILE_SUFFIX" => "inc",
-						"EDIT_TEMPLATE" => "",
-						"COMPONENT_TEMPLATE" => ".default",
-						"PATH" => "/local/templates/rudenta/inc/record.php"
-					),
-					false
-				);?>
-			</div>
+			<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 		<?else:?>
-			<div class="w-2col">
-				<?$APPLICATION->IncludeComponent(
-					"bitrix:main.include",
-					".default",
-					array(
-						"AREA_FILE_SHOW" => "file",
-						"AREA_FILE_SUFFIX" => "inc",
-						"EDIT_TEMPLATE" => "",
-						"COMPONENT_TEMPLATE" => ".default",
-						"PATH" => "/local/templates/rudenta/inc/record.php"
-					),
-					false
-				);?>
-			</div>
+			<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 			<div class="w-1col">&nbsp;</div>
 		<? endif;?>
 	</div>

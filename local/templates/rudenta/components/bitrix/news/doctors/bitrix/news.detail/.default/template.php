@@ -89,18 +89,7 @@ $this->setFrameMode(true);
 		<?endif;?>
 	</div>
 	<div class="w-1col">
-		<?$APPLICATION->IncludeComponent(
-			"bitrix:main.include",
-			".default",
-			array(
-				"AREA_FILE_SHOW" => "file",
-				"AREA_FILE_SUFFIX" => "inc",
-				"EDIT_TEMPLATE" => "",
-				"COMPONENT_TEMPLATE" => ".default",
-				"PATH" => "/local/templates/rudenta/inc/record.php"
-			),
-			false
-		);?>
+		<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 		<div class="docNoteBlock">
 			<?php $articles = Doctors::getArticles($arResult['ID']);?>
 			<?if(!empty($articles)):?>
