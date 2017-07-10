@@ -3,3 +3,4 @@
 /src/libs/*
 /local/templates/rudenta/fonts/*
 .sublime-gulp.cache
+/local/templates/rudenta/inc_editable/*

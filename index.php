@@ -49,31 +49,112 @@ $APPLICATION->SetTitle("Rudenta Kids");
 	false
 );?>
 
-<?$APPLICATION->IncludeComponent(
-    "bitrix:main.include",
-    ".default",
-    Array(
-        "AREA_FILE_SHOW" => "file",
-        "AREA_FILE_SUFFIX" => "inc",
-        "COMPONENT_TEMPLATE" => ".default",
-        "EDIT_TEMPLATE" => "",
-        "PATH" => "/local/templates/rudenta/inc/hp_video.php"
-    )
-);?>
+<div class="hpVideoRow clear">
+		<div class="lc">
+			<div class="videoBlock">
+				<div class="img" style="background-image: url('/upload/img/videoPlch2.jpg');">
+					<div class="videoPlayButton" data-dep="hp">
+						<div class="triangle"></div>
+					</div>
+				</div>
+				<div class="videoPopup mfp-with-anim" data-dep="hp">
+					<video id="companyVideo" class="video-js" data-dep="hp"  poster="/upload/img/videoPlch2.jpg">
+						<source src="/upload/video/themevideo/RuDenta_Kids.mp4" type="video/mp4">
+						<source src="/upload/video/themevideo/RuDenta_Kids.webm" type="video/webm">
+					</video>
+				</div>
+			</div>
+		</div>
+		<div class="rc">
+			<div class="t1">Принимаем детей в возрасте от 0 до 16 лет</div>
+    	<div class="t2">Мы постарались сделать все, чтобы вашим деткам нарвилось лечить зубки</div>
+		</div>
+</div>
 
 <div class="doctorsBlock clear">
 	<div class="w-1col">
-		<?$APPLICATION->IncludeComponent(
-			"bitrix:main.include",
-			".default",
-			Array(
-				"AREA_FILE_SHOW" => "file",
-				"AREA_FILE_SUFFIX" => "inc",
-				"COMPONENT_TEMPLATE" => ".default",
-				"EDIT_TEMPLATE" => "",
-				"PATH" => "/local/templates/rudenta/inc/hp_doctorsLeftCol.php"
-			)
-		);?>
+		<div class="m123wrapper">
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:main.include",
+				".default",
+				Array(
+					"AREA_FILE_SHOW" => "file",
+					"AREA_FILE_SUFFIX" => "inc",
+					"COMPONENT_TEMPLATE" => ".default",
+					"EDIT_TEMPLATE" => "",
+					"PATH" => "/local/templates/rudenta/inc_editable/hp_doctorsLeftCol.php"
+				)
+			);?>
+			<div class="icons m123">
+			    <div class="item">
+			        <a href="/tehnology/" class="tech">
+			            <svg class="icon">
+			                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-nlo"></use>
+			            </svg>
+			            <span class="text">Применяемые<br />технологии</span>
+			        </a>
+			    </div>
+			    <?$APPLICATION->IncludeComponent(
+			        "bitrix:news.detail",
+			        "license",
+			        Array(
+			            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+			            "ADD_ELEMENT_CHAIN" => "N",
+			            "ADD_SECTIONS_CHAIN" => "Y",
+			            "AJAX_MODE" => "N",
+			            "AJAX_OPTION_ADDITIONAL" => "",
+			            "AJAX_OPTION_HISTORY" => "N",
+			            "AJAX_OPTION_JUMP" => "N",
+			            "AJAX_OPTION_STYLE" => "Y",
+			            "BROWSER_TITLE" => "-",
+			            "CACHE_GROUPS" => "Y",
+			            "CACHE_TIME" => "36000000",
+			            "CACHE_TYPE" => "A",
+			            "CHECK_DATES" => "Y",
+			            "DETAIL_URL" => "",
+			            "DISPLAY_BOTTOM_PAGER" => "Y",
+			            "DISPLAY_DATE" => "Y",
+			            "DISPLAY_NAME" => "Y",
+			            "DISPLAY_PICTURE" => "Y",
+			            "DISPLAY_PREVIEW_TEXT" => "Y",
+			            "DISPLAY_TOP_PAGER" => "N",
+			            "ELEMENT_CODE" => "license",
+			            "ELEMENT_ID" => "",
+			            "FIELD_CODE" => array("NAME", ""),
+			            "IBLOCK_ID" => "10",
+			            "IBLOCK_TYPE" => "contect",
+			            "IBLOCK_URL" => "",
+			            "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+			            "MESSAGE_404" => "",
+			            "META_DESCRIPTION" => "-",
+			            "META_KEYWORDS" => "-",
+			            "PAGER_BASE_LINK_ENABLE" => "N",
+			            "PAGER_SHOW_ALL" => "N",
+			            "PAGER_TEMPLATE" => ".default",
+			            "PAGER_TITLE" => "Страница",
+			            "PROPERTY_CODE" => array("", "FILE"),
+			            "SET_BROWSER_TITLE" => "N",
+			            "SET_CANONICAL_URL" => "N",
+			            "SET_LAST_MODIFIED" => "N",
+			            "SET_META_DESCRIPTION" => "N",
+			            "SET_META_KEYWORDS" => "N",
+			            "SET_STATUS_404" => "N",
+			            "SET_TITLE" => "N",
+			            "SHOW_404" => "N",
+			            "USE_PERMISSIONS" => "N",
+			            "USE_SHARE" => "N"
+			        )
+			    );?>
+			    <div class="item">
+			        <a href="/vacancy/" class="vacancies">
+			            <svg class="icon">
+			                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-beidj"></use>
+			            </svg>
+			            <span class="text">Вакансии</span>
+			        </a>
+			    </div>
+			</div>
+		</div>
 	</div>
 	<div class="w-2col">
 	<?$APPLICATION->IncludeComponent(

@@ -52,6 +52,9 @@
 	.lc{
 		float: left;
 		width: 680px;
+		h2{
+			color: map-get($colors, green);
+		}
 		p{
 			font-size: 18px;
 			line-height: 28px;
@@ -123,6 +126,7 @@
 #content .rudenta-standart-row{
 	h2{
 			margin-bottom: 7px;
+			color: map-get($colors, pink);
 		}
 	p{
 		font-size: 18px;
@@ -205,6 +209,7 @@
 	.rc{
     margin-left: 506px;
 		h2{
+			color: map-get($colors, lBlue);
 			margin-bottom: 7px;
 		}
 		p{

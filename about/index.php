@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
                 "AREA_FILE_SUFFIX" => "inc",
                 "COMPONENT_TEMPLATE" => ".default",
                 "EDIT_TEMPLATE" => "",
-                "PATH" => "/local/templates/rudenta/inc/about_preview_text.php"
+                "PATH" => "/local/templates/rudenta/inc_editable/about_preview_text.php"
             )
         );?>
         <svg class="icon bear">
@@ -28,17 +28,37 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             <use xlink:href="/local/templates/rudenta/images/symbol//sprite.svg#icon-tooth2"></use>
         </svg>
     </div>
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        ".default",
-        Array(
-            "AREA_FILE_SHOW" => "file",
-            "AREA_FILE_SUFFIX" => "inc",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "",
-            "PATH" => "/local/templates/rudenta/inc/rudentaAboutTopBlock.php"
-        )
-    );?>
+    <div class="rudentaAboutTopBlock clear">
+        <div class="lc">
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:main.include",
+                ".default",
+                Array(
+                    "AREA_FILE_SHOW" => "file",
+                    "AREA_FILE_SUFFIX" => "inc",
+                    "COMPONENT_TEMPLATE" => ".default",
+                    "EDIT_TEMPLATE" => "",
+                    "PATH" => "/local/templates/rudenta/inc_editable/rudentaAboutTopBlock.php"
+                )
+            );?>            
+        </div>
+        <div class="rc">
+            <div class="videoBlock">
+                <div class="img">
+                    <div class="videoPlayButton" data-dep="hp">
+                        <div class="triangle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="videoPopup mfp-with-anim" data-dep="hp">
+                <video id="companyVideo" class="video-js" data-dep="hp"  poster="/local/templates/rudenta/images/hpVideoRow_videoPoster.png">
+                    <source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.mp4" type="video/mp4">
+                    <source src="/upload/video/themevideo/detskaya_stomatologiaya_rudenta.webm" type="video/webm">
+                </video>
+            </div>
+        </div>
+    </div>
+
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.list",
@@ -98,17 +118,20 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
         )
     );?>
 
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        ".default",
-        Array(
-            "AREA_FILE_SHOW" => "file",
-            "AREA_FILE_SUFFIX" => "inc",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "",
-            "PATH" => "/local/templates/rudenta/inc/rudenta_standart.php"
-        )
-    );?>
+    <div class="rudenta-standart-row clear">
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:main.include",
+            ".default",
+            Array(
+                "AREA_FILE_SHOW" => "file",
+                "AREA_FILE_SUFFIX" => "inc",
+                "COMPONENT_TEMPLATE" => ".default",
+                "EDIT_TEMPLATE" => "",
+                "PATH" => "/local/templates/rudenta/inc_editable/about_standart.php"
+            )
+        );?>
+    </div>
+
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.list",
         "recalls",
@@ -165,16 +188,35 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
             "SORT_ORDER2" => "ASC"
         )
     );?>
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        ".default",
-        Array(
-            "AREA_FILE_SHOW" => "file",
-            "AREA_FILE_SUFFIX" => "inc",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "",
-            "PATH" => "/local/templates/rudenta/inc/aboutVideoRow.php"
-        )
-    );?>
+    <div class="aboutVideoRow clear">
+            <div class="lc">
+                <div class="videoBlock">
+                    <div class="img">
+                        <div class="videoPlayButton lBlue" data-dep="about">
+                            <div class="triangle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rc">
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    ".default",
+                    Array(
+                        "AREA_FILE_SHOW" => "file",
+                        "AREA_FILE_SUFFIX" => "inc",
+                        "COMPONENT_TEMPLATE" => ".default",
+                        "EDIT_TEMPLATE" => "",
+                        "PATH" => "/local/templates/rudenta/inc_editable/aboutVideoRow.php"
+                    )
+                );?>
+            </div>
+            <div class="videoPopup mfp-with-anim" data-dep="about">
+            <video id="aboutVideo" data-dep="about" class="video-js"  poster="/local/templates/rudenta/images/videoPlaceholderAboutPage.png">
+                <source src="/upload/video/themevideo/vse_o_lechenii_zubov_pod_narkozom.mp4" type="video/mp4">
+                <source src="/upload/video/themevideo/vse_o_lechenii_zubov_pod_narkozom.webm" type="video/webm">
+            </video>
+            </div>
+    </div>
 </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
