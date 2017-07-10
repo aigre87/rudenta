@@ -121,33 +121,41 @@
   margin-bottom: 50px;
 }
 #content .rudenta-standart-row{
-	.lc, .rc{
-		float: left;
-	}
-	.lc{
-		width: 680px;
-		h2{
+	h2{
 			margin-bottom: 7px;
 		}
-		p{
-			font-size: 18px;
-			line-height: 28px;
-			margin-bottom: 14px;
-		}
+	p{
+		font-size: 18px;
+		line-height: 28px;
+		margin-bottom: 14px;
 	}
-	.rc{
-		width: 480px;
-		margin-left: 20px;
-		.img{
-			margin-top: 10px;
-			width: 100%;
-			height: 230px;
-			background-color: #f2f2f2;
-			background-image: url(../images/joinCommisionLogo.png);
-			background-position: center center;
-			background-repeat: no-repeat;
-		}
-	}
+	// .lc, .rc{
+	// 	float: left;
+	// }
+	// .lc{
+	// 	width: 680px;
+	// 	h2{
+	// 		margin-bottom: 7px;
+	// 	}
+	// 	p{
+	// 		font-size: 18px;
+	// 		line-height: 28px;
+	// 		margin-bottom: 14px;
+	// 	}
+	// }
+	// .rc{
+	// 	width: 480px;
+	// 	margin-left: 20px;
+	// 	.img{
+	// 		margin-top: 10px;
+	// 		width: 100%;
+	// 		height: 230px;
+	// 		background-color: #f2f2f2;
+	// 		background-image: url(../images/joinCommisionLogo.png);
+	// 		background-position: center center;
+	// 		background-repeat: no-repeat;
+	// 	}
+	// }
 }
 #content .aboutPage .recallsBlockSlider{
 	margin-top: 93px;

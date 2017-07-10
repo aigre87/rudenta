@@ -1123,7 +1123,7 @@ function recallsListInit(){
         $(".filtesBlock").append(mySelect);
             
         if( $("html#mobile").length > 0 ){
-            var $select = $('.filtesBlock select');
+            var $select = $('.filtesBlock select.'+clearclassList+'');
             $select.on("change", function(){
                 var index = $(this).find("option:selected").index();
                 linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");

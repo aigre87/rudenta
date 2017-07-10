@@ -2,15 +2,14 @@
 <?if (!empty($arResult)):?>
 	<div class="bestInRusMenu">
 		<div class="title">
-			<svg class="icon left">
+<!-- 			<svg class="icon left">
 			    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-wreath-left"></use>
-			</svg>
-			Лучшая детская стоматология России
-			<svg class="icon right">
+			</svg> -->
+			Лечение как развлечение в «РуДентаКидс»
+<!-- 			<svg class="icon right">
 			    <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/symbol/sprite.svg#icon-wreath-right"></use>
-			</svg>
+			</svg> -->
 		</div>
-		<div class="t">РуДента заняла 1-е место в рейтинге детских стоматологий России 2016, по версии ИД «Коммерсант» и портала SmartSmile</div>
 		<div class="itemsW customIconsMenu">
 			<div class="clear items">
 			<? foreach($arResult as $arItem):?>

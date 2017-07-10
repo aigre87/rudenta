@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 ?>
 <div class="item">
-	<a class="license" download="license.pdf" href="<?=$arResult['FILE_SRC']?>">
+	<a class="license" target="_blank" href="<?=$arResult['FILE_SRC']?>">
 		<svg class="icon">
 			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-gramota"></use>
 		</svg>
