@@ -19,6 +19,15 @@ $this->setFrameMode(true);
 	</h2>
 		<? $i = 0; ?>
 		<?foreach($arResult['ITEMS'] as $arItem):?>
+			<?php
+				if($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'm'){
+					$class = 'male';
+				}elseif($arItem['DISPLAY_PROPERTIES']['SEX']['VALUE_XML_ID'] == 'zh'){
+					$class = 'female';
+				}else{
+					$class = 'unisex';
+				}
+			?>
 		<?
 		if( $i == 0 ){
 			if( $class == 'male' ){
