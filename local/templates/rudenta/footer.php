@@ -5,29 +5,17 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 		</section>
 		<!--content END-->
 		<footer>
- 			<div class="contactsBlock clear">
-				<div class="contactsMapW w-2col">
-					<div id="contactsMap"></div>
-				</div>
-				<div class="contactsText w-1col">
-					<div class="item">
-						<div class="title">Адрес</div>
-						<div class="desc"><b>Москва, пр Березовой рощи, д8</b></div>
-					</div>
-					<div class="item">
-						<div class="title">Время работы</div>
-						<div class="desc">9:00 - 21:00 ежедневно</div>
-					</div>
-					<div class="item phone">
-						<div class="title">Многоканальный телефон</div>
-						<div class="desc"><a href="tel:+74956468191"><b>+ 7 (495) 104-77-87</b></a></div>
-					</div>
-					<div class="item">
-						<div class="title">Электронная почта</div>
-						<div class="desc"><a href="mailto:grandpark@rudenta.ru">grandpark@rudenta.ru</a></div>
-					</div>
-				</div>
-			</div>
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:main.include",
+				".default",
+				Array(
+					"AREA_FILE_SHOW" => "file",
+					"AREA_FILE_SUFFIX" => "inc",
+					"COMPONENT_TEMPLATE" => ".default",
+					"EDIT_TEMPLATE" => "",
+					"PATH" => "/local/templates/rudenta/inc_editable/footer_contacts.php"
+				)
+			);?>
 			<menu id="bottomMenu">
 			<div class="layoutW clear">
 				<?$APPLICATION->IncludeComponent(
