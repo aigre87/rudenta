@@ -38,7 +38,7 @@ $APPLICATION->SetTitle("О клинике «Рудента kids»");
                     "AREA_FILE_SUFFIX" => "inc",
                     "COMPONENT_TEMPLATE" => ".default",
                     "EDIT_TEMPLATE" => "",
-                    "PATH" => "/local/templates/rudenta/inc_editable/aboutTopBlock.php.php"
+                    "PATH" => "/local/templates/rudenta/inc_editable/aboutTopBlock.php"
                 )
             );?>            
         </div>

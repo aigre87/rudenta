@@ -29,13 +29,13 @@ $this->setFrameMode(true);
 	<div id="items" class="items w-2col">
 		<div id="itemsRow">
 			<?foreach($arResult["ITEMS"] as $arItem):?>
-				<a href="<?=$arItem['DETAIL_PAGE_URL']?>" data-cat="<? for($i = 0;$i<count($arItem['PROPERTIES']['SERVICE']['VALUE']);$i++): ?><?=$arItem['PROPERTIES']['SERVICE']['VALUE'][$i]." "?><? endfor;?>" class="item">
+				<div data-cat="<? for($i = 0;$i<count($arItem['PROPERTIES']['SERVICE']['VALUE']);$i++): ?><?=$arItem['PROPERTIES']['SERVICE']['VALUE'][$i]." "?><? endfor;?>" class="item">
 					<div class="imgW" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['src']?>);"></div>
 					<div class="name"><?=$arItem['NAME']?></div>
-				</a>
-				<div class="modal-detail-text">
-					<?=$arItem['NAME']?>
-					<?=$arItem['PREVIEW_TEXT']?>
+					<div class="modal-detail-text">
+						<?=$arItem['NAME']?>
+						<?=$arItem['PREVIEW_TEXT']?>
+					</div>
 				</div>
 			<?endforeach;?>
 		</div>

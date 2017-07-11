@@ -523,9 +523,9 @@ function HPinitDoctorsBlock(){
     $links = $block.find(".item");
 
 
-    for(var i = 0; i < colsL; i+=4) {
-      $cols.slice(i, i+4).wrapAll("<div class='row clear'></div>");
-    }
+    // for(var i = 0; i < colsL; i+=4) {
+    //   $cols.slice(i, i+4).wrapAll("<div class='row clear'></div>");
+    // }
     TweenLite.set( $links, { zIndex:0 });
 
     var gradColors = ["#f0f1f3","#95edd4","#d7efe2", "#b8c2ba", "#edf4d5"];
@@ -563,7 +563,7 @@ function HPinitDoctorsBlock(){
 
     }
     initIcons();
-    $(".homepage .doctors-list").css({visibility:"visible"});
+    //$(".homepage .doctors-list").css({visibility:"visible"});
 }
 
 
@@ -1238,7 +1238,7 @@ function servicesList(){
 }
 
 function servicesDetail(){
-    if( !$("body.services-detail").length > 0 ){ return false; }
+    if( !$(".servicesDetailPage").length > 0 ){ return false; }
     createSlider( $(".servicesDetailPage .recalls-list"), $(".servicesDetailPage .recalls-list .recall-item") );
 
     if( $("#doctors-list .item").length > 0 ){
@@ -1433,7 +1433,7 @@ function servicesDetail(){
             
         if ( $ar.length > 0 ){
             var arSC = $ar.offset().top;
-            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC});
+            TweenLite.to(window, 0.5, { ease: Sine.easeInOut, scrollTo: arSC-15});
         }
     });
 
@@ -1676,6 +1676,29 @@ function tehnologypage(){
     $(".linksBlock .button.reset").on("click", function(){
         $(".linksBlock .button.active:not(.reset)").trigger("click");
     });
+
+    $("#itemsRow .item").on("click", function(){
+        var $this = $(this),
+            $thisDetail = $this.find(".modal-detail-text");
+        $.magnificPopup.open({
+            items: {
+                src: "<div class='defaultPopupContent mfp-with-anim'>"+$thisDetail[0].outerHTML+"</div>",
+                type: 'inline'
+            },
+            removalDelay: 500, //delay removal by X to allow out-animation
+            closeBtnInside: true,
+            mainClass: 'mfp-with-zoom',
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.mainClass = "mfp-zoom-in defaultPopup";
+                },
+                beforeClose: function() {
+                    $this.removeClass("active");
+                },
+            },
+            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+        });
+    });
 }
 
 function salesList(){
@@ -1738,12 +1761,74 @@ function pageAbout(){
     
 }
 
+function defaultSpoiler(){
+    function initMultiple(){
+        $(".default-spoiler").each(function(){
+            var $this = $(this);
+            if( $this.closest(".default-spoilers-wraper").length == 0 ){
+                var $prevs = $this.prevUntil( "*:not(.default-spoiler)" );
+                var $nexts = $this.nextUntil( "*:not(.default-spoiler)" );
+                if( $prevs.length > 0 || $nexts.length > 0 ){
+                    $this.add($prevs).add($nexts).wrapAll("<div class='default-spoilers-wraper'>");
+                }
+            }
+        });
+    }
+    initMultiple();
+    function action($spoiler, update){
+        var $spoiler = $spoiler,
+            $header = $spoiler.find(".header"),
+            $content = $spoiler.find(".content"),
+            minH = $header.outerHeight(),
+            maxH = minH+$content.outerHeight(),
+            args = Array.prototype.slice.call(arguments);
+            
+        if( args.indexOf("update") > -1 ){
+            if( !$spoiler.hasClass("active") ){
+                TweenMax.set( $spoiler , { height : minH });
+                $spoiler.addClass("complete");
+            }else{
+                TweenMax.set( $spoiler , { height : maxH });
+                $spoiler.addClass("complete");
+            }
+        }else{
+            if( !$spoiler.hasClass("active") ){
+                $spoiler.removeClass("complete");
+                TweenMax.to( $spoiler , 0.5, { height : maxH, className:"+=active", ease: Power1.easeInOut, onComplete: function(){
+                    $spoiler.addClass("complete");
+                } });
+            }else{
+                $spoiler.removeClass("complete");
+                TweenMax.to( $spoiler , 0.5, { height : minH, className:"-=active", ease: Power1.easeInOut, onComplete: function(){
+                    $spoiler.addClass("complete");
+                } });
+            }
+        }
+    }
+
+    $(".default-spoiler").on("click", function(){
+        action($(this));
+    });
+    $(".default-spoiler.open").each(function(){
+        action($(this));
+    });
+    $(".default-spoiler").each(function(){
+        action($(this), "update");
+    });
+    // $(window).smartresize(function(){
+    //     $(".default-spoiler").each(function(){
+    //         action($(this), "update");
+    //     })
+    // });
+}
+
 $(document).ready(function(){
     svg4everybody({});
 /*recalls*/
     recallsListInit();
 /*recalls END*/
 /*GLOBAL*/
+    defaultSpoiler();
     optionSelect( $("#content") );
     customizeCheckbox( $("#content") );
     customizeRadiobox( $("#content") );
