@@ -146,11 +146,11 @@ $APPLICATION->SetTitle("Rudenta Kids");
 			        )
 			    );?>
 			    <div class="item">
-			        <a href="/vacancy/" class="vacancies">
+			        <a href="/safety/" class="vacancies">
 			            <svg class="icon">
 			                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-beidj"></use>
 			            </svg>
-			            <span class="text">Вакансии</span>
+			            <span class="text">Безопасность пациента</span>
 			        </a>
 			    </div>
 			</div>
