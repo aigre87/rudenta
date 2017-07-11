@@ -16,7 +16,7 @@ $all = 0;
 $cnt = count($arResult['ITEMS']);
 ?>
 <div class="unlocal-recalls">
-	<h3 class="title">Отзывы о клинике РуДента на сторонних порталах</h3>
+	<h3 class="title">Отзывы о «РуДента Кидс» на сторонних порталах</h3>
 	<div class="items">
 		<? foreach($arResult['ITEMS'] as $key => $arItem): ?>
 			<?if ($i % 4 == 0):?>
