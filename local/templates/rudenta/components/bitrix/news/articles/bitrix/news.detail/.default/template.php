@@ -50,9 +50,6 @@ $this->setFrameMode(true);
 					<? endif; ?>
 				</span>
 			</a>
-			<div class="date">
-				Опубликованно <?php echo FormatDate("d F Y", MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']));?>
-			</div>
 			<div class="printVersion">
 				<svg class="icon">
 				    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-print"></use>

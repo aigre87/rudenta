@@ -44,7 +44,7 @@ $this->setFrameMode(true);
 		<div class="topics">
 			<div class="title">Темы</div>
 			<div class="linksBlock">
-				<div class="button reset"><span>Все темы <sup><?=$arResult['ALL_CNT']?></sup></span></div>
+				<div class="button reset active"><span>Все темы <sup><?=$arResult['ALL_CNT']?></sup></span></div>
 				<?foreach($arResult['TEMS'] as $section_name => $section_arr):?>
 					<div data-val="<?=$section_arr['SERVICE_ID']?>" class="button">
 						<span><?=$section_name?><sup><?=$section_arr['CNT']?></sup></span>

@@ -96,7 +96,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 			<div class="bb">
 			<div class="layoutW clear">
 				<div class="copyright">
-					&copy; 2007–2016, Стоматологическая клиника «РуДента»
+					&copy; 2007–<?=date('Y');?>, Стоматологическая клиника «РуДента»
 				</div>
 				<div class="siteMap">
 					Карта сайта

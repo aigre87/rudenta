@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Лечение по страховке");
+$APPLICATION->SetTitle("Безопасность пациента");
 ?>
 
     <div class="articlesDetailPage">
@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Лечение по страховке");
                             "AREA_FILE_SUFFIX" => "inc",
                             "EDIT_TEMPLATE" => "",
                             "COMPONENT_TEMPLATE" => ".default",
-                            "PATH" => "/local/templates/rudenta/inc_editable/insurance.php"
+                            "PATH" => "/local/templates/rudenta/inc_editable/safety.php"
                         ),
                         false
                     );?>

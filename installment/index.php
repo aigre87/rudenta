@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Рассрочка");
                             "AREA_FILE_SUFFIX" => "inc",
                             "EDIT_TEMPLATE" => "",
                             "COMPONENT_TEMPLATE" => ".default",
-                            "PATH" => "/local/templates/rudenta/inc/installment.php"
+                            "PATH" => "/local/templates/rudenta/inc_editable/installment.php"
                         ),
                         false
                     );?>
