@@ -2442,23 +2442,44 @@ blockquote.blueLeft{
 }
 
 .default-spoiler{
-  border: 2px solid map-get($colors, dBlue);
+  border: 2px solid map-get($colors, lBlue);
   transition: border-color 0.15s ease;
   overflow: hidden;
   position: relative;
   &:hover{
-    z-index: 1;
     border: 2px solid map-get($colors, pink);
+    .header{
+      &:after {
+        color: map-get($colors, pink);
+      }
+    }
   }
   &.active{
     border: 2px solid map-get($colors, green);
-    z-index: 2;
+    .header{
+      &:after {
+        color: map-get($colors, green);
+        transform: rotate(180deg) translateY(50%);
+      }
+    }
   }
   .header{
-    padding: 5px 20px;
-    font-size: 20px;
-    line-height: 24px;
+    position: relative;
+    padding: 10px 20px;
+    font-size: 25px;
+    line-height: 27px;
     cursor: pointer;
+    font-weight: 500;
+    &:after{
+      transition: color 0.15s ease;
+      font-size: 14px;
+      content: "\25bc";
+      position: absolute;
+      right: 17px;
+      top: 50%;
+      transform-origin: 50% 50%;
+      transform: translateY(-50%);
+    }
   }
   .content{
     padding: 10px 20px;
@@ -2467,9 +2488,29 @@ blockquote.blueLeft{
 .default-spoilers-wraper{
   .default-spoiler{
     margin-top: -2px;
+    border-top: 2px solid transparent;
     &:first-child{
       margin-top: 0;
       border-radius: 5px 5px 0 0;
+      border-top: 2px solid map-get($colors, lBlue);
+      &:hover{
+        border: 2px solid map-get($colors, pink);
+      }
+      &.active{
+        border: 2px solid map-get($colors, green);
+      }
+    }
+    &:hover{
+      z-index: 2;
+      border: 2px solid map-get($colors, pink);
+      +.default-spoiler{
+        border-top: 2px solid map-get($colors, pink);
+      }
+    }
+
+    &.active{
+      border: 2px solid map-get($colors, green);
+      z-index: 1;
     }
     &:last-child{
       border-radius: 0 0 5px 5px;

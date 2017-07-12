@@ -1814,8 +1814,8 @@ function defaultSpoiler(){
         }
     }
 
-    $(".default-spoiler").on("click", function(){
-        action($(this));
+    $(".default-spoiler .header").on("click", function(){
+        action($(this).closest(".default-spoiler"));
     });
     $(".default-spoiler.open").each(function(){
         action($(this));
