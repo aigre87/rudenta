@@ -1777,6 +1777,7 @@ function defaultSpoiler(){
     initMultiple();
     function action($spoiler, update){
         var $spoiler = $spoiler,
+            $otherActiveSpoilers = $spoiler.siblings(".default-spoiler.active"),
             $header = $spoiler.find(".header"),
             $content = $spoiler.find(".content"),
             minH = $header.outerHeight(),
@@ -1792,6 +1793,13 @@ function defaultSpoiler(){
                 $spoiler.addClass("complete");
             }
         }else{
+            if($otherActiveSpoilers.length > 0){
+                $otherActiveSpoilers.removeClass("complete");
+                TweenMax.to( $otherActiveSpoilers , 0.5, { height : minH, className:"-=active", ease: Power1.easeInOut, onComplete: function(){
+                    $otherActiveSpoilers.addClass("complete");
+                } });
+            }
+            
             if( !$spoiler.hasClass("active") ){
                 $spoiler.removeClass("complete");
                 TweenMax.to( $spoiler , 0.5, { height : maxH, className:"+=active", ease: Power1.easeInOut, onComplete: function(){

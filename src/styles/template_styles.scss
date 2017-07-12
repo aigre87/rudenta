@@ -2442,16 +2442,16 @@ blockquote.blueLeft{
 }
 
 .default-spoiler{
-  border: 1px solid map-get($colors, dBlue);
+  border: 2px solid map-get($colors, dBlue);
   transition: border-color 0.15s ease;
   overflow: hidden;
   position: relative;
   &:hover{
     z-index: 1;
-    border: 1px solid map-get($colors, pink);
+    border: 2px solid map-get($colors, pink);
   }
   &.active{
-    border: 1px solid map-get($colors, green);
+    border: 2px solid map-get($colors, green);
     z-index: 2;
   }
   .header{
@@ -2466,7 +2466,7 @@ blockquote.blueLeft{
 }
 .default-spoilers-wraper{
   .default-spoiler{
-    margin-top: -1px;
+    margin-top: -2px;
     &:first-child{
       margin-top: 0;
       border-radius: 5px 5px 0 0;
