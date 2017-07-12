@@ -26,30 +26,36 @@ $this->setFrameMode(true);
 			<?if($arItem["PREVIEW_TEXT"]):?>
 				<div class="detailText"><?echo $arItem["PREVIEW_TEXT"];?></div>
 			<?endif;?>
-			<div class="duties cat">
-			<div class="catTitle">Обязанности:</div>
-			 <ul>
-				 <?foreach($arItem['PROPERTIES']['DUTIES']['VALUE'] as $duties_name):?>
-					<li><?=$duties_name?></li>
-				 <?endforeach;?>
-			 </ul>
-			</div>
-			<div class="requir cat">
-				<div class="catTitle">Требования:</div>
-				<ul>
-					<?foreach($arItem['PROPERTIES']['REQUIR']['VALUE'] as $requir_name):?>
-						<li><?=$requir_name?></li>
-					<?endforeach;?>
-				</ul>
-			</div>
-			<div class="conditions cat">
-				<div class="catTitle">Условия:</div>
-				<ul>
-					<?foreach($arItem['PROPERTIES']['CONDITIONS']['VALUE'] as $condition_name):?>
-						<li><?=$condition_name?></li>
-					<?endforeach;?>
-				</ul>
-			</div>
+			<? if(!empty($arItem['PROPERTIES']['DUTIES']['VALUE'])): ?>
+				<div class="duties cat">
+					<div class="catTitle">Обязанности:</div>
+					 <ul>
+						 <?foreach($arItem['PROPERTIES']['DUTIES']['VALUE'] as $duties_name):?>
+							<li><?=$duties_name?></li>
+						 <?endforeach;?>
+					 </ul>
+				</div>
+			<? endif; ?>
+			<? if(!empty($arItem['PROPERTIES']['REQUIR']['VALUE'])): ?>
+				<div class="requir cat">
+					<div class="catTitle">Требования:</div>
+					<ul>
+						<?foreach($arItem['PROPERTIES']['REQUIR']['VALUE'] as $requir_name):?>
+							<li><?=$requir_name?></li>
+						<?endforeach;?>
+					</ul>
+				</div>
+			<? endif; ?>
+			<? if(!empty($arItem['PROPERTIES']['CONDITIONS']['VALUE'])): ?>
+				<div class="conditions cat">
+					<div class="catTitle">Условия:</div>
+					<ul>
+						<?foreach($arItem['PROPERTIES']['CONDITIONS']['VALUE'] as $condition_name):?>
+							<li><?=$condition_name?></li>
+						<?endforeach;?>
+					</ul>
+				</div>
+			<? endif; ?>
 		</div>
 	</div>
 <?endforeach;?>
