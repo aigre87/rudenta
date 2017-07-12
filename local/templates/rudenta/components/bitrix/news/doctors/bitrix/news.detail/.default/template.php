@@ -89,7 +89,7 @@ $this->setFrameMode(true);
 		<?endif;?>
 	</div>
 	<div class="w-1col">
-		<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+		<?require_once('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 		<div class="docNoteBlock">
 			<?php $articles = Doctors::getArticles($arResult['ID']);?>
 			<?if(!empty($articles)):?>

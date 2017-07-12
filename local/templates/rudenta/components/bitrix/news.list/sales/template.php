@@ -42,6 +42,6 @@ $this->setFrameMode(true);
 		<? endforeach; ?>
 	</div>
 	<div class="recordForm">
-		<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+		<?require_once('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
 	</div>
 </div>

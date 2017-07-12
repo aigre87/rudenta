@@ -35,7 +35,7 @@ $APPLICATION->SetTitle("Рассрочка");
                 </div>
                 <a class="printButton">Распечатать</a>
                 <a class="disablePrintVersion">Обычный просмотр</a>
-                <?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+                <?require_once('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
             </div>
         </div>
     </div>

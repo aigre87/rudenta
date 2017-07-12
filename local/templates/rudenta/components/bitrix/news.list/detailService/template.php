@@ -125,9 +125,13 @@ $this->setFrameMode(true);
 					</div>
 				</div>
 			</div>
-			<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+			<div class="w-1col">
+				<?require_once('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+			</div>
 		<?else:?>
-			<?require('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+			<div class="w-2col">
+				<?require_once('/home/p10298/public_html/local/templates/rudenta/inc/record.php');?>
+			</div>
 			<div class="w-1col">&nbsp;</div>
 		<? endif;?>
 	</div>
