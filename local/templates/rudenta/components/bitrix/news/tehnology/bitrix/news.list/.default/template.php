@@ -25,7 +25,7 @@ $this->setFrameMode(true);
 		)
 	);?>
 </div>
-<div id="tehnologyBlock" class="clear">
+<div id="tehnologyBlock" class="clear tehnology-list">
 	<div id="items" class="items w-2col">
 		<div id="itemsRow">
 			<?foreach($arResult["ITEMS"] as $arItem):?>

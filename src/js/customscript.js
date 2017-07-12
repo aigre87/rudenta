@@ -1057,6 +1057,76 @@ function createSlider($block, $items){
 function doctorDetail(){
     if( $(".doctor-detail").length == 0 ){ return false; }
     createSlider( $(".doctor-detail .recalls-list"), $(".doctor-detail .recalls-list .recall-item") );
+
+
+    function sertifSlider(){
+      var owl = $(".doctor-detail .zoom-gallery"),
+          $LA = $(".doctor-detail .arrow.left"),
+          $RA = $(".doctor-detail .arrow.right");
+      if( owl.length == 0 ){return false;}
+
+      function checkArrowsState(ev){
+          var index = ev.item.index,
+              count = ev.item.count,
+              size = ev.page.size;
+
+          if( index == 0 ){
+              $LA.addClass("disabled");
+          }else{
+              $LA.removeClass("disabled");
+          }
+          if( index+size == count || count <= 3 ){
+              $RA.addClass("disabled");
+          }else{
+              $RA.removeClass("disabled");
+          }
+      }
+      owl.on('initialized.owl.carousel', function(event) {
+            checkArrowsState(event);
+            var $items = $(".doctor-detail .zoom-gallery .item"),
+            itemsL = $items.length,
+            maxRowH = [];
+            for(var i = 0; i < itemsL; i++) {
+                maxRowH.push($items.eq(i).outerHeight());
+            }
+
+            var maxH = maxRowH.max();
+            // console.log(maxRowH);
+            // console.log(maxH);
+            $items.css({height : maxH})
+      });
+      owl.owlCarousel({
+        loop:false,
+        items: 4,
+        navRewind:false,
+        margin: 10,
+        nav: true,
+        navText: [
+          "<i class='fa fa-caret-left'></i>",
+          "<i class='fa fa-caret-right'></i>"
+        ],
+        autoplay: false,
+        autoplayHoverPause: false,
+        // responsive: {
+        //   0: {
+        //     items: 2
+        //   },
+        //   800: {
+        //     items: 3
+        //   }
+        // }
+      });
+      owl.on('changed.owl.carousel', function(event) {
+          checkArrowsState(event);
+      });
+      $RA.click(function() {
+          owl.trigger('next.owl.carousel');
+      });
+      $LA.click(function() {
+          owl.trigger('prev.owl.carousel');
+      });
+    }
+    sertifSlider();
 }
 
 function doctorsListInit(){
@@ -1676,28 +1746,36 @@ function tehnologypage(){
     $(".linksBlock .button.reset").on("click", function(){
         $(".linksBlock .button.active:not(.reset)").trigger("click");
     });
+}
 
-    $("#itemsRow .item").on("click", function(){
+function tehnologyPopup(){
+    $(".tehnology-list .item").on("click", function(e){
         var $this = $(this),
             $thisDetail = $this.find(".modal-detail-text");
-        $.magnificPopup.open({
-            items: {
-                src: "<div class='defaultPopupContent mfp-with-anim'>"+$thisDetail[0].outerHTML+"</div>",
-                type: 'inline'
-            },
-            removalDelay: 500, //delay removal by X to allow out-animation
-            closeBtnInside: true,
-            mainClass: 'mfp-with-zoom',
-            callbacks: {
-                beforeOpen: function() {
-                    this.st.mainClass = "mfp-zoom-in defaultPopup";
+        if( $thisDetail.length != 0 ){
+            e.preventDefault();
+            var $this = $(this),
+                $thisDetail = $this.find(".modal-detail-text");
+
+            $.magnificPopup.open({
+                items: {
+                    src: "<div class='defaultPopupContent mfp-with-anim'>"+$thisDetail[0].outerHTML+"</div>",
+                    type: 'inline'
                 },
-                beforeClose: function() {
-                    $this.removeClass("active");
+                removalDelay: 500, //delay removal by X to allow out-animation
+                closeBtnInside: true,
+                mainClass: 'mfp-with-zoom',
+                callbacks: {
+                    beforeOpen: function() {
+                        this.st.mainClass = "mfp-zoom-in defaultPopup";
+                    },
+                    beforeClose: function() {
+                        $this.removeClass("active");
+                    },
                 },
-            },
-            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-        });
+                midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+            });
+        }
     });
 }
 
@@ -1846,6 +1924,7 @@ $(document).ready(function(){
     docNoteBlock_maxHeight();
     writeRewievForm();
     videoPlay();
+    tehnologyPopup();
 /*END GLOBAL*/
 /*homepage*/
     HPblueLinksBlock();

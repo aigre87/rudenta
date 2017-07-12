@@ -44,8 +44,21 @@ $this->setFrameMode(true);
 		<div class="titleH3"><?php echo "Стаж работы - ", $arResult['DISPLAY_PROPERTIES']['EXPERIENCE']['NEW_VALUE'];?></div>
 		<div class="text"><?php echo $arResult['DETAIL_TEXT'];?></div>
 		<?if( $arResult['DISPLAY_PROPERTIES']['AWARDS']['VALUE'] ):?>
-			<div class="titleH4">Награды и сертификаты</div>
-			<div class="zoom-gallery clear">
+			<div class="titleH4">Награды и сертификаты
+				<div class="arrowsB">
+					<div class="arrow left">
+						<svg class="icon">
+						    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-left"></use>
+						</svg>
+					</div>
+					<div class="arrow right">
+						<svg class="icon">
+						    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/local/templates/rudenta/images/symbol/sprite.svg#icon-arrow1-right"></use>
+						</svg>
+					</div>
+				</div>
+			</div>
+			<div class="zoom-gallery owl-carousel clear">
 			<?foreach($arResult['DISPLAY_PROPERTIES']['AWARDS']['VALUE'] as $img):?>
 				<a class="w-1d6col" href="<?=CFile::GetPath($img);?>">
 					<img src="<?=CFile::GetPath($img);?>">

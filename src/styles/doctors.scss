@@ -406,24 +406,54 @@
 			font-weight: 700;
 			font-style: italic;
 			margin-bottom: 10px;
+			position: relative;
 		}
 	}
+	// .zoom-gallery{
+	// 	-moz-column-count: 4; /* Для Firefox */
+ //    -webkit-column-count: 4; /* Для Safari и Chrome */
+ //    column-count: 4;
+	// 	-webkit-column-gap: 0px;
+ //   -moz-column-gap: 0px;
+ //    column-gap: 0px;
+	//   a{
+	//     display: inline-block;
+	//     vertical-align: top;
+	//     width: 180px;
+	//     max-width: 100%;
+	//     margin: 0 10px 10px 0;
+	//     -webkit-column-break-inside: avoid;
+	//     page-break-inside: avoid;
+	//     break-inside: avoid;
+	//     border: 2px solid map-get($colors, green);
+	//     border-radius: 4px;
+	//     overflow: hidden;
+	//     img{
+	//     	max-width: 100%;
+	//     	height: auto;
+	//     	width: auto;
+	//     	display: block;
+	//     }
+	//   }
+	// }
+	.arrowsB{
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  font-size: 0;
+	  .arrow{
+			width: 40px;
+			height: 40px;
+	  }
+  }
 	.zoom-gallery{
-		-moz-column-count: 4; /* Для Firefox */
-    -webkit-column-count: 4; /* Для Safari и Chrome */
-    column-count: 4;
-		-webkit-column-gap: 0px;
-   -moz-column-gap: 0px;
-    column-gap: 0px;
+		margin-top: 25px;
 	  a{
 	    display: inline-block;
 	    vertical-align: top;
 	    width: 180px;
 	    max-width: 100%;
 	    margin: 0 10px 10px 0;
-	    -webkit-column-break-inside: avoid;
-	    page-break-inside: avoid;
-	    break-inside: avoid;
 	    border: 2px solid map-get($colors, green);
 	    border-radius: 4px;
 	    overflow: hidden;
@@ -496,5 +526,4 @@
 			}
 		}
 	}
-
 }
