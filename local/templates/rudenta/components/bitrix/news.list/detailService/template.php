@@ -309,10 +309,14 @@ $this->setFrameMode(true);
 			</h2>
 			<div class="tehnology-list owl-carousel">
 			<? foreach($arResult['TEHNOLOGY'] as $arTehno): ?>
-				<a class="item" href="/tehnology/<?=$arTehno['ID']?>/">
+				<div class="item" <?/*href="/tehnology/<?=$arTehno['ID']?>/"*/?>>
           <div class="imgW" style="background-image: url('<?=$arTehno['PREVIEW_PICTURE']['src']?>');"></div>
           <div class="name"><?=$arTehno['NAME']?></div>
-				</a>
+					<div class="modal-detail-text">
+						<?=$arTehno['NAME']?>
+						<?=$arTehno['PREVIEW_TEXT']?>
+					</div>
+				</div>
 			<? endforeach;?>
 			</div>
 		</div>
