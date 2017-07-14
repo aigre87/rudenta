@@ -412,7 +412,7 @@ function HPmainSlider(){
     }
     myIntervalMainSlider();
 
-    $block.on("mouseenter", function(){
+    $block.on("mouseover", function(){
         clearInterval(sliderInterval);
     });
     $block.on("mouseleave", function(){

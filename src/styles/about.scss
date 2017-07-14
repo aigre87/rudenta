@@ -22,13 +22,14 @@
 			width: 45px;
 			height: 45px;
 	    top: 36px;
-	    left: 40px;
+	    left: 25px;
 		}
 		&.robot{
 			fill: map-get($colors, green);
 			width: 40px;
 			height: 57px;
-	    right: 60px;
+	    //right: 60px;
+      right: 25px;
 	    top: 20px;
 		}
 		&.nlo{
@@ -42,7 +43,7 @@
 			fill: map-get($colors, dBlue);
 			width: 44px;
 			height: 48px;
-			left: 85px;
+			left: 70px;
 	    bottom: 80px;
 		}
 	}
