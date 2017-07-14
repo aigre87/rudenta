@@ -3,7 +3,7 @@
 $resizeImg = CFile::GetFileArray($arResult['DETAIL_PICTURE']['ID']);
 $resizeImg = CFile::ResizeImageGet(
     $resizeImg,
-    array('width'=> 380, 'height'=>340),
+    array('width'=> 380, 'height'=>2000),
     BX_RESIZE_IMAGE_PROPORTIONAL,
     true
 );
