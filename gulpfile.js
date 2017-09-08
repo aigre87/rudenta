@@ -147,7 +147,7 @@ gulp.task('image:build', function () {
 gulp.task('styles:build', function () {
     gulp.src(path.src.styles)               // Выберем наш .sass|scss
         .pipe(plumber())
-        .pipe(sourcemaps.init())            // То же самое что и с js
+        //.pipe(sourcemaps.init())            // То же самое что и с js
         .pipe(sass())                       // Скомпилируем
         .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
         .pipe(concat('template_styles.min.css'))
@@ -161,7 +161,7 @@ gulp.task('styles:build', function () {
           timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/css/'
         }))
-        .pipe(sourcemaps.write())           // Пропишем карты
+        //.pipe(sourcemaps.write())           // Пропишем карты
         .pipe(gutil.noop());
 });
 
