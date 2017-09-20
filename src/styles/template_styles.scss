@@ -1237,6 +1237,7 @@ select{
   .selectric-items .selectric-scroll {
     height: 100%;
     overflow: auto;
+    position: relative;
   }
   .selectric-above .selectric-items {
     top: auto;

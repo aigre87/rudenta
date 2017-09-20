@@ -222,8 +222,6 @@ function setFooterPadding(){
     $("#mainWrapper").css({"padding-bottom": h});
 }
 
-
-
 function optionSelect($element){
     if( myGlobalisMobileDevice ){ return false; }
     var $s = $element.find("select");
@@ -231,21 +229,8 @@ function optionSelect($element){
         disableOnMobile: false
     });
     var $ss = $s.closest(".selectric-wrapper").find(".selectric-scroll")
-    $ss.niceScroll({
-        cursorcolor: '#1bbee8',
-        cursorwidth: '5px',
-        cursorborderradius: '2px',
-        cursorborder: '0px solid #1bbee8',
-        background: 'transparent',
-        scrollspeed: 70,
-        mousescrollstep: 50,
-        railoffset: {top: 0, right: 0, left: 0, bottom: 0},
-        cursoropacitymin: 1,
-        cursoropacitymax: 1,
-        horizrailenabled: false,
-        zindex: 2,
-        nativeparentscrolling: true,
-        autohidemode: false
+    $ss.perfectScrollbar({
+        wheelPropagation: false
     });
 };
 function customizeRadiobox($element){
@@ -1278,6 +1263,10 @@ function writeRewievForm(){
             callbacks: {
                 beforeOpen: function() {
                     this.st.mainClass = "mfp-zoom-in";
+                },
+                open: function(){
+                    $writeReviewForm.find('select').selectric('destroy');
+                    optionSelect( $writeReviewForm );
                 }
             },
             midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.

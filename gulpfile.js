@@ -86,6 +86,7 @@ gulp.task('libs:build', function() {
         'src/libs/jquery-selectric/public/jquery.selectric.js',
         'src/libs/smoothscroll-for-websites/SmoothScroll.js',
         'src/libs/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        'src/libs/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js',
         'src/libs/shufflejs/dist/shuffle.min.js',
         'src/libs/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
         'src/libs/jquery.inputmask/dist/inputmask/inputmask.extensions.js',
