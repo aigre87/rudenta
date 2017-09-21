@@ -223,14 +223,31 @@ function setFooterPadding(){
 }
 
 function optionSelect($element){
+    // if( myGlobalisMobileDevice ){ return false; }
+    // var $s = $element.find("select");
+    // $('select:not(.recallsFilter)').selectric({
+    //     disableOnMobile: false
+    // });
+    // var $ss = $s.closest(".selectric-wrapper").find(".selectric-scroll")
+    // $ss.perfectScrollbar({
+    //     wheelPropagation: false
+    // });
+
+
     if( myGlobalisMobileDevice ){ return false; }
-    var $s = $element.find("select");
-    $('select:not(.recallsFilter)').selectric({
-        disableOnMobile: false
-    });
-    var $ss = $s.closest(".selectric-wrapper").find(".selectric-scroll")
-    $ss.perfectScrollbar({
-        wheelPropagation: false
+    var $s = $element.find("select:not(.recallsFilter)");
+    $s.each(function(){
+        var $this = $(this);
+        $this.selectric({
+            disableOnMobile: false,
+            onOpen: function() {
+                $this.closest(".selectric-wrapper").find(".selectric-scroll").perfectScrollbar('update');
+            },
+        });
+        var $ss = $this.closest(".selectric-wrapper").find(".selectric-scroll");
+        $ss.perfectScrollbar({
+            wheelPropagation: false
+        });
     });
 };
 function customizeRadiobox($element){
@@ -1176,7 +1193,7 @@ function recallsListInit(){
             });
         mySelect+="</select>";
         $(".filtesBlock").append(mySelect);
-            
+        
         if( $("html#mobile").length > 0 ){
             var $select = $('.filtesBlock select.'+clearclassList+'');
             $select.on("change", function(){
@@ -1187,22 +1204,40 @@ function recallsListInit(){
         }else{
             if( clearclassList.indexOf("doctors") > -1 ){
                 var selectric = $('select.'+clearclassList+'').selectric({
-                  optionsItemBuilder: function(itemData, element, index) {
-
-                    if( itemData.element[0].hasAttribute("data-img") ){
-                        return '<span class="imgW"><img src="'+itemData.element[0].getAttribute("data-img")+'"></span><span class="text">'+ itemData.text+'</span>';
-                    }else{
-                        return itemData.text;
-                    }
-                  }
+                    optionsItemBuilder: function(itemData, element, index) {
+                        if( itemData.element[0].hasAttribute("data-img") ){
+                            return '<span class="imgW"><img src="'+itemData.element[0].getAttribute("data-img")+'"></span><span class="text">'+ itemData.text+'</span>';
+                        }else{
+                            return itemData.text;
+                        }
+                    },
+                    onOpen: function() {
+                        $('select.'+clearclassList+'').closest(".selectric-wrapper").find(".selectric-scroll").perfectScrollbar('update');
+                    },
                 });
+
+                var $ss = $('select.'+clearclassList+'').closest(".selectric-wrapper").find(".selectric-scroll");
+                $ss.perfectScrollbar({
+                    wheelPropagation: false
+                });
+
                 selectric.on("selectric-change", function(event, element, selectric){
                     var index = $(element).find("option:selected").index();
                     linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
                     window.location.href = linkHref;
                 });
             }else{
-                var selectric = $('select.'+clearclassList+'').selectric();
+                var selectric = $('select.'+clearclassList+'').selectric({
+                    onOpen: function() {
+                        $('select.'+clearclassList+'').closest(".selectric-wrapper").find(".selectric-scroll").perfectScrollbar('update');
+                    }
+                });
+
+                var $ss = $('select.'+clearclassList+'').closest(".selectric-wrapper").find(".selectric-scroll");
+                $ss.perfectScrollbar({
+                    wheelPropagation: false
+                });
+
                 selectric.on("selectric-change", function(event, element, selectric){
                     var index = $(element).find("option:selected").index();
                     linkHref = $(".filterHidden .filter."+clearclassList+" a:eq("+index+")").attr("href");
