@@ -1093,8 +1093,6 @@ function doctorDetail(){
             }
 
             var maxH = maxRowH.max();
-            // console.log(maxRowH);
-            // console.log(maxH);
             $items.css({height : maxH})
       });
       owl.owlCarousel({
@@ -1145,7 +1143,6 @@ function doctorsListInit(){
             if( $item2.length > 0 ){ maxRowH.push($item2.outerHeight()); }
             if( $item3.length > 0 ){ maxRowH.push($item3.outerHeight()); }
             var maxH = maxRowH.max();
-            //console.log(maxH);
             $item1
             .add($item2)
             .add($item3)
@@ -1164,7 +1161,6 @@ function recallsListInit(){
             classList = $(this).attr("class").split(' ').join(" "),
             clearclassList = classList.replace('filter','').replace(' ',''),
             mySelect = "<select class='recallsFilter "+clearclassList+"'>";
-            //console.log(clearclassList);
 
             $this.find("a").each(function(){
                 var $thisa = $(this);
@@ -1368,8 +1364,6 @@ function servicesDetail(){
                 }
 
                 var maxH = maxRowH.max();
-                // console.log(maxRowH);
-                // console.log(maxH);
                 $items.css({height : maxH})
           });
           owl.owlCarousel({
@@ -1439,8 +1433,6 @@ function servicesDetail(){
                 }
 
                 var maxH = maxRowH.max();
-                // console.log(maxRowH);
-                // console.log(maxH);
                 $items.css({height : maxH})
           });
           owl.owlCarousel({
@@ -1599,7 +1591,6 @@ function tehnologypage(){
     var Demo = function (element) {
       //this.shapes = toArray(document.querySelectorAll('.linksBlock button'));
       this.category = toArray( $('.linksBlock .button:not(.reset)') );
-      //console.log(this.category);
       this.shuffle = new Shuffle(element, {
         itemSelector: '#itemsRow .item',
         sizer: null,

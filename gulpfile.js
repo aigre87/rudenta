@@ -1,18 +1,18 @@
 "use strict"
 
 var gulp        = require('gulp'),
-    watch       = require('gulp-watch'),        // Наблюдение за изменениями файлов
-    prefixer    = require('gulp-autoprefixer'), // Автоматически добавляет вендорные префиксы к CSS свойствам
-    uglify      = require('gulp-uglify'),       // Сжимать наш JS
-    concat      = require('gulp-concat'),       // Подключаем gulp-concat (для конкатенации файлов)
-    rigger      = require('gulp-rigger'),       // Позволяет импортировать один файл в другой простой конструкцией
-    sass        = require('gulp-sass'),         // для компиляции нашего SCSS кода
-    sourcemaps  = require('gulp-sourcemaps'),   // Для генерации css sourscemaps, помогает нам при отладке кода
-    cssmin      = require('gulp-minify-css'),   // Сжатие CSS кода
-    imagemin    = require('gulp-imagemin'),     // Сжатие картинок
-    pngquant    = require('imagemin-pngquant'), // Сжатие картинок | работа с PNG
-    rename      = require('gulp-rename'),       // Подключаем библиотеку для переименования файлов
-    cache       = require('gulp-cache'),        // Подключаем библиотеку кеширования
+    watch       = require('gulp-watch'),
+    prefixer    = require('gulp-autoprefixer'),
+    uglify      = require('gulp-uglify'),
+    concat      = require('gulp-concat'),
+    rigger      = require('gulp-rigger'),
+    sass        = require('gulp-sass'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    cssmin      = require('gulp-minify-css'),
+    imagemin    = require('gulp-imagemin'),
+    pngquant    = require('imagemin-pngquant'),
+    rename      = require('gulp-rename'),
+    cache       = require('gulp-cache'),
     sftp        = require('gulp-sftp'),
     ftp         = require('gulp-ftp'),
     gutil       = require('gulp-util'),
@@ -22,7 +22,7 @@ var gulp        = require('gulp'),
     svgmin      = require('gulp-svgmin'),
     cheerio     = require('gulp-cheerio'),
     replace     = require('gulp-replace'),
-    plumber     = require('gulp-plumber');      // Ловим ошибки, чтобы не прервался watch
+    plumber     = require('gulp-plumber');
 
 
 // пути
@@ -60,10 +60,8 @@ var path = {
 gulp.task('js:build', function () {
     gulp.src([path.src.js])
         .pipe(plumber())
-        .pipe(sourcemaps.init()) //Инициализируем sourcemap
         .pipe(concat('main.min.js' , {newLine: ';'}))
         .pipe(uglify())
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(plumber.stop())
         .pipe(sftp({
@@ -77,9 +75,9 @@ gulp.task('js:build', function () {
 });
 //libs
 gulp.task('libs:build', function() {
-    gulp.src([ // Берем все необходимые библиотеки
-        'src/libs/jquery/dist/jquery.min.js', // Берем jQuery
-        'src/libs/magnific-popup/dist/jquery.magnific-popup.min.js', // Берем Magnific Popup
+    gulp.src([
+        'src/libs/jquery/dist/jquery.min.js',
+        'src/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
         'src/libs/gsap/src/minified/TweenMax.min.js',
         'src/libs/gsap/src/minified/plugins/ColorPropsPlugin.min.js',
         'src/libs/gsap/src/minified/plugins/ScrollToPlugin.min.js',
@@ -103,10 +101,10 @@ gulp.task('libs:build', function() {
         //'src/libs/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js'
         ])
         .pipe(plumber())
-        .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
+        .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(plumber.stop())
-        .pipe(gulp.dest('local/templates/rudenta/libs/')) // Выгружаем в папку app/js
+        .pipe(gulp.dest('local/templates/rudenta/libs/'))
         .pipe(sftp({
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
@@ -146,15 +144,14 @@ gulp.task('image:build', function () {
 });
 // styles
 gulp.task('styles:build', function () {
-    gulp.src(path.src.styles)               // Выберем наш .sass|scss
+    gulp.src(path.src.styles)
         .pipe(plumber())
-        //.pipe(sourcemaps.init())            // То же самое что и с js
-        .pipe(sass())                       // Скомпилируем
-        .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))                   // Добавим вендорные префиксы
+        .pipe(sass())
+        .pipe(prefixer(['last 15 versions', 'IE 8'], { cascade: true }))
         .pipe(concat('template_styles.min.css'))
         .pipe(cssmin())
         .pipe(plumber.stop())
-        .pipe(gulp.dest(path.build.styles)) // И в build
+        .pipe(gulp.dest(path.build.styles))
         .pipe(sftp({
           host: 'p10298.cpanel.relevate.ru',
           user: 'p10298',
@@ -162,20 +159,17 @@ gulp.task('styles:build', function () {
           timeout: 50000,
           remotePath: '/home/p10298/www/local/templates/rudenta/css/'
         }))
-        //.pipe(sourcemaps.write())           // Пропишем карты
         .pipe(gutil.noop());
 });
 
 /*svg*/
 gulp.task('svgSprite:build', function () {
     return gulp.src(path.src.svg)
-        // minify svg
         .pipe(svgmin({
             js2svg: {
                 pretty: true
             }
         }))
-        // remove all fill, style and stroke declarations in out shapes
         .pipe(cheerio({
             run: function ($) {
                 $('[fill]').removeAttr('fill');
@@ -184,24 +178,15 @@ gulp.task('svgSprite:build', function () {
             },
             parserOptions: {xmlMode: true}
         }))
-        // cheerio plugin create unnecessary string '&gt;', so replace it.
         .pipe(replace('&gt;', '>'))
-        // build svg sprite
         .pipe(svgSprite({
             mode: {
                 symbol: {
                     sprite: "sprite.svg",
-                    // render: {
-                    //     scss: {
-                    //         dest:'/src/styles/other/',
-                    //         template: path.src.svgSpriteTemplate
-                    //     }
-                    // }
                 }
             }
         })) 
         .pipe(gulp.dest(path.build.images))
-        //.pipe(gulp.dest("src/styles/other/"))
         .pipe(sftp({
             host: 'p10298.cpanel.relevate.ru',
             user: 'p10298',
